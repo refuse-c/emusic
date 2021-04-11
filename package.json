@@ -57,6 +57,7 @@
     "node-sass": "^5.0.0",
     "react-app-rewired": "^2.1.8",
     "react-custom-scrollbars": "^4.2.1",
+    "react-router-dom": "^5.2.0",
     "reset.css": "^2.0.2",
     "sass-loader": "^11.0.1",
     "source-map-loader": "^2.0.1",

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-11 11:58:33
+ * @LastEditTime: 2021-04-12 00:48:25
  * @Description:
  */
 
@@ -18,7 +18,7 @@
 export const menuList = [
   {
     name: '发现音乐',
-    path: '/find',
+    path: '/',
     type: 1,
     isBold: true,
   },
