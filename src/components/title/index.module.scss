@@ -1,0 +1,24 @@
+.title {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  line-height: 1;
+
+  .iconText {
+    color: #ec4141;
+    padding: 2px 4px;
+    border-radius: 2px;
+    border: 1px solid #ec4141;
+    margin-right: 13px;
+  }
+
+  .text {
+    color: #333;
+    font-size: 22px;
+    font-weight: bold;
+  }
+
+  .children {
+    flex: 1;
+  }
+}

@@ -1,4 +1,5 @@
 {
+  "extends": "./paths.json",
   "compilerOptions": {
     "target": "es5",
     "lib": [
@@ -6,21 +7,36 @@
       "dom.iterable",
       "esnext"
     ],
+    "types": [
+      "node"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
     "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "sourceMap": true,
+    "declaration": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "experimentalDecorators": true,
+    "incremental": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true
   },
   "include": [
-    "src"
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
   ]
 }

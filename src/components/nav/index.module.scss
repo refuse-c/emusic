@@ -1,0 +1,40 @@
+.nav {
+  display: flex;
+  align-items: center;
+  padding: 22px 0;
+  height: 64px;
+
+  li {
+    color: #373737;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.25s ease;
+
+    &:not(:first-child) {
+      margin-left: 24px;
+    }
+
+    &:hover {
+      color: #000;
+    }
+
+    &.active {
+      position: relative;
+      color: #000;
+      font-size: 20px;
+      line-height: 1;
+      font-weight: bold;
+
+      &::after {
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        content: '';
+        width: 80%;
+        border-radius: 4px;
+        transform: translateX(-50%);
+        border-bottom: 3px solid#ec4141;
+      }
+    }
+  }
+}

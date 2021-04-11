@@ -1,0 +1,24 @@
+.find {
+  width: 100%;
+  padding: 0 30px;
+
+  .tools {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #9f9f9f;
+    margin-left: 11px;
+    font-size: 14px;
+
+
+    :global {
+      .ant-btn {
+        border: none;
+        height: auto;
+        outline: none;
+        padding: 0;
+        color: #507daf;
+      }
+    }
+  }
+}

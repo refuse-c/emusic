@@ -1,0 +1,63 @@
+.menu {
+  padding: 12px 10px 0 20px;
+
+  li {
+    padding: 0 8px;
+    font-size: 15px;
+    user-select: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: all 0.25s ease;
+    border-radius: 2px;
+
+    &:not(:first-child) {
+      margin-top: 2px;
+    }
+
+    &:last-child {
+      padding-bottom: 12px;
+    }
+
+    &.router {
+      color: #333;
+      cursor: pointer;
+      line-height: 36px;
+
+      &:hover {
+        color: #313131;
+        background-color: #f6f6f7;
+      }
+    }
+
+    &.active1 {
+      font-size: 14px;
+    }
+
+    &.active2 {
+      color: #313131;
+      background-color: #f6f6f7;
+    }
+
+    &.active3 {
+      font-size: 17px;
+      font-weight: bold;
+    }
+
+    &.directory {
+      color: #999;
+      font-size: 13px;
+      cursor: default;
+      line-height: 36px;
+      margin-top: 5px;
+    }
+
+    // &.tentative {
+    //   color: #b8b8b8;
+    //   cursor: not-allowed;
+    //   text-decoration: line-through;
+    // }
+  }
+
+
+}

@@ -1,0 +1,41 @@
+.view {
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+
+  .area {
+    width: 100%;
+    height: 100%;
+  }
+
+  :global {
+    .ant-layout {
+      height: 100%;
+
+      .ant-layout-header {
+        height: 60px;
+        padding: 0 14px;
+        -webkit-app-region: drag;
+        background-color: #ec4141;
+      }
+
+      .ant-layout-sider {
+        background-color: #fff;
+        border-right: 1px solid #e5e6ea;
+      }
+
+      .ant-layout-content {
+        background-color: #fff;
+      }
+
+      .ant-layout-footer {
+        height: 73px;
+        padding: 0 14px;
+        border-top: 1px solid #e1e1e1;
+        background-color: #fff;
+        box-shadow: 3px 3px 3px #000;
+      }
+    }
+  }
+
+}
