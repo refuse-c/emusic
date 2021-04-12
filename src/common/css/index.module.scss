@@ -2,6 +2,7 @@ div,
 ul,
 li {
   cursor: default;
+  user-select: none;
 }
 
 body {
@@ -15,6 +16,6 @@ body {
     content: '';
     width: 10px;
     height: 10px;
-    background: url("~@images/icon_drag_drop.svg") center center / 10px no-repeat;
+    background: url('~@images/icon_drag_drop.svg') center center / 10px no-repeat;
   }
 }
