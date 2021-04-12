@@ -2,15 +2,16 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:24:31
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-12 13:31:35
+ * @LastEditTime: 2021-04-12 21:56:02
  * @Description:
  */
 
 import axios from 'axios';
 // 新创建一个axios实例，并进行基础配置
 const instance = axios.create({
-  baseURL: 'http://rap2api.taobao.org/app/mock/161631/api',
-  timeout: 2000,
+  baseURL: 'http://tshy.xyz:3000/',
+  timeout: 15000,
+  withCredentials: true,
   // headers: {'X-Requested-With': 'XMLHttpRequest'}
 });
 
@@ -23,7 +24,7 @@ instance.interceptors.request.use((config) => {
 instance.interceptors.response.use(
   (response) => {
     //响应数据后做点什么
-    return response;
+    return response.data;
   },
   (error) => {
     // 对响应错误做点什么
@@ -36,10 +37,10 @@ instance.interceptors.response.use(
  * @method get
  * @param {url, params, loading} 请求地址，请求参数，是否需要加载层
  */
-const get = (url, params) => {
+export const get = (url: string, params: any) => {
   return new Promise((resolve, reject) => {
     instance
-      .get(url, params)
+      .get(url, { params })
       .then((res) => {
         resolve(res);
       })
@@ -53,11 +54,11 @@ const get = (url, params) => {
  * @method post
  * @param {url, params} 请求地址，请求参数，是否需要加载层
  */
-const post = (url, data) => {
+export const post = (url: string, params: object) => {
   return new Promise((resolve, reject) => {
-    // qs.stringify(data)
+    // qs.stringify(params)
     instance
-      .post(url, data)
+      .post(url, { params })
       .then((res) => {
         console.log(res);
         resolve(res);
@@ -67,4 +68,3 @@ const post = (url, data) => {
       });
   });
 };
-export default { get, post };

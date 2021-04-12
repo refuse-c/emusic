@@ -1,0 +1,24 @@
+.friend {
+  background-color: transparent;
+
+  .tools {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    :global {
+      .ant-btn {
+        border: none;
+        height: auto;
+        outline: none;
+        padding: 0;
+        color: #fff;
+        width: 82px;
+        height: 24px;
+        font-size: 12px;
+        border-radius: 12px;
+        background-color: #ec4141;
+      }
+    }
+  }
+}
