@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:24:31
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-12 21:56:02
+ * @LastEditTime: 2021-04-13 21:40:31
  * @Description:
  */
 
@@ -37,7 +37,7 @@ instance.interceptors.response.use(
  * @method get
  * @param {url, params, loading} 请求地址，请求参数，是否需要加载层
  */
-export const get = (url: string, params: any) => {
+export const get = (url: string, params?: any) => {
   return new Promise((resolve, reject) => {
     instance
       .get(url, { params })
@@ -54,7 +54,7 @@ export const get = (url: string, params: any) => {
  * @method post
  * @param {url, params} 请求地址，请求参数，是否需要加载层
  */
-export const post = (url: string, params: object) => {
+export const post = (url: string, params?: object) => {
   return new Promise((resolve, reject) => {
     // qs.stringify(params)
     instance

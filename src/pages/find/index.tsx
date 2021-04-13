@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 11:59:45
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-13 13:19:42
+ * @LastEditTime: 2021-04-13 23:17:00
  * @Description:发现音乐
  */
 import { FC } from 'react';
@@ -16,19 +16,17 @@ const Find: FC = (props: any) => {
   const { router } = props;
   return (
     <div className={styles.find}>
-      <Nav list={findNav} />
-      <div>
-        <Router>
-          {router.map((item: any, index: number) => (
-            <Route
-              exact
-              key={index}
-              path={item.path}
-              render={(props) => <item.component {...props} router={item.router} />}
-            />
-          ))}
-        </Router>
-      </div>
+      <Nav list={findNav} isFixed={true} />
+      <Router>
+        {router.map((item: any, index: number) => (
+          <Route
+            exact
+            key={index}
+            path={item.path}
+            render={(props) => <item.component {...props} router={item.router} />}
+          />
+        ))}
+      </Router>
     </div>
   );
 };

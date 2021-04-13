@@ -4,6 +4,13 @@
   padding: 22px 0;
   height: 64px;
 
+  &.isFixed {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+  }
+
   a {
     color: #373737;
     cursor: pointer;
