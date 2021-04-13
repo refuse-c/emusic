@@ -2,14 +2,14 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-12 23:22:36
+ * @LastEditTime: 2021-04-13 13:20:16
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
+import Title from '@pages/find/component/title';
 import { login } from '@/common/net/login';
 import { recommendList, recommendSong } from '@/common/net/find';
-import Title from '@pages/find/component/title';
 const Recommend: FC = () => {
   const [songList, setSongList] = useState([]);
   const [SingleList, setSingleList] = useState([]);
