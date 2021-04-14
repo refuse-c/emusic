@@ -51,6 +51,7 @@
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.15.0",
     "axios": "^0.21.1",
+    "clone": "^2.1.2",
     "concurrently": "^6.0.1",
     "css-loader": "^5.2.0",
     "customize-cra": "^1.0.0",
