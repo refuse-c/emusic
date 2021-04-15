@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-15 13:32:46
+ * @LastEditTime: 2021-04-15 23:02:18
  * @Description:轮播图
  */
 import { FC, useState, useEffect } from 'react';
@@ -10,34 +10,49 @@ import styles from './index.module.scss';
 interface Props {
   list: any;
 }
+interface Item {
+  name: string;
+  imageUrl: string;
+  typeTitle: string;
+  titleColor: string;
+}
 
 const Banner: FC<Props> = (props) => {
   const { list } = props;
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
       const newActive = active + 1 === list.length ? 0 : active + 1;
       setActive(newActive);
-    }, 3000);
-    return () => {
-      clearInterval(timer);
-    };
-  });
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [active, list.length]);
+
   return (
-    <ul className={styles.banner}>
-      {list.map((item: any, index: number) => {
-        const len = list.length;
-        const cls1 = index === active ? styles.active : '';
-        const cls2 = index === (active - 1 === 0 ? len : active - 1) ? styles.active_left : '';
-        const cls3 = index === (active + 1 === len ? 0 : active + 1) ? styles.active_right : '';
-        return (
-          <li key={index} className={[cls1, cls2, cls3].join(' ')} onClick={() => setActive(index)}>
-            {<img src={item.imageUrl} alt="" />}
-          </li>
-        );
-      })}
-    </ul>
+    <div className={styles.banner}>
+      <ul className={styles.imgList}>
+        {list.map((item: Item, index: number) => {
+          const len = list.length - 1;
+          const cls1 = index === active ? styles.active : '';
+          const cls2 = index === (active === 0 ? len : active - 1) ? styles.active_left : '';
+          const cls3 = index === (active === len ? 0 : active + 1) ? styles.active_right : '';
+          const color = item.titleColor === 'red' ? '#CC4A4A' : '#4A79CC';
+          return (
+            <li key={index} className={[cls1, cls2, cls3].join(' ')} onClick={() => setActive(index)}>
+              {<img src={item.imageUrl} alt="" />}
+              <p style={{ backgroundColor: color }}>{item.typeTitle}</p>
+            </li>
+          );
+        })}
+      </ul>
+      <ul className={styles.pointList}>
+        {list.map((item: Item, index: number) => {
+          const cls = index === active ? styles.active : '';
+          return <li key={item.name} className={cls} onMouseEnter={() => setActive(index)}></li>;
+        })}
+      </ul>
+    </div>
   );
 };
 
