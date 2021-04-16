@@ -1,0 +1,32 @@
+.singleList {
+  display: flex;
+  flex-wrap: wrap;
+
+  li {
+    width: calc(20% - 16px);
+    border-radius: 6px;
+    height: 20vw;
+    &:not(:nth-child(5n - 4)) {
+      margin-left: 20px;
+    }
+    div {
+      width: 100%;
+      padding-top: 100%;
+      border-radius: 6px;
+      cursor: pointer;
+      background-size: 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+    p {
+      font-size: 14px;
+      margin: 10px 0 20px;
+      overflow: hidden;
+      line-height: 1.5;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+  }
+}

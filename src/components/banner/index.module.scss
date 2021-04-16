@@ -29,7 +29,6 @@
         left: 0;
         z-index: 2;
         transform: translate(0, -50%);
-
       }
 
       &.active {
@@ -37,14 +36,13 @@
         left: 50%;
         transform: translate(-50%, -50%) scale(1, 1.25);
         z-index: 3;
-
       }
 
       &.active_right {
         right: 0;
         z-index: 2;
+        left: inherit;
         transform: translate(0, -50%);
-
       }
 
       p {
@@ -56,6 +54,35 @@
         padding: 2px 10px;
         border-radius: 8px 0 8px 0;
         font-size: 11px;
+      }
+    }
+
+    &:hover {
+      div {
+        opacity: 1;
+      }
+    }
+
+    div {
+      opacity: 0;
+      transition: ease 0.25s all;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      z-index: 5;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.2) url('~@images/icon_arrow.svg') center center / 20px no-repeat;
+      &.arrow_prev {
+        left: 10px;
+        transform: rotate(-180deg);
+        font-size: 20px;
+      }
+      &.arrow_next {
+        right: 10px;
+        font-size: 20px;
       }
     }
   }

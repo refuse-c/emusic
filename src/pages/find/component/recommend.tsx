@@ -2,19 +2,20 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-14 23:43:00
+ * @LastEditTime: 2021-04-16 14:02:55
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
 import Title from '@pages/find/component/title';
 import Banner from '@components/banner';
+import SingleList from '@/components/singleList';
 import { login } from '@/common/net/login';
 import { findBanner, recommendList, recommendSong } from '@/common/net/find';
 const Recommend: FC = () => {
   const [bannerList, setBannerList] = useState([]);
   const [songList, setSongList] = useState([]);
-  const [SingleList, setSingleList] = useState([]);
+  const [singleList, setSingleList] = useState([]);
 
   /**
    * @name:登录
@@ -54,8 +55,12 @@ const Recommend: FC = () => {
    */
   const getRecommendList = async () => {
     const result: any = await recommendList();
-    const songList = result.recommend || [];
-    setSingleList(songList);
+    const obj = { name: '每日推荐音乐' };
+    const singleList = result.recommend || [];
+    singleList.unshift(obj);
+    singleList.length = 10;
+    console.log(singleList);
+    setSingleList(singleList);
   };
 
   useEffect(() => {
@@ -69,6 +74,7 @@ const Recommend: FC = () => {
     <div className={styles.recommend}>
       <Banner list={bannerList || []} />
       <Title title="推荐歌单" pathName="/find/playlist" />
+      <SingleList list={singleList || []} />
       <Title title="独家放送" pathName="/find/playlist" />
       <Title title="最新音乐" pathName="/find/playlist" />
       <Title title="推荐MV" pathName="/find/playlist" />
@@ -77,7 +83,7 @@ const Recommend: FC = () => {
       {songList.map((item: any, index: number) => {
         return <li key={index}>{item.name}</li>;
       })}
-      {SingleList.map((item: any, index: number) => {
+      {singleList.map((item: any, index: number) => {
         return <li key={index}>{item.name}</li>;
       })}
     </div>
