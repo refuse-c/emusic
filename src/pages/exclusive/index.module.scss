@@ -1,25 +1,24 @@
-.singleList {
+.exclusiveList {
   display: flex;
   flex-wrap: wrap;
 
   li {
-    width: calc(20% - 16px);
+    width: calc(33.333% - 13.4px);
     border-radius: 6px;
 
-    &:not(:nth-child(5n - 4)) {
+    &:not(:nth-child(3n - 2)) {
       margin-left: 20px;
     }
 
     .imgBox {
       position: relative;
       width: 100%;
-      padding-top: 100%;
       border-radius: 6px;
+      padding-top: calc(100% / 1.78);
       cursor: pointer;
       background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
-      border: 1px solid #f3f3f3;
 
       &::before {
         position: absolute;
@@ -31,6 +30,19 @@
         border-radius: 6px;
         background: url('~@images/icon_mask_layer3.png') top center / 100% no-repeat;
       }
+
+      &::after {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        content: '';
+        width: 26px;
+        height: 26px;
+        background: url('~@images/icon_play_1.png') center center / 26px no-repeat;
+      }
+
+
+
     }
 
     p {
@@ -43,5 +55,29 @@
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
     }
+
+    // 自适应
+
+    @media screen and (max-width: 1100px) {
+
+      // 小于1200
+      &.adaptive {
+        width: calc(50% - 20px);
+        padding-top: calc(50% / 2);
+        background: red;
+
+        &:not(:nth-child(2n - 1)) {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+
+      // 大于1200
+
+    }
+
+
   }
 }

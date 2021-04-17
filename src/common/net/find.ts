@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-13 21:41:24
+ * @LastEditTime: 2021-04-16 21:22:52
  * @Description:
  */
 import { get } from './request';
@@ -31,4 +31,13 @@ export const recommendSong = (params?: any) => {
  */
 export const recommendList = (params?: any) => {
   return get('/recommend/resource', params);
+};
+
+/**
+ * @name: 独家放送入口列表
+ * @param {any} params
+ * @Description:
+ */
+export const exclusive = (params?: any) => {
+  return get('/personalized/privatecontent', params);
 };

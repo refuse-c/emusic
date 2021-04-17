@@ -1,5 +1,5 @@
 .menu {
-  padding: 12px 10px 0 20px;
+  padding: 12px 10px 0 12px;
 
   li {
     padding: 0 8px;
@@ -10,6 +10,7 @@
     white-space: nowrap;
     border-radius: 2px;
     transition: all 0.25s ease;
+
     &:not(:first-child) {
       margin-top: 2px;
     }

@@ -1,25 +1,41 @@
-.singleList {
+.exclusiveList {
   display: flex;
   flex-wrap: wrap;
 
   li {
-    width: calc(20% - 16px);
+    width: calc(33.333% - 13.4px);
     border-radius: 6px;
 
-    &:not(:nth-child(5n - 4)) {
+    &:not(:nth-child(3n - 2)) {
       margin-left: 20px;
+    }
+
+    // 自适应
+    &.adaptive {
+      @media screen and (max-width: 1100px) {
+        // 小于1100 显示2个
+        width: calc(50% - 20px);
+        margin-left: 0;
+
+        &:nth-child(2n - 2) {
+          margin-left: 20px;
+        }
+      }
+
+      .imgBox {
+        padding-top: calc(100% / 2.65);
+      }
     }
 
     .imgBox {
       position: relative;
       width: 100%;
-      padding-top: 100%;
       border-radius: 6px;
+      padding-top: calc(100% / 1.78);
       cursor: pointer;
       background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
-      border: 1px solid #f3f3f3;
 
       &::before {
         position: absolute;
@@ -31,6 +47,17 @@
         border-radius: 6px;
         background: url('~@images/icon_mask_layer3.png') top center / 100% no-repeat;
       }
+
+      &::after {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        content: '';
+        width: 26px;
+        height: 26px;
+        background: url('~@images/icon_play_1.png') center center / 26px no-repeat;
+      }
+
     }
 
     p {
