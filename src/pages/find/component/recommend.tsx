@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-16 23:19:25
+ * @LastEditTime: 2021-04-18 22:38:27
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
@@ -11,10 +11,12 @@ import Title from '@pages/find/component/title';
 import Banner from '@components/banner';
 import SingleList from '@/components/singleList';
 import ExclusiveList from '@/components/exclusiveList';
-
 import { login } from '@/common/net/login';
 import { findBanner, recommendList, recommendSong, exclusive } from '@/common/net/find';
-const Recommend: FC = () => {
+
+const Recommend: FC = (props: any) => {
+  console.log(props);
+  const { handleHasMore } = props;
   const [bannerList, setBannerList] = useState([]);
   const [singleList, setSingleList] = useState([]);
   const [songList, setSongList] = useState([]);
@@ -102,6 +104,7 @@ const Recommend: FC = () => {
       {singleList.map((item: any, index: number) => {
         return <li key={index}>{item.name}</li>;
       })}
+      <div onClick={() => handleHasMore(false)}>dasdasasds</div>
     </div>
   );
 };

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-12 22:54:17
+ * @LastEditTime: 2021-04-17 18:39:10
  * @Description:歌单
  */
 import { FC, useEffect } from 'react';
@@ -22,7 +22,6 @@ const Recommend: FC = () => {
   };
 
   useEffect(() => {
-    console.log('歌单');
     getLogin();
     getRecommendSong();
   });

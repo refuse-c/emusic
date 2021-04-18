@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 11:59:45
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-13 23:17:00
+ * @LastEditTime: 2021-04-17 18:53:54
  * @Description:发现音乐
  */
 import { FC } from 'react';
@@ -13,7 +13,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 import { findNav } from '@utils/local';
 
 const Find: FC = (props: any) => {
-  const { router } = props;
+  const { router, hasMore, handleHasMore } = props;
   return (
     <div className={styles.find}>
       <Nav list={findNav} isFixed={true} />
@@ -23,7 +23,9 @@ const Find: FC = (props: any) => {
             exact
             key={index}
             path={item.path}
-            render={(props) => <item.component {...props} router={item.router} />}
+            render={(props) => (
+              <item.component {...props} hasMore={hasMore} handleHasMore={handleHasMore} router={item.router} />
+            )}
           />
         ))}
       </Router>
