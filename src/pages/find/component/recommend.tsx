@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-18 22:38:27
+ * @LastEditTime: 2021-04-19 16:54:04
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
@@ -13,7 +13,7 @@ import SingleList from '@/components/singleList';
 import ExclusiveList from '@/components/exclusiveList';
 import { login } from '@/common/net/login';
 import { findBanner, recommendList, recommendSong, exclusive } from '@/common/net/find';
-
+import img from '@images/icon_mask_layer4.png';
 const Recommend: FC = (props: any) => {
   console.log(props);
   const { handleHasMore } = props;
@@ -50,7 +50,7 @@ const Recommend: FC = (props: any) => {
    */
   const getRecommendList = async () => {
     const result: any = await recommendList();
-    const obj = { name: '每日推荐音乐', identifying: true };
+    const obj = { name: '每日推荐音乐', identifying: true, picUrl: img, day: 19 };
     const singleList = result.recommend || [];
     singleList.unshift(obj);
     singleList.length = 10;

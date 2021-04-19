@@ -2,20 +2,19 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 19:37:39
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-17 18:37:06
+ * @LastEditTime: 2021-04-19 13:28:20
  * @Description:
  */
-import { FC, useEffect, useRef } from 'react';
+import { FC, useRef } from 'react';
 import styles from './index.module.scss';
 import { Layout } from 'antd';
 import CustomHeader from '@components/header';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { isArray } from '@utils/tools';
-import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 const { Header, Footer, Sider, Content } = Layout;
 
 interface Props {
-  width?: number;
   children?: any;
   isFull?: boolean; // 是否展示全屏
   handleHasMore: Function;
@@ -32,15 +31,7 @@ const View: FC<Props> = (props) => {
     }
   };
 
-  useEffect(() => {
-    console.log(scrollRef);
-  });
-
-  const { width = 200, children, isFull = false } = props;
-
-  const onResize = (event: any, { element, size }: any) => {
-    console.log(event, element, size);
-  };
+  const { children, isFull = false } = props;
 
   return (
     <div className={styles.view}>
@@ -50,18 +41,10 @@ const View: FC<Props> = (props) => {
         </Header>
         <Layout>
           {isArray(children) ? (
-            <Sider width={width}>
-              <ResizableBox
-                width={200}
-                height={500}
-                minConstraints={[100, 100]}
-                maxConstraints={[300, 300]}
-                onResize={onResize}
-              >
-                <Scrollbars ref={scrollRef} className={styles.area}>
-                  {props.children[0]}
-                </Scrollbars>
-              </ResizableBox>
+            <Sider>
+              <Scrollbars ref={scrollRef} className={styles.area}>
+                {props.children[0]}
+              </Scrollbars>
             </Sider>
           ) : null}
 

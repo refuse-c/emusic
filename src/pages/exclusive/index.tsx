@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-17 18:32:43
+ * @LastEditTime: 2021-04-19 13:32:59
  * @Description:独家发送
  */
 import { FC, useEffect, useState } from 'react';
@@ -21,7 +21,7 @@ const Exclusive: FC = () => {
 
   useEffect(() => {
     getPrivatecontentList();
-  });
+  }, []);
 
   return (
     <div className={styles.exclusive}>

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-14 00:05:47
+ * @LastEditTime: 2021-04-19 13:01:36
  * @Description:
  */
 
@@ -16,6 +16,174 @@
  * 4.isBold 选中样式是否加粗 true加粗 false不加粗
  */
 export const menuList = [
+  {
+    name: '发现音乐',
+    path: '/find',
+    type: 1,
+    isBold: true,
+    isFull: false,
+  },
+  {
+    name: '视频',
+    path: '/video',
+    type: 1,
+    isBold: true,
+    isFull: false,
+  },
+  {
+    name: '朋友',
+    path: '/friend',
+    type: 1,
+    isBold: true,
+    isFull: true,
+  },
+  // {
+  //   name: '直播',
+  //   path: '/live',
+  //   type: 1,
+  //   isBold: true,
+  //   isFull: true,
+  // },
+  {
+    name: '私人FM',
+    path: '/fm',
+    type: 1,
+    isBold: true,
+    isFull: false,
+  },
+  {
+    name: '我的音乐',
+    path: null,
+    type: 2,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '本地音乐',
+    path: '/local',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '下载管理',
+    path: '/download',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '我的音乐云盘',
+    path: '/cloud',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '我的电台',
+    path: '/radio',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '我的收藏',
+    path: '/collection',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '创建的歌单',
+    path: '/createPlaylist',
+    type: 2,
+    isBold: false,
+    isFull: false,
+  },
+  {
+    name: '发现音乐',
+    path: '/find',
+    type: 1,
+    isBold: true,
+    isFull: false,
+  },
+  {
+    name: '视频',
+    path: '/video',
+    type: 1,
+    isBold: true,
+    isFull: false,
+  },
+  {
+    name: '朋友',
+    path: '/friend',
+    type: 1,
+    isBold: true,
+    isFull: true,
+  },
+  // {
+  //   name: '直播',
+  //   path: '/live',
+  //   type: 1,
+  //   isBold: true,
+  //   isFull: true,
+  // },
+  {
+    name: '私人FM',
+    path: '/fm',
+    type: 1,
+    isBold: true,
+    isFull: false,
+  },
+  {
+    name: '我的音乐',
+    path: null,
+    type: 2,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '本地音乐',
+    path: '/local',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '下载管理',
+    path: '/download',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '我的音乐云盘',
+    path: '/cloud',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '我的电台',
+    path: '/radio',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '我的收藏',
+    path: '/collection',
+    type: 1,
+    isBold: false,
+    isFull: true,
+  },
+  {
+    name: '创建的歌单',
+    path: '/createPlaylist',
+    type: 2,
+    isBold: false,
+    isFull: false,
+  },
   {
     name: '发现音乐',
     path: '/find',
