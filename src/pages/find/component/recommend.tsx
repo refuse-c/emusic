@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-19 16:54:04
+ * @LastEditTime: 2021-04-19 23:44:25
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
@@ -14,9 +14,8 @@ import ExclusiveList from '@/components/exclusiveList';
 import { login } from '@/common/net/login';
 import { findBanner, recommendList, recommendSong, exclusive } from '@/common/net/find';
 import img from '@images/icon_mask_layer4.png';
-const Recommend: FC = (props: any) => {
-  console.log(props);
-  const { handleHasMore } = props;
+import { newMusic } from '@/common/net/api';
+const Recommend: FC = () => {
   const [bannerList, setBannerList] = useState([]);
   const [singleList, setSingleList] = useState([]);
   const [songList, setSongList] = useState([]);
@@ -79,12 +78,24 @@ const Recommend: FC = (props: any) => {
     setExclusiveList(exclusiveList);
   };
 
+  /**
+   * @name:最新音乐
+   * @param {*} async
+   * @Description:
+   */
+  const getNewMusic = async (limit: number) => {
+    const result: any = await newMusic(limit);
+    const exclusiveList = result.result || [];
+    setExclusiveList(exclusiveList);
+  };
+
   useEffect(() => {
     getLogin();
     getFindBanner();
     getRecommendList();
     getRecommendSong();
     getExclusiveList();
+    getNewMusic(10);
   }, []);
 
   return (
@@ -104,7 +115,6 @@ const Recommend: FC = (props: any) => {
       {singleList.map((item: any, index: number) => {
         return <li key={index}>{item.name}</li>;
       })}
-      <div onClick={() => handleHasMore(false)}>dasdasasds</div>
     </div>
   );
 };

@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 19:37:39
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-19 13:28:20
+ * @LastEditTime: 2021-04-19 23:06:13
  * @Description:
  */
-import { FC, useRef } from 'react';
+import { FC } from 'react';
 import styles from './index.module.scss';
 import { Layout } from 'antd';
 import CustomHeader from '@components/header';
@@ -17,20 +17,9 @@ const { Header, Footer, Sider, Content } = Layout;
 interface Props {
   children?: any;
   isFull?: boolean; // 是否展示全屏
-  handleHasMore: Function;
 }
 
 const View: FC<Props> = (props) => {
-  const scrollRef: any = useRef();
-  // 滚动到底部改变状态触发事件
-  const handleScroll = (e: any) => {
-    const { scrollTop, clientHeight, scrollHeight } = e.target;
-    if (scrollTop + clientHeight === scrollHeight) {
-      const { handleHasMore } = props;
-      handleHasMore(true);
-    }
-  };
-
   const { children, isFull = false } = props;
 
   return (
@@ -42,14 +31,12 @@ const View: FC<Props> = (props) => {
         <Layout>
           {isArray(children) ? (
             <Sider>
-              <Scrollbars ref={scrollRef} className={styles.area}>
-                {props.children[0]}
-              </Scrollbars>
+              <Scrollbars className={styles.area}>{props.children[0]}</Scrollbars>
             </Sider>
           ) : null}
 
           <Content>
-            <Scrollbars className={styles.area} onScroll={handleScroll}>
+            <Scrollbars className={styles.area}>
               <div className={isFull ? styles.isFull : styles.notFull}>
                 {isArray(children) ? children[1] : children}
               </div>

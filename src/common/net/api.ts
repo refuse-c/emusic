@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-16 23:45:51
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-16 23:48:02
+ * @LastEditTime: 2021-04-19 23:14:17
  * @Description:
  */
 import { get } from './request';
@@ -14,4 +14,12 @@ import { get } from './request';
  */
 export const privatecontentList = (params?: any) => {
   return get('/personalized/privatecontent/list', params);
+};
+/**
+ * @name: 最新音乐
+ * @param {any} params
+ * @Description:
+ */
+export const newMusic = (params?: any) => {
+  return get('top/song', params);
 };
