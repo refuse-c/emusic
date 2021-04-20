@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-16 21:22:52
+ * @LastEditTime: 2021-04-20 23:39:28
  * @Description:
  */
 import { get } from './request';
@@ -40,4 +40,13 @@ export const recommendList = (params?: any) => {
  */
 export const exclusive = (params?: any) => {
   return get('/personalized/privatecontent', params);
+};
+
+/**
+ * @name: 推荐MV
+ * @param {any} params
+ * @Description:
+ */
+export const personalizedMv = (params?: any) => {
+  return get('/personalized/mv', params);
 };

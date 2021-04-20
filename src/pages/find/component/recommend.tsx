@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-19 23:44:25
+ * @LastEditTime: 2021-04-20 23:41:05
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
@@ -11,8 +11,10 @@ import Title from '@pages/find/component/title';
 import Banner from '@components/banner';
 import SingleList from '@/components/singleList';
 import ExclusiveList from '@/components/exclusiveList';
+import Songs from '@/components/song';
 import { login } from '@/common/net/login';
-import { findBanner, recommendList, recommendSong, exclusive } from '@/common/net/find';
+import { findBanner, recommendList, recommendSong, exclusive, personalizedMv } from '@/common/net/find';
+import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
 import { newMusic } from '@/common/net/api';
 const Recommend: FC = () => {
@@ -20,6 +22,8 @@ const Recommend: FC = () => {
   const [singleList, setSingleList] = useState([]);
   const [songList, setSongList] = useState([]);
   const [exclusiveList, setExclusiveList] = useState([]);
+  const [newMusicList, setNewMusicList] = useState([]);
+  const [mvList, setMvList] = useState([]);
 
   /**
    * @name:登录
@@ -49,7 +53,7 @@ const Recommend: FC = () => {
    */
   const getRecommendList = async () => {
     const result: any = await recommendList();
-    const obj = { name: '每日推荐音乐', identifying: true, picUrl: img, day: 19 };
+    const obj = { name: '每日推荐音乐', identifying: true, picUrl: img, day: moment().format('DD') };
     const singleList = result.recommend || [];
     singleList.unshift(obj);
     singleList.length = 10;
@@ -83,10 +87,24 @@ const Recommend: FC = () => {
    * @param {*} async
    * @Description:
    */
-  const getNewMusic = async (limit: number) => {
-    const result: any = await newMusic(limit);
-    const exclusiveList = result.result || [];
-    setExclusiveList(exclusiveList);
+  const getNewMusic = async () => {
+    const result: any = await newMusic();
+    const newMusicList = result.data || [];
+    newMusicList.length = 12;
+    setNewMusicList(newMusicList);
+  };
+
+  /**
+   * @name:最新音乐
+   * @param {*} async
+   * @Description:
+   */
+  const getPersonalizedMv = async () => {
+    const result: any = await personalizedMv();
+    console.log(result);
+    const mvList = result.result || [];
+    mvList.length = 3;
+    setMvList(mvList);
   };
 
   useEffect(() => {
@@ -95,7 +113,8 @@ const Recommend: FC = () => {
     getRecommendList();
     getRecommendSong();
     getExclusiveList();
-    getNewMusic(10);
+    getNewMusic();
+    getPersonalizedMv();
   }, []);
 
   return (
@@ -106,9 +125,11 @@ const Recommend: FC = () => {
       <Title title="独家放送" pathName="/exclusive" />
       <ExclusiveList list={exclusiveList} isAdaptive={false} />
       <Title title="最新音乐" pathName="/find/playlist" />
+      <Songs list={newMusicList} />
       <Title title="推荐MV" pathName="/find/playlist" />
       <Title title="主播电台" pathName="/find/playlist" />
       <Title title="看看" pathName="/find/playlist" />
+      {console.log(mvList)}
       {songList.map((item: any, index: number) => {
         return <li key={index}>{item.name}</li>;
       })}
