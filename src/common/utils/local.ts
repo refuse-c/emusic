@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-21 09:47:51
+ * @LastEditTime: 2021-04-21 22:20:27
  * @Description:
  */
 
@@ -37,13 +37,13 @@ export const menuList = [
     isBold: true,
     isFull: true,
   },
-  // {
-  //   name: '直播',
-  //   path: '/live',
-  //   type: 1,
-  //   isBold: true,
-  //   isFull: true,
-  // },
+  {
+    name: '直播',
+    path: '/live',
+    type: 1,
+    isBold: true,
+    isFull: true,
+  },
   {
     name: '私人FM',
     path: '/fm',
@@ -64,6 +64,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
+    icon: require('@images/icon_local_music.png').default,
   },
   {
     name: '下载管理',
@@ -71,6 +72,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
+    icon: require('@images/icon_down.png').default,
   },
   {
     name: '我的音乐云盘',
@@ -78,6 +80,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
+    icon: require('@images/icon_cloud.png').default,
   },
   {
     name: '我的电台',
@@ -85,6 +88,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
+    icon: require('@images/icon_radio.png').default,
   },
   {
     name: '我的收藏',
@@ -92,6 +96,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
+    icon: require('@images/icon_my_collection.png').default,
   },
   {
     name: '创建的歌单',

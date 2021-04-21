@@ -44,11 +44,19 @@
       font-weight: bold;
     }
 
-    &.directory {
+    &.active4 {
       color: #999;
       font-size: 13px;
       line-height: 36px;
       margin-top: 5px;
+    }
+
+    &.active5 {
+      padding-left: 30px;
+      background-size: 16px 16px;
+      background-position: left 3px center;
+      background-repeat: no-repeat;
+      padding-left: 30px;
     }
 
     // &.tentative {
