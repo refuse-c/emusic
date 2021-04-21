@@ -12,13 +12,12 @@
     border-radius: 6px;
     color: #333;
 
-
     &:hover {
-      background-color: #EAEAEA;
+      background-color: #eaeaea;
     }
 
     &.active {
-      background-color: #EAEAEA;
+      background-color: #eaeaea;
     }
 
     &:not(:nth-child(-n + 3)) {
@@ -54,7 +53,7 @@
       justify-content: space-between;
       padding: 5px 0 8px 10px;
 
-      p {
+      div {
         &:nth-child(1) {
           font-size: 14px;
 

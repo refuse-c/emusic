@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-20 21:24:51
+ * @LastEditTime: 2021-04-21 09:37:14
  * @Description:最新音乐组件
  */
 import { renderArtists } from '@/common/utils/tools';
@@ -25,7 +25,6 @@ const Songs: FC<Props> = (props) => {
   const [active, setActive] = useState(NaN);
 
   const { list } = props;
-  console.log(list);
 
   return (
     <ul className={styles.list}>
@@ -37,11 +36,11 @@ const Songs: FC<Props> = (props) => {
           <li key={index} className={[styles.item, cls].join(' ')} onClick={() => setActive(index)}>
             <div className={styles.img} style={{ backgroundImage: `url(${album.picUrl})` }}></div>
             <div className={styles.info}>
-              <p>
+              <div>
                 {name}
                 {transNames.length ? transNames[0] : null}
-              </p>
-              <p>{renderArtists(artists)}</p>
+              </div>
+              <div>{renderArtists(artists)}</div>
             </div>
           </li>
         );
