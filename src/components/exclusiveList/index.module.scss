@@ -3,7 +3,7 @@
   flex-wrap: wrap;
 
   li {
-    width: calc(33.333% - 13.4px);
+    width: calc(33.333% - 13.33px);
     border-radius: 6px;
 
     &:not(:nth-child(3n - 2)) {

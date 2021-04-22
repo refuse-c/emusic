@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-20 23:39:28
+ * @LastEditTime: 2021-04-22 23:26:33
  * @Description:
  */
 import { get } from './request';
@@ -49,4 +49,13 @@ export const exclusive = (params?: any) => {
  */
 export const personalizedMv = (params?: any) => {
   return get('/personalized/mv', params);
+};
+
+/**
+ * @name: 推荐电台
+ * @param {any} params
+ * @Description:
+ */
+export const recommendDj = (params?: any) => {
+  return get('/dj/personalize/recommend', params);
 };

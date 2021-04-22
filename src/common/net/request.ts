@@ -2,14 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:24:31
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-16 19:55:44
+ * @LastEditTime: 2021-04-22 22:49:33
  * @Description:
  */
 
 import axios from 'axios';
 // 新创建一个axios实例，并进行基础配置
 const instance = axios.create({
-  baseURL: 'http://tshy.xyz:3000/',
+  // baseURL: 'http://tshy.xyz:3000/',
+  baseURL: 'http://47.110.230.41:3000',
   timeout: 15000,
   withCredentials: true,
   // headers: {'X-Requested-With': 'XMLHttpRequest'}

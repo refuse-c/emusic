@@ -1,0 +1,94 @@
+.mvList {
+  display: flex;
+
+  li {
+    position: relative;
+    width: calc(25% - 15px);
+    overflow: hidden;
+    margin-bottom: 14px;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    // &.hideLst {
+    //   margin-bottom: 0;
+    // }
+
+    .img_box {
+      position: relative;
+      width: 100%;
+      cursor: pointer;
+      background-size: 100% 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+      padding-top: calc(100% / 1.8);
+      border-radius: 6px;
+
+      .copywriter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        opacity: 0;
+        color: #fff;
+        font-size: 14px;
+        line-height: 1;
+        padding: 12px 8px;
+        transform: all 0.25 ease;
+        background-color: rgba($color: #000000, $alpha: .5);
+      }
+
+      &:hover {
+        .copywriter {
+          opacity: 1;
+        }
+
+      }
+
+
+      .name {
+        font-size: 14px;
+        margin: 4px 0 0;
+        line-height: 1.5;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .artistName {
+        font-size: 12px;
+        color: #676767;
+      }
+
+      .playCount_box {
+        opacity: 0;
+      }
+    }
+
+    @media screen and (max-width: 1300px) {
+      width: calc(33% - 13.33px);
+      overflow: hidden;
+
+
+      &:not(:last-child) {
+        margin-right: 20px;
+      }
+
+      &.hideLst {
+        &:last-child {
+          display: none;
+        }
+      }
+
+      &:not(:nth-last-child(2)) {
+        margin-right: 20px;
+      }
+
+      .img_box {
+        padding-top: calc(100% / 1.78);
+      }
+    }
+
+  }
+}

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-20 23:41:05
+ * @LastEditTime: 2021-04-23 00:09:32
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
@@ -12,19 +12,21 @@ import Banner from '@components/banner';
 import SingleList from '@/components/singleList';
 import ExclusiveList from '@/components/exclusiveList';
 import Songs from '@/components/song';
+import MvList from '@/components/mvList';
+import RadioList from '@/components/radioList';
 import { login } from '@/common/net/login';
-import { findBanner, recommendList, recommendSong, exclusive, personalizedMv } from '@/common/net/find';
+import { findBanner, recommendList, exclusive, personalizedMv, recommendDj } from '@/common/net/find';
 import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
 import { newMusic } from '@/common/net/api';
 const Recommend: FC = () => {
   const [bannerList, setBannerList] = useState([]);
   const [singleList, setSingleList] = useState([]);
-  const [songList, setSongList] = useState([]);
+  // const [songList, setSongList] = useState([]);
   const [exclusiveList, setExclusiveList] = useState([]);
   const [newMusicList, setNewMusicList] = useState([]);
   const [mvList, setMvList] = useState([]);
-
+  const [radioList, setRadioList] = useState([]);
   /**
    * @name:登录
    * @param {*} async
@@ -65,11 +67,11 @@ const Recommend: FC = () => {
    * @param {*} async
    * @Description:
    */
-  const getRecommendSong = async () => {
-    const result: any = await recommendSong();
-    const songList = result.data.dailySongs || [];
-    setSongList(songList);
-  };
+  // const getRecommendSong = async () => {
+  //   const result: any = await recommendSong();
+  //   const songList = result.data.dailySongs || [];
+  //   setSongList(songList);
+  // };
 
   /**
    * @name:获取独家放送入口列表
@@ -95,47 +97,53 @@ const Recommend: FC = () => {
   };
 
   /**
-   * @name:最新音乐
+   * @name:推荐mv
    * @param {*} async
    * @Description:
    */
   const getPersonalizedMv = async () => {
     const result: any = await personalizedMv();
-    console.log(result);
     const mvList = result.result || [];
-    mvList.length = 3;
     setMvList(mvList);
+  };
+
+  /**
+   * @name:推荐mv
+   * @param {*} async
+   * @Description:
+   */
+  const getRecommendDj = async () => {
+    const result: any = await recommendDj();
+    console.log(result);
+    const radioList = result.data || [];
+    setRadioList(radioList);
   };
 
   useEffect(() => {
     getLogin();
     getFindBanner();
     getRecommendList();
-    getRecommendSong();
+    // getRecommendSong();
     getExclusiveList();
     getNewMusic();
     getPersonalizedMv();
+    getRecommendDj();
   }, []);
 
   return (
     <div className={styles.recommend}>
       <Banner list={bannerList || []} />
-      <Title title="推荐歌单" pathName="/find/playlist" />
+      <Title title="推荐歌单" top={5} pathName="/find/playlist" />
       <SingleList list={singleList || []} />
-      <Title title="独家放送" pathName="/exclusive" />
+      <Title title="独家放送" top={10} pathName="/exclusive" />
       <ExclusiveList list={exclusiveList} isAdaptive={false} />
-      <Title title="最新音乐" pathName="/find/playlist" />
+      <Title title="最新音乐" top={10} pathName="/find/playlist" />
       <Songs list={newMusicList} />
-      <Title title="推荐MV" pathName="/find/playlist" />
-      <Title title="主播电台" pathName="/find/playlist" />
-      <Title title="看看" pathName="/find/playlist" />
-      {console.log(mvList)}
-      {songList.map((item: any, index: number) => {
-        return <li key={index}>{item.name}</li>;
-      })}
-      {singleList.map((item: any, index: number) => {
-        return <li key={index}>{item.name}</li>;
-      })}
+      <Title title="推荐MV" top={10} pathName="/find/playlist" />
+      <MvList list={mvList} hideLst={true} showTips={true} />
+      <Title title="主播电台" top={10} pathName="/find/playlist" />
+      <RadioList list={radioList} />
+      {/* <Title title="看看" pathName="/find/playlist" /> */}
     </div>
   );
 };
