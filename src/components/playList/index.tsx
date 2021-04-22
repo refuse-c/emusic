@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-22 20:22:13
+ * @LastEditTime: 2021-04-23 00:21:43
  * @Description:歌单组件
  */
 import { FC } from 'react';
@@ -20,10 +20,10 @@ interface Item {
   identifying?: boolean;
 }
 
-const SingleList: FC<Props> = (props) => {
+const PlayList: FC<Props> = (props) => {
   const { list } = props;
   return (
-    <ul className={styles.singleList}>
+    <ul className={styles.playlist}>
       {list.map((item: Item, index: number) => {
         const { day, name, picUrl, playcount, identifying } = item;
         return (
@@ -39,4 +39,4 @@ const SingleList: FC<Props> = (props) => {
   );
 };
 
-export default SingleList;
+export default PlayList;

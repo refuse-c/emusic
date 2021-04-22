@@ -2,14 +2,14 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-23 00:09:32
+ * @LastEditTime: 2021-04-23 00:23:47
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
 import Title from '@pages/find/component/title';
 import Banner from '@components/banner';
-import SingleList from '@/components/singleList';
+import PlayList from '@/components/playList';
 import ExclusiveList from '@/components/exclusiveList';
 import Songs from '@/components/song';
 import MvList from '@/components/mvList';
@@ -21,7 +21,7 @@ import img from '@images/icon_mask_layer4.png';
 import { newMusic } from '@/common/net/api';
 const Recommend: FC = () => {
   const [bannerList, setBannerList] = useState([]);
-  const [singleList, setSingleList] = useState([]);
+  const [playList, setPlayList] = useState([]);
   // const [songList, setSongList] = useState([]);
   const [exclusiveList, setExclusiveList] = useState([]);
   const [newMusicList, setNewMusicList] = useState([]);
@@ -56,10 +56,10 @@ const Recommend: FC = () => {
   const getRecommendList = async () => {
     const result: any = await recommendList();
     const obj = { name: '每日推荐音乐', identifying: true, picUrl: img, day: moment().format('DD') };
-    const singleList = result.recommend || [];
-    singleList.unshift(obj);
-    singleList.length = 10;
-    setSingleList(singleList);
+    const playList = result.recommend || [];
+    playList.unshift(obj);
+    playList.length = 10;
+    setPlayList(playList);
   };
 
   /**
@@ -134,7 +134,7 @@ const Recommend: FC = () => {
     <div className={styles.recommend}>
       <Banner list={bannerList || []} />
       <Title title="推荐歌单" top={5} pathName="/find/playlist" />
-      <SingleList list={singleList || []} />
+      <PlayList list={playList || []} />
       <Title title="独家放送" top={10} pathName="/exclusive" />
       <ExclusiveList list={exclusiveList} isAdaptive={false} />
       <Title title="最新音乐" top={10} pathName="/find/playlist" />

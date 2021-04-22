@@ -1,4 +1,4 @@
-.singleList {
+.playlist {
   display: flex;
   flex-wrap: wrap;
 
@@ -9,6 +9,7 @@
     &:not(:nth-child(5n - 4)) {
       margin-left: 20px;
     }
+
     .dateBox {
       position: absolute;
       top: 50%;
@@ -23,6 +24,7 @@
       line-height: 80px;
       background: url('~@images/icon_date_box.png') center center / cover no-repeat;
     }
+
     .imgBox {
       position: relative;
       width: 100%;
