@@ -3,11 +3,11 @@
   flex-wrap: wrap;
 
   li {
-    width: calc(20% - 16px);
+    width: calc(20% - 15px);
     border-radius: 6px;
 
     &:not(:nth-child(5n - 4)) {
-      margin-left: 20px;
+      margin-left: 18px;
     }
 
     .dateBox {
@@ -34,7 +34,7 @@
       background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
-      border: 1px solid #f3f3f3;
+      // border: 1px solid #f3f3f3;
 
       &::before {
         position: absolute;
