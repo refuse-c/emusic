@@ -19,8 +19,6 @@
     }
   }
 
-
-
   :global {
     .ant-layout {
       height: 100%;
@@ -44,12 +42,11 @@
 
       .ant-layout-footer {
         height: 73px;
-        padding: 0 14px;
+        padding: 0;
         border-top: 1px solid #e1e1e1;
         background-color: #fff;
         box-shadow: 3px 3px 3px #000;
       }
     }
   }
-
 }

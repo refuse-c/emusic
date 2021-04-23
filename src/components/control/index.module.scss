@@ -1,0 +1,110 @@
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 100%;
+  .left {
+    display: flex;
+    width: 200px;
+    img {
+      width: 48px;
+      min-width: 48px;
+      height: 48px;
+      margin: 0 12px;
+      border-radius: 4px;
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: calc(100% - 72px);
+      div {
+        width: 100%;
+        color: #313132;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        &:first-child {
+          font-size: 14px;
+          display: flex;
+
+          p {
+            &:first-child {
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            &:last-child {
+              width: 15px;
+              min-width: 15px;
+              height: 15px;
+              background-color: pink;
+            }
+          }
+        }
+        &:last-child {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+  .center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 450px;
+    .btnGroup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      font-size: 10px;
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        margin: 0 15px;
+        cursor: pointer;
+        background-color: #ebebed;
+        &:nth-child(3) {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background-color: #ebebed;
+        }
+      }
+    }
+    .progress {
+      margin-top: 6px;
+      width: 100%;
+      background-color: red;
+    }
+  }
+  .right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 242px;
+    padding-right: 20px;
+
+    .quality {
+      width: 32px;
+      height: 32px;
+      background-color: pink;
+    }
+    .volume {
+      width: 130px;
+      height: 2px;
+      background-color: red;
+    }
+    .list {
+      width: 24px;
+      height: 24px;
+      background-color: pink;
+    }
+  }
+}

@@ -2,13 +2,14 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 19:37:39
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-19 23:06:13
+ * @LastEditTime: 2021-04-23 15:01:01
  * @Description:
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 import { Layout } from 'antd';
 import CustomHeader from '@components/header';
+import Control from '@components/control';
 import { Scrollbars } from 'react-custom-scrollbars';
 import { isArray } from '@utils/tools';
 import 'react-resizable/css/styles.css';
@@ -43,7 +44,9 @@ const View: FC<Props> = (props) => {
             </Scrollbars>
           </Content>
         </Layout>
-        <Footer>footer</Footer>
+        <Footer>
+          <Control />
+        </Footer>
       </Layout>
     </div>
   );
