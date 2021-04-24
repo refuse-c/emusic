@@ -1,0 +1,233 @@
+{
+  "id": "2501801",
+  "name": "播放器",
+  "font_family": "font_family",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "21206798",
+      "name": "原始大小",
+      "font_class": "min",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "21206799",
+      "name": "邮件",
+      "font_class": "email",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "21206800",
+      "name": "换肤",
+      "font_class": "theme",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "21206801",
+      "name": "实心向下箭头",
+      "font_class": "arrow-bottom",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "21206802",
+      "name": "目录",
+      "font_class": "playlist",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "21206803",
+      "name": "搜索",
+      "font_class": "search",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "21206804",
+      "name": "左侧箭头",
+      "font_class": "arrow-left",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "21206805",
+      "name": "播放",
+      "font_class": "volume",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "21206806",
+      "name": "暂停",
+      "font_class": "pause",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
+      "icon_id": "21206807",
+      "name": "音乐-01",
+      "font_class": "local-music",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "21206808",
+      "name": "后一首",
+      "font_class": "next",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "21206809",
+      "name": "新歌",
+      "font_class": "sound",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "21206810",
+      "name": "前一首",
+      "font_class": "prev",
+      "unicode": "e61a",
+      "unicode_decimal": 58906
+    },
+    {
+      "icon_id": "21206811",
+      "name": "话筒",
+      "font_class": "general-song",
+      "unicode": "e61b",
+      "unicode_decimal": 58907
+    },
+    {
+      "icon_id": "21206812",
+      "name": "最小化",
+      "font_class": "minimize",
+      "unicode": "e61c",
+      "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "21206813",
+      "name": "单曲循环",
+      "font_class": "cycle",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "21206814",
+      "name": "设置",
+      "font_class": "setting",
+      "unicode": "e61e",
+      "unicode_decimal": 58910
+    },
+    {
+      "icon_id": "21206815",
+      "name": "放大",
+      "font_class": "amplification",
+      "unicode": "e61f",
+      "unicode_decimal": 58911
+    },
+    {
+      "icon_id": "21206816",
+      "name": "关闭",
+      "font_class": "close",
+      "unicode": "e620",
+      "unicode_decimal": 58912
+    },
+    {
+      "icon_id": "21196435",
+      "name": "音乐-01",
+      "font_class": "yinle-01",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "21142682",
+      "name": "下载2-01",
+      "font_class": "menu-playlist",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "21142683",
+      "name": "下载-01",
+      "font_class": "download",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "21142684",
+      "name": "我喜欢的音乐2-01",
+      "font_class": "cardiac",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "21142685",
+      "name": "云盘-01",
+      "font_class": "cloud",
+      "unicode": "e604",
+      "unicode_decimal": 58884
+    },
+    {
+      "icon_id": "21142686",
+      "name": "我的电台-01",
+      "font_class": "radio",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "21142687",
+      "name": "mv",
+      "font_class": "mv",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "21142688",
+      "name": "我的收藏-01",
+      "font_class": "collection",
+      "unicode": "e607",
+      "unicode_decimal": 58887
+    },
+    {
+      "icon_id": "21142689",
+      "name": "创建歌单-01",
+      "font_class": "add",
+      "unicode": "e608",
+      "unicode_decimal": 58888
+    },
+    {
+      "icon_id": "21142690",
+      "name": "点赞-01",
+      "font_class": "dianzan-01",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "21142691",
+      "name": "sq-01",
+      "font_class": "sq",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "21142692",
+      "name": "vip-01",
+      "font_class": "vip",
+      "unicode": "e60b",
+      "unicode_decimal": 58891
+    },
+    {
+      "icon_id": "21142694",
+      "name": "我喜欢的音乐-01",
+      "font_class": "like",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    }
+  ]
+}

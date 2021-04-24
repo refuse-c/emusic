@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-22 21:31:53
+ * @LastEditTime: 2021-04-24 01:10:27
  * @Description:mv组件列表
  */
 import { FC } from 'react';
@@ -34,10 +34,10 @@ const mvList: FC<Props> = (props) => {
               <div className={styles.playCount_box}>
                 <Playcount num={playCount} />
               </div>
+              {showTips ? <div className={styles.copywriter}>{copywriter}</div> : ''}
             </div>
             <p className={styles.name}>{name}</p>
             <p className={styles.artistName}>{artistName}</p>
-            {showTips ? <div className={styles.copywriter}>{copywriter}</div> : ''}
           </li>
         );
       })}
