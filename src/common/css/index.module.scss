@@ -5,10 +5,10 @@ p {
   cursor: default;
   user-select: none;
   font-family: 'Segoe UI',
-Tahoma,
-Geneva,
-Verdana,
-sans-serif;
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 }
 
 body {
@@ -45,5 +45,14 @@ body {
     &:hover {
       text-decoration: underline;
     }
+  }
+}
+
+:global {
+  .ant-input:focus {
+    border-color: none;
+    border-right-width: 1px !important;
+    outline: 0;
+    box-shadow: none !important;
   }
 }
