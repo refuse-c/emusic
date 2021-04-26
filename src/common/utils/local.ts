@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-21 22:20:27
+ * @LastEditTime: 2021-04-25 20:09:49
  * @Description:
  */
 
@@ -64,7 +64,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
-    icon: require('@images/icon_local_music.png').default,
+    icon: 'icon icon-yinle-01',
   },
   {
     name: '下载管理',
@@ -72,7 +72,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
-    icon: require('@images/icon_down.png').default,
+    icon: 'icon icon-download',
   },
   {
     name: '我的音乐云盘',
@@ -80,7 +80,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
-    icon: require('@images/icon_cloud.png').default,
+    icon: 'icon icon-cloud',
   },
   {
     name: '我的电台',
@@ -88,7 +88,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
-    icon: require('@images/icon_radio.png').default,
+    icon: 'icon icon-radio',
   },
   {
     name: '我的收藏',
@@ -96,7 +96,7 @@ export const menuList = [
     type: 1,
     isBold: false,
     isFull: true,
-    icon: require('@images/icon_my_collection.png').default,
+    icon: 'iocn icon-collection',
   },
   {
     name: '创建的歌单',
