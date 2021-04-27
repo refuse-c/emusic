@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-22 23:26:33
+ * @LastEditTime: 2021-04-27 21:33:43
  * @Description:
  */
 import { get } from './request';
@@ -56,6 +56,6 @@ export const personalizedMv = (params?: any) => {
  * @param {any} params
  * @Description:
  */
-export const recommendDj = (params?: any) => {
-  return get('/dj/personalize/recommend', params);
+export const recommendDj = () => {
+  return get('/dj/personalize/recommend');
 };

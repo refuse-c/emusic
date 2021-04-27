@@ -100,6 +100,14 @@
     display: flex;
     align-items: center;
 
+    .author {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: pink;
+      margin-right: 0;
+    }
+
     li {
       color: #fff;
       margin: 0 10px;

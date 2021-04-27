@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-26 23:35:31
+ * @LastEditTime: 2021-04-27 22:01:18
  * @Description:
  */
 import { FC } from 'react';
@@ -24,9 +24,11 @@ const Header: FC = () => {
         </div>
       </div>
       <ul className={styles.tool}>
-        <li className="icon"></li>
-        <li className="icon"></li>
-        <li className="icon"></li>
+        <li className={styles.author}></li>
+        <li className="icon">
+          REFUSE_C <span></span>
+        </li>
+        <li className="icon icon-theme"></li>
         <li className="icon icon-setting"></li>
         <li className="icon icon-email"></li>
         <li className="icon icon-min"></li>

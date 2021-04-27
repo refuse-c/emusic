@@ -2,28 +2,23 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-17 18:39:10
+ * @LastEditTime: 2021-04-27 22:42:14
  * @Description:歌单
  */
-import { FC, useEffect } from 'react';
+import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
-import { login } from '@/common/net/login';
-import { recommendSong } from '@/common/net/find';
+import { playlistTag } from '@/common/net/playList';
 
 const Recommend: FC = () => {
-  const getLogin = async () => {
-    const result = await login({ phone: '13272946536', password: 'wangyi123@@' });
-    console.log(result);
-  };
-
-  const getRecommendSong = async () => {
-    const result = await recommendSong('');
+  const [tagList, setTagList] = useState([]);
+  const getPlaylistTag = async () => {
+    const result = await playlistTag();
+    setTagList(tagList);
     console.log(result);
   };
 
   useEffect(() => {
-    getLogin();
-    getRecommendSong();
+    getPlaylistTag();
   });
 
   return <div className={styles.recommend}>歌单</div>;
