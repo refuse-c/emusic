@@ -1,0 +1,53 @@
+.tags {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px 0;
+
+  .name {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1;
+    color: #373737;
+    border-radius: 20px;
+    padding: 7px 14px;
+    border: 1px solid #D8D8D8;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #F2F2F2;
+    }
+
+    span {
+      font-size: 14px;
+      display: inline-block;
+      transform: rotate(180deg);
+    }
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      color: #676767;
+      padding: 4px 10px;
+      font-size: 12px;
+      cursor: pointer;
+
+      &:hover {
+        color: #373737;
+      }
+
+      &.active {
+        color: #EC4141;
+        border-radius: 10px;
+        background-color: #FDF5F5;
+
+        &:hover {
+          color: #EC4141;
+          background-color: #FDF5F5;
+        }
+      }
+    }
+  }
+}

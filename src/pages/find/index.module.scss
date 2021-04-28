@@ -39,5 +39,28 @@
 }
 
 
-// Recommend
-// .recommend {}
+// playlist
+.playlist {
+  .boutique {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 170px;
+    padding: 15px;
+    background-color: red;
+
+    img {
+      width: 140px;
+      min-width: 140px;
+      height: 140px;
+      border-radius: 6px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
