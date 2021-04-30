@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-27 22:38:10
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-28 23:02:00
+ * @LastEditTime: 2021-04-30 18:24:24
  * @Description:
  */
 import { get } from './request';
@@ -135,7 +135,7 @@ export const highqualityTags = () => {
  * @param {*} before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一页数据
  * @Description:
  */
-export const highqualityTop = (params: { cat: string; limit: number; before: number | string }) => {
+export const highqualityTop = (params: { cat?: string; limit?: number; before?: number | string }) => {
   return get('/top/playlist/highquality', params);
 };
 
