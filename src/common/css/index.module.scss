@@ -55,4 +55,69 @@ body {
     outline: 0;
     box-shadow: none !important;
   }
+
+  // 分页组件样式重写
+  .ant-pagination {
+    display: table;
+    margin: 0 auto;
+
+    .ant-pagination-item {
+      margin-left: 4px !important;
+      border: 1px solid #E6E6E6 !important;
+      background-color: #fff;
+
+      a:hover {
+        color: #373737;
+        background-color: #f4f4f4;
+      }
+    }
+
+    .ant-pagination-prev,
+    .ant-pagination-next {
+      margin-left: 4px !important;
+      border: 1px solid #E6E6E6 !important;
+
+
+      &:hover {
+        background-color: #f4f4f4;
+
+        .anticon {
+          color: #373737;
+          background-color: #f4f4f4;
+        }
+      }
+    }
+
+    .ant-pagination-disabled {
+      &:hover {
+        background-color: #fff;
+
+        .anticon {
+          color: #cbcbcb;
+          background-color: #fff;
+        }
+      }
+    }
+
+    .ant-pagination-item-active {
+      background-color: #ec4141;
+      border-color: #ec4141;
+
+      a {
+        color: #fff;
+
+        &:hover {
+          color: #fff;
+          background-color: #ec4141;
+        }
+      }
+    }
+
+    .anticon {
+      vertical-align: 0;
+    }
+  }
+
+
+
 }

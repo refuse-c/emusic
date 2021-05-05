@@ -6,6 +6,76 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "21351797",
+      "name": "播放2",
+      "font_class": "play",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "21351798",
+      "name": "最小化",
+      "font_class": "minimize",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "21351799",
+      "name": "邮箱2-01",
+      "font_class": "mail",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "21287960",
+      "name": "单曲循环-1",
+      "font_class": "cycle",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "21287961",
+      "name": "静音",
+      "font_class": "jingyin",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "21287962",
+      "name": "无序播放",
+      "font_class": "random",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "21287963",
+      "name": "播放-红色",
+      "font_class": "play-red",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "21287964",
+      "name": "循环",
+      "font_class": "xunhuan",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "21287965",
+      "name": "顺序播放",
+      "font_class": "order",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "21287966",
+      "name": "不知道是啥",
+      "font_class": "sound",
+      "unicode": "e627",
+      "unicode_decimal": 58919
+    },
+    {
       "icon_id": "13333956",
       "name": "back-line",
       "font_class": "back",
@@ -90,13 +160,6 @@
       "unicode_decimal": 58904
     },
     {
-      "icon_id": "21206809",
-      "name": "新歌",
-      "font_class": "sound",
-      "unicode": "e619",
-      "unicode_decimal": 58905
-    },
-    {
       "icon_id": "21206810",
       "name": "前一首",
       "font_class": "prev",
@@ -109,20 +172,6 @@
       "font_class": "general-song",
       "unicode": "e61b",
       "unicode_decimal": 58907
-    },
-    {
-      "icon_id": "21206812",
-      "name": "最小化",
-      "font_class": "minimize",
-      "unicode": "e61c",
-      "unicode_decimal": 58908
-    },
-    {
-      "icon_id": "21206813",
-      "name": "单曲循环",
-      "font_class": "cycle",
-      "unicode": "e61d",
-      "unicode_decimal": 58909
     },
     {
       "icon_id": "21206814",

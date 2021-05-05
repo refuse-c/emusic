@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 19:37:39
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-23 15:01:01
+ * @LastEditTime: 2021-05-05 02:37:50
  * @Description:
  */
 import { FC } from 'react';
@@ -10,7 +10,6 @@ import styles from './index.module.scss';
 import { Layout } from 'antd';
 import CustomHeader from '@components/header';
 import Control from '@components/control';
-import { Scrollbars } from 'react-custom-scrollbars';
 import { isArray } from '@utils/tools';
 import 'react-resizable/css/styles.css';
 const { Header, Footer, Sider, Content } = Layout;
@@ -30,18 +29,9 @@ const View: FC<Props> = (props) => {
           <CustomHeader />
         </Header>
         <Layout>
-          {isArray(children) ? (
-            <Sider>
-              <Scrollbars className={styles.area}>{props.children[0]}</Scrollbars>
-            </Sider>
-          ) : null}
-
-          <Content>
-            <Scrollbars className={styles.area}>
-              <div className={isFull ? styles.isFull : styles.notFull}>
-                {isArray(children) ? children[1] : children}
-              </div>
-            </Scrollbars>
+          {isArray(children) ? <Sider>{props.children[0]}</Sider> : null}
+          <Content id="content">
+            <div className={isFull ? styles.isFull : styles.notFull}>{isArray(children) ? children[1] : children}</div>
           </Content>
         </Layout>
         <Footer>

@@ -2,29 +2,34 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-01 02:04:24
+ * @LastEditTime: 2021-05-05 13:55:16
  * @Description:歌单
  */
 import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
-import { playlistHot, playlistTop, highqualityTags, playlistCatlist, highqualityTop } from '@/common/net/playList';
+import { playlistHot, playlistTop, playlistCatlist, highqualityTop } from '@/common/net/playList'; // highqualityTags
+import { Pagination } from 'antd';
 import Tags from '@components/tags';
 import PlayList from '@/components/playList';
 import { formatImgSize } from '@/common/utils/format';
 
 const Recommend: FC = () => {
-  const [tag, setTag] = useState('全部歌单');
+  // const [tag, setTag] = useState('全部歌单');
   const [tagList, setTagList] = useState([]);
   const [catlist, setCatlist] = useState<any[]>([]);
-  const [playList, setPlayList] = useState([]);
-  const [highTags, setHighTags] = useState([]);
+  const [playList, setPlayList] = useState({
+    cat: '全部',
+    total: 0,
+    current: 1,
+    playlists: [],
+  });
   const [highList, setHighList] = useState({ coverImgUrl: '', name: '', copywriter: '' });
 
   // 点击热门标签回调
   const changeTag = async (tag: string) => {
-    await setTag(tag);
+    // setTag(tag);
     getHighqualityTop(tag);
-    getPplaylistTop(tag);
+    getPplaylistTop(tag, 1);
   };
   // 获取热门歌单标签
   const getPlaylistHot = async () => {
@@ -32,6 +37,10 @@ const Recommend: FC = () => {
     const tagList = res.tags;
     setTagList(tagList);
   };
+
+  // 切换分页
+  const onChange = (current: number) => getPplaylistTop(playList.cat, current);
+
   // 获取歌单分类
   const getPlaylistCatlist = async () => {
     const res: any = await playlistCatlist();
@@ -45,25 +54,26 @@ const Recommend: FC = () => {
     setCatlist(catlist);
   };
   // 获取精品歌单标签
-  const getHighqualityTags = async () => {
-    const res: any = await highqualityTags();
-    const highTags = res.tags;
-    setHighTags(highTags);
-  };
+  // const getHighqualityTags = async () => {
+  //   const res: any = await highqualityTags();
+  //   const highTags = res.tags;
+  //   setHighTags(highTags);
+  // };
 
   // 获取歌单列表
-  const getPplaylistTop = async (cat: string) => {
-    const params = { order: 'hot', cat, limit: 100, offset: 0 };
+  const getPplaylistTop = async (cat: string, current: number) => {
+    const contentDom = document.getElementById('content');
+    if (contentDom) contentDom.scrollTop = 0;
+    const params = { order: 'hot', cat, limit: 100, offset: (current - 1) * 100 };
     const res: any = await playlistTop({ ...params });
-    const playList = res.playlists;
-    setPlayList(playList);
+    res.current = current || 1;
+    setPlayList(res);
   };
 
   // 获取精品歌单
   const getHighqualityTop = async (cat: string) => {
     const params = { cat, limit: 1, before: '' };
     const res: any = await highqualityTop({ ...params });
-    console.log(res);
     const playList = res.playlists[0] || {};
     setHighList(playList);
   };
@@ -71,8 +81,8 @@ const Recommend: FC = () => {
   useEffect(() => {
     getPlaylistHot();
     getPlaylistCatlist();
-    getHighqualityTags();
-    getPplaylistTop('');
+    // getHighqualityTags();
+    getPplaylistTop('', 1);
     getHighqualityTop('');
   }, []);
 
@@ -92,11 +102,19 @@ const Recommend: FC = () => {
           ></div>
         </div>
       ) : null}
-      <Tags tag={tag} list={tagList} changeTag={(cat: string) => changeTag(cat)} />
-      <PlayList list={playList} />
-      {console.log(highTags)}
-      {console.log(catlist)}
-      {console.log(highList)}
+      <Tags tag={playList.cat} list={tagList} changeTag={(cat: string) => changeTag(cat)} />
+      <PlayList list={playList.playlists} />
+      <div className={styles.pages}>
+        <Pagination
+          size="small"
+          pageSize={100}
+          total={playList.total}
+          showSizeChanger={false}
+          hideOnSinglePage={true}
+          current={playList.current}
+          onChange={onChange}
+        />
+      </div>
     </div>
   );
 };

@@ -3,21 +3,19 @@
   height: 100vh;
   background-color: transparent;
 
-  .area {
+
+  .isFull {
     width: 100%;
-    height: 100%;
-
-    .isFull {
-      width: 100%;
-    }
-
-    .notFull {
-      width: 100%;
-      // min-width: 760px;
-      max-width: 1160px;
-      margin: 0 auto;
-    }
+    max-height: 100vh;
   }
+
+  .notFull {
+    width: 100%;
+    max-width: 1160px;
+    max-height: 100vh;
+    margin: 0 auto;
+  }
+
 
   :global {
     .ant-layout {
@@ -33,11 +31,59 @@
       .ant-layout-sider {
         background-color: #fff;
         border-right: 1px solid #e5e6ea;
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          background: #fff;
+          border-radius: 8px;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: #e1e1e1;
+          border-radius: 8px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: #cfcfd1;
+        }
       }
 
       .ant-layout-content {
         position: relative;
+        overflow-x: hidden;
+        overflow-y: scroll;
         background-color: #fff;
+
+        &::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+
+        /* Track */
+        &::-webkit-scrollbar-track {
+          background: #fff;
+          border-radius: 8px;
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+          background: #e1e1e1;
+          border-radius: 8px;
+        }
+
+        /* Handle on hover */
+        &::-webkit-scrollbar-thumb:hover {
+          background: #cfcfd1;
+        }
       }
 
       .ant-layout-footer {
