@@ -2,19 +2,22 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-27 22:01:18
+ * @LastEditTime: 2021-05-10 15:58:16
  * @Description:
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 import { Input } from 'antd';
+import { createHashHistory } from 'history';
+
 const Header: FC = () => {
+  const history = createHashHistory();
   return (
     <div className={styles.header}>
       <div className={styles.left}>
         <div className={styles.back_group}>
-          <p className="icon icon-back"></p>
-          <p className="icon icon-back"></p>
+          <p className="icon icon-back" onClick={() => history.go(-1)}></p>
+          <p className="icon icon-back" onClick={() => history.go(+1)}></p>
         </div>
         <div className={styles.search}>
           <Input placeholder="搜索" />
