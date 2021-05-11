@@ -2,14 +2,16 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 09:05:23
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-05 00:24:01
+ * @LastEditTime: 2021-05-11 21:59:22
  * @Description:左侧菜单
  */
-import { FC, useState } from 'react';
+import { FC, useState, useContext } from 'react';
 import styles from './index.module.scss';
 import { menuList } from '@utils/local';
 import { message } from 'antd';
+import { MyContext } from '@pages/app/context/context';
 import { createHashHistory } from 'history';
+
 interface Props {
   callBack: any;
 }
@@ -23,6 +25,7 @@ interface Item {
 const Menu: FC<Props> = (props) => {
   const history = createHashHistory();
   const [statue, setStatue] = useState(0);
+  const { playList } = useContext(MyContext);
 
   /**
    * @name: 改变选中的项目的样式
@@ -32,7 +35,6 @@ const Menu: FC<Props> = (props) => {
    */
   const handleMeun = (item: any, index: number) => {
     const { callBack } = props;
-
     const { type, path, isFull } = item;
 
     if (type === 1) {
@@ -46,7 +48,7 @@ const Menu: FC<Props> = (props) => {
 
   return (
     <ul className={styles.menu}>
-      {menuList.map((item: Item, index: number) => {
+      {menuList.concat(playList).map((item: Item, index: number) => {
         const { type, name, isBold, icon } = item;
         const cls1 = isBold ? null : styles.active1;
         const cls2 = statue === index ? styles.active2 : null;

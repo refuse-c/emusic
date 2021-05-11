@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-26 20:02:37
+ * @LastEditTime: 2021-05-11 21:57:30
  * @Description:
  */
 
@@ -98,13 +98,13 @@ export const menuList = [
     isFull: true,
     icon: 'iocn icon-collection',
   },
-  {
-    name: '创建的歌单',
-    path: '/createPlaylist',
-    type: 2,
-    isBold: false,
-    isFull: false,
-  },
+  // {
+  //   name: '创建的歌单',
+  //   path: '/createPlaylist',
+  //   type: 2,
+  //   isBold: false,
+  //   isFull: false,
+  // },
 ];
 
 /**

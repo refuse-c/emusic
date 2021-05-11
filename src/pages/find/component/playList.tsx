@@ -2,21 +2,20 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-05 13:55:16
+ * @LastEditTime: 2021-05-11 20:30:33
  * @Description:歌单
  */
 import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
-import { playlistHot, playlistTop, playlistCatlist, highqualityTop } from '@/common/net/playList'; // highqualityTags
+import { playlistHot, playlistTop, playlistCatlist, highqualityTop } from '@/common/net/playList';
 import { Pagination } from 'antd';
 import Tags from '@components/tags';
 import PlayList from '@/components/playList';
 import { formatImgSize } from '@/common/utils/format';
 
 const Recommend: FC = () => {
-  // const [tag, setTag] = useState('全部歌单');
   const [tagList, setTagList] = useState([]);
-  const [catlist, setCatlist] = useState<any[]>([]);
+  const [catlist, setCatlist] = useState<any>([]);
   const [playList, setPlayList] = useState({
     cat: '全部',
     total: 0,
@@ -53,14 +52,8 @@ const Recommend: FC = () => {
     });
     setCatlist(catlist);
   };
-  // 获取精品歌单标签
-  // const getHighqualityTags = async () => {
-  //   const res: any = await highqualityTags();
-  //   const highTags = res.tags;
-  //   setHighTags(highTags);
-  // };
 
-  // 获取歌单列表
+  // 获取歌单 ( 网友精选碟 )
   const getPplaylistTop = async (cat: string, current: number) => {
     const contentDom = document.getElementById('content');
     if (contentDom) contentDom.scrollTop = 0;
@@ -81,9 +74,9 @@ const Recommend: FC = () => {
   useEffect(() => {
     getPlaylistHot();
     getPlaylistCatlist();
-    // getHighqualityTags();
     getPplaylistTop('', 1);
     getHighqualityTop('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -114,6 +107,7 @@ const Recommend: FC = () => {
           current={playList.current}
           onChange={onChange}
         />
+        {console.log(catlist)}
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ import ExclusiveList from '@/components/exclusiveList';
 import Songs from '@/components/song';
 import MvList from '@/components/mvList';
 import RadioList from '@/components/radioList';
-import { login } from '@/common/net/login';
+
 import { findBanner, recommendList, exclusive, personalizedMv, recommendDj } from '@/common/net/find';
 import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
@@ -27,15 +27,6 @@ const Recommend: FC = () => {
   const [newMusicList, setNewMusicList] = useState([]);
   const [mvList, setMvList] = useState([]);
   const [radioList, setRadioList] = useState([]);
-  /**
-   * @name:登录
-   * @param {*} async
-   * @Description:
-   */
-  const getLogin = async () => {
-    const result: any = await login({ phone: '13272946536', password: 'wangyi123@@' });
-    console.log(result);
-  };
 
   /**
    * @name:获取轮播图
@@ -120,7 +111,6 @@ const Recommend: FC = () => {
   };
 
   useEffect(() => {
-    getLogin();
     getFindBanner();
     getRecommendList();
     // getRecommendSong();
