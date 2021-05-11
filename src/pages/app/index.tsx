@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-11 22:31:16
+ * @LastEditTime: 2021-05-11 22:44:57
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -17,8 +17,8 @@ const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: fa
 interface Item {
   path: string;
   type: number;
-  isFull?: boolean;
-  icon?: string;
+  isFull: boolean;
+  icon: string;
   privacy: number;
   userId: number;
   name: string;
