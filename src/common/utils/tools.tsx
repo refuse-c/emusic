@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 00:18:57
+ * @LastEditTime: 2021-05-13 00:38:59
  * @Description:
  */
 
@@ -44,7 +44,7 @@ export const assemblyIds = (arr: any) => {
 };
 
 /**
- * @name: 组装歌曲ids
+ * @name: 歌曲数据合并
  * @param {any} arr
  * @Description:
  */
