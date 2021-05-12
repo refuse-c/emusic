@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-11 23:49:04
+ * @LastEditTime: 2021-05-12 23:03:19
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -14,7 +14,7 @@ import { MyContext } from '@pages/app/context/context';
 const Header: FC = () => {
   const history = createHashHistory();
   const { userInfo } = useContext(MyContext);
-  console.log(userInfo);
+  // console.log(userInfo);
   return (
     <div className={styles.header}>
       <div className={styles.left}>

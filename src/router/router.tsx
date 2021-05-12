@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 00:03:41
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-05 20:49:18
+ * @LastEditTime: 2021-05-12 22:27:50
  * @Description:
  */
 
@@ -16,6 +16,7 @@ import Friend from '@pages/friend'; // 发现
 
 import Exclusive from '@pages/exclusive'; // 独家放送
 
+import Single from '@/pages/single'; // 歌单组件
 const router = [
   {
     path: '/find',
@@ -32,6 +33,7 @@ const router = [
   { path: '/video', component: Video },
   { path: '/friend', component: Friend },
   { path: '/exclusive', component: Exclusive },
+  { path: '/single:id', component: Single },
 ];
 
 export default router;

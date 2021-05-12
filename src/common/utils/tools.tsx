@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-20 21:18:58
+ * @LastEditTime: 2021-05-13 00:18:57
  * @Description:
  */
 
@@ -31,4 +31,27 @@ export const renderArtists = (arr: []) => {
       ))}
     </ul>
   );
+};
+
+/**
+ * @name: 组装歌曲ids
+ * @param {any} arr
+ * @Description:
+ */
+export const assemblyIds = (arr: any) => {
+  let ids = arr.map((item: { id: string }) => item.id).join(',');
+  return ids;
+};
+
+/**
+ * @name: 组装歌曲ids
+ * @param {any} arr
+ * @Description:
+ */
+export const mergeData = (songs: [], privileges: []) => {
+  return privileges.reduce((pre: any[], cur: { id: any }) => {
+    const item = pre.find((el: { id: any }) => el.id === cur.id);
+    if (item) Object.assign(item, cur);
+    return pre;
+  }, songs);
 };

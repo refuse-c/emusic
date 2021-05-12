@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-11 23:44:17
+ * @LastEditTime: 2021-05-12 23:47:41
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -16,6 +16,7 @@ import { playlist } from '@/common/net/playList';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
 interface Item {
+  id: number;
   path: string;
   type: number;
   isFull: boolean;
@@ -48,13 +49,12 @@ const App: FC = () => {
     const allList = res.playlist || [];
     allList.map((item: Item) => {
       item.type = 1;
-      item.path = '/find';
+      item.path = `/single${item.id}`;
       item.isFull = true;
       item.icon = 'icon icon-menu-playlist';
       item.name = item.userId === uid ? item.name.replace(nickname, '我') : item.name;
       return item;
     });
-    console.log(allList);
     const createList = allList.filter((item: Item) => item.privacy !== 10 && item.userId === uid);
     const collectList = allList.filter((item: Item) => item.privacy !== 10 && item.userId !== uid);
     // const myLikeSingle = allList.find((item) => item.specialType === 5 && item.userId === uid);

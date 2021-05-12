@@ -1,0 +1,48 @@
+.single {
+  width: 100%;
+}
+
+.head {
+  padding: 30px 0;
+  display: flex;
+
+  .left {
+    width: 184px;
+    height: 184px;
+    border-radius: 6px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .right {
+    padding: 6px 20px;
+
+    .title {
+      display: flex;
+      align-items: center;
+
+      span {
+        &:nth-child(1) {
+          display: table;
+          font-size: 12px;
+          color: #EC4141;
+          padding: 3px 5px;
+          border-radius: 1px;
+          white-space: nowrap;
+          border: 1px solid #EC4141
+        }
+
+        &:nth-child(2) {
+          font-size: 22px;
+          color: #373737;
+          font-weight: 600;
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+}

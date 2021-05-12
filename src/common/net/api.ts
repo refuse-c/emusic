@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-16 23:45:51
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-11 20:02:55
+ * @LastEditTime: 2021-05-13 00:04:27
  * @Description:
  */
 import { get } from './request';
@@ -30,4 +30,13 @@ export const newMusic = (params?: any) => {
  */
 export const likelist = (params?: any) => {
   return get('/likelist', params);
+};
+
+/**
+ * @name: 获取每首歌的详情
+ * @param {*} params
+ * @Description:
+ */
+export const songDetail = (params: { ids: string }) => {
+  return get('song/detail', params);
 };
