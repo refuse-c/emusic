@@ -1,0 +1,63 @@
+.musicList {
+  .name {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    p {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 5px;
+    }
+
+    i {
+      white-space: nowrap;
+      text-align: center;
+      margin: 0 2px;
+      padding: 2px 4px;
+      font-size: 12px;
+      width: 32px;
+      height: 16px;
+    }
+  }
+
+  .singer {
+    cursor: pointer;
+    padding-right: 5px;
+
+    &:hover {
+      color: #000000d9;
+      text-decoration: underline;
+    }
+  }
+
+  .album {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .vip {
+    background: url("~@common/images/vip.png") center center / contain no-repeat;
+  }
+
+  .sq {
+    background: url("~@common/images/sq.png") center center / contain no-repeat;
+  }
+
+  .mv {
+    width: 42px !important;
+    cursor: pointer;
+    background: url("~@common/images/mv.png") center center / contain no-repeat;
+  }
+
+  :global {
+    .ant-table-cell {
+      border: none !important;
+
+
+    }
+  }
+}

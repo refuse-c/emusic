@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:22:22
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-19 23:05:15
+ * @LastEditTime: 2021-05-13 20:14:35
  * @Description:
  */
 import { FC, useState } from 'react';
@@ -27,7 +27,7 @@ const Home: FC = () => {
                 render={(props) => <item.component {...props} router={item.router} />}
               />
             ))}
-            <Redirect exact from="/" to="/find" />
+            <Redirect exact from="/" to="/single5312444463" />
           </Router>
         </div>
       </View>

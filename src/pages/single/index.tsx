@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 09:55:01
+ * @LastEditTime: 2021-05-14 00:19:40
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -10,13 +10,19 @@ import { Spin } from 'antd';
 import Head from './component/head';
 import styles from './index.module.scss';
 import { songDetail } from '@/common/net/api';
+import MusicList from '@components/musicList';
+import Navigation from '@components/navigation';
+import Comments from '@components/comments';
+import Collectors from '@components/collectors';
 import { playlistDetail } from '@/common/net/playList';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
+import { navigationList } from '@/common/utils/local';
 const Single: FC = (props: any) => {
   const id = props.match.params.id;
-  const [list, setList] = useState<any>([]);
+  const [musicList, setMusicList] = useState<any>([]);
   const [headData, setHeadData] = useState({ coverImgUrl: '' });
   const [loading, setLoading] = useState(false);
+  const [navStatus, setNavStatus] = useState(0);
 
   const getPlayListDetail = async (id: string) => {
     setLoading(true);
@@ -31,10 +37,11 @@ const Single: FC = (props: any) => {
   const getSongDetail = async (ids: string) => {
     const res: any = await songDetail({ ids });
     const { songs, privileges } = res;
-    const list = mergeData(songs, privileges); // 合并数据
-    setList(list);
+    const musicList = mergeData(songs, privileges); // 合并数据
+    setMusicList(musicList);
   };
   useEffect(() => {
+    setNavStatus(0);
     getPlayListDetail(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
@@ -43,9 +50,8 @@ const Single: FC = (props: any) => {
     <Spin spinning={loading}>
       <div className={styles.single}>
         <Head data={headData} />
-        {list.map((item: { name: string }, index: number) => {
-          return <div key={index}>{item.name}</div>;
-        })}
+        <Navigation status={navStatus} list={navigationList} onChange={(index: number) => setNavStatus(index)} />
+        {navStatus === 0 ? <MusicList list={musicList} /> : navStatus === 1 ? <Comments /> : <Collectors />}
       </div>
     </Spin>
   );

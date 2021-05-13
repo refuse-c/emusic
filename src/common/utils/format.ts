@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:13
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-16 20:26:21
+ * @LastEditTime: 2021-05-13 22:32:27
  * @Description:
  */
 
@@ -29,4 +29,19 @@ export const formatNumber = (val: number) => {
       ? `${Math.floor(val / 10000)}万`
       : val
     : 0;
+};
+/**
+ * @name: 格式化歌曲时间
+ * @param {*} v
+ * @param {*} isSeconds
+ * @Description:
+ */
+export const formatTime = (v: any, isSeconds: boolean = false) => {
+  if (!v) return '00:00';
+  const time = isSeconds ? v : Math.floor(v / 1000);
+  let m = Math.floor(time / 60);
+  let s = Math.floor(time % 60);
+  const mm = m < 10 ? '0' + m : m;
+  const ss = s < 10 ? '0' + s : s;
+  return `${mm}:${ss}`;
 };
