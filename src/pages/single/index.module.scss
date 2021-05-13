@@ -125,5 +125,40 @@
         }
       }
     }
+    .info {
+      margin-top: 20px;
+      div {
+        color: #373737;
+        font-size: 14px;
+        line-height: 1.2;
+        margin-top: 6px;
+        &.tags {
+          span {
+            color: #507daf;
+            margin-right: 10px;
+          }
+        }
+        &.count {
+          span {
+            color: #676767;
+            margin-right: 20px;
+          }
+        }
+
+        &.makedown {
+          margin-top: 0;
+          color: #676767;
+          font-size: 13px;
+          line-height: 2;
+          p {
+            margin: 0;
+            strong {
+              font-size: 14px;
+              color: #373737;
+            }
+          }
+        }
+      }
+    }
   }
 }
