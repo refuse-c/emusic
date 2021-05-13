@@ -2,18 +2,16 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 00:29:24
+ * @LastEditTime: 2021-05-13 09:55:01
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
 import { Spin } from 'antd';
 import Head from './component/head';
 import styles from './index.module.scss';
-import { withRouter } from 'react-router';
 import { songDetail } from '@/common/net/api';
 import { playlistDetail } from '@/common/net/playList';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
-
 const Single: FC = (props: any) => {
   const id = props.match.params.id;
   const [list, setList] = useState<any>([]);
@@ -53,4 +51,4 @@ const Single: FC = (props: any) => {
   );
 };
 
-export default withRouter(Single);
+export default Single;

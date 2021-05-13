@@ -2,17 +2,19 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-12 23:14:50
+ * @LastEditTime: 2021-05-13 09:53:39
  * @Description:歌单组件
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 import Playcount from '@components/playcount';
 import { formatImgSize } from '@/common/utils/format';
+import { useHistory } from 'react-router-dom';
 interface Props {
   list: any;
 }
 interface Item {
+  id: number;
   day?: number;
   name: string;
   picUrl: string;
@@ -23,6 +25,7 @@ interface Item {
 }
 
 const PlayList: FC<Props> = (props) => {
+  const history = useHistory();
   const { list } = props;
   return (
     <ul className={styles.playlist}>
@@ -31,6 +34,7 @@ const PlayList: FC<Props> = (props) => {
         return (
           <li key={index}>
             <div
+              onClick={() => history.push(`/single${item.id}`)}
               className={styles.imgBox}
               style={{ backgroundImage: `url(${formatImgSize(picUrl || coverImgUrl, 210, 210)})` }}
             >
