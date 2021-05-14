@@ -1,3 +1,4 @@
+@import '~@common/css/_variables.scss';
 .banner {
   padding-top: 7px;
   width: 100%;
@@ -104,7 +105,7 @@
       background-color: #e6e6e6;
 
       &.active {
-        background-color: #ec4141;
+        background-color: $color;
       }
     }
   }

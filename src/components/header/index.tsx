@@ -2,21 +2,40 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-12 23:03:19
+ * @LastEditTime: 2021-05-14 15:39:21
  * @Description:
  */
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import styles from './index.module.scss';
 import { Input } from 'antd';
+import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
 import { MyContext } from '@pages/app/context/context';
-
+import { defaultColor } from '@/common/utils/local';
+import { getLocal, setLocal } from '@/common/utils/tools';
+const history = createHashHistory();
+const globalColor = getLocal('color') || '#EC4141';
+const DOM = document.getElementsByTagName('body')[0];
 const Header: FC = () => {
-  const history = createHashHistory();
   const { userInfo } = useContext(MyContext);
-  // console.log(userInfo);
+  const [color, setColor] = useState(globalColor);
+  const [showPicker, setShowPicker] = useState(false);
+  DOM.style.setProperty('--color', color, '');
+
+  //  修改颜色
+  const changeColor = (val: string) => {
+    setColor(val);
+    setLocal('color', val);
+    DOM.style.setProperty('--color', val, '');
+  };
+
   return (
     <div className={styles.header}>
+      <div className={styles.colorContent}>
+        {showPicker ? (
+          <BlockPicker colors={defaultColor} color={color} onChange={(e: { hex: string }) => changeColor(e.hex)} />
+        ) : null}
+      </div>
       <div className={styles.left}>
         <div className={styles.back_group}>
           <p className="icon icon-back" onClick={() => history.go(-1)}></p>
@@ -34,7 +53,7 @@ const Header: FC = () => {
         <li className="icon">
           {userInfo.nickname} <span></span>
         </li>
-        <li className="icon icon-theme"></li>
+        <li className="icon icon-theme" onClick={() => setShowPicker(!showPicker)}></li>
         <li className="icon icon-setting"></li>
         <li className="icon icon-email"></li>
         <li className="icon icon-min"></li>

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 17:54:08
+ * @LastEditTime: 2021-05-14 12:33:13
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -16,7 +16,6 @@ interface Props {
 }
 const Head: FC<Props> = (props: any) => {
   const { data } = props;
-  console.log(data);
   const {
     userId: user_id,
     name,

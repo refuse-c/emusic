@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 00:38:59
+ * @LastEditTime: 2021-05-14 14:36:00
  * @Description:
  */
 
@@ -54,4 +54,30 @@ export const mergeData = (songs: [], privileges: []) => {
     if (item) Object.assign(item, cur);
     return pre;
   }, songs);
+};
+
+/**
+ * @name:缓存处理
+ * @param {*} name
+ * @param {*} data
+ */
+export const setLocal = (name: string, data: any) => {
+  window.localStorage.setItem(name, JSON.stringify(data));
+};
+export const getLocal = (name: string) => {
+  const data = window.localStorage.getItem(name);
+  if (data) return JSON.parse(data);
+};
+export const reLocal = (name: string) => {
+  window.localStorage.removeItem(name);
+};
+export const setSession = (name: string, data: any) => {
+  window.sessionStorage.setItem(name, JSON.stringify(data));
+};
+export const getSession = (name: string) => {
+  const data = window.sessionStorage.getItem(name);
+  if (data) return JSON.parse(data);
+};
+export const reSession = (name: string) => {
+  window.sessionStorage.removeItem(name);
 };

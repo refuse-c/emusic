@@ -1,5 +1,12 @@
 .musicList {
+  .table {
+    margin-top: 6px;
+  }
+  .serial {
+    color: #cfcfcf;
+  }
   .name {
+    color: #373737;
     display: flex;
     align-items: center;
     width: 100%;
@@ -20,10 +27,25 @@
       font-size: 12px;
       width: 32px;
       height: 16px;
+
+      &.vip {
+        background: url('~@common/images/vip.png') center center / contain no-repeat;
+      }
+
+      &.sq {
+        background: url('~@common/images/sq.png') center center / contain no-repeat;
+      }
+
+      &.mv {
+        width: 42px !important;
+        cursor: pointer;
+        background: url('~@common/images/mv.png') center center / contain no-repeat;
+      }
     }
   }
 
   .singer {
+    color: #656565;
     cursor: pointer;
     padding-right: 5px;
 
@@ -34,30 +56,70 @@
   }
 
   .album {
+    color: #656565;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
-  .vip {
-    background: url("~@common/images/vip.png") center center / contain no-repeat;
+  .time {
+    font-size: 13px;
+    color: #9b9b9b;
   }
 
-  .sq {
-    background: url("~@common/images/sq.png") center center / contain no-repeat;
+  .disabled {
+    .name {
+      color: #ccc;
+      &:hover {
+        color: #ccc !important;
+        // text-decoration: none;
+      }
+    }
   }
 
-  .mv {
-    width: 42px !important;
-    cursor: pointer;
-    background: url("~@common/images/mv.png") center center / contain no-repeat;
+  .even {
+    background-color: #f9f9f9;
+  }
+
+  .odd {
+    background-color: #ffffff;
   }
 
   :global {
+    .ant-table {
+      font-size: 13px;
+    }
     .ant-table-cell {
-      border: none !important;
-
-
+      border: none;
+    }
+    .ant-table-thead > tr > th {
+      color: #888888;
+      background-color: #fff;
+      height: 18px;
+      .ant-table-column-sorters {
+        padding: 7px !important;
+      }
+    }
+    .ant-table-tbody {
+      font-size: 12px;
+      tr {
+        .ant-table-cell {
+          padding: 7px !important;
+        }
+      }
+    }
+    .ant-table-tbody {
+      > tr:hover:not(.ant-table-expanded-row) > td,
+      .ant-table-row-hover,
+      .ant-table-row-hover > td {
+        background: #f0f1f2;
+      }
+    }
+    .ant-table-fixed {
+      .ant-table-row-hover,
+      .ant-table-row-hover > td {
+        background: #f0f1f2;
+      }
     }
   }
 }

@@ -1,3 +1,4 @@
+@import '~@common/css/_variables.scss';
 .list {
   display: flex;
 
@@ -31,7 +32,6 @@
       }
     }
 
-
     .name {
       position: absolute;
       bottom: 0;
@@ -64,6 +64,5 @@
         display: none;
       }
     }
-
   }
 }

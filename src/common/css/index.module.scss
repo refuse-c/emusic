@@ -1,14 +1,12 @@
+@import '~@common/css/_variables.scss';
+
 div,
 ul,
 li,
 p {
   cursor: default;
   user-select: none;
-  font-family: 'Segoe UI',
-    Tahoma,
-    Geneva,
-    Verdana,
-    sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -25,7 +23,6 @@ body {
     background: url('~@images/icon_drag_drop.svg') center center / 10px no-repeat;
   }
 }
-
 
 .artists {
   display: flex;
@@ -63,7 +60,7 @@ body {
 
     .ant-pagination-item {
       margin-left: 4px !important;
-      border: 1px solid #E6E6E6 !important;
+      border: 1px solid #e6e6e6 !important;
       background-color: #fff;
 
       a:hover {
@@ -75,8 +72,7 @@ body {
     .ant-pagination-prev,
     .ant-pagination-next {
       margin-left: 4px !important;
-      border: 1px solid #E6E6E6 !important;
-
+      border: 1px solid #e6e6e6 !important;
 
       &:hover {
         background-color: #f4f4f4;
@@ -100,15 +96,15 @@ body {
     }
 
     .ant-pagination-item-active {
-      background-color: #ec4141;
-      border-color: #ec4141;
+      background-color: $color;
+      border-color: $color;
 
       a {
         color: #fff;
 
         &:hover {
           color: #fff;
-          background-color: #ec4141;
+          background-color: $color;
         }
       }
     }
@@ -117,7 +113,4 @@ body {
       vertical-align: 0;
     }
   }
-
-
-
 }

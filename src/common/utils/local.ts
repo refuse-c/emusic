@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 21:24:10
+ * @LastEditTime: 2021-05-14 16:38:21
  * @Description:
  */
 
@@ -159,4 +159,36 @@ export const navigationList = [
     key: 0,
     title: '收藏者',
   },
+];
+
+/**
+ * @name:默认颜色
+ * @param {*}
+ */
+export const defaultColor = [
+  '#EC4141',
+  '#9741EC',
+  '#37D67A',
+  '#2CCCE4',
+  '#ff8a65',
+  '#ba68c8',
+  '#F44E3B',
+  '#FE9200',
+  '#A4DD00',
+  '#68CCCA',
+  '#AEA1FF',
+  '#E27300',
+  '#B0BC00',
+  '#68BC00',
+  '#16A5A5',
+  '#009CE0',
+  '#7B64FF',
+  '#9F0500',
+  '#C45100',
+  '#FB9E00',
+  '#0C797D',
+  '#0062B1',
+  '#653294',
+  '#697689',
+  '#555555',
 ];

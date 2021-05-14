@@ -1,3 +1,4 @@
+@import '~@common/css/_variables.scss';
 .navigation {
   display: flex;
 
@@ -21,7 +22,7 @@
         width: 75%;
         border-radius: 4px;
         transform: translateX(-50%);
-        border-bottom: 3px solid#ec4141;
+        border-bottom: 3px solid $color;
       }
     }
   }

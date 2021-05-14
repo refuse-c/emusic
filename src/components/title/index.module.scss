@@ -1,3 +1,4 @@
+@import '~@common/css/_variables.scss';
 .title {
   display: flex;
   align-items: center;
@@ -5,10 +6,10 @@
   line-height: 1;
 
   .iconText {
-    color: #ec4141;
+    color: $color;
     padding: 2px 4px;
     border-radius: 2px;
-    border: 1px solid #ec4141;
+    border: 1px solid $color;
     margin-right: 13px;
     font-size: 14px;
   }

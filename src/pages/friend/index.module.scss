@@ -1,3 +1,4 @@
+@import '~@common/css/_variables.scss';
 .friend {
   background-color: transparent;
 
@@ -17,7 +18,7 @@
         height: 24px;
         font-size: 12px;
         border-radius: 12px;
-        background-color: #ec4141;
+        background-color: $color;
       }
     }
   }

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-14 00:19:40
+ * @LastEditTime: 2021-05-14 09:16:56
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -42,6 +42,7 @@ const Single: FC = (props: any) => {
   };
   useEffect(() => {
     setNavStatus(0);
+    setMusicList([]);
     getPlayListDetail(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);

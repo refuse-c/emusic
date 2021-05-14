@@ -1,8 +1,8 @@
+@import '~@common/css/_variables.scss';
 .view {
   width: 100%;
   height: 100vh;
   background-color: transparent;
-
 
   .isFull {
     width: 100%;
@@ -16,7 +16,6 @@
     margin: 0 auto;
   }
 
-
   :global {
     .ant-layout {
       height: 100%;
@@ -25,7 +24,7 @@
         height: 60px;
         padding: 0 14px;
         -webkit-app-region: drag;
-        background-color: #ec4141;
+        background-color: $color;
       }
 
       .ant-layout-sider {

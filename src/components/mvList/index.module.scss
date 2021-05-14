@@ -1,3 +1,5 @@
+@import '~@common/css/_variables.scss';
+
 .mvList {
   display: flex;
 
@@ -37,7 +39,7 @@
         padding: 12px 8px;
         transform: all 0.25 ease;
         z-index: 5;
-        background-color: rgba($color: #000000, $alpha: .5);
+        background-color: rgba($color: #000000, $alpha: 0.5);
       }
 
       &:hover {
@@ -69,7 +71,6 @@
       width: calc(33% - 13.33px);
       overflow: hidden;
 
-
       &:not(:last-child) {
         margin-right: 20px;
       }
@@ -88,6 +89,5 @@
         padding-top: calc(100% / 1.78);
       }
     }
-
   }
 }

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:13
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 22:32:27
+ * @LastEditTime: 2021-05-14 12:31:26
  * @Description:
  */
 
@@ -44,4 +44,13 @@ export const formatTime = (v: any, isSeconds: boolean = false) => {
   const mm = m < 10 ? '0' + m : m;
   const ss = s < 10 ? '0' + s : s;
   return `${mm}:${ss}`;
+};
+
+/**
+ * @name:格式化序号
+ * @param {number} v
+ */
+export const formatSerialNumber = (v: number) => {
+  if (v < 0) return '';
+  return v < 10 ? '0' + v : v;
 };
