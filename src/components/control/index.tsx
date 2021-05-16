@@ -2,27 +2,34 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-24 14:54:37
+ * @LastEditTime: 2021-05-16 20:56:26
  * @Description:control
  */
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import styles from './index.module.scss';
+import { Context } from '@utils/context';
+import { formatTime } from '@/common/utils/format';
 interface Props {
   // title?: string;
 }
 
 const Control: FC<Props> = () => {
   // const { title } = props;
+  const { currentSong } = useContext(Context);
   return (
     <div className={styles.control}>
       <div className={styles.left}>
-        <img className={styles.img_box} src={require('@images/icon_mask_layer4.png').default} alt="" />
+        <img className={styles.img_box} src={currentSong.al.picUrl} alt="" />
         <div className={styles.info}>
           <div>
-            <p>132132131231232132131</p>
+            <p>{currentSong.name}</p>
             <p></p>
           </div>
-          <div>132132131231232132131</div>
+          <div>
+            {currentSong.ar.map((item: any, index: number) => (
+              <span key={index}>{item.name}</span>
+            ))}
+          </div>
         </div>
       </div>
       <div className={styles.center}>
@@ -36,7 +43,7 @@ const Control: FC<Props> = () => {
         <div className={styles.progress_box}>
           <p className={styles.time}>00:00</p>
           <p className={styles.progress}></p>
-          <p className={styles.time}>04:36</p>
+          <p className={styles.time}>{formatTime(currentSong.dt)}</p>
         </div>
       </div>
       <div className={styles.right}>

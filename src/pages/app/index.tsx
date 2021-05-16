@@ -2,16 +2,16 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-12 23:47:41
+ * @LastEditTime: 2021-05-16 20:57:43
  * @Description:
  */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useReducer, useState } from 'react';
 import styles from './index.module.scss';
 import Home from '@pages/home';
-import { MyContext } from './context/context';
+import { Context } from '@utils/context';
 import { likelist } from '@/common/net/api';
 import { login } from '@/common/net/login';
-import { initUserInfo } from '@utils/local';
+import { initSong, initUserInfo } from '@utils/local';
 import { playlist } from '@/common/net/playList';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
@@ -25,10 +25,28 @@ interface Item {
   userId: number;
   name: string;
 }
+const initialState = { currentSong: initSong };
+
+function reducer(state: any, action: any) {
+  const { type, data } = action;
+  switch (type) {
+    case 'currentSong':
+      return Object.assign({}, state, { currentSong: data });
+    default:
+      throw new Error();
+  }
+}
 const App: FC = () => {
   const [likeList, setLikeList] = useState([]);
   const [userInfo, setUserInfo] = useState(initUserInfo);
   const [playList, setPlayList] = useState([]);
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { currentSong } = state;
+
+  const _dispatch = (obj: any) => {
+    dispatch(obj);
+  };
   // 登录
   const getLogin = async () => {
     const res: any = await login({ phone: '13272946536', password: 'wangyi123@@' });
@@ -72,9 +90,9 @@ const App: FC = () => {
 
   return (
     <div className={styles.app}>
-      <MyContext.Provider value={{ likeList, userInfo, playList, getLikeList }}>
+      <Context.Provider value={{ likeList, userInfo, currentSong, playList, _dispatch, getLikeList }}>
         <Home />
-      </MyContext.Provider>
+      </Context.Provider>
     </div>
   );
 };

@@ -61,7 +61,6 @@ export const post = (url: string, params?: object) => {
     instance
       .post(url, { params })
       .then((res) => {
-        console.log(res);
         resolve(res);
       })
       .catch((err) => {

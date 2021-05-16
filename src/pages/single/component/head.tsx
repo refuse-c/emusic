@@ -2,13 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-14 12:33:13
+ * @LastEditTime: 2021-05-15 22:27:51
  * @Description:
  */
 import { FC, useContext } from 'react';
 import styles from '../index.module.scss';
 import moment from 'moment';
-import { MyContext } from '@pages/app/context/context';
+import { Context } from '@utils/context';
 import { formatImgSize } from '@/common/utils/format';
 import ReactMarkdown from 'react-markdown';
 interface Props {
@@ -29,7 +29,7 @@ const Head: FC<Props> = (props: any) => {
     playCount,
     description,
   } = data;
-  const { userInfo } = useContext(MyContext);
+  const { userInfo } = useContext(Context);
   const { userId, nickname } = userInfo;
   const isUser = user_id === userId;
   return (

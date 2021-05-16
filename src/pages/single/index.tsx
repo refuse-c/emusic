@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-14 09:16:56
+ * @LastEditTime: 2021-05-14 21:28:34
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -29,7 +29,7 @@ const Single: FC = (props: any) => {
     const res: any = await playlistDetail({ id });
     const headData = res.playlist || {};
     const idsArr = assemblyIds(res.playlist.trackIds);
-    getSongDetail(idsArr);
+    await getSongDetail(idsArr);
     setHeadData(headData);
     setLoading(false);
   };

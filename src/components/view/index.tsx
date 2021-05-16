@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 19:37:39
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-05 02:37:50
+ * @LastEditTime: 2021-05-14 22:23:34
  * @Description:
  */
 import { FC } from 'react';
@@ -21,7 +21,6 @@ interface Props {
 
 const View: FC<Props> = (props) => {
   const { children, isFull = false } = props;
-
   return (
     <div className={styles.view}>
       <Layout>

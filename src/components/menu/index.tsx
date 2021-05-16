@@ -9,7 +9,7 @@ import { FC, useState, useContext } from 'react';
 import styles from './index.module.scss';
 import { menuList } from '@utils/local';
 import { message } from 'antd';
-import { MyContext } from '@pages/app/context/context';
+import { Context } from '@utils/context';
 import { createHashHistory } from 'history';
 
 interface Props {
@@ -25,7 +25,7 @@ interface Item {
 const Menu: FC<Props> = (props) => {
   const history = createHashHistory();
   const [statue, setStatue] = useState(0);
-  const { playList } = useContext(MyContext);
+  const { playList } = useContext(Context);
 
   /**
    * @name: 改变选中的项目的样式

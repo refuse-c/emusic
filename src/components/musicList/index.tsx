@@ -2,12 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-14 14:04:04
+ * @LastEditTime: 2021-05-15 04:31:45
  * @Description:音乐列表
  */
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { message, Table } from 'antd';
 import styles from './index.module.scss';
+import { Context } from '@utils/context';
 import { formatSerialNumber, formatTime } from '@/common/utils/format';
 interface Props {
   list?: any | [];
@@ -70,39 +71,28 @@ const columns = [
   },
 ];
 
-// 控制样式
-const setClassName = (record: { st: number }, index: number) => {
-  const cls1 = record.st === -200 ? styles.disabled : '';
-  const cls2 = index % 2 === 0 ? styles.even : styles.odd;
-  return [cls1, cls2].join(' ');
-};
-// 点击事件
-const selectRow = (record: { st: number; fee: number }) => {
-  message.destroy();
-  if (record.st === -200) {
-    message.error('因合作方要求，该资源暂时下架');
-  } else if (record.fee === 4) {
-    message.error('版权方要求,当前专辑需单独付费,购买数字专辑即可无限畅享');
-  } else {
-    // const index = currentPlayList.findIndex((item) => item.id === record.id);
-    // if (index === -1) {
-    //   currentPlayList.unshift(record);
-    // }
-    // this.props.setCurrentPlayList(currentPlayList);
-    // this.props.setCurrentPlayer(record);
-  }
-
-  /*     
-      privilege.fee
-      8、0：免费
-      4：所在专辑需单独付费
-      1：VIP可听
-      privilege.cs: 云盘
-      privilege.st：-200无版权
-    */
-};
 const MusicList: FC<Props> = (props) => {
   const { list } = props;
+  const { currentSong, _dispatch } = useContext(Context);
+  console.log(currentSong);
+
+  // 控制样式
+  const setClassName = (record: { st: number }, index: number) => {
+    const cls1 = record.st === -200 ? styles.disabled : '';
+    const cls2 = index % 2 === 0 ? styles.even : styles.odd;
+    return [cls1, cls2].join(' ');
+  };
+  // 点击事件
+  const selectRow = (record: { st: number; fee: number }) => {
+    message.destroy();
+    if (record.st === -200) {
+      message.error('因合作方要求，该资源暂时下架');
+    } else if (record.fee === 4) {
+      message.error('版权方要求,当前专辑需单独付费,购买数字专辑即可无限畅享');
+    } else {
+      _dispatch({ type: 'currentSong', data: record });
+    }
+  };
   return (
     <div className={styles.musicList}>
       <Table

@@ -27,7 +27,6 @@ const Exclusive: FC = () => {
     <div className={styles.exclusive}>
       <Title text="独家放送" />
       <ExclusiveList list={list} isAdaptive={true} />
-      {console.log(list)}
     </div>
   );
 };

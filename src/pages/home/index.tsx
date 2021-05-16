@@ -2,14 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:22:22
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 20:14:35
+ * @LastEditTime: 2021-05-15 00:54:55
  * @Description:
  */
 import { FC, useState } from 'react';
 import styles from './index.module.scss';
 import View from '@components/view';
 import Menu from '@components/menu';
-
 import { HashRouter as Router, Redirect, Route } from 'react-router-dom';
 import router from '@/router/router';
 const Home: FC = () => {

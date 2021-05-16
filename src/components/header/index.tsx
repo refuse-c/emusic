@@ -10,14 +10,14 @@ import styles from './index.module.scss';
 import { Input } from 'antd';
 import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
-import { MyContext } from '@pages/app/context/context';
+import { Context } from '@utils/context';
 import { defaultColor } from '@/common/utils/local';
 import { getLocal, setLocal } from '@/common/utils/tools';
 const history = createHashHistory();
 const globalColor = getLocal('color') || '#EC4141';
 const DOM = document.getElementsByTagName('body')[0];
 const Header: FC = () => {
-  const { userInfo } = useContext(MyContext);
+  const { userInfo } = useContext(Context);
   const [color, setColor] = useState(globalColor);
   const [showPicker, setShowPicker] = useState(false);
   DOM.style.setProperty('--color', color, '');

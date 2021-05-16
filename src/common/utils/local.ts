@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-14 16:38:21
+ * @LastEditTime: 2021-05-15 23:00:05
  * @Description:
  */
 
@@ -109,10 +109,9 @@ export const menuList = [
 
 /**
  * @name: 发现音乐顶部导航
- * @param {*}
  * @Description:
  * 1.name: 显示的名字
- * 2.path:路由地址
+ * 2.path: 路由地址
  */
 export const findNav = [
   { name: '个性推荐', path: '/find' },
@@ -125,21 +124,27 @@ export const findNav = [
 
 /**
  * @name: 视频顶部导航
- * @param {*}
  * @Description:
  * 1.name: 显示的名字
- * 2.path:路由地址
+ * 2.path: 路由地址
  */
 export const videoNav = [
   { name: '视频', path: '/video' },
   { name: 'MV', path: '/video/mv' },
 ];
 /**
- * @name: 用户信息初始化
+ * @name: 用户信息默认值
  * @param {*}
  * @Description:
  */
 export const initUserInfo = { userId: 0, nickname: '', avatarUrl: '' };
+
+/**
+ * @name: 歌曲信息默认值
+ * @param {*}
+ * @Description:
+ */
+export const initSong = { id: 0, name: '', ar: [], dt: 0, al: { picUrl: '' } };
 
 /**
  * @name: 歌曲列表二级导航列表
