@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-15 04:31:45
+ * @LastEditTime: 2021-05-17 19:23:01
  * @Description:音乐列表
  */
 import { FC, useContext } from 'react';
@@ -37,9 +37,9 @@ const columns = [
         >
           {record.name}
         </p>
-        {record.fee === 1 ? <i className={styles.vip}></i> : null}
-        {record.dl === 999000 ? <i className={styles.sq}></i> : null}
-        {record.mv !== 0 ? <i onClick={() => console.log(record.mv)} className={styles.mv}></i> : null}
+        {record.fee === 1 ? <i className={'icon vip'}></i> : null}
+        {record.dl === 999000 ? <i className={'icon sq'}></i> : null}
+        {record.mv !== 0 ? <i onClick={() => console.log(record.mv)} className={'icon mv'}></i> : null}
       </div>
     ),
   },
@@ -73,14 +73,13 @@ const columns = [
 
 const MusicList: FC<Props> = (props) => {
   const { list } = props;
-  const { currentSong, _dispatch } = useContext(Context);
-  console.log(currentSong);
-
+  const { currentSong, dispatch } = useContext(Context);
   // 控制样式
-  const setClassName = (record: { st: number }, index: number) => {
+  const setClassName = (record: { st: number; id: number }, index: number) => {
     const cls1 = record.st === -200 ? styles.disabled : '';
     const cls2 = index % 2 === 0 ? styles.even : styles.odd;
-    return [cls1, cls2].join(' ');
+    const cls3 = record.id === currentSong.id ? styles.active : '';
+    return [cls1, cls2, cls3].join(' ');
   };
   // 点击事件
   const selectRow = (record: { st: number; fee: number }) => {
@@ -90,7 +89,7 @@ const MusicList: FC<Props> = (props) => {
     } else if (record.fee === 4) {
       message.error('版权方要求,当前专辑需单独付费,购买数字专辑即可无限畅享');
     } else {
-      _dispatch({ type: 'currentSong', data: record });
+      dispatch({ type: 'currentSong', data: record });
     }
   };
   return (

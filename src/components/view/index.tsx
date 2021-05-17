@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 19:37:39
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-14 22:23:34
+ * @LastEditTime: 2021-05-17 19:23:49
  * @Description:
  */
 import { FC } from 'react';
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const View: FC<Props> = (props) => {
-  const { children, isFull = false } = props;
+  const { children } = props;
   return (
     <div className={styles.view}>
       <Layout>
@@ -29,9 +29,7 @@ const View: FC<Props> = (props) => {
         </Header>
         <Layout>
           {isArray(children) ? <Sider>{props.children[0]}</Sider> : null}
-          <Content id="content">
-            <div className={isFull ? styles.isFull : styles.notFull}>{isArray(children) ? children[1] : children}</div>
-          </Content>
+          <Content id="content">{isArray(children) ? children[1] : children}</Content>
         </Layout>
         <Footer>
           <Control />

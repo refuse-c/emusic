@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-23 00:23:47
+ * @LastEditTime: 2021-05-17 12:11:13
  * @Description:发现音乐
  */
 import { FC, useEffect, useState } from 'react';
@@ -105,7 +105,6 @@ const Recommend: FC = () => {
    */
   const getRecommendDj = async () => {
     const result: any = await recommendDj();
-    console.log(result);
     const radioList = result.data || [];
     setRadioList(radioList);
   };

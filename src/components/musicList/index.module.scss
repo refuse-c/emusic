@@ -72,7 +72,6 @@
       color: #ccc;
       &:hover {
         color: #ccc !important;
-        // text-decoration: none;
       }
     }
   }
@@ -83,6 +82,9 @@
 
   .odd {
     background-color: #ffffff;
+  }
+  .active {
+    background-color: #e5e5e5;
   }
 
   :global {
@@ -112,13 +114,13 @@
       > tr:hover:not(.ant-table-expanded-row) > td,
       .ant-table-row-hover,
       .ant-table-row-hover > td {
-        background: #f0f1f2;
+        background-color: #f0f1f2;
       }
     }
     .ant-table-fixed {
       .ant-table-row-hover,
       .ant-table-row-hover > td {
-        background: #f0f1f2;
+        background-color: transparent;
       }
     }
   }

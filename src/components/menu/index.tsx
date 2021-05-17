@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 09:05:23
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-14 15:39:31
+ * @LastEditTime: 2021-05-17 19:42:45
  * @Description:左侧菜单
  */
 import { FC, useState, useContext } from 'react';
@@ -12,9 +12,6 @@ import { message } from 'antd';
 import { Context } from '@utils/context';
 import { createHashHistory } from 'history';
 
-interface Props {
-  callBack: any;
-}
 interface Item {
   type: number;
   name: string;
@@ -22,7 +19,7 @@ interface Item {
   icon?: string;
 }
 
-const Menu: FC<Props> = (props) => {
+const Menu: FC = () => {
   const history = createHashHistory();
   const [statue, setStatue] = useState(0);
   const { playList } = useContext(Context);
@@ -34,12 +31,10 @@ const Menu: FC<Props> = (props) => {
    * @Description:
    */
   const handleMeun = (item: any, index: number) => {
-    const { callBack } = props;
-    const { type, path, isFull } = item;
+    const { type, path } = item;
 
     if (type === 1) {
       setStatue(index);
-      callBack(isFull);
       history.push(path);
     } else if (type === 3) {
       message.info('暂未开发');
