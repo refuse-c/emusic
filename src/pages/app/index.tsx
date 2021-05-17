@@ -2,16 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-17 19:29:45
+ * @LastEditTime: 2021-05-18 07:00:25
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
 import styles from './index.module.scss';
 import Home from '@pages/home';
-import { Context } from '@utils/context';
 import { login } from '@/common/net/login';
-import { initSong, initUserInfo } from '@utils/local';
 import { playlist } from '@/common/net/playList';
+import { Context, reducer, initialState } from '@utils/context';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
 interface Item {
@@ -24,21 +23,7 @@ interface Item {
   userId: number;
   name: string;
 }
-const initialState = { currentSong: initSong, userInfo: initUserInfo, playList: [] };
 
-function reducer(state: any, action: any) {
-  const { type, data } = action;
-  switch (type) {
-    case 'userInfo':
-      return Object.assign({}, state, { userInfo: data });
-    case 'playList':
-      return Object.assign({}, state, { playList: data });
-    case 'currentSong':
-      return Object.assign({}, state, { currentSong: data });
-    default:
-      throw new Error();
-  }
-}
 const App: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const { userInfo, playList, currentSong } = state;

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-17 11:18:22
+ * @LastEditTime: 2021-05-18 06:33:58
  * @Description:control
  */
 import { FC, useContext } from 'react';
@@ -19,19 +19,24 @@ const Control: FC<Props> = () => {
   return (
     <div className={styles.control}>
       <div className={styles.left}>
-        <img className={styles.img_box} src={currentSong.al.picUrl} alt="" />
-        <div className={styles.info}>
-          <div>
-            <p>{currentSong.name}</p>
-            <p></p>
+        {currentSong.al.picUrl ? (
+          <div className={styles.content}>
+            <img className={styles.img_box} src={currentSong.al.picUrl} alt="" />
+            <div className={styles.info}>
+              <div>
+                <p>{currentSong.name}</p>
+                <p></p>
+              </div>
+              <div>
+                {currentSong.ar.map((item: any, index: number) => (
+                  <span key={index}>{item.name}</span>
+                ))}
+              </div>
+            </div>
           </div>
-          <div>
-            {currentSong.ar.map((item: any, index: number) => (
-              <span key={index}>{item.name}</span>
-            ))}
-          </div>
-        </div>
+        ) : null}
       </div>
+
       <div className={styles.center}>
         <ul className={styles.btn_group}>
           <li className="icon icon-cycle"></li>
