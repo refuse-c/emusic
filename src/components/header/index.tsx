@@ -2,38 +2,39 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-17 11:16:22
+ * @LastEditTime: 2021-05-18 23:00:04
  * @Description:
  */
-import { FC, useContext, useState } from 'react';
+import { FC, useContext } from 'react';
 import styles from './index.module.scss';
 import { Input } from 'antd';
 import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
 import { Context } from '@utils/context';
 import { defaultColor } from '@/common/utils/local';
-import { getLocal, setLocal } from '@/common/utils/tools';
+import { setLocal } from '@/common/utils/tools';
 const history = createHashHistory();
-const globalColor = getLocal('color') || '#EC4141';
 const DOM = document.getElementsByTagName('body')[0];
 const Header: FC = () => {
-  const { userInfo } = useContext(Context);
-  const [color, setColor] = useState(globalColor);
-  const [showPicker, setShowPicker] = useState(false);
-  DOM.style.setProperty('--color', color, '');
+  const { userInfo, globalColor, showModal, dispatch } = useContext(Context);
+  DOM.style.setProperty('--color', globalColor, '');
 
   //  修改颜色
   const changeColor = (val: string) => {
-    setColor(val);
     setLocal('color', val);
     DOM.style.setProperty('--color', val, '');
+    dispatch({ type: 'globalColor', data: val });
   };
 
   return (
     <div className={styles.header}>
-      <div className={styles.colorContent}>
-        {showPicker ? (
-          <BlockPicker colors={defaultColor} color={color} onChange={(e: { hex: string }) => changeColor(e.hex)} />
+      <div className={styles.colorContent} onClick={(e) => e.stopPropagation()}>
+        {showModal ? (
+          <BlockPicker
+            colors={defaultColor}
+            color={globalColor}
+            onChange={(e: { hex: string }) => changeColor(e.hex)}
+          />
         ) : null}
       </div>
       <div className={styles.left}>
@@ -49,11 +50,22 @@ const Header: FC = () => {
         </div>
       </div>
       <ul className={styles.tool}>
-        <li className={styles.author} style={{ backgroundImage: `url(${userInfo.avatarUrl})` }}></li>
-        <li className="icon">
-          {userInfo.nickname} <span></span>
+        <li className={styles.author}>
+          <img src={userInfo.avatarUrl} alt="" />
+          <div>
+            <p>{userInfo.nickname}</p>
+            <p>去开通</p>
+            <p className="icon icon-arrow-bottom"></p>
+          </div>
         </li>
-        <li className="icon icon-theme" onClick={() => setShowPicker(!showPicker)}></li>
+
+        <li
+          className="icon icon-theme"
+          onClick={(e) => {
+            dispatch({ type: 'showModal', data: showModal ? '' : 'showColor' });
+            e.stopPropagation();
+          }}
+        ></li>
         <li className="icon icon-setting"></li>
         <li className="icon icon-email"></li>
         <li className="icon icon-min"></li>

@@ -6,12 +6,17 @@ li,
 p {
   cursor: default;
   user-select: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI',
+    Tahoma,
+    Geneva,
+    Verdana,
+    sans-serif;
 }
 
 body {
   color: #373737;
   position: relative;
+  font-size: 14px;
 
   &::after {
     position: absolute;

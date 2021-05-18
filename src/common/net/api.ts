@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-16 23:45:51
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 00:04:27
+ * @LastEditTime: 2021-05-18 23:17:59
  * @Description:
  */
 import { get } from './request';
@@ -39,4 +39,13 @@ export const likelist = (params?: any) => {
  */
 export const songDetail = (params: { ids: string }) => {
   return get('song/detail', params);
+};
+/**
+ * @name: 获取歌曲url
+ * @param {*} params
+ * @Description:
+ * br: 码率,默认设置了 999000 即最大码率,如果要 320k 则可设置为 320000,其他类推
+ */
+export const songUrl = (params: { id: string | number; br?: string }) => {
+  return get('song/url', params);
 };

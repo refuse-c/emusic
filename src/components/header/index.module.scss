@@ -1,4 +1,5 @@
 @import '~@common/css/_variables.scss';
+
 .header {
   position: relative;
   display: flex;
@@ -99,21 +100,51 @@
     display: flex;
     align-items: center;
 
-    .author {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      margin-right: 0;
-      background-size: contain;
-      background-position: center center;
-      background-repeat: no-repeat;
-    }
+
 
     li {
       color: #fff;
       margin: 0 10px;
       font-size: 16px;
       -webkit-app-region: no-drag;
+      color: #e9e9e9;
+
+      &:hover {
+        color: #fff;
+      }
+
+      &.author {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          margin-right: 6px;
+          cursor: pointer;
+        }
+
+        div {
+          display: flex;
+          align-items: center;
+
+          p {
+            cursor: pointer;
+            white-space: nowrap;
+
+            &:nth-child(2) {
+              margin-left: 4px;
+            }
+
+            &:nth-child(3) {
+              font-size: 8px;
+              margin-left: 4px;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -122,5 +153,5 @@
   position: fixed;
   top: 70px;
   right: 168px;
-  z-index: 1;
+  z-index: 30;
 }

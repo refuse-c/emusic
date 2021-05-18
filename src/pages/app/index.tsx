@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-18 07:00:25
+ * @LastEditTime: 2021-05-18 23:26:39
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -26,7 +26,8 @@ interface Item {
 
 const App: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const { userInfo, playList, currentSong } = state;
+
+  const { isPlay, userInfo, playList, globalColor, showModal, currentSong } = state;
 
   // 登录
   const getLogin = async () => {
@@ -64,8 +65,8 @@ const App: FC = () => {
   }, []);
 
   return (
-    <div className={styles.app}>
-      <Context.Provider value={{ userInfo, playList, currentSong, dispatch }}>
+    <div className={styles.app} onClick={() => dispatch({ type: 'showModal', data: '' })}>
+      <Context.Provider value={{ isPlay, userInfo, playList, globalColor, showModal, currentSong, dispatch }}>
         <Home />
       </Context.Provider>
     </div>

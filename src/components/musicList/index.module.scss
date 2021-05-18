@@ -1,3 +1,5 @@
+@import '~@common/css/_variables.scss';
+
 .musicList {
   .table {
     margin-top: 6px;
@@ -6,16 +8,19 @@
   .tools {
     display: flex;
     padding-left: 23px;
+
     span {
       &:not(:first-child) {
         cursor: pointer;
       }
     }
+
     .serial {
       color: #bababa;
       width: 30px;
     }
   }
+
   .name {
     color: #373737;
     display: flex;
@@ -81,6 +86,7 @@
   .disabled {
     .name {
       color: #ccc;
+
       &:hover {
         color: #ccc !important;
       }
@@ -94,43 +100,59 @@
   .odd {
     background-color: #ffffff;
   }
+
   .active {
     background-color: #e5e5e5;
+
+    .name {
+      p {
+        color: $color !important;
+      }
+    }
   }
 
   :global {
     .ant-table {
       font-size: 13px;
     }
+
     .ant-table-cell {
       border: none;
     }
-    .ant-table-thead > tr > th {
+
+    .ant-table-thead>tr>th {
       color: #888888;
       background-color: #fff;
       height: 18px;
+
       .ant-table-column-sorters {
         padding: 7px !important;
       }
     }
+
     .ant-table-tbody {
       font-size: 12px;
+
       tr {
         .ant-table-cell {
           padding: 7px !important;
         }
       }
     }
+
     .ant-table-tbody {
-      > tr:hover:not(.ant-table-expanded-row) > td,
+
+      >tr:hover:not(.ant-table-expanded-row)>td,
       .ant-table-row-hover,
-      .ant-table-row-hover > td {
+      .ant-table-row-hover>td {
         background-color: #f0f1f2;
       }
     }
+
     .ant-table-fixed {
+
       .ant-table-row-hover,
-      .ant-table-row-hover > td {
+      .ant-table-row-hover>td {
         background-color: transparent;
       }
     }
