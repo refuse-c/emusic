@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-17 19:30:04
+ * @LastEditTime: 2021-05-18 15:57:29
  * @Description:
  */
 
@@ -141,15 +141,15 @@ export const initSong = { id: 0, name: '', ar: [], dt: 0, al: { picUrl: '' } };
  */
 export const navigationList = [
   {
-    key: 0,
+    key: 1,
     title: '歌曲列表',
   },
   {
-    key: 0,
+    key: 2,
     title: '评论',
   },
   {
-    key: 0,
+    key: 3,
     title: '收藏者',
   },
 ];

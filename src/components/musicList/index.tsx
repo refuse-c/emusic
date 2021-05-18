@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-17 19:23:01
+ * @LastEditTime: 2021-05-18 09:46:35
  * @Description:音乐列表
  */
 import { FC, useContext } from 'react';
@@ -18,10 +18,16 @@ const columns = [
   {
     title: '',
     key: 'index',
-    width: 50,
-    render: (_record: any, _text: any, index: number) => (
-      <span className={styles.serial}>{formatSerialNumber(index + 1)}</span>
-    ),
+    width: 110,
+    render: (_record: any, _text: any, index: number) => {
+      return (
+        <div className={styles.tools}>
+          <span className={styles.serial}>{formatSerialNumber(index + 1)}</span>
+          <span className="icon icon-like"></span>
+          <span style={{ marginLeft: 10 }} className="icon icon-like"></span>
+        </div>
+      );
+    },
   },
   {
     title: '音乐标题',

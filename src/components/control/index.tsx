@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-18 06:33:58
+ * @LastEditTime: 2021-05-18 09:34:54
  * @Description:control
  */
 import { FC, useContext } from 'react';
@@ -25,7 +25,7 @@ const Control: FC<Props> = () => {
             <div className={styles.info}>
               <div>
                 <p>{currentSong.name}</p>
-                <p></p>
+                <p className="icon icon-like"></p>
               </div>
               <div>
                 {currentSong.ar.map((item: any, index: number) => (
@@ -40,7 +40,7 @@ const Control: FC<Props> = () => {
       <div className={styles.center}>
         <ul className={styles.btn_group}>
           <li className="icon icon-cycle"></li>
-          <li className="icon icon-prev"></li>
+          <li className="icon icon-next" style={{ transform: 'rotate(180deg)' }}></li>
           <li className="icon icon-pause"></li>
           <li className="icon icon-next"></li>
           <li>lyrc</li>

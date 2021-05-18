@@ -2,8 +2,19 @@
   .table {
     margin-top: 6px;
   }
-  .serial {
-    color: #cfcfcf;
+
+  .tools {
+    display: flex;
+    padding-left: 23px;
+    span {
+      &:not(:first-child) {
+        cursor: pointer;
+      }
+    }
+    .serial {
+      color: #bababa;
+      width: 30px;
+    }
   }
   .name {
     color: #373737;
