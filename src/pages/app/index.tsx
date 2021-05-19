@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-18 23:26:39
+ * @LastEditTime: 2021-05-19 16:12:24
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -46,7 +46,7 @@ const App: FC = () => {
     allList.map((item: Item) => {
       item.type = 1;
       item.path = `/single${item.id}`;
-      item.icon = 'icon icon-menu-playlist';
+      // item.icon = 'icon icon-menu-playlist';
       item.name = item.userId === uid ? item.name.replace(nickname, '我') : item.name;
       return item;
     });

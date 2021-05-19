@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-13 09:53:39
+ * @LastEditTime: 2021-05-19 16:36:06
  * @Description:歌单组件
  */
 import { FC } from 'react';
@@ -31,10 +31,11 @@ const PlayList: FC<Props> = (props) => {
     <ul className={styles.playlist}>
       {list.map((item: Item, index: number) => {
         const { day, name, picUrl, coverImgUrl, playcount, playCount, identifying } = item;
+        const pathName = identifying ? '/recommendSong' : `/single${item.id}`;
         return (
           <li key={index}>
             <div
-              onClick={() => history.push(`/single${item.id}`)}
+              onClick={() => history.push(pathName)}
               className={styles.imgBox}
               style={{ backgroundImage: `url(${formatImgSize(picUrl || coverImgUrl, 210, 210)})` }}
             >

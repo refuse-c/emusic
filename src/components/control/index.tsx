@@ -2,25 +2,24 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-18 23:59:18
+ * @LastEditTime: 2021-05-19 16:13:26
  * @Description:control
  */
-import { FC, useContext, useState, useEffect, useRef } from 'react';
+import { FC, useContext, useState, useEffect } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatTime } from '@/common/utils/format';
 import { songUrl } from '@/common/net/api';
 import { message } from 'antd';
-interface Props {
-  // title?: string;
-}
+import { initTime } from '@/common/utils/local';
 
-const Control: FC<Props> = () => {
-  // const { title } = props;
-  const audio = useRef(null);
+const Control: FC = () => {
+  const refAudio = document.getElementById('refAudio') as any;
   const [url, setUrl] = useState('');
+  const [songTime, setSongTime] = useState(initTime);
   const { isPlay, currentSong, dispatch } = useContext(Context);
-  const id = currentSong.id;
+  const { id } = currentSong;
+  // 获取url
   const getSongUrl = async (id: number | string) => {
     if (!id) return message.error('发生未知错误');
     const params = { id, br: '128000' };
@@ -30,10 +29,10 @@ const Control: FC<Props> = () => {
     dispatch({ type: 'isPlay', data: true });
   };
 
+  // 暂停/播放
   const handlePaused = () => {
     dispatch({ type: 'isPlay', data: !isPlay });
-    const audioDom = audio.current as any;
-    isPlay ? audioDom.pause() : audioDom.play();
+    isPlay ? refAudio.pause() : refAudio.play();
   };
 
   useEffect(() => {
@@ -41,9 +40,18 @@ const Control: FC<Props> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  useEffect(() => {
+    refAudio &&
+      refAudio.addEventListener('timeupdate', () => {
+        const { currentTime, duration } = refAudio;
+        setSongTime({ currentTime, duration });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [refAudio]);
+
   return (
     <div className={styles.control}>
-      <audio src={url} autoPlay loop ref={audio} />
+      <audio src={url} autoPlay loop id="refAudio" />
       <div className={styles.left}>
         {currentSong.al.picUrl ? (
           <div className={styles.content}>
@@ -65,16 +73,16 @@ const Control: FC<Props> = () => {
 
       <div className={styles.center}>
         <ul className={styles.btn_group}>
-          <li className="icon icon-cycle"></li>
+          <li className="icon icon-order"></li>
           <li className="icon icon-next" style={{ transform: 'rotate(180deg)' }}></li>
           <li className={`icon ${isPlay ? 'icon-pause' : 'icon-play'}`} onClick={() => handlePaused()}></li>
           <li className="icon icon-next"></li>
           <li>lyrc</li>
         </ul>
         <div className={styles.progress_box}>
-          <p className={styles.time}>00:00</p>
+          <p className={styles.time}>{formatTime(songTime.currentTime, true)}</p>
           <p className={styles.progress}></p>
-          <p className={styles.time}>{formatTime(currentSong.dt)}</p>
+          <p className={styles.time}>{formatTime(songTime.duration || Number(currentSong.dt) / 1000, true)}</p>
         </div>
       </div>
       <div className={styles.right}>

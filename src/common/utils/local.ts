@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-18 15:57:29
+ * @LastEditTime: 2021-05-19 15:43:42
  * @Description:
  */
 
@@ -57,35 +57,35 @@ export const menuList = [
     path: '/local',
     type: 1,
     isBold: false,
-    icon: 'icon icon-yinle-01',
+    // icon: 'icon icon-yinle-01',
   },
   {
     name: '下载管理',
     path: '/download',
     type: 1,
     isBold: false,
-    icon: 'icon icon-download',
+    // icon: 'icon icon-download',
   },
   {
     name: '我的音乐云盘',
     path: '/cloud',
     type: 1,
     isBold: false,
-    icon: 'icon icon-cloud',
+    // icon: 'icon icon-cloud',
   },
   {
     name: '我的电台',
     path: '/radio',
     type: 1,
     isBold: false,
-    icon: 'icon icon-radio',
+    // icon: 'icon icon-radio',
   },
   {
     name: '我的收藏',
     path: '/collection',
     type: 1,
     isBold: false,
-    icon: 'iocn icon-collection',
+    // icon: 'iocn icon-collection',
   },
   // {
   //   name: '创建的歌单',
@@ -133,6 +133,13 @@ export const initUserInfo = { userId: 0, nickname: '', avatarUrl: '' };
  * @Description:
  */
 export const initSong = { id: 0, name: '', ar: [], dt: 0, al: { picUrl: '' } };
+
+/**
+ * @name: 初始化歌曲时间
+ * @param {*}
+ * @Description:
+ */
+export const initTime = { currentTime: 0, duration: 0 };
 
 /**
  * @name: 歌曲列表二级导航列表
