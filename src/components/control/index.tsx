@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 16:13:26
+ * @LastEditTime: 2021-05-19 22:05:34
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -10,15 +10,18 @@ import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatTime } from '@/common/utils/format';
 import { songUrl } from '@/common/net/api';
-import { message } from 'antd';
+import { message, Slider } from 'antd';
 import { initTime } from '@/common/utils/local';
+import { getLocal, setLocal } from '@/common/utils/tools';
 
 const Control: FC = () => {
   const refAudio = document.getElementById('refAudio') as any;
   const [url, setUrl] = useState('');
+  const [volume, setVolume] = useState(getLocal('volume') || 5);
   const [songTime, setSongTime] = useState(initTime);
   const { isPlay, currentSong, dispatch } = useContext(Context);
   const { id } = currentSong;
+  const { currentTime, duration } = songTime;
   // 获取url
   const getSongUrl = async (id: number | string) => {
     if (!id) return message.error('发生未知错误');
@@ -35,17 +38,32 @@ const Control: FC = () => {
     isPlay ? refAudio.pause() : refAudio.play();
   };
 
+  // 改变进度
+  const changeCurrentTime = (value: number) => {
+    refAudio.currentTime = value;
+  };
+
+  // 改变音量
+  const changeVolume = (value: number) => {
+    setLocal('volume', value);
+    refAudio.volume = value / 10;
+    setVolume(value);
+  };
+
   useEffect(() => {
     getSongUrl(id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
-    refAudio &&
+    if (refAudio) {
+      refAudio.volume = volume / 10;
       refAudio.addEventListener('timeupdate', () => {
         const { currentTime, duration } = refAudio;
         setSongTime({ currentTime, duration });
       });
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refAudio]);
 
@@ -70,7 +88,6 @@ const Control: FC = () => {
           </div>
         ) : null}
       </div>
-
       <div className={styles.center}>
         <ul className={styles.btn_group}>
           <li className="icon icon-order"></li>
@@ -80,16 +97,33 @@ const Control: FC = () => {
           <li>lyrc</li>
         </ul>
         <div className={styles.progress_box}>
-          <p className={styles.time}>{formatTime(songTime.currentTime, true)}</p>
-          <p className={styles.progress}></p>
-          <p className={styles.time}>{formatTime(songTime.duration || Number(currentSong.dt) / 1000, true)}</p>
+          <div className={styles.time}>{formatTime(currentTime, true)}</div>
+          <div className={styles.progress}>
+            <Slider
+              min={0}
+              max={duration}
+              disabled={false}
+              value={currentTime}
+              tipFormatter={null}
+              onChange={(value: number) => changeCurrentTime(value)}
+            />
+          </div>
+          <div className={styles.time}>{formatTime(duration || Number(currentSong.dt) / 1000, true)}</div>
         </div>
       </div>
-      <div className={styles.right}>
-        <div className={styles.quality}></div>
-        <div className={styles.volume}></div>
-        <div className={[styles.aa, 'icon icon-playlist'].join(' ')}></div>
-      </div>
+      <ul className={styles.right}>
+        <li className={[styles.quality, 'icon icon-volume'].join(' ')}></li>
+        <li className={styles.volume}>
+          <Slider
+            min={0}
+            max={10}
+            value={volume}
+            tipFormatter={null}
+            onChange={(value: number) => changeVolume(value)}
+          />
+        </li>
+        <li className={[styles.list, 'icon icon-playlist'].join(' ')}></li>
+      </ul>
     </div>
   );
 };
