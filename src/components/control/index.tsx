@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 22:05:34
+ * @LastEditTime: 2021-05-19 23:22:28
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -69,7 +69,7 @@ const Control: FC = () => {
 
   return (
     <div className={styles.control}>
-      <audio src={url} autoPlay loop id="refAudio" />
+      <audio src={url} autoPlay loop preload="auto" id="refAudio" />
       <div className={styles.left}>
         {currentSong.al.picUrl ? (
           <div className={styles.content}>
