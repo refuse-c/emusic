@@ -2,20 +2,23 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 16:28:07
+ * @LastEditTime: 2021-05-20 21:25:34
  * @Description:
  */
 import { FC, useContext } from 'react';
 import styles from '../index.module.scss';
 import moment from 'moment';
 import { Context } from '@utils/context';
-import { formatImgSize } from '@/common/utils/format';
 import ReactMarkdown from 'react-markdown';
+import PlayAll from '@components/playAll';
+import { formatImgSize } from '@/common/utils/format';
+
 interface Props {
   data: object;
+  list: any | [];
 }
 const Head: FC<Props> = (props: any) => {
-  const { data } = props;
+  const { data, list } = props;
   const {
     userId: user_id,
     name,
@@ -48,10 +51,7 @@ const Head: FC<Props> = (props: any) => {
           <p>{createTime ? `${moment(createTime).format('YYYY-MM-DD')}创建` : ''}</p>
         </div>
         <div className={styles.btnGroup}>
-          <div className={styles.play}>
-            <p className="icon icon-play">播放全部</p>
-            <p className="icon icon-add"></p>
-          </div>
+          <PlayAll list={list} />
           <div className={styles.tool}>
             <p className={isUser ? styles.disabled : ''}>收藏{subscribedCount ? `(${subscribedCount})` : ''}</p>
             <p>分享{shareCount ? `(${shareCount})` : ''}</p>

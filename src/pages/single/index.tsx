@@ -17,6 +17,7 @@ import Collectors from '@components/collectors';
 import { playlistDetail } from '@/common/net/playList';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
 import { navigationList } from '@/common/utils/local';
+
 import Content from '@components/view/content';
 const Single: FC = (props: any) => {
   const id = props.match.params.id;
@@ -57,7 +58,7 @@ const Single: FC = (props: any) => {
       <Spin spinning={loading}>
         <div className={styles.single}>
           <Content isFull={true} padding={'0 30px'}>
-            <Head data={headData} />
+            <Head data={headData} list={musicList} />
             <Navigation status={navStatus} list={navigationList} onChange={(index: number) => setNavStatus(index)} />
           </Content>
           {navStatus === 0 ? <MusicList list={musicList} /> : navStatus === 1 ? <Comments /> : <Collectors />}

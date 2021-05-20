@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 15:29:11
+ * @LastEditTime: 2021-05-21 01:33:30
  * @Description:音乐列表
  */
 import { FC, useContext } from 'react';
@@ -81,23 +81,31 @@ const columns = [
 
 const MusicList: FC<Props> = (props) => {
   const { list } = props;
-  const { currentSong, dispatch } = useContext(Context);
+  const { songList, currentSong, currentIndex, dispatch } = useContext(Context);
+  console.log(songList);
+  console.log(currentIndex);
   // 控制样式
   const setClassName = (record: { st: number; id: number }, index: number) => {
     const cls1 = record.st === -200 ? styles.disabled : '';
     const cls2 = index % 2 === 0 ? styles.even : styles.odd;
-    const cls3 = record.id === currentSong.id ? styles.active : '';
+    const cls3 = record.id === currentSong.id || 0 ? styles.active : '';
     return [cls1, cls2, cls3].join(' ');
   };
   // 点击事件
-  const selectRow = (record: { st: number; fee: number }) => {
+  const selectRow = (record: { st: number; fee: number; id: number }) => {
     message.destroy();
     if (record.st === -200) {
       message.error('因合作方要求，该资源暂时下架');
     } else if (record.fee === 4) {
       message.error('版权方要求,当前专辑需单独付费,购买数字专辑即可无限畅享');
     } else {
+      const index = songList.findIndex((item: { id: number }) => item.id === record.id);
+      if (index === -1) {
+        songList.splice(currentIndex + 1, 0, record);
+      }
+      dispatch({ type: 'songList', data: songList });
       dispatch({ type: 'currentSong', data: record });
+      dispatch({ type: 'currentIndex', data: currentIndex + 1 });
     }
   };
   return (

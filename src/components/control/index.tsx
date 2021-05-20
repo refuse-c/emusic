@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 15:25:40
+ * @LastEditTime: 2021-05-21 00:48:59
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -11,37 +11,29 @@ import { Context } from '@utils/context';
 import { formatTime } from '@/common/utils/format';
 import { songUrl } from '@/common/net/api';
 import { message, Slider } from 'antd';
-import { initTime } from '@/common/utils/local';
-import { getLocal, setLocal } from '@/common/utils/tools';
+import { initSong, initTime } from '@/common/utils/local';
+import { cutSong, debounce, getLocal, setLocal } from '@/common/utils/tools';
 
 const Control: FC = () => {
   const refAudio = document.getElementById('refAudio') as any;
   const [url, setUrl] = useState('');
+  const [model, setModel] = useState(getLocal('model') || 1);
   const [volume, setVolume] = useState(getLocal('volume') || 5);
   const [songTime, setSongTime] = useState(initTime);
-  const { isPlay, currentSong, dispatch } = useContext(Context);
+  const { isPlay, songList, currentSong, currentIndex, dispatch } = useContext(Context);
   const { id } = currentSong;
   const { currentTime, duration } = songTime;
-  // 通过blob预加载 src为原视频的视频地址
-  const blob_load = (src: string) => {
+  // 通过blob预加载全部音频
+  const blobLoad = (src: string) => {
     const req = new XMLHttpRequest();
     req.open('GET', src, true);
     req.responseType = 'blob';
     req.onload = function () {
       if (this.status === 200) {
-        const videoBlob = this.response;
-        const blobSrc = URL.createObjectURL(videoBlob); // IE10+
-        setUrl(blobSrc);
-        // setSession('currentTime', currentTime);
-        // console.log(blobSrc);
-        // console.log(currentTime);
-        // console.log(getSession('currentTime'));
-        // setTimeout(() => {
-        //   console.log(11);
-        //   setUrl(blobSrc);
-        // }, 1000);
-        // refAudio.currentTime = getSession('currentTime');
-        // reSession('currentTime');
+        const blob = this.response;
+        const blobSrc = URL.createObjectURL(blob);
+        console.log(blobSrc);
+        // setUrl(blobSrc);
       }
     };
     req.onerror = function () {
@@ -49,6 +41,7 @@ const Control: FC = () => {
     };
     req.send();
   };
+
   // 获取url
   const getSongUrl = async (id: number | string) => {
     if (!id) return message.error('发生未知错误');
@@ -56,7 +49,7 @@ const Control: FC = () => {
     const res: any = await songUrl(params);
     const url = res.data[0].url || `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
     setUrl(url);
-    blob_load(url);
+    blobLoad(url);
     dispatch({ type: 'isPlay', data: true });
   };
 
@@ -64,6 +57,24 @@ const Control: FC = () => {
   const handlePaused = () => {
     dispatch({ type: 'isPlay', data: !isPlay });
     isPlay ? refAudio.pause() : refAudio.play();
+  };
+
+  // 切歌
+  const handlcutSong = (type: number) => {
+    if (model === 3) return false;
+    const index = cutSong(currentIndex, songList, model, type);
+    if (songList.length) {
+      dispatch({ type: 'currentSong', data: songList[index] });
+      dispatch({ type: 'currentIndex', data: index });
+    } else {
+      dispatch({ type: 'currentSong', data: initSong });
+    }
+  };
+
+  // 改变模式
+  const handleModel = () => {
+    const _model = model === 1 ? 2 : model === 2 ? 3 : 1;
+    setModel(_model);
   };
 
   // 改变进度
@@ -80,6 +91,12 @@ const Control: FC = () => {
 
   useEffect(() => {
     getSongUrl(id);
+    // 播放结束切歌
+    if (refAudio) {
+      refAudio.addEventListener('ended', () => {
+        debounce(() => handlcutSong(2), 1000);
+      });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -93,10 +110,9 @@ const Control: FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refAudio]);
-
   return (
     <div className={styles.control}>
-      <audio src={url} autoPlay loop preload="auto" id="refAudio" />
+      <audio src={url} loop={model === 3} autoPlay preload="auto" id="refAudio" />
       <div className={styles.left}>
         {currentSong.al.picUrl ? (
           <div className={styles.content}>
@@ -117,10 +133,13 @@ const Control: FC = () => {
       </div>
       <div className={styles.center}>
         <ul className={styles.btn_group}>
-          <li className="icon icon-order"></li>
-          <li className="icon icon-next" style={{ transform: 'rotate(180deg)' }}></li>
+          <li
+            className={`icon ${model === 1 ? 'icon-order' : model === 2 ? 'icon-random' : 'icon-cycle'}`}
+            onClick={() => handleModel()}
+          ></li>
+          <li className="icon icon-next" onClick={() => handlcutSong(1)} style={{ transform: 'rotate(180deg)' }}></li>
           <li className={`icon ${isPlay ? 'icon-pause' : 'icon-play'}`} onClick={() => handlePaused()}></li>
-          <li className="icon icon-next"></li>
+          <li className="icon icon-next" onClick={() => handlcutSong(2)}></li>
           <li>lyrc</li>
         </ul>
         <div className={styles.progress_box}>

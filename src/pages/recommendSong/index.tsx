@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 10:09:32
+ * @LastEditTime: 2021-05-20 21:05:53
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -37,7 +37,7 @@ const RecommendSong: FC = () => {
             <p>根据您的音乐口味生成，每天6:00更新</p>
           </div>
         </div>
-        <PlayAll />
+        <PlayAll list={dailySongs} />
       </Content>
       <MusicList list={dailySongs} />
     </div>
