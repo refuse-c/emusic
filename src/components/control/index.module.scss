@@ -71,7 +71,7 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    width: 420px;
+    width: 416px;
 
     .btn_group {
       display: flex;
@@ -109,17 +109,16 @@
 
       .time {
         color: #9f9f9f;
-        font-size: 10px;
+        font-size: 11px;
       }
 
       .progress {
         width: 100%;
-        margin: 0 10px;
+        margin: 0 6px;
 
         :global {
           .ant-slider {
             &:hover {
-
               .ant-slider-rail,
               .ant-slider-step,
               .ant-slider-track {
@@ -128,7 +127,7 @@
             }
 
             .ant-slider-rail {
-              background-color: #CDCDCD;
+              background-color: #cdcdcd;
             }
           }
         }
@@ -140,7 +139,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 242px;
+    width: 252px;
     padding-right: 20px;
 
     .quality {
@@ -183,14 +182,12 @@
       }
 
       .ant-slider-rail {
-        background-color: #E5E5E5;
+        background-color: #e5e5e5;
       }
 
       .ant-slider-track {
         background-color: $color;
       }
-
-
 
       .ant-slider-handle {
         width: 9px;

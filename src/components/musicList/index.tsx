@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-18 09:46:35
+ * @LastEditTime: 2021-05-20 15:29:11
  * @Description:音乐列表
  */
 import { FC, useContext } from 'react';
@@ -24,7 +24,7 @@ const columns = [
         <div className={styles.tools}>
           <span className={styles.serial}>{formatSerialNumber(index + 1)}</span>
           <span className="icon icon-like"></span>
-          <span style={{ marginLeft: 10 }} className="icon icon-like"></span>
+          <span style={{ marginLeft: 10 }} className="icon icon-cc-download"></span>
         </div>
       );
     },
@@ -43,9 +43,11 @@ const columns = [
         >
           {record.name}
         </p>
-        {record.fee === 1 ? <i className={'icon vip'}></i> : null}
-        {record.dl === 999000 ? <i className={'icon sq'}></i> : null}
-        {record.mv !== 0 ? <i onClick={() => console.log(record.mv)} className={'icon mv'}></i> : null}
+        {record.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
+        {record.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
+        {record.mv !== 0 ? (
+          <i onClick={() => console.log(record.mv)} className={['icon icon-mv', styles.mv].join(' ')}></i>
+        ) : null}
       </div>
     ),
   },

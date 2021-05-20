@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 23:22:28
+ * @LastEditTime: 2021-05-20 15:25:40
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -22,6 +22,33 @@ const Control: FC = () => {
   const { isPlay, currentSong, dispatch } = useContext(Context);
   const { id } = currentSong;
   const { currentTime, duration } = songTime;
+  // 通过blob预加载 src为原视频的视频地址
+  const blob_load = (src: string) => {
+    const req = new XMLHttpRequest();
+    req.open('GET', src, true);
+    req.responseType = 'blob';
+    req.onload = function () {
+      if (this.status === 200) {
+        const videoBlob = this.response;
+        const blobSrc = URL.createObjectURL(videoBlob); // IE10+
+        setUrl(blobSrc);
+        // setSession('currentTime', currentTime);
+        // console.log(blobSrc);
+        // console.log(currentTime);
+        // console.log(getSession('currentTime'));
+        // setTimeout(() => {
+        //   console.log(11);
+        //   setUrl(blobSrc);
+        // }, 1000);
+        // refAudio.currentTime = getSession('currentTime');
+        // reSession('currentTime');
+      }
+    };
+    req.onerror = function () {
+      // Error
+    };
+    req.send();
+  };
   // 获取url
   const getSongUrl = async (id: number | string) => {
     if (!id) return message.error('发生未知错误');
@@ -29,6 +56,7 @@ const Control: FC = () => {
     const res: any = await songUrl(params);
     const url = res.data[0].url || `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
     setUrl(url);
+    blob_load(url);
     dispatch({ type: 'isPlay', data: true });
   };
 
@@ -63,7 +91,6 @@ const Control: FC = () => {
         setSongTime({ currentTime, duration });
       });
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refAudio]);
 
