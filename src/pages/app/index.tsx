@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 21:08:34
+ * @LastEditTime: 2021-05-21 21:55:40
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -11,6 +11,7 @@ import Home from '@pages/home';
 import { login } from '@/common/net/login';
 import { playlist } from '@/common/net/playList';
 import { Context, reducer, initialState } from '@utils/context';
+import { likelist } from '@/common/net/api';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
 interface Item {
@@ -27,8 +28,6 @@ interface Item {
 const App: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // const { isPlay, songList, userInfo, playList, globalColor, showModal, currentSong } = state;
-
   // 登录
   const getLogin = async () => {
     const res: any = await login({ phone: '13272946536', password: 'wangyi123@@' });
@@ -37,6 +36,12 @@ const App: FC = () => {
     const nickname = userInfo.nickname || '';
     getPlaylist(userId, nickname);
     dispatch({ type: 'userInfo', data: userInfo });
+  };
+
+  // 获取我喜欢的音乐ids集合
+  const getLikeIds = async () => {
+    const res: any = await likelist();
+    dispatch({ type: 'likeList', data: res.ids || [] });
   };
 
   // 获取当前登录用户的歌单
@@ -60,12 +65,13 @@ const App: FC = () => {
 
   useEffect(() => {
     getLogin();
+    getLikeIds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className={styles.app} onClick={() => dispatch({ type: 'showModal', data: '' })}>
-      <Context.Provider value={{ ...state, dispatch }}>
+      <Context.Provider value={{ ...state, getLikeIds, dispatch }}>
         <Home />
       </Context.Provider>
     </div>

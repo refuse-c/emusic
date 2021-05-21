@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 17:59:05
+ * @LastEditTime: 2021-05-21 18:57:43
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -11,7 +11,6 @@ import { Context } from '@utils/context';
 import { formatTime } from '@/common/utils/format';
 import { songUrl } from '@/common/net/api';
 import { message, Slider } from 'antd';
-import PlayList from '@components/playList';
 import { initSong, initTime } from '@/common/utils/local';
 import { cutSong, debounce, getLocal, setLocal, _findIndex } from '@/common/utils/tools';
 
@@ -34,11 +33,11 @@ const Control: FC = () => {
   //       const blob = this.response;
   //       const blobSrc = URL.createObjectURL(blob);
   //       console.log(blobSrc);
-  //       // setUrl(blobSrc);
+  // setUrl(blobSrc);
   //     }
   //   };
   //   req.onerror = function () {
-  //     // Error
+  // Error
   //   };
   //   req.send();
   // };
@@ -109,7 +108,6 @@ const Control: FC = () => {
   }, [refAudio]);
   return (
     <div className={styles.control}>
-      {showModal === 'showPlayList' ? <PlayList /> : null}
       <audio src={url} loop={model === 3} autoPlay preload="auto" id="refAudio" />
       <div className={styles.left}>
         {currentSong.al.picUrl ? (
@@ -169,7 +167,7 @@ const Control: FC = () => {
         <li
           className={[styles.list, 'icon icon-playlist'].join(' ')}
           onClick={(e) => {
-            dispatch({ type: 'showModal', data: showModal ? '' : 'showPlayList' });
+            dispatch({ type: 'showModal', data: showModal === 'showPlayList' ? '' : 'showPlayList' });
             e.stopPropagation();
           }}
         ></li>

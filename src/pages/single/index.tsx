@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 15:38:03
+ * @LastEditTime: 2021-05-22 00:39:41
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -58,8 +58,10 @@ const Single: FC = (props: any) => {
       <Spin spinning={loading}>
         <div className={styles.single}>
           <Content isFull={true} padding={'0 30px'}>
-            <Head data={headData} list={musicList} />
-            <Navigation status={navStatus} list={navigationList} onChange={(index: number) => setNavStatus(index)} />
+            <div id="head">
+              <Head data={headData} list={musicList} />
+              <Navigation status={navStatus} list={navigationList} onChange={(index: number) => setNavStatus(index)} />
+            </div>
           </Content>
           {navStatus === 0 ? <MusicList list={musicList} /> : navStatus === 1 ? <Comments /> : <Collectors />}
         </div>

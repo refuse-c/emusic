@@ -5,12 +5,77 @@
   width: 425px;
   height: calc(100vh - 133px);
   overflow: hidden;
+  z-index: 10;
   background-color: #fff;
+
   .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px 0 0;
     width: calc(100% - 10px);
     margin-left: 10px;
     height: 100%;
-    box-shadow: 0px 0px 10px 0px rgba($color: #000000, $alpha: 0.1);
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+
+    .tools {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: calc(100% - 40px);
+      padding: 20px 0 15px;
+      border-bottom: 1px solid #F2F2F2;
+
+      .total {
+        color: #CFCFCF;
+        font-size: 12px;
+      }
+
+      .info {
+        display: flex;
+      }
+    }
+
+
+    .listbox {
+      width: 100%;
+      height: calc(100% - 80px);
+      overflow-y: scroll;
+
+      li {
+        line-height: 34px;
+        padding: 0 20px;
+
+        &:nth-child(even) {
+          background-color: #f9f9f9;
+        }
+
+        &:nth-child(odd) {
+          background-color: #ffffff;
+        }
+      }
+
+      &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: #fff;
+        border-radius: 8px;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: #e1e1e1;
+        border-radius: 8px;
+      }
+
+      /* Handle on hover */
+      &::-webkit-scrollbar-thumb:hover {
+        background: #cfcfd1;
+      }
+    }
   }
 }

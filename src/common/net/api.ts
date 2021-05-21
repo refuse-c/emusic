@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-16 23:45:51
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-18 23:17:59
+ * @LastEditTime: 2021-05-21 21:57:03
  * @Description:
  */
 import { get } from './request';
@@ -23,13 +23,23 @@ export const privatecontentList = (params?: any) => {
 export const newMusic = (params?: any) => {
   return get('/top/song', params);
 };
+
+/**
+ * @name: 喜欢的音乐
+ * @param {object} params
+ * @Description:
+ */
+export const addLike = (params: { id: number; like: boolean }) => {
+  return get('/like', params);
+};
+
 /**
  * @name: 喜欢的音乐列表id
  * @param {any} params
  * @Description:
  */
-export const likelist = (params?: any) => {
-  return get('/likelist', params);
+export const likelist = () => {
+  return get('/likelist');
 };
 
 /**

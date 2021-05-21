@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 16:22:30
+ * @LastEditTime: 2021-05-22 00:46:36
  * @Description:音乐列表
  */
 import { FC, useContext } from 'react';
@@ -12,78 +12,102 @@ import { Context } from '@utils/context';
 import { formatSerialNumber, formatTime } from '@/common/utils/format';
 import { _findIndex } from '@/common/utils/tools';
 import clone from 'clone';
+import { addLike } from '@/common/net/api';
 interface Props {
   list?: any | [];
 }
 
-const columns = [
-  {
-    title: '',
-    key: 'index',
-    width: 110,
-    render: (_record: any, _text: any, index: number) => {
-      return (
-        <div className={styles.tools}>
-          <span className={styles.serial}>{formatSerialNumber(index + 1)}</span>
-          <span className="icon icon-like"></span>
-          <span style={{ marginLeft: 10 }} className="icon icon-cc-download"></span>
-        </div>
-      );
-    },
-  },
-  {
-    title: '音乐标题',
-    key: 'name',
-    ellipsis: true,
-    sorter: (a: any, b: any) => a.name.localeCompare(b.name),
-    render: (record: any) => (
-      <div className={styles.name}>
-        <p
-        // dangerouslySetInnerHTML={{
-        //   __html: highlightText(this.props.keywords, item.name),
-        // }}
-        >
-          {record.name}
-        </p>
-        {record.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
-        {record.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
-        {record.mv !== 0 ? (
-          <i onClick={() => console.log(record.mv)} className={['icon icon-mv', styles.mv].join(' ')}></i>
-        ) : null}
-      </div>
-    ),
-  },
-  {
-    title: '歌手',
-    key: 'singer',
-    ellipsis: true,
-    sorter: (a: any, b: any) => a.ar[0].name.localeCompare(b.ar[0].name),
-    render: (record: any) =>
-      record.ar.map((item: any, index: number) => (
-        <span key={index} className={styles.singer}>
-          {item.name}
-        </span>
-      )),
-  },
-  {
-    title: '专辑',
-    key: 'album',
-    ellipsis: true,
-    sorter: (a: any, b: any) => a.name.localeCompare(b.name),
-    render: (record: any) => <span className={styles.album}>{record.al.name}</span>,
-  },
-  {
-    title: '时长',
-    key: 'dt',
-    width: 80,
-    sorter: (a: any, b: any) => a.dt - b.dt,
-    render: (record: any) => <span className={styles.time}>{formatTime(record.dt)}</span>,
-  },
-];
-
 const MusicList: FC<Props> = (props) => {
   const { list } = props;
-  const { songList, currentSong, dispatch } = useContext(Context);
+  const { songList, likeList, currentSong, dispatch, getLikeIds } = useContext(Context);
+  const setLike = async (id: number, like: boolean) => {
+    const res: any = await addLike({ id, like });
+    if (res.code === 200) {
+      getLikeIds();
+      message.success(like ? '已添加到我喜欢的音乐' : '取消喜欢成功');
+    }
+  };
+  const handle = () => {
+    const _index = _findIndex(list, currentSong.id);
+    const contentDom = document.getElementById('content') as any;
+    const headDomHeight = document.getElementById('head')?.clientHeight as any;
+    const tableDom = document.getElementsByClassName('ant-table-tbody')[0].childNodes as any;
+    if (contentDom && tableDom) {
+      contentDom.scrollTop = _index === -1 ? 0 : tableDom[_index].offsetTop + headDomHeight;
+    }
+  };
+  const columns = [
+    {
+      title: '',
+      key: 'index',
+      width: 110,
+      render: (record: any, _text: any, index: number) => {
+        return (
+          <div className={styles.tools}>
+            <span className={styles.serial}>{formatSerialNumber(index + 1)}</span>
+            {likeList.includes(record.id) ? (
+              <span
+                onClick={() => setLike(record.id, false)}
+                style={{ color: '#EC4141' }}
+                className="icon icon-like"
+              ></span>
+            ) : (
+              <span onClick={() => setLike(record.id, true)} className="icon icon-like"></span>
+            )}
+            <span style={{ marginLeft: 10 }} className="icon icon-cc-download"></span>
+          </div>
+        );
+      },
+    },
+    {
+      title: '音乐标题',
+      key: 'name',
+      ellipsis: true,
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
+      render: (record: any) => (
+        <div className={styles.name}>
+          <p
+          // dangerouslySetInnerHTML={{
+          //   __html: highlightText(this.props.keywords, item.name),
+          // }}
+          >
+            {record.name}
+          </p>
+          {record.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
+          {record.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
+          {record.mv !== 0 ? (
+            <i onClick={() => console.log(record.mv)} className={['icon icon-mv', styles.mv].join(' ')}></i>
+          ) : null}
+        </div>
+      ),
+    },
+    {
+      title: '歌手',
+      key: 'singer',
+      ellipsis: true,
+      sorter: (a: any, b: any) => a.ar[0].name.localeCompare(b.ar[0].name),
+      render: (record: any) =>
+        record.ar.map((item: any, index: number) => (
+          <span key={index} className={styles.singer}>
+            {item.name}
+          </span>
+        )),
+    },
+    {
+      title: '专辑',
+      key: 'album',
+      ellipsis: true,
+      sorter: (a: any, b: any) => a.name.localeCompare(b.name),
+      render: (record: any) => <span className={styles.album}>{record.al.name}</span>,
+    },
+    {
+      title: '时长',
+      key: 'dt',
+      width: 80,
+      sorter: (a: any, b: any) => a.dt - b.dt,
+      render: (record: any) => <span className={styles.time}>{formatTime(record.dt)}</span>,
+    },
+  ];
   // 控制样式
   const setClassName = (record: { st: number; id: number }, index: number) => {
     const cls1 = record.st === -200 ? styles.disabled : '';
@@ -115,6 +139,7 @@ const MusicList: FC<Props> = (props) => {
   };
   return (
     <div className={styles.musicList}>
+      <div id="point" className={styles.point} onClick={() => handle()}></div>
       <Table
         rowKey="id"
         size="small"

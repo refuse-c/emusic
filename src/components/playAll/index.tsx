@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 12:19:25
+ * @LastEditTime: 2021-05-21 18:40:38
  * @Description:播放全部
  */
 import { FC, useContext } from 'react';
@@ -40,6 +40,7 @@ const PlayAll: FC<Props> = (props) => {
       list.map((item: any) => {
         const _index = cloneList.findIndex((ele: { id: number }) => ele.id === item.id);
         if (_index === -1) array = array.concat(item);
+        return item.id;
       });
       cloneList.splice(index + 1, 0, ...array);
     } else {

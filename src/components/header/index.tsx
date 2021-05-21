@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 17:47:41
+ * @LastEditTime: 2021-05-21 18:58:21
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -62,7 +62,7 @@ const Header: FC = () => {
         <li
           className="icon icon-theme"
           onClick={(e) => {
-            dispatch({ type: 'showModal', data: showModal ? '' : 'showColor' });
+            dispatch({ type: 'showModal', data: showModal === 'showColor' ? '' : 'showColor' });
             e.stopPropagation();
           }}
         ></li>
