@@ -1,15 +1,41 @@
 @import '~@common/css/_variables.scss';
 
 .musicList {
+  &:hover {
+    .point {
+      opacity: 1;
+    }
+  }
+
   .point {
     position: fixed;
     right: 30px;
     bottom: 100px;
-    width: 40px;
-    height: 40px;
-    z-index: 20;
+    width: 20px;
+    height: 20px;
+    z-index: 8;
     cursor: pointer;
-    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    opacity: 0;
+    border: 1px solid $color;
+    background-color: transparent;
+    transition: all 0.25s ease;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      content: '';
+      width: 30px;
+      height: 1px;
+      transform: translate(-50%, -50%);
+      background-color: $color;
+    }
+
+    &::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+    }
   }
 
   padding-bottom: 30px;
@@ -159,6 +185,10 @@
           height: 34px;
           vertical-align: middle;
           padding: 0 7px !important;
+
+          .ant-table-column-sort {
+            background-color: transparent;
+          }
         }
       }
     }
