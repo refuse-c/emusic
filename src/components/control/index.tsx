@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 00:48:59
+ * @LastEditTime: 2021-05-21 12:18:09
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -12,7 +12,7 @@ import { formatTime } from '@/common/utils/format';
 import { songUrl } from '@/common/net/api';
 import { message, Slider } from 'antd';
 import { initSong, initTime } from '@/common/utils/local';
-import { cutSong, debounce, getLocal, setLocal } from '@/common/utils/tools';
+import { cutSong, debounce, getLocal, setLocal, _findIndex } from '@/common/utils/tools';
 
 const Control: FC = () => {
   const refAudio = document.getElementById('refAudio') as any;
@@ -20,27 +20,27 @@ const Control: FC = () => {
   const [model, setModel] = useState(getLocal('model') || 1);
   const [volume, setVolume] = useState(getLocal('volume') || 5);
   const [songTime, setSongTime] = useState(initTime);
-  const { isPlay, songList, currentSong, currentIndex, dispatch } = useContext(Context);
+  const { isPlay, songList, currentSong, dispatch } = useContext(Context);
   const { id } = currentSong;
   const { currentTime, duration } = songTime;
   // 通过blob预加载全部音频
-  const blobLoad = (src: string) => {
-    const req = new XMLHttpRequest();
-    req.open('GET', src, true);
-    req.responseType = 'blob';
-    req.onload = function () {
-      if (this.status === 200) {
-        const blob = this.response;
-        const blobSrc = URL.createObjectURL(blob);
-        console.log(blobSrc);
-        // setUrl(blobSrc);
-      }
-    };
-    req.onerror = function () {
-      // Error
-    };
-    req.send();
-  };
+  // const blobLoad = (src: string) => {
+  //   const req = new XMLHttpRequest();
+  //   req.open('GET', src, true);
+  //   req.responseType = 'blob';
+  //   req.onload = function () {
+  //     if (this.status === 200) {
+  //       const blob = this.response;
+  //       const blobSrc = URL.createObjectURL(blob);
+  //       console.log(blobSrc);
+  //       // setUrl(blobSrc);
+  //     }
+  //   };
+  //   req.onerror = function () {
+  //     // Error
+  //   };
+  //   req.send();
+  // };
 
   // 获取url
   const getSongUrl = async (id: number | string) => {
@@ -49,7 +49,7 @@ const Control: FC = () => {
     const res: any = await songUrl(params);
     const url = res.data[0].url || `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
     setUrl(url);
-    blobLoad(url);
+    // blobLoad(url);
     dispatch({ type: 'isPlay', data: true });
   };
 
@@ -62,13 +62,9 @@ const Control: FC = () => {
   // 切歌
   const handlcutSong = (type: number) => {
     if (model === 3) return false;
+    const currentIndex = _findIndex(songList, currentSong.id);
     const index = cutSong(currentIndex, songList, model, type);
-    if (songList.length) {
-      dispatch({ type: 'currentSong', data: songList[index] });
-      dispatch({ type: 'currentIndex', data: index });
-    } else {
-      dispatch({ type: 'currentSong', data: initSong });
-    }
+    dispatch({ type: 'currentSong', data: songList.length ? songList[index] : initSong });
   };
 
   // 改变模式

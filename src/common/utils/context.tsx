@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 22:14:58
+ * @LastEditTime: 2021-05-21 09:03:36
  * @Description:
  */
 /*
@@ -21,7 +21,6 @@ export const initialState = {
   playList: [], // 当前用户创建/收藏的歌单
   showModal: '', // 显示弹窗
   songList: [], // 当前播放的音乐列表
-  currentIndex: 0, //当前播放音乐的index
   currentSong: initSong, // 当前播放的音乐信息
   userInfo: initUserInfo, // 用户信息
   globalColor: getLocal('color') || '#EC4141', // 当前主题颜色
@@ -42,8 +41,6 @@ export const reducer = (state: any, action: any) => {
     case 'showModal':
       return Object.assign({}, state, { [type]: data });
     case 'currentSong':
-      return Object.assign({}, state, { [type]: data });
-    case 'currentIndex':
       return Object.assign({}, state, { [type]: data });
     default:
       throw new Error();

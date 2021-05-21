@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 23:53:12
+ * @LastEditTime: 2021-05-21 12:35:02
  * @Description:
  */
 
@@ -131,4 +131,8 @@ export const debounce = (cb: () => any, wait = 500) => {
     timeout = null;
     cb && cb();
   }, wait);
+};
+export const _findIndex = (list: [], ele: number | string) => {
+  const _index = list.findIndex((item: { id: number }) => item.id === ele);
+  return _index; // === -1 ? 0 : _index;
 };

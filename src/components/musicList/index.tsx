@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 01:37:13
+ * @LastEditTime: 2021-05-21 12:38:02
  * @Description:音乐列表
  */
 import { FC, useContext } from 'react';
@@ -10,6 +10,8 @@ import { message, Table } from 'antd';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatSerialNumber, formatTime } from '@/common/utils/format';
+import { _findIndex } from '@/common/utils/tools';
+import clone from 'clone';
 interface Props {
   list?: any | [];
 }
@@ -81,7 +83,7 @@ const columns = [
 
 const MusicList: FC<Props> = (props) => {
   const { list } = props;
-  const { songList, currentSong, currentIndex, dispatch } = useContext(Context);
+  const { songList, currentSong, dispatch } = useContext(Context);
   // 控制样式
   const setClassName = (record: { st: number; id: number }, index: number) => {
     const cls1 = record.st === -200 ? styles.disabled : '';
@@ -97,13 +99,18 @@ const MusicList: FC<Props> = (props) => {
     } else if (record.fee === 4) {
       message.error('版权方要求,当前专辑需单独付费,购买数字专辑即可无限畅享');
     } else {
-      const index = songList.findIndex((item: { id: number }) => item.id === record.id);
-      if (index === -1) {
-        songList.splice(currentIndex + 1, 0, record);
+      let cloneList = clone(songList);
+      if (songList.length) {
+        let index = _findIndex(songList, record.id);
+        if (index === -1) {
+          const currentIndex = _findIndex(songList, currentSong.id);
+          cloneList.splice(currentIndex + 1, 0, record);
+        }
+      } else {
+        cloneList = cloneList.concat(record);
       }
-      dispatch({ type: 'songList', data: songList });
+      dispatch({ type: 'songList', data: cloneList });
       dispatch({ type: 'currentSong', data: record });
-      dispatch({ type: 'currentIndex', data: currentIndex + 1 });
     }
   };
   return (
