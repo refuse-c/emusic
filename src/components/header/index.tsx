@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 09:21:16
+ * @LastEditTime: 2021-05-21 17:47:41
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -29,7 +29,7 @@ const Header: FC = () => {
   return (
     <div className={styles.header}>
       <div className={styles.colorContent} onClick={(e) => e.stopPropagation()}>
-        {showModal ? (
+        {showModal === 'showColor' ? (
           <BlockPicker
             colors={defaultColor}
             color={globalColor}

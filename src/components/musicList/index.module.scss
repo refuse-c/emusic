@@ -1,6 +1,7 @@
 @import '~@common/css/_variables.scss';
 
 .musicList {
+  padding-bottom: 30px;
   .table {
     margin-top: 6px;
   }
@@ -127,7 +128,7 @@
       border: none;
     }
 
-    .ant-table-thead>tr>th {
+    .ant-table-thead > tr > th {
       color: #888888;
       background-color: #fff;
       height: 34px;
@@ -151,18 +152,16 @@
     }
 
     .ant-table-tbody {
-
-      >tr:hover:not(.ant-table-expanded-row)>td,
+      > tr:hover:not(.ant-table-expanded-row) > td,
       .ant-table-row-hover,
-      .ant-table-row-hover>td {
+      .ant-table-row-hover > td {
         background-color: #f0f1f2;
       }
     }
 
     .ant-table-fixed {
-
       .ant-table-row-hover,
-      .ant-table-row-hover>td {
+      .ant-table-row-hover > td {
         background-color: transparent;
       }
     }

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 09:03:36
+ * @LastEditTime: 2021-05-21 18:00:03
  * @Description:
  */
 /*
@@ -12,6 +12,7 @@ showModal:
   showVideTag; // 显示视频tag
   showMvTag; // 显示MV tag
   showLogin；// 显示登录
+  showPlayList；// 显示播放列表
 */
 import React from 'react';
 import { getLocal } from '@/common/utils/tools';

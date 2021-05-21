@@ -9,7 +9,7 @@ import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
 import Title from '@pages/find/component/title';
 import Banner from '@components/banner';
-import PlayList from '@/components/playList';
+import PlayList from '@/components/songList';
 import ExclusiveList from '@/components/exclusiveList';
 import Songs from '@/components/song';
 import MvList from '@/components/mvList';

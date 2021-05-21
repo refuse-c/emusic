@@ -10,7 +10,7 @@ import styles from '../index.module.scss';
 import { playlistHot, playlistTop, playlistCatlist, highqualityTop } from '@/common/net/playList';
 import { Pagination } from 'antd';
 import Tags from '@components/tags';
-import PlayList from '@/components/playList';
+import PlayList from '@/components/songList';
 import { formatImgSize } from '@/common/utils/format';
 
 const Recommend: FC = () => {

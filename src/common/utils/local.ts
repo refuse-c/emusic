@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 15:43:42
+ * @LastEditTime: 2021-05-21 16:54:17
  * @Description:
  */
 
@@ -109,6 +109,12 @@ export const findNav = [
   { name: '歌手', path: '/find/singer' },
   { name: '最新音乐', path: '/find/newmusic' },
 ];
+
+/**
+ * @name:播放列表导航
+ * @param {*}
+ */
+export const playListNav = [{ title: '播放列表' }, { title: '历史记录' }];
 
 /**
  * @name: 视频顶部导航

@@ -1,56 +1,28 @@
 /*
  * @Author: REFUSE_C
- * @Date: 2021-04-12 11:16:04
+ * @Date: 2021-05-21 16:27:12
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 16:36:06
- * @Description:歌单组件
+ * @LastEditTime: 2021-05-21 17:59:13
+ * @Description:播放列表
  */
-import { FC } from 'react';
-import styles from './index.module.scss';
-import Playcount from '@components/playcount';
-import { formatImgSize } from '@/common/utils/format';
-import { useHistory } from 'react-router-dom';
-interface Props {
-  list: any;
-}
-interface Item {
-  id: number;
-  day?: number;
-  name: string;
-  picUrl: string;
-  coverImgUrl: string;
-  playcount: number;
-  playCount: number;
-  identifying?: boolean;
-}
 
-const PlayList: FC<Props> = (props) => {
-  const history = useHistory();
-  const { list } = props;
+import { FC, useState, useContext } from 'react';
+import styles from './index.module.scss';
+import { Context } from '@utils/context';
+import { playListNav } from '@/common/utils/local';
+import EllipticalNav from '@components/ellipticalNav';
+
+const Empty: FC = () => {
+  const { songList } = useContext(Context);
+  const [state, setstate] = useState(0);
   return (
-    <ul className={styles.playlist}>
-      {list.map((item: Item, index: number) => {
-        const { day, name, picUrl, coverImgUrl, playcount, playCount, identifying } = item;
-        const pathName = identifying ? '/recommendSong' : `/single${item.id}`;
-        return (
-          <li key={index}>
-            <div
-              onClick={() => history.push(pathName)}
-              className={styles.imgBox}
-              style={{ backgroundImage: `url(${formatImgSize(picUrl || coverImgUrl, 210, 210)})` }}
-            >
-              {identifying ? (
-                <div className={styles.dateBox}>{day}</div>
-              ) : (
-                <Playcount top={'1'} num={playcount || playCount} />
-              )}
-            </div>
-            <p>{name}</p>
-          </li>
-        );
-      })}
-    </ul>
+    <div className={styles.playlist} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.content}>
+        <EllipticalNav list={playListNav} status={state} onChange={(state: number) => setstate(state)} />
+        {console.log(songList)}
+      </div>
+    </div>
   );
 };
 
-export default PlayList;
+export default Empty;
