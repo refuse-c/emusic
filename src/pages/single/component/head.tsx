@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 21:25:34
+ * @LastEditTime: 2021-05-22 16:25:19
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -11,7 +11,7 @@ import moment from 'moment';
 import { Context } from '@utils/context';
 import ReactMarkdown from 'react-markdown';
 import PlayAll from '@components/playAll';
-import { formatImgSize } from '@/common/utils/format';
+import { formatImgSize, formatNumber } from '@/common/utils/format';
 
 interface Props {
   data: object;
@@ -53,8 +53,10 @@ const Head: FC<Props> = (props: any) => {
         <div className={styles.btnGroup}>
           <PlayAll list={list} />
           <div className={styles.tool}>
-            <p className={isUser ? styles.disabled : ''}>收藏{subscribedCount ? `(${subscribedCount})` : ''}</p>
-            <p>分享{shareCount ? `(${shareCount})` : ''}</p>
+            <p className={isUser ? styles.disabled : ''}>
+              收藏{subscribedCount ? `(${formatNumber(subscribedCount)})` : ''}
+            </p>
+            <p>分享{shareCount ? `(${formatNumber(shareCount)})` : ''}</p>
             <p>下载全部</p>
           </div>
         </div>

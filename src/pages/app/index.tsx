@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 21:55:40
+ * @LastEditTime: 2021-05-23 14:43:58
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -11,7 +11,8 @@ import Home from '@pages/home';
 import { login } from '@/common/net/login';
 import { playlist } from '@/common/net/playList';
 import { Context, reducer, initialState } from '@utils/context';
-import { likelist } from '@/common/net/api';
+import { likelist, addLike } from '@/common/net/api';
+import { message } from 'antd';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
 interface Item {
@@ -44,6 +45,15 @@ const App: FC = () => {
     dispatch({ type: 'likeList', data: res.ids || [] });
   };
 
+  // 添加/取消我喜欢的音乐
+  const setLike = async (id: number, like: boolean) => {
+    const res: any = await addLike({ id, like });
+    if (res.code === 200) {
+      getLikeIds();
+      message.success(like ? '已添加到我喜欢的音乐' : '取消喜欢成功');
+    }
+  };
+
   // 获取当前登录用户的歌单
   const getPlaylist = async (uid: number, nickname: string) => {
     const res: any = await playlist({ uid });
@@ -66,12 +76,20 @@ const App: FC = () => {
   useEffect(() => {
     getLogin();
     getLikeIds();
+    window.ononline = () => {
+      message.info('网络已经连上');
+      dispatch({ type: 'isOnLine', data: navigator.onLine });
+    };
+    window.onoffline = () => {
+      message.warning('网络已经断开');
+      dispatch({ type: 'isOnLine', data: navigator.onLine });
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className={styles.app} onClick={() => dispatch({ type: 'showModal', data: '' })}>
-      <Context.Provider value={{ ...state, getLikeIds, dispatch }}>
+      <Context.Provider value={{ ...state, setLike, dispatch }}>
         <Home />
       </Context.Provider>
     </div>

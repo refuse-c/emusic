@@ -2,39 +2,32 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-22 00:46:36
+ * @LastEditTime: 2021-05-23 13:48:34
  * @Description:音乐列表
  */
-import { FC, useContext } from 'react';
+import { FC, useState, useContext } from 'react';
 import { message, Table } from 'antd';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatSerialNumber, formatTime } from '@/common/utils/format';
 import { _findIndex } from '@/common/utils/tools';
+import ToggleLike from '@components/model/toggleLike';
 import clone from 'clone';
-import { addLike } from '@/common/net/api';
 interface Props {
   list?: any | [];
 }
 
 const MusicList: FC<Props> = (props) => {
   const { list } = props;
-  const { songList, likeList, currentSong, dispatch, getLikeIds } = useContext(Context);
-  const setLike = async (id: number, like: boolean) => {
-    const res: any = await addLike({ id, like });
-    if (res.code === 200) {
-      getLikeIds();
-      message.success(like ? '已添加到我喜欢的音乐' : '取消喜欢成功');
-    }
-  };
+  const [id, setId] = useState(0);
+  const { songList, likeList, currentSong, setLike, dispatch } = useContext(Context);
+
   const handle = () => {
     const _index = _findIndex(list, currentSong.id);
     const contentDom = document.getElementById('content') as any;
     const headDomHeight = document.getElementById('head')?.clientHeight as any;
     const tableDom = document.getElementsByClassName('ant-table-tbody')[0].childNodes as any;
-    if (contentDom && tableDom) {
-      contentDom.scrollTop = _index === -1 ? 0 : tableDom[_index].offsetTop + headDomHeight;
-    }
+    if (contentDom && tableDom) contentDom.scrollTop = _index === -1 ? 0 : tableDom[_index].offsetTop + headDomHeight;
   };
   const columns = [
     {
@@ -46,11 +39,7 @@ const MusicList: FC<Props> = (props) => {
           <div className={styles.tools}>
             <span className={styles.serial}>{formatSerialNumber(index + 1)}</span>
             {likeList.includes(record.id) ? (
-              <span
-                onClick={() => setLike(record.id, false)}
-                style={{ color: '#EC4141' }}
-                className="icon icon-like"
-              ></span>
+              <span onClick={() => setId(record.id)} style={{ color: '#EC4141' }} className="icon icon-like"></span>
             ) : (
               <span onClick={() => setLike(record.id, true)} className="icon icon-like"></span>
             )}
@@ -139,6 +128,7 @@ const MusicList: FC<Props> = (props) => {
   };
   return (
     <div className={styles.musicList}>
+      <ToggleLike id={id} hasShow={!!id} onClose={() => setId(0)} />
       <div id="point" className={styles.point} onClick={() => handle()}></div>
       <Table
         rowKey="id"

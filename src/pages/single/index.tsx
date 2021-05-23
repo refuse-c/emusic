@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-22 00:39:41
+ * @LastEditTime: 2021-05-23 14:45:41
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -28,14 +28,14 @@ const Single: FC = (props: any) => {
 
   const getPlayListDetail = async (id: string) => {
     setLoading(true);
-    const res: any = await playlistDetail({ id });
-    if (res.code === 200) {
+    try {
+      const res: any = await playlistDetail({ id });
       const headData = res.playlist || {};
       const idsArr = assemblyIds(res.playlist.trackIds);
       await getSongDetail(idsArr);
       setHeadData(headData);
       setLoading(false);
-    } else {
+    } catch (e) {
       setLoading(false);
     }
   };

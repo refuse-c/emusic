@@ -2,27 +2,27 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-10 16:01:12
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-10 16:09:27
+ * @LastEditTime: 2021-05-23 13:54:42
  * @Description:
  */
 import { FC } from 'react';
 import { Modal } from 'antd';
-import styles from './index.module.scss';
+import styles from './css/index.module.scss';
 
 interface Props {
   title?: string;
   width?: number;
   height?: number;
   hasShow?: boolean;
-  headView?: any;
   onClose?: any;
   contentView?: any;
 }
 
-const Title: FC<Props> = (props) => {
-  const { title, width, height, hasShow, headView, onClose, contentView } = props;
+const BoxModel: FC<Props> = (props) => {
+  const { title, width, height, hasShow, onClose, children } = props;
   return (
     <Modal
+      mask={false}
       width={width}
       title={title}
       visible={hasShow}
@@ -32,10 +32,9 @@ const Title: FC<Props> = (props) => {
       wrapClassName={`webModel`}
     >
       <div className={styles.contentbox} style={{ width: '100%', height: height || 'auto' }}>
-        {headView}
-        {contentView}
+        {children}
       </div>
     </Modal>
   );
 };
-export default Title;
+export default BoxModel;

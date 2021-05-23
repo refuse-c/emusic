@@ -7,7 +7,6 @@
     padding: 0 20px;
     font-size: 14px;
     line-height: 30px;
-    white-space: nowrap;
     border-radius: 30px;
     border: 1px solid #d8d8d8;
   }
@@ -15,7 +14,7 @@
   .play {
     display: inline-flex;
     overflow: hidden;
-
+    white-space: nowrap;
     border-radius: 30px;
     background-color: $color;
 
