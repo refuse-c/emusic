@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-23 14:24:28
+ * @LastEditTime: 2021-05-24 22:06:57
  * @Description:
  */
 /*
@@ -19,6 +19,7 @@ import { getLocal } from '@/common/utils/tools';
 import { initSong, initUserInfo } from '@utils/local';
 export const initialState = {
   isPlay: false, // 是否播放
+  searchText: '', // 检索的文字
   isOnLine: true, // 当前的网络状态 true/已连接  false/已断开
   likeList: [], // 我喜欢的音乐id集合
   songList: [], // 当前播放的音乐列表

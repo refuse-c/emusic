@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 11:06:57
+ * @LastEditTime: 2021-05-24 23:25:56
  * @Description:
  */
 /**
@@ -104,9 +104,20 @@ export const findNav = [
   { name: '个性推荐', path: '/find' },
   { name: '歌单', path: '/find/playlist' },
   { name: '主播电台', path: '/find/radio' },
-  { name: '排行榜', path: '/find/list' },
+  { name: '排行榜', path: '/find/toplist' },
   { name: '歌手', path: '/find/singer' },
   { name: '最新音乐', path: '/find/newmusic' },
+];
+
+export const searchNav = [
+  { name: '单曲', path: '/search', type: 1 },
+  { name: '歌手', path: '/search/singer', type: 100 },
+  { name: '专辑', path: '/search/album', type: 10 },
+  { name: '视频', path: '/search/video', type: 1014 },
+  { name: '歌单', path: '/search/playlist', type: 1000 },
+  { name: '歌词', path: '/search/lyric', type: 1006 },
+  { name: '主播电台', path: '/search/radio', type: 1009 },
+  { name: '用户', path: '/search/user', type: 1002 },
 ];
 
 /**

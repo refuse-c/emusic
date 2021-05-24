@@ -3,7 +3,7 @@
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
  * @LastEditTime: 2021-05-11 20:30:33
- * @Description:歌单
+ * @Description:发现音乐-歌单
  */
 import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';

@@ -2,8 +2,8 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-05 13:55:52
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-05 13:57:41
- * @Description:精品歌单
+ * @LastEditTime: 2021-05-24 22:27:26
+ * @Description:发现音乐-精品歌单
  */
 import { FC } from 'react';
 import Title from '@pages/find/component/title';

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:24:31
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-23 14:44:42
+ * @LastEditTime: 2021-05-24 23:09:20
  * @Description:
  */
 
@@ -54,12 +54,8 @@ export const get = (url: string, params: any | {} = {}) => {
   return new Promise((resolve, reject) => {
     instance
       .get(url, { params })
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((err) => {
-        reject(err);
-      });
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
   });
 };
 /**
@@ -72,11 +68,7 @@ export const post = (url: string, params: any | {} = {}) => {
   return new Promise((resolve, reject) => {
     instance
       .post(url, { params })
-      .then((res) => {
-        resolve(res);
-      })
-      .catch((err) => {
-        reject(err);
-      });
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
   });
 };

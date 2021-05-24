@@ -2,14 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 16:22:47
+ * @LastEditTime: 2021-05-24 21:29:16
  * @Description:歌单组件
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 import Playcount from '@components/playcount';
 import { formatImgSize } from '@/common/utils/format';
-import { useHistory } from 'react-router-dom';
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 interface Props {
   list: any;
 }
@@ -25,7 +26,6 @@ interface Item {
 }
 
 const SongList: FC<Props> = (props) => {
-  const history = useHistory();
   const { list } = props;
   return (
     <ul className={styles.songList}>
