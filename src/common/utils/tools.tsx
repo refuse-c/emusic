@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 12:35:02
+ * @LastEditTime: 2021-05-24 10:31:05
  * @Description:
  */
 
@@ -135,4 +135,26 @@ export const debounce = (cb: () => any, wait = 500) => {
 export const _findIndex = (list: [], ele: number | string) => {
   const _index = list.findIndex((item: { id: number }) => item.id === ele);
   return _index; // === -1 ? 0 : _index;
+};
+
+/**
+ * @name: 去空格
+ * @param {*} str
+ * @param {*} type
+ * a 去全部空格
+ * t 去首尾空格
+ * l 去左边空格
+ * r 去右边空格
+ */
+export const trim = (str: string, type: string = 'a') => {
+  switch (type) {
+    case 't':
+      return str.replace(/^\s+|\s+$/g, '');
+    case 'l':
+      return str.replace(/^\s*/, '');
+    case 'r':
+      return str.replace(/(\s*$)/g, '');
+    default:
+      return str.replace(/\s+/g, '');
+  }
 };

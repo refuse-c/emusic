@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 20:16:26
+ * @LastEditTime: 2021-05-24 11:06:57
  * @Description:
  */
 /**
@@ -165,6 +165,15 @@ export const navigationList = [
     title: '收藏者',
   },
 ];
+/**
+ * @name: 默认搜索关键词
+ * @param {*}
+ */
+export const defaultVal = {
+  realkeyword: '',
+  searchType: 1,
+  showKeyword: '',
+};
 
 /**
  * @name:默认颜色

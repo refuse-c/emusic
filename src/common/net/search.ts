@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-28 21:28:23
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-28 21:35:15
+ * @LastEditTime: 2021-05-24 12:17:21
  * @Description: 搜索接口
  */
 import { get } from './request';
@@ -14,7 +14,7 @@ import { get } from './request';
  * @param {*} type: 搜索类型；默认为 1 即单曲 , 取值意义 : 1: 单曲, 10: 专辑, 100: 歌手, 1000: 歌单, 1002: 用户, 1004: MV, 1006: 歌词, 1009: 电台, 1014: 视频, 1018:综合
  * @Description: 传入搜索关键词可以搜索该音乐 / 专辑 / 歌手 / 歌单 / 用户 , 关键词可以多个 , 以空格隔开 , 如 " 周杰伦 搁浅 "( 不需要登录 ), 搜索获取的 mp3url 不能直接用 , 可通过 /song/url 接口传入歌曲 id 获取具体的播放链接 /search 或者 /cloudsearch(更全)
  */
-export const search = (params: { keywords: string; limit: number; type: number | string }) => {
+export const search = (params: { keywords: string; limit?: number; type: number | string }) => {
   return get('/search', params);
 };
 

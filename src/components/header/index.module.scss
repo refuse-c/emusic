@@ -50,40 +50,6 @@
       }
     }
 
-    .search {
-      display: flex;
-      align-items: center;
-      width: 160px;
-      height: 32px;
-      margin-left: 12px;
-      -webkit-app-region: no-drag;
-
-      :global {
-        .ant-input {
-          height: 32px;
-
-          outline: none;
-          border: none;
-          font-size: 12px;
-          color: #fff;
-          border-radius: 32px;
-          background-color: rgba(0, 0, 0, 0.05);
-
-          &:focus {
-            border-color: none;
-            border-right-width: 1px !important;
-            outline: 0;
-            box-shadow: none !important;
-          }
-
-          &::placeholder {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.2)
-          }
-        }
-      }
-    }
-
     .general_song {
       margin-left: 14px;
       color: #fff;
@@ -99,8 +65,6 @@
   .tool {
     display: flex;
     align-items: center;
-
-
 
     li {
       color: #fff;

@@ -2,23 +2,22 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 18:58:21
+ * @LastEditTime: 2021-05-24 12:13:30
  * @Description:
  */
 import { FC, useContext } from 'react';
 import styles from './index.module.scss';
-import { Input } from 'antd';
 import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
+import { setLocal } from '@/common/utils/tools';
 import { Context } from '@utils/context';
 import { defaultColor } from '@/common/utils/local';
-import { setLocal } from '@/common/utils/tools';
+import SearchInput from '@components/searchInput';
 const history = createHashHistory();
 const DOM = document.getElementsByTagName('body')[0];
 const Header: FC = () => {
   const { userInfo, globalColor, showModal, dispatch } = useContext(Context);
   DOM.style.setProperty('--color', globalColor, '');
-
   //  修改颜色
   const changeColor = (val: string) => {
     setLocal('color', val);
@@ -42,13 +41,12 @@ const Header: FC = () => {
           <p className="icon icon-back" onClick={() => history.go(-1)}></p>
           <p className="icon icon-back" onClick={() => history.go(+1)}></p>
         </div>
-        <div className={styles.search}>
-          <Input placeholder="搜索" />
-        </div>
+
         <div className={styles.general_song}>
           <p className="icon icon-general-song"></p>
         </div>
       </div>
+      <SearchInput />
       <ul className={styles.tool}>
         <li className={styles.author}>
           <img src={userInfo.avatarUrl} alt="" />
@@ -58,7 +56,6 @@ const Header: FC = () => {
             <p className="icon icon-arrow-bottom"></p>
           </div>
         </li>
-
         <li
           className="icon icon-theme"
           onClick={(e) => {
