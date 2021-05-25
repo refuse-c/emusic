@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 23:38:08
+ * @LastEditTime: 2021-05-25 11:43:08
  * @Description:搜索-单曲
  */
 import { FC, useEffect, useState, useContext } from 'react';
@@ -13,15 +13,17 @@ import { assemblyIds, mergeData } from '@/common/utils/tools';
 import { songDetail } from '@/common/net/api';
 import MusicList from '@/components/musicList';
 const Single: FC = () => {
-  // const [limit, setLimit] = useState(1);
   const [list, setList] = useState<any>([]);
+  const [loading, setloading] = useState(false);
   const { searchText: keywords } = useContext(Context);
 
   // 检索
   const getSearch = async (keywords: string) => {
+    setList([]);
+    setloading(true);
     const res: any = await search({ keywords, limit: 100, type: 1 });
-    console.log(res);
-    const idsArr = assemblyIds(res.result.songs);
+    const songs = (res && res.result && res.result.songs) || [];
+    const idsArr = songs.length && assemblyIds(songs);
     await getSongDetail(idsArr);
   };
 
@@ -30,6 +32,7 @@ const Single: FC = () => {
     const { songs, privileges } = res;
     const list = mergeData(songs, privileges) || []; // 合并数据
     setList(list);
+    setloading(false);
   };
 
   useEffect(() => {
@@ -39,7 +42,7 @@ const Single: FC = () => {
 
   return (
     <div className={styles.single}>
-      <MusicList list={list} />
+      <MusicList list={list} loading={loading} />
     </div>
   );
 };

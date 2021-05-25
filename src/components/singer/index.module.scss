@@ -1,0 +1,36 @@
+.singer {
+  &.row {
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+      padding: 0 30px;
+      &:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      &:nth-child(odd) {
+        background-color: #ffffff;
+      }
+      &:hover {
+        background-color: #f0f1f2;
+      }
+      .content {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        img {
+          width: 60px;
+          height: 60px;
+        }
+        p {
+          padding-left: 10px;
+        }
+      }
+    }
+  }
+  &.col {
+    background-color: red;
+  }
+}

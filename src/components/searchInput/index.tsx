@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 23:30:09
+ * @LastEditTime: 2021-05-25 11:42:15
  * @Description:搜索框组件
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -27,15 +27,13 @@ const SearchInput: FC = () => {
 
   // 回车检索事件
   const onPressEnter = async () => {
+    let pathname = -1;
     const _val = keywords ? keywords : dfKeyWord.realkeyword;
     setKeywords(_val);
-    history.push('/search');
-    debounce(() => getSearch(_val), 500);
-  };
-
-  // 搜索
-  const getSearch = async (keywords: string) => {
-    dispatch({ type: 'searchText', data: keywords });
+    dispatch({ type: 'searchText', data: _val });
+    pathname = window.location.href.indexOf('/search');
+    if (pathname === -1) history.push('/search');
+    debounce(() => getDefaultVal(), 10000);
   };
 
   //搜索建议

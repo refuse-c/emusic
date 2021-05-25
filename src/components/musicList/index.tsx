@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-23 13:48:34
+ * @LastEditTime: 2021-05-25 11:04:00
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
@@ -15,10 +15,11 @@ import ToggleLike from '@components/model/toggleLike';
 import clone from 'clone';
 interface Props {
   list?: any | [];
+  loading?: boolean;
 }
 
 const MusicList: FC<Props> = (props) => {
-  const { list } = props;
+  const { list, loading = false } = props;
   const [id, setId] = useState(0);
   const { songList, likeList, currentSong, setLike, dispatch } = useContext(Context);
 
@@ -137,6 +138,7 @@ const MusicList: FC<Props> = (props) => {
         dataSource={list}
         columns={columns}
         pagination={false}
+        loading={loading}
         className={styles.table}
         locale={{
           cancelSort: '', // 取消排序
