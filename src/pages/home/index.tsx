@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:22:22
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 18:55:52
+ * @LastEditTime: 2021-05-26 09:06:25
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -29,7 +29,7 @@ const Home: FC = () => {
                 render={(props) => <item.component {...props} router={item.router} />}
               />
             ))}
-            <Redirect exact from="/" to="/single5312444463" />
+            <Redirect exact from="/" to="/find" />
           </Router>
         </div>
       </View>

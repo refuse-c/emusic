@@ -27,7 +27,7 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "starts": "concurrently \"set BROWSER=none &&  react-app-rewired start\" \"electron .\" ",
-    "packager": "electron-packager . emusic --out out_dir --arch=x64 --overwrite --ignore=node_modules"
+    "packager": "electron-packager ./build emusic –out out_dir --arch=x64 --overwrite --ignore=node_modules"
   },
   "eslintConfig": {
     "extends": [

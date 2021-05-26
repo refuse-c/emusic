@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 00:08:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-12 10:22:15
+ * @LastEditTime: 2021-05-26 12:11:26
  * @Description:
  */
 const { app, BrowserWindow, globalShortcut } = require('electron');
