@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 23:25:56
+ * @LastEditTime: 2021-05-26 20:31:10
  * @Description:
  */
 /**
@@ -110,14 +110,14 @@ export const findNav = [
 ];
 
 export const searchNav = [
-  { name: '单曲', path: '/search', type: 1 },
-  { name: '歌手', path: '/search/singer', type: 100 },
-  { name: '专辑', path: '/search/album', type: 10 },
-  { name: '视频', path: '/search/video', type: 1014 },
-  { name: '歌单', path: '/search/playlist', type: 1000 },
-  { name: '歌词', path: '/search/lyric', type: 1006 },
-  { name: '主播电台', path: '/search/radio', type: 1009 },
-  { name: '用户', path: '/search/user', type: 1002 },
+  { name: '单曲', path: '/search', type: 1, unit: '首' },
+  { name: '歌手', path: '/search/singer', type: 100, unit: '位' },
+  { name: '专辑', path: '/search/album', type: 10, unit: '张' },
+  { name: '视频', path: '/search/video', type: 1014, unit: '个' },
+  { name: '歌单', path: '/search/playlist', type: 1000, unit: '个' },
+  { name: '歌词', path: '/search/lyric', type: 1006, unit: '首' },
+  { name: '主播电台', path: '/search/radio', type: 1009, unit: '个' },
+  { name: '用户', path: '/search/user', type: 1002, unit: '位' },
 ];
 
 /**
@@ -156,6 +156,13 @@ export const initSong = { id: 0, name: '', ar: [], dt: 0, al: { picUrl: '' } };
  * @Description:
  */
 export const initTime = { currentTime: 0, duration: 0 };
+
+/**
+ * @name: 检索信息
+ * @param {*}
+ * @Description:
+ */
+export const initSearchInfo = { total: 0, type: 1 };
 
 /**
  * @name: 歌曲列表二级导航列表

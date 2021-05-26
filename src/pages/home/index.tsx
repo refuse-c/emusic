@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:22:22
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 09:06:25
+ * @LastEditTime: 2021-05-26 20:01:17
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -20,18 +20,16 @@ const Home: FC = () => {
       {showModal === 'showPlayList' ? <PlayList /> : null}
       <View>
         <Menu />
-        <div className={styles.content}>
-          <Router>
-            {router.map((item: any, index: number) => (
-              <Route
-                key={index}
-                path={item.path}
-                render={(props) => <item.component {...props} router={item.router} />}
-              />
-            ))}
-            <Redirect exact from="/" to="/find" />
-          </Router>
-        </div>
+        <Router>
+          {router.map((item: any, index: number) => (
+            <Route
+              key={index}
+              path={item.path}
+              render={(props) => <item.component {...props} router={item.router} />}
+            />
+          ))}
+          <Redirect exact from="/" to="/find" />
+        </Router>
       </View>
     </div>
   );

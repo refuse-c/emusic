@@ -1,0 +1,17 @@
+.search {
+  .total {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  .box {
+    min-height: calc(100vh - 250px);
+
+    .empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100vh - 250px);
+    }
+  }
+}

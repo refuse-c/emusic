@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-25 12:46:49
+ * @LastEditTime: 2021-05-26 22:42:16
  * @Description:搜索-歌手
  */
 
@@ -11,19 +11,22 @@ import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
 import SingerComponent from '@components/singer';
-import Content from '@components/view/content';
+import { Spin } from 'antd';
 const Singer: FC = () => {
   const [list, setList] = useState<any>([]);
   const [loading, setloading] = useState(false);
-  const { searchText: keywords } = useContext(Context);
+  const { searchText: keywords, dispatch } = useContext(Context);
 
   // 检索
   const getSearch = async (keywords: string) => {
     setList([]);
     setloading(true);
-    const res: any = await search({ keywords, limit: 100, type: 100 });
-    const list = res.result.artists;
-    setList(list);
+    const res: any = await search({ keywords, type: 100, limit: 100 });
+    const { artists = [], artistCount } = res && res.result;
+    const data = { type: 100, total: artistCount || 0 };
+    setloading(false);
+    setList(artists || []);
+    dispatch({ type: 'searchInfo', data });
   };
 
   useEffect(() => {
@@ -32,12 +35,17 @@ const Singer: FC = () => {
   }, [keywords]);
 
   return (
-    <div className={styles.singer}>
-      <Content padding={0}>
-        <SingerComponent list={list} />
-      </Content>
-      {console.log(loading)}
-    </div>
+    <Spin spinning={loading}>
+      <div className={styles.box}>
+        {list.length && !loading ? (
+          <SingerComponent list={list} />
+        ) : !loading ? (
+          <p className={styles.empty}>
+            很抱歉,未能找到与" <span style={{ color: '#507DAF' }}>{keywords}</span> "相关的任何歌手
+          </p>
+        ) : null}
+      </div>
+    </Spin>
   );
 };
 

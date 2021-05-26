@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-20 21:05:53
+ * @LastEditTime: 2021-05-26 19:47:05
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -18,7 +18,6 @@ const RecommendSong: FC = () => {
     const res: any = await recommendSong();
     const dailySongs = res.data.dailySongs;
     setDdailySongs(dailySongs);
-    console.log(res);
   };
 
   useEffect(() => {

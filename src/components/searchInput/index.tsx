@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-25 11:42:15
+ * @LastEditTime: 2021-05-26 19:47:51
  * @Description:搜索框组件
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -33,7 +33,7 @@ const SearchInput: FC = () => {
     dispatch({ type: 'searchText', data: _val });
     pathname = window.location.href.indexOf('/search');
     if (pathname === -1) history.push('/search');
-    debounce(() => getDefaultVal(), 10000);
+    // debounce(() => getDefaultVal(), 10000);
   };
 
   //搜索建议
