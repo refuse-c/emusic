@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 23:35:55
+ * @LastEditTime: 2021-05-27 22:35:44
  * @Description:
  */
 
@@ -157,4 +157,67 @@ export const trim = (str: string, type: string = 'a') => {
     default:
       return str.replace(/\s+/g, '');
   }
+};
+
+/**
+ * @name:
+ * @param {string} array 原歌词
+ * @param {string} arr2 翻译后的歌词
+ * @Description:
+ */
+export const parsingLyrics = (lyric: string = '') => {
+  if (!lyric) {
+    return { lyric: [{ time: 0, lyric: '这个地方没有歌词！' }] };
+  }
+  const lyricObjArr: any = []; // 最终生成的歌词数组
+
+  // 将歌曲字符串变成数组，数组每一项就是当前歌词信息
+  const lineLyric: any = lyric?.split(/\n/);
+
+  // 匹配中括号里正则的
+  const regTime = /\d{2}:\d{2}.\d{2,3}/;
+
+  // 循环遍历歌曲数组
+  for (let i = 0; i < lineLyric?.length; i++) {
+    if (lineLyric[i] === '') continue;
+    const time: number = formatLyricTime(lineLyric[i].match(regTime)[0]);
+
+    if (lineLyric[i].split(']')[1]) {
+      lyricObjArr.push({
+        time: time,
+        lyric: lineLyric[i].split(']')[1],
+      });
+    }
+  }
+  return {
+    lyric: lyricObjArr,
+  };
+};
+
+const formatLyricTime = (time: string) => {
+  const regMin = /.*:/;
+  const regSec = /:.*\./;
+  const regMs = /\./;
+  const min = parseInt((time.match(regMin) as any)[0].slice(0, 2));
+  let sec = parseInt((time.match(regSec) as any)[0].slice(1, 3));
+  const ms = time.slice((time.match(regMs) as any).index + 1, (time.match(regMs) as any).index + 3);
+  if (min !== 0) {
+    sec += min * 60;
+  }
+  return Number(sec + '.' + ms);
+};
+
+export const getTimeIndex = (timeArr, time) => {
+  let timeIndex = -1;
+  const length = timeArr.length;
+  const currentTime = Number(time) + 0.2;
+  for (let i = 0; i < length; i++) {
+    if (timeArr[i].time >= currentTime) {
+      timeIndex = i - 1;
+      break;
+    } else {
+      timeIndex = i;
+    }
+  }
+  return Number(timeIndex);
 };

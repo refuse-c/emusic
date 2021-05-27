@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-16 23:45:51
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-23 14:11:33
+ * @LastEditTime: 2021-05-27 19:31:30
  * @Description:
  */
 import { get } from './request';
@@ -58,4 +58,13 @@ export const songDetail = (params: { ids: string }) => {
  */
 export const songUrl = (params: { id: string | number; br?: string }) => {
   return get('song/url', params);
+};
+
+/**
+ * @name: 获取歌词
+ * @param {object} params
+ * @Description:
+ */
+export const lyric = (params: { id: string | number }) => {
+  return get('lyric', params);
 };

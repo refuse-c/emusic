@@ -119,6 +119,7 @@
         :global {
           .ant-slider {
             &:hover {
+
               .ant-slider-rail,
               .ant-slider-step,
               .ant-slider-track {
@@ -203,5 +204,35 @@
         }
       }
     }
+  }
+
+  .lrc {
+    position: fixed;
+    bottom: 73px;
+    right: 0;
+    z-index: 5;
+    width: calc(100% - 200px);
+    height: 30px;
+    overflow: hidden;
+    background-color: rgba($color: #F5F5F6, $alpha: 0.9);
+    border-top: 1px solid #E1E1E1;
+
+    .content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: all ease 0.5s;
+
+      li {
+        font-size: 12px;
+        line-height: 30px;
+        text-align: center;
+      }
+    }
+  }
+
+  .active {
+    color: $color;
   }
 }

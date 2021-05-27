@@ -2,21 +2,22 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-23 14:19:35
+ * @LastEditTime: 2021-05-27 23:03:13
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatTime } from '@/common/utils/format';
-import { songUrl } from '@/common/net/api';
+import { lyric, songUrl } from '@/common/net/api';
 import { Slider } from 'antd';
 import { initSong, initTime } from '@/common/utils/local';
-import { cutSong, debounce, getLocal, setLocal, _findIndex } from '@/common/utils/tools';
+import { cutSong, debounce, getLocal, setLocal, _findIndex, parsingLyrics, getTimeIndex } from '@/common/utils/tools';
 
 const Control: FC = () => {
   const refAudio = document.getElementById('refAudio') as any;
   const [url, setUrl] = useState('');
+  const [lrc, setLrc] = useState<any>([]);
   const [model, setModel] = useState(getLocal('model') || 1);
   const [volume, setVolume] = useState(getLocal('volume') || 5);
   const [songTime, setSongTime] = useState(initTime);
@@ -42,6 +43,23 @@ const Control: FC = () => {
   //   req.send();
   // };
 
+  // 获取歌词
+  const getLyric = async (id: number | string) => {
+    if (!id) return false;
+    const res: any = await lyric({ id });
+    if (res.code === 200) {
+      let lrcs = '';
+      const { nolyric, lrc } = res; // tlyric
+      if (!nolyric) {
+        // console.log(klyric.lyric); // 逐字同步歌词
+        // console.log(lrc.lyric); // 原歌词
+        // console.log(tlyric.lyric); // 中文译文歌词
+        lrcs = lrc.lyric || '';
+      }
+      const aaa = parsingLyrics(lrcs);
+      setLrc(aaa.lyric);
+    }
+  };
   // 获取url
   const getSongUrl = async (id: number | string) => {
     if (!id) return false;
@@ -54,7 +72,6 @@ const Control: FC = () => {
       dispatch({ type: 'isPlay', data: true });
     }
   };
-
   // 暂停/播放
   const handlePaused = () => {
     dispatch({ type: 'isPlay', data: !isPlay });
@@ -89,6 +106,7 @@ const Control: FC = () => {
 
   useEffect(() => {
     getSongUrl(id);
+    getLyric(id);
     // 播放结束切歌
     if (refAudio) {
       refAudio.addEventListener('ended', () => {
@@ -110,6 +128,20 @@ const Control: FC = () => {
   }, [refAudio]);
   return (
     <div className={styles.control}>
+      <div className={styles.lrc}>
+        <ul className={styles.content} id="lrc">
+          {lrc.map((item, index) => {
+            const num = getTimeIndex(lrc, currentTime);
+            const ids = document.getElementById('lrc') as any;
+            ids.style.transform = `translateY(${-num * 30}px)`;
+            return (
+              <li className={index === num ? styles.active : styles.bb} key={index}>
+                {item.lyric}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
       <audio src={url} loop={model === 3} autoPlay preload="auto" id="refAudio" />
       <div className={styles.left}>
         {al.picUrl ? (
