@@ -1,0 +1,53 @@
+.user {
+  font-size: 12px;
+  &.row {
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+      padding: 0 30px;
+
+      &:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      &:nth-child(odd) {
+        background-color: #ffffff;
+      }
+
+      &:hover {
+        background-color: #f0f1f2;
+      }
+
+      .content {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+        }
+
+        p {
+          padding-left: 10px;
+          white-space: nowrap;
+        }
+      }
+      .artist {
+        max-width: 100%;
+        color: #9f9f9f;
+        padding-left: 30px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &.col {
+    background-color: red;
+  }
+}
