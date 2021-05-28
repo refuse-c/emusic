@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-27 23:03:13
+ * @LastEditTime: 2021-05-28 13:48:35
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -54,7 +54,7 @@ const Control: FC = () => {
         // console.log(klyric.lyric); // 逐字同步歌词
         // console.log(lrc.lyric); // 原歌词
         // console.log(tlyric.lyric); // 中文译文歌词
-        lrcs = lrc.lyric || '';
+        lrcs = (lrc && lrc.lyric) || '';
       }
       const aaa = parsingLyrics(lrcs);
       setLrc(aaa.lyric);

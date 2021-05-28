@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-27 22:35:44
+ * @LastEditTime: 2021-05-28 13:47:01
  * @Description:
  */
 
@@ -179,9 +179,8 @@ export const parsingLyrics = (lyric: string = '') => {
 
   // 循环遍历歌曲数组
   for (let i = 0; i < lineLyric?.length; i++) {
-    if (lineLyric[i] === '') continue;
+    if (!lineLyric[i].match(regTime)) continue;
     const time: number = formatLyricTime(lineLyric[i].match(regTime)[0]);
-
     if (lineLyric[i].split(']')[1]) {
       lyricObjArr.push({
         time: time,
