@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-28 13:48:35
+ * @LastEditTime: 2021-05-28 20:17:46
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -153,7 +153,7 @@ const Control: FC = () => {
                 {likeList.includes(id) ? (
                   <p onClick={() => setLike(id, false)} style={{ color: '#EC4141' }} className="icon icon-like"></p>
                 ) : (
-                  <p onClick={() => setLike(id, true)} className="icon icon-like"></p>
+                  <p onClick={() => setLike(id, true)} className="icon icon-unlike"></p>
                 )}
               </div>
               <div>
@@ -174,7 +174,7 @@ const Control: FC = () => {
           <li className="icon icon-next" onClick={() => handlcutSong(1)} style={{ transform: 'rotate(180deg)' }}></li>
           <li className={`icon ${isPlay ? 'icon-pause' : 'icon-play'}`} onClick={() => handlePaused()}></li>
           <li className="icon icon-next" onClick={() => handlcutSong(2)}></li>
-          <li>lyrc</li>
+          <li className="icon icon-lrc"></li>
         </ul>
         <div className={styles.progress_box}>
           <div className={styles.time}>{formatTime(currentTime, true)}</div>

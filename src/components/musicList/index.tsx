@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-25 11:04:00
+ * @LastEditTime: 2021-05-28 20:24:09
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
@@ -42,9 +42,9 @@ const MusicList: FC<Props> = (props) => {
             {likeList.includes(record.id) ? (
               <span onClick={() => setId(record.id)} style={{ color: '#EC4141' }} className="icon icon-like"></span>
             ) : (
-              <span onClick={() => setLike(record.id, true)} className="icon icon-like"></span>
+              <span onClick={() => setLike(record.id, true)} className="icon icon-unlike"></span>
             )}
-            <span style={{ marginLeft: 10 }} className="icon icon-cc-download"></span>
+            <span style={{ marginLeft: 10 }} className="icon icon-list-download"></span>
           </div>
         );
       },

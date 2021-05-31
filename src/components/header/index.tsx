@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 21:28:31
+ * @LastEditTime: 2021-05-28 20:11:25
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -67,7 +67,7 @@ const Header: FC = () => {
         <li className="icon icon-mail"></li>
         <li className="icon icon-min"></li>
         <li className="icon icon-minimize"></li>
-        <li className="icon icon-amplification"></li>
+        <li className="icon  icon-min"></li>
         <li className="icon icon-close"></li>
       </ul>
     </div>
