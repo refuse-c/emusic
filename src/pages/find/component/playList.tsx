@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-11 20:30:33
+ * @LastEditTime: 2021-06-01 18:04:48
  * @Description:发现音乐-歌单
  */
 import { FC, useEffect, useState } from 'react';
@@ -11,6 +11,7 @@ import { playlistHot, playlistTop, playlistCatlist, highqualityTop } from '@/com
 import { Pagination } from 'antd';
 import Tags from '@components/tags';
 import PlayList from '@/components/songList';
+import CatGroup from '@/components/catGroup';
 import { formatImgSize } from '@/common/utils/format';
 
 const Recommend: FC = () => {
@@ -44,13 +45,14 @@ const Recommend: FC = () => {
   const getPlaylistCatlist = async () => {
     const res: any = await playlistCatlist();
     const { categories, sub } = res;
+    let catObj: any = [];
     Object.getOwnPropertyNames(categories).forEach((element) => {
       const title = categories[element];
-      const list = sub.filter((item: any) => item.category === Number(element));
-      const obj = { title, list };
-      catlist.push(obj);
+      const children = sub.filter((item: any) => item.category === Number(element));
+      const obj = { title, children };
+      catObj.push(obj);
     });
-    setCatlist(catlist);
+    setCatlist(catObj);
   };
 
   // 获取歌单 ( 网友精选碟 )
@@ -81,6 +83,7 @@ const Recommend: FC = () => {
 
   return (
     <div className={styles.playlist}>
+      <CatGroup list={catlist} active={playList.cat} />
       {highList.coverImgUrl ? (
         <div className={styles.boutique}>
           <img src={formatImgSize(highList.coverImgUrl, 140, 140)} alt="" />
@@ -96,6 +99,7 @@ const Recommend: FC = () => {
         </div>
       ) : null}
       <Tags tag={playList.cat} list={tagList} changeTag={(cat: string) => changeTag(cat)} />
+
       <PlayList list={playList.playlists} />
       <div className={styles.pages}>
         <Pagination
@@ -107,7 +111,6 @@ const Recommend: FC = () => {
           current={playList.current}
           onChange={onChange}
         />
-        {console.log(catlist)}
       </div>
     </div>
   );

@@ -2,13 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 00:03:41
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-25 08:30:27
+ * @LastEditTime: 2021-06-01 11:26:40
  * @Description:
  */
 
 import Find from '@pages/find'; // 发现音乐
 import FindRecommend from '@pages/find/component/recommend'; // 个性推荐
-import FindPlaylist from '@pages/find/component/playlist'; // 歌单
+import FindPlaylist from '@pages/find/component/playList'; // 歌单
 import FindRadio from '@pages/find/component/radio'; // 主播电台
 import FindToplist from '@pages/find/component/toplist'; // 排行榜
 import FindSinger from '@pages/find/component/singer'; // 歌手
