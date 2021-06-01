@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 19:47:05
+ * @LastEditTime: 2021-06-01 19:52:20
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -26,18 +26,20 @@ const RecommendSong: FC = () => {
 
   return (
     <div className={styles.recommendSong}>
-      <Content padding={30}>
-        <div className={styles.head}>
-          <div className={styles.time}>
-            <span>{moment().locale('zh-cn').format('DD')}</span>
+      <div id="head">
+        <Content padding={30}>
+          <div className={styles.head}>
+            <div className={styles.time}>
+              <span>{moment().locale('zh-cn').format('DD')}</span>
+            </div>
+            <div className={styles.info}>
+              <p>每日歌曲推荐</p>
+              <p>根据您的音乐口味生成，每天6:00更新</p>
+            </div>
           </div>
-          <div className={styles.info}>
-            <p>每日歌曲推荐</p>
-            <p>根据您的音乐口味生成，每天6:00更新</p>
-          </div>
-        </div>
-        <PlayAll list={dailySongs} />
-      </Content>
+          <PlayAll list={dailySongs} />
+        </Content>
+      </div>
       <MusicList list={dailySongs} />
     </div>
   );
