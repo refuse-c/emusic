@@ -6,6 +6,97 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "21901096",
+      "name": "声音0528",
+      "font_class": "volume",
+      "unicode": "e635",
+      "unicode_decimal": 58933
+    },
+    {
+      "icon_id": "21893963",
+      "name": "最小化0528",
+      "font_class": "minimize",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "21893964",
+      "name": "不知道叫什么0528",
+      "font_class": "min",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "21893965",
+      "name": "x0528",
+      "font_class": "close",
+      "unicode": "e626",
+      "unicode_decimal": 58918
+    },
+    {
+      "icon_id": "21893966",
+      "name": "放大0528",
+      "font_class": "zoom",
+      "unicode": "e62e",
+      "unicode_decimal": 58926
+    },
+    {
+      "icon_id": "21893967",
+      "name": "声音12345",
+      "font_class": "shengyin12345",
+      "unicode": "e62f",
+      "unicode_decimal": 58927
+    },
+    {
+      "icon_id": "21893968",
+      "name": "声音关闭",
+      "font_class": "mute",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "21893969",
+      "name": "日期",
+      "font_class": "date",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "21893970",
+      "name": "皮肤0528",
+      "font_class": "theme",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "21893971",
+      "name": "邮件0528",
+      "font_class": "mail",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "21893972",
+      "name": "设置0528",
+      "font_class": "setting",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "21891452",
+      "name": "like-2-01",
+      "font_class": "like",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "20572176",
+      "name": "网易云音乐",
+      "font_class": "logo",
+      "unicode": "e6c1",
+      "unicode_decimal": 59073
+    },
+    {
       "icon_id": "286976",
       "name": "download",
       "font_class": "download",
@@ -15,7 +106,7 @@
     {
       "icon_id": "372151",
       "name": "cc-download",
-      "font_class": "cc-download",
+      "font_class": "list-download",
       "unicode": "e639",
       "unicode_decimal": 58937
     },
@@ -83,13 +174,6 @@
       "unicode_decimal": 58908
     },
     {
-      "icon_id": "21615704",
-      "name": "下载全部-01",
-      "font_class": "xiazaiquanbu-01",
-      "unicode": "e61d",
-      "unicode_decimal": 58909
-    },
-    {
       "icon_id": "21615705",
       "name": "收藏2-01",
       "font_class": "shoucang2-01",
@@ -104,34 +188,6 @@
       "unicode_decimal": 58923
     },
     {
-      "icon_id": "21351798",
-      "name": "最小化",
-      "font_class": "minimize",
-      "unicode": "e628",
-      "unicode_decimal": 58920
-    },
-    {
-      "icon_id": "21351799",
-      "name": "邮箱2-01",
-      "font_class": "mail",
-      "unicode": "e629",
-      "unicode_decimal": 58921
-    },
-    {
-      "icon_id": "21287961",
-      "name": "静音",
-      "font_class": "jingyin",
-      "unicode": "e622",
-      "unicode_decimal": 58914
-    },
-    {
-      "icon_id": "21287963",
-      "name": "播放-红色",
-      "font_class": "play-red",
-      "unicode": "e624",
-      "unicode_decimal": 58916
-    },
-    {
       "icon_id": "21287966",
       "name": "不知道是啥",
       "font_class": "sound",
@@ -144,27 +200,6 @@
       "font_class": "back",
       "unicode": "e600",
       "unicode_decimal": 58880
-    },
-    {
-      "icon_id": "21206798",
-      "name": "原始大小",
-      "font_class": "min",
-      "unicode": "e60e",
-      "unicode_decimal": 58894
-    },
-    {
-      "icon_id": "21206799",
-      "name": "邮件",
-      "font_class": "email",
-      "unicode": "e60f",
-      "unicode_decimal": 58895
-    },
-    {
-      "icon_id": "21206800",
-      "name": "换肤",
-      "font_class": "theme",
-      "unicode": "e610",
-      "unicode_decimal": 58896
     },
     {
       "icon_id": "21206801",
@@ -195,51 +230,9 @@
       "unicode_decimal": 58900
     },
     {
-      "icon_id": "21206805",
-      "name": "播放",
-      "font_class": "volume",
-      "unicode": "e615",
-      "unicode_decimal": 58901
-    },
-    {
-      "icon_id": "21206807",
-      "name": "音乐-01",
-      "font_class": "local-music",
-      "unicode": "e617",
-      "unicode_decimal": 58903
-    },
-    {
-      "icon_id": "21206811",
-      "name": "话筒",
-      "font_class": "general-song",
-      "unicode": "e61b",
-      "unicode_decimal": 58907
-    },
-    {
-      "icon_id": "21206814",
-      "name": "设置",
-      "font_class": "setting",
-      "unicode": "e61e",
-      "unicode_decimal": 58910
-    },
-    {
-      "icon_id": "21206815",
-      "name": "放大",
-      "font_class": "amplification",
-      "unicode": "e61f",
-      "unicode_decimal": 58911
-    },
-    {
-      "icon_id": "21206816",
-      "name": "关闭",
-      "font_class": "close",
-      "unicode": "e620",
-      "unicode_decimal": 58912
-    },
-    {
       "icon_id": "21196435",
       "name": "音乐-01",
-      "font_class": "yinle-01",
+      "font_class": "local-music",
       "unicode": "e60c",
       "unicode_decimal": 58892
     },
@@ -316,7 +309,7 @@
     {
       "icon_id": "21142694",
       "name": "我喜欢的音乐-01",
-      "font_class": "like",
+      "font_class": "unlike",
       "unicode": "e60d",
       "unicode_decimal": 58893
     }

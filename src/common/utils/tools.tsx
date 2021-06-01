@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-28 13:47:01
+ * @LastEditTime: 2021-05-28 22:23:20
  * @Description:
  */
 
@@ -160,15 +160,13 @@ export const trim = (str: string, type: string = 'a') => {
 };
 
 /**
- * @name:
- * @param {string} array 原歌词
- * @param {string} arr2 翻译后的歌词
+ * @name: 歌词格式化
+ * @param {string} lyric
  * @Description:
  */
 export const parsingLyrics = (lyric: string = '') => {
-  if (!lyric) {
-    return { lyric: [{ time: 0, lyric: '这个地方没有歌词！' }] };
-  }
+  if (!lyric) return { lyric: [{ time: 0, lyric: '这个地方没有歌词！' }] };
+
   const lyricObjArr: any = []; // 最终生成的歌词数组
 
   // 将歌曲字符串变成数组，数组每一项就是当前歌词信息
@@ -206,7 +204,13 @@ const formatLyricTime = (time: string) => {
   return Number(sec + '.' + ms);
 };
 
-export const getTimeIndex = (timeArr, time) => {
+/**
+ * @name: 获取当前歌词的index
+ * @param {any} timeArr
+ * @param {number} time
+ * @Description:
+ */
+export const getTimeIndex = (timeArr: any | [], time: number) => {
   let timeIndex = -1;
   const length = timeArr.length;
   const currentTime = Number(time) + 0.2;
