@@ -7,11 +7,15 @@
   z-index: 50;
   width: 740px;
   border-radius: 2px;
-  padding: 0 20px;
   box-shadow: 0 0 10px 0 rgba($color: #e5e5e5, $alpha: 1);
   background-color: #fff;
+  .all {
+    line-height: 60px;
+    padding: 0 30px;
+    border-bottom: 1px solid #e5e5e5;
+  }
   .alone {
-    padding: 0 0 15px;
+    padding: 0 20px 15px;
     display: flex;
     p {
       padding-top: 25px;

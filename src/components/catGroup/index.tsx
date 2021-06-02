@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-01 18:05:26
+ * @LastEditTime: 2021-06-02 12:13:29
  * @Description:catGroup
  */
 import { FC } from 'react';
@@ -10,10 +10,11 @@ import styles from './index.module.scss';
 interface Props {
   list?: any | [];
   active: string;
+  changeTag: (val: string) => void;
 }
 
 const CatGroup: FC<Props> = (props) => {
-  const { list, active } = props;
+  const { list, active, changeTag } = props;
   console.log(list);
   return (
     <div className={styles.catGroup}>
@@ -28,7 +29,9 @@ const CatGroup: FC<Props> = (props) => {
                 const cls2 = child.hot ? styles.isHot : '';
                 return (
                   <li key={child.name} className={[cls1].join(' ')}>
-                    <span className={cls2}>{child.name}</span>
+                    <span className={cls2} onClick={() => changeTag(child.name)}>
+                      {child.name}
+                    </span>
                   </li>
                 );
               })}

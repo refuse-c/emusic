@@ -2,17 +2,18 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 20:34:21
+ * @LastEditTime: 2021-06-02 12:29:22
  * @Description:
  */
 /*
 showModal:
-  showColor;// 显示颜色选择
-  showPlayListTag; // 显示歌单tag
-  showVideTag; // 显示视频tag
-  showMvTag; // 显示MV tag
-  showLogin；// 显示登录
-  showPlayList；// 显示播放列表
+  showColor: // 显示颜色选择
+  showPlayListTag: // 显示歌单tag
+  showVideTag: // 显示视频tag
+  showMvTag: // 显示MV tag
+  showLogin: // 显示登录
+  showPlayList: // 显示播放列表
+  showCatList: // 显示catlist
 */
 import React from 'react';
 import { getLocal } from '@/common/utils/tools';

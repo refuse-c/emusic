@@ -2,14 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-01 18:04:48
+ * @LastEditTime: 2021-06-02 12:30:15
  * @Description:发现音乐-歌单
  */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useContext } from 'react';
 import styles from '../index.module.scss';
 import { playlistHot, playlistTop, playlistCatlist, highqualityTop } from '@/common/net/playList';
 import { Pagination } from 'antd';
 import Tags from '@components/tags';
+import { Context } from '@utils/context';
 import PlayList from '@/components/songList';
 import CatGroup from '@/components/catGroup';
 import { formatImgSize } from '@/common/utils/format';
@@ -24,10 +25,10 @@ const Recommend: FC = () => {
     playlists: [],
   });
   const [highList, setHighList] = useState({ coverImgUrl: '', name: '', copywriter: '' });
+  const { showModal, dispatch } = useContext(Context);
 
   // 点击热门标签回调
   const changeTag = async (tag: string) => {
-    // setTag(tag);
     getHighqualityTop(tag);
     getPplaylistTop(tag, 1);
   };
@@ -83,7 +84,9 @@ const Recommend: FC = () => {
 
   return (
     <div className={styles.playlist}>
-      <CatGroup list={catlist} active={playList.cat} />
+      {showModal === 'showCatList' && (
+        <CatGroup list={catlist} active={playList.cat} changeTag={(cat: string) => changeTag(cat)} />
+      )}
       {highList.coverImgUrl ? (
         <div className={styles.boutique}>
           <img src={formatImgSize(highList.coverImgUrl, 140, 140)} alt="" />
@@ -98,7 +101,12 @@ const Recommend: FC = () => {
           ></div>
         </div>
       ) : null}
-      <Tags tag={playList.cat} list={tagList} changeTag={(cat: string) => changeTag(cat)} />
+      <Tags
+        tag={playList.cat}
+        list={tagList}
+        changeTag={(cat: string) => changeTag(cat)}
+        showCallBack={() => dispatch({ type: 'showModal', data: showModal === 'showCatList' ? '' : 'showCatList' })}
+      />
 
       <PlayList list={playList.playlists} />
       <div className={styles.pages}>
