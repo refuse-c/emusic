@@ -74,16 +74,14 @@
       -webkit-app-region: no-drag;
       color: #e9e9e9;
 
-      &:hover {
-        color: #fff;
-      }
+
 
       &.author {
         display: flex;
         align-items: center;
         font-size: 14px;
 
-        img {
+        .avatarUrl {
           width: 30px;
           height: 30px;
           border-radius: 50%;
@@ -91,9 +89,19 @@
           cursor: pointer;
         }
 
-        div {
+        .userInfo {
           display: flex;
           align-items: center;
+          cursor: pointer;
+
+          &:hover {
+            color: #fff;
+          }
+
+          .redVipImageUrl {
+            height: 12px;
+            margin-left: 4px;
+          }
 
           p {
             cursor: pointer;

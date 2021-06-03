@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-02 12:29:22
+ * @LastEditTime: 2021-06-03 20:57:28
  * @Description:
  */
 /*
@@ -27,6 +27,7 @@ export const initialState = {
   songList: [], // 当前播放的音乐列表
   playList: [], // 当前用户创建/收藏的歌单
   showModal: '', // 显示弹窗
+  vipInfo: getLocal('vipInfo') || { redVipImageUrl: '', level: 0 }, // vip  信息
   currentSong: initSong, // 当前播放的音乐信息
   userInfo: initUserInfo, // 用户信息
   globalColor: getLocal('color') || '#EC4141', // 当前主题颜色

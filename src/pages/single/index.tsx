@@ -26,6 +26,7 @@ const Single: FC = (props: any) => {
   const [loading, setLoading] = useState(false);
   const [navStatus, setNavStatus] = useState(0);
 
+  // 获取歌单内容
   const getPlayListDetail = async (id: string) => {
     setLoading(true);
     try {
@@ -40,6 +41,7 @@ const Single: FC = (props: any) => {
     }
   };
 
+  // 批量获取歌曲详情
   const getSongDetail = async (ids: string) => {
     const res: any = await songDetail({ ids });
     const { songs, privileges } = res;
@@ -63,7 +65,13 @@ const Single: FC = (props: any) => {
               <Navigation status={navStatus} list={navigationList} onChange={(index: number) => setNavStatus(index)} />
             </div>
           </Content>
-          {navStatus === 0 ? <MusicList list={musicList} /> : navStatus === 1 ? <Comments /> : <Collectors />}
+          {navStatus === 0 ? (
+            <MusicList list={musicList} likeCallBack={getPlayListDetail} />
+          ) : navStatus === 1 ? (
+            <Comments />
+          ) : (
+            <Collectors />
+          )}
         </div>
       </Spin>
     </Content>

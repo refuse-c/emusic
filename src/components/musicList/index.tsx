@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-01 19:50:36
+ * @LastEditTime: 2021-06-03 21:51:57
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
@@ -16,6 +16,7 @@ import clone from 'clone';
 interface Props {
   list?: any | [];
   loading?: boolean;
+  likeCallBack?: (id: string) => void;
 }
 
 const MusicList: FC<Props> = (props) => {

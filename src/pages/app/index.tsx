@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-03 17:17:54
+ * @LastEditTime: 2021-06-03 20:57:57
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -14,6 +14,7 @@ import { Context, reducer, initialState } from '@utils/context';
 import { likelist, addLike } from '@/common/net/api';
 import { message } from 'antd';
 import { growthpoint } from '@/common/net/vip';
+import { setLocal } from '@/common/utils/tools';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
 interface Item {
@@ -45,7 +46,14 @@ const App: FC = () => {
 
   const getGrowthpoint = async () => {
     const res: any = await growthpoint();
-    console.log(res);
+    if (res.code === 200) {
+      const data = {
+        level: res.data.levelCard.level,
+        redVipImageUrl: res.data.levelCard.redVipImageUrl,
+      };
+      setLocal('vipInfo', data);
+      dispatch({ type: 'vipInfo', data });
+    }
   };
 
   // 获取我喜欢的音乐ids集合

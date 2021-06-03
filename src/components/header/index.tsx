@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-03 16:32:54
+ * @LastEditTime: 2021-06-04 00:12:24
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -16,7 +16,7 @@ import SearchInput from '@components/searchInput';
 const history = createHashHistory();
 const DOM = document.getElementsByTagName('body')[0];
 const Header: FC = () => {
-  const { userInfo, globalColor, showModal, dispatch } = useContext(Context);
+  const { vipInfo, userInfo, globalColor, showModal, dispatch } = useContext(Context);
   DOM.style.setProperty('--color', globalColor, '');
   //  修改颜色
   const changeColor = (val: string) => {
@@ -24,7 +24,6 @@ const Header: FC = () => {
     DOM.style.setProperty('--color', val, '');
     dispatch({ type: 'globalColor', data: val });
   };
-
   return (
     <div className={styles.header}>
       <div className={styles.colorContent} onClick={(e) => e.stopPropagation()}>
@@ -49,10 +48,14 @@ const Header: FC = () => {
 
       <ul className={styles.tool}>
         <li className={styles.author}>
-          <img src={userInfo.avatarUrl} alt="" />
-          <div>
+          <img className={styles.avatarUrl} src={userInfo.avatarUrl} alt="" />
+          <div className={styles.userInfo}>
             <p>{userInfo.nickname}</p>
-            <p>去开通</p>
+            {vipInfo.redVipImageUrl ? (
+              <img className={styles.redVipImageUrl} src={vipInfo.redVipImageUrl} alt="" />
+            ) : (
+              <p>去开通</p>
+            )}
             <p className="icon icon-arrow-bottom"></p>
           </div>
         </li>
