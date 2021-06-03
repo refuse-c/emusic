@@ -6,6 +6,27 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "22013303",
+      "name": "hot-0603",
+      "font_class": "hot-0603",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "22013005",
+      "name": "fangda-023",
+      "font_class": "max",
+      "unicode": "e617",
+      "unicode_decimal": 58903
+    },
+    {
+      "icon_id": "22012916",
+      "name": "mic-0603",
+      "font_class": "mic-0603",
+      "unicode": "e616",
+      "unicode_decimal": 58902
+    },
+    {
       "icon_id": "21901096",
       "name": "声音0528",
       "font_class": "volume",

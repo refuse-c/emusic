@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-28 20:11:25
+ * @LastEditTime: 2021-06-03 16:32:54
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -41,12 +41,12 @@ const Header: FC = () => {
           <p className="icon icon-back" onClick={() => history.go(-1)}></p>
           <p className="icon icon-back" onClick={() => history.go(+1)}></p>
         </div>
-
+        <SearchInput />
         <div className={styles.general_song}>
-          <p className="icon icon-general-song"></p>
+          <p className="icon icon-mic-0603"></p>
         </div>
       </div>
-      <SearchInput />
+
       <ul className={styles.tool}>
         <li className={styles.author}>
           <img src={userInfo.avatarUrl} alt="" />
@@ -67,7 +67,7 @@ const Header: FC = () => {
         <li className="icon icon-mail"></li>
         <li className="icon icon-min"></li>
         <li className="icon icon-minimize"></li>
-        <li className="icon  icon-min"></li>
+        <li className="icon  icon-max"></li>
         <li className="icon icon-close"></li>
       </ul>
     </div>
