@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-04 00:12:24
+ * @LastEditTime: 2021-06-04 17:05:04
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -51,7 +51,7 @@ const Header: FC = () => {
           <img className={styles.avatarUrl} src={userInfo.avatarUrl} alt="" />
           <div className={styles.userInfo}>
             <p>{userInfo.nickname}</p>
-            {vipInfo.redVipImageUrl ? (
+            {vipInfo.vipType !== -1 ? (
               <img className={styles.redVipImageUrl} src={vipInfo.redVipImageUrl} alt="" />
             ) : (
               <p>去开通</p>

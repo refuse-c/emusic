@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-03 20:57:57
+ * @LastEditTime: 2021-06-04 17:04:00
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -33,7 +33,7 @@ const App: FC = () => {
 
   // 登录
   const getLogin = async () => {
-    const res: any = await login({ phone: '13272946536', password: 'wangyi123@@' });
+    const res: any = await login({ phone: '18008523529', password: 'wangyi123' });
     const userInfo = res.profile;
     const userId = userInfo.userId;
     const nickname = userInfo.nickname || '';
@@ -50,6 +50,7 @@ const App: FC = () => {
       const data = {
         level: res.data.levelCard.level,
         redVipImageUrl: res.data.levelCard.redVipImageUrl,
+        vipType: res.data.userLevel.vipType,
       };
       setLocal('vipInfo', data);
       dispatch({ type: 'vipInfo', data });
