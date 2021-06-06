@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-06 22:20:41
+ * @LastEditTime: 2021-06-06 22:24:20
  * @Description:播放页
  */
-import { FC, useEffect, useContext } from 'react';
+import { FC, useState, useEffect, useContext } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import Content from '@components/view/content';
@@ -22,12 +22,14 @@ const Player: FC<Props> = (props) => {
   const { num, lrc, isPlay, noLyric } = props;
   const { currentSong } = useContext(Context);
   const { al, ar, name } = currentSong;
+  const [rotate, setRotate] = useState(0);
 
   useEffect(() => {
     if (isPlay) {
       clearInterval(T1);
       T1 = setInterval(() => {
-        i = i >= 720 ? 0 : i + 0.1;
+        const num = rotate >= 720 ? 0 : rotate + 0.2;
+        setRotate(num);
       }, 10);
     } else {
       clearInterval(T1);
@@ -35,7 +37,7 @@ const Player: FC<Props> = (props) => {
     return () => {
       clearInterval(T1);
     };
-  }, [isPlay]);
+  }, [isPlay, rotate]);
   console.log(i);
   return (
     <div className={styles.player}>
@@ -51,7 +53,7 @@ const Player: FC<Props> = (props) => {
           </div>
           <div className={styles.info}>
             <div className={styles.info_box}>
-              <div className={styles.album_box} style={{ transform: `rotate(${i}deg)` }}>
+              <div className={styles.album_box} style={{ transform: `rotate(${rotate}deg)` }}>
                 <img src={formatImgSize(al.picUrl, 170, 170)} alt="" />
               </div>
             </div>
