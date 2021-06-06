@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 23:39:48
+ * @LastEditTime: 2021-06-06 21:43:12
  * @Description:control
  */
 import { FC, useContext, useState, useEffect } from 'react';
@@ -11,6 +11,7 @@ import { Context } from '@utils/context';
 import { formatImgSize, formatTime } from '@/common/utils/format';
 import { lyric, songUrl } from '@/common/net/api';
 import { Slider } from 'antd';
+import Player from '@pages/player';
 import { initSong, initTime } from '@/common/utils/local';
 import { cutSong, debounce, getLocal, setLocal, _findIndex, parseLRC, getTimeIndex } from '@/common/utils/tools';
 
@@ -18,6 +19,7 @@ const Control: FC = () => {
   const refAudio = document.getElementById('refAudio') as any;
   const [url, setUrl] = useState('');
   const [lrc, setLrc] = useState<any>([]);
+  const [isShowPlayer, setIsShowPlayer] = useState(false);
   const [isShowlrc, setIsShowlrc] = useState(getLocal('showLrc') || false);
   const [lrcLoading, setLrcLoading] = useState(false);
   const [model, setModel] = useState(getLocal('model') || 1);
@@ -151,6 +153,7 @@ const Control: FC = () => {
   const num = getTimeIndex(lrc, currentTime);
   return (
     <div className={styles.control}>
+      {isShowPlayer && <Player num={num} lrc={lrc} isPlay={isPlay} noLyric={noLyric} />}
       {
         <div className={styles.lrc} style={{ height: isShowlrc ? 31 : 0, bottom: isShowlrc ? 73 : 72 }}>
           {isShowlrc && (
@@ -174,7 +177,12 @@ const Control: FC = () => {
       <div className={styles.left}>
         {al.picUrl ? (
           <div className={styles.content}>
-            <img className={styles.img_box} src={formatImgSize(al.picUrl, 48, 48)} alt="" />
+            <img
+              onClick={() => setIsShowPlayer(!isShowPlayer)}
+              className={styles.img_box}
+              src={formatImgSize(al.picUrl, 48, 48)}
+              alt=""
+            />
             <div className={styles.info}>
               <div>
                 <p>{name}</p>

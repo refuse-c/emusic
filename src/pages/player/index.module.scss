@@ -1,0 +1,114 @@
+@import '~@common/css/_variables.scss';
+
+
+.player {
+  position: fixed;
+  width: 100%;
+  height: calc(100vh - 133px);
+  top: 60px;
+  left: 0;
+  z-index: 30;
+  background-color: #fff;
+
+  .content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .name {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      p {
+        &:nth-child(1) {
+          font-size: 24px;
+        }
+
+        &:nth-child(2) {
+          padding-top: 16px;
+          font-size: 12px;
+          line-height: 1;
+          color: #979798;
+        }
+      }
+    }
+
+    .info {
+      padding-top: 40px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .info_box {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 1;
+        height: 300px;
+        background-color: #fff;
+        box-shadow: 0 0 5px red;
+        overflow: hidden;
+      }
+
+      .album_box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 250px;
+        height: 250px;
+        border-radius: 50%;
+        // transition: all 1s ease;
+        border: 10px solid #DBDBDB;
+        background: url('~@common/images/album.png') center center / 250px no-repeat;
+
+        img {
+          width: 170px;
+          height: 170px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}
+
+// .lrc {
+//   position: fixed;
+//   right: 0;
+//   z-index: 5;
+//   width: calc(100% - 200px);
+//   transition: all 0.5s ease;
+//   overflow: hidden;
+//   background-color: rgba($color: #F5F5F6, $alpha: 0.9);
+//   border-top: 1px solid #E1E1E1;
+
+.lrc_list {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 50%;
+  transition: all ease 0.5s;
+
+  li {
+    font-size: 12px;
+    line-height: 30px;
+    text-align: center;
+  }
+}
+
+// }
+
+.active {
+  color: $color;
+}
+
+.noLyric {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

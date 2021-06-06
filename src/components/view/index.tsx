@@ -9,7 +9,7 @@ import { FC } from 'react';
 import styles from './index.module.scss';
 import { Layout } from 'antd';
 import CustomHeader from '@components/header';
-import Control from '@components/control';
+import Control from '@/pages/control';
 import { isArray } from '@utils/tools';
 import 'react-resizable/css/styles.css';
 const { Header, Footer, Sider, Content } = Layout;
