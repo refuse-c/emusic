@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-06 22:24:20
+ * @LastEditTime: 2021-06-06 23:35:28
  * @Description:播放页
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -16,7 +16,6 @@ interface Props {
   isPlay: boolean;
   noLyric: any;
 }
-let i = 0;
 let T1: NodeJS.Timeout;
 const Player: FC<Props> = (props) => {
   const { num, lrc, isPlay, noLyric } = props;
@@ -38,7 +37,6 @@ const Player: FC<Props> = (props) => {
       clearInterval(T1);
     };
   }, [isPlay, rotate]);
-  console.log(i);
   return (
     <div className={styles.player}>
       <Content isFull={false} padding={30}>
