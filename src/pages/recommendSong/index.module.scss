@@ -1,9 +1,11 @@
 @import '~@common/css/_variables.scss';
+
 .recommendSong {
   .head {
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
+
     .time {
       position: relative;
       display: flex;
@@ -27,9 +29,11 @@
         border: 2px solid $color;
         background-color: $color;
       }
+
       &::before {
         left: 14px;
       }
+
       &::after {
         right: 14px;
       }
@@ -40,6 +44,7 @@
         font-weight: bold;
       }
     }
+
     .info {
       p {
         &:first-child {
@@ -47,6 +52,7 @@
           font-size: 22px;
           font-weight: bold;
         }
+
         &:last-child {
           color: #676767;
           font-size: 14px;

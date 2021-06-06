@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-04 17:05:04
+ * @LastEditTime: 2021-06-05 14:02:52
  * @Description:
  */
 import { FC, useContext } from 'react';
@@ -13,6 +13,7 @@ import { setLocal } from '@/common/utils/tools';
 import { Context } from '@utils/context';
 import { defaultColor } from '@/common/utils/local';
 import SearchInput from '@components/searchInput';
+import { formatImgSize } from '@/common/utils/format';
 const history = createHashHistory();
 const DOM = document.getElementsByTagName('body')[0];
 const Header: FC = () => {
@@ -48,11 +49,11 @@ const Header: FC = () => {
 
       <ul className={styles.tool}>
         <li className={styles.author}>
-          <img className={styles.avatarUrl} src={userInfo.avatarUrl} alt="" />
+          <img className={styles.avatarUrl} src={formatImgSize(userInfo.avatarUrl, 30, 30)} alt="" />
           <div className={styles.userInfo}>
             <p>{userInfo.nickname}</p>
             {vipInfo.vipType !== -1 ? (
-              <img className={styles.redVipImageUrl} src={vipInfo.redVipImageUrl} alt="" />
+              <img className={styles.redVipImageUrl} src={formatImgSize(vipInfo.redVipImageUrl, 36, 12)} alt="" />
             ) : (
               <p>去开通</p>
             )}

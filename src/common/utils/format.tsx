@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:13
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-19 16:09:58
+ * @LastEditTime: 2021-06-05 20:16:27
  * @Description:
  */
 
@@ -13,7 +13,7 @@
  * @param {string} h      图片高度
  */
 export const formatImgSize = (imgUrl: string, w: number, h: number) => {
-  return `${imgUrl}?param=${w}y${h}`;
+  return imgUrl && `${imgUrl.replace('http:', 'https:')}?param=${w}y${h}`;
 };
 
 /**

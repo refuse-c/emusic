@@ -2,9 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-23 00:45:40
+ * @LastEditTime: 2021-06-05 14:01:17
  * @Description:轮播图
  */
+import { formatImgSize } from '@/common/utils/format';
 import { FC, useState, useEffect } from 'react';
 import styles from './index.module.scss';
 interface Props {
@@ -38,8 +39,8 @@ const Banner: FC<Props> = (props) => {
           const cls3 = index === (active === len ? 0 : active + 1) ? styles.active_right : '';
           const color = item.titleColor === 'red' ? '#CC4A4A' : '#4A79CC';
           return (
-            <li key={item.imageUrl} className={[cls1, cls2, cls3].join(' ')} onClick={() => setActive(index)}>
-              {<img src={item.imageUrl} alt="" />}
+            <li key={index} className={[cls1, cls2, cls3].join(' ')} onClick={() => setActive(index)}>
+              {<img src={formatImgSize(item.imageUrl, 540, 198)} alt="" />}
               <p style={{ backgroundColor: color }}>{item.typeTitle}</p>
             </li>
           );

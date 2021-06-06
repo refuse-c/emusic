@@ -2,12 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 21:52:41
+ * @LastEditTime: 2021-06-05 14:06:59
  * @Description:视频列表组件
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 import Playcount from '@components/playcount';
+import { formatImgSize } from '@/common/utils/format';
 interface Props {
   list?: any;
   hideLst?: boolean;
@@ -29,7 +30,7 @@ const Video: FC<Props> = (props) => {
         const { title, coverUrl, playTime, creator } = item;
         return (
           <li key={index}>
-            <div className={styles.img_box} style={{ backgroundImage: `url(${coverUrl})` }}>
+            <div className={styles.img_box} style={{ backgroundImage: `url(${formatImgSize(coverUrl, 334, 188)})` }}>
               <div className={styles.playCount_box}>
                 <Playcount num={playTime} />
               </div>

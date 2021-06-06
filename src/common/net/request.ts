@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:24:31
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 23:09:20
+ * @LastEditTime: 2021-06-05 21:13:19
  * @Description:
  */
 
@@ -20,7 +20,10 @@ window.onoffline = () => {
 // 新创建一个axios实例，并进行基础配置
 const instance = axios.create({
   // baseURL: 'http://tshy.xyz:3000/',
-  baseURL: 'http://47.110.230.41:3000',
+  // baseURL: 'https://refusec.xyz:3000/'
+
+  baseURL: 'http://47.110.230.41:3000/',
+
   timeout: 15000,
   withCredentials: true,
   // headers: {'X-Requested-With': 'XMLHttpRequest'}

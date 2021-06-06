@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-03 23:51:20
+ * @LastEditTime: 2021-06-05 22:44:57
  * @Description:
  */
 
@@ -18,6 +18,11 @@ import { message } from 'antd';
 //   index: number;
 //   orderType: number;
 // }
+
+interface LRC {
+  time: number;
+  text: string;
+}
 
 export const isArray = (arr: []) => {
   return arr instanceof Array;
@@ -161,47 +166,42 @@ export const trim = (str: string, type: string = 'a') => {
 
 /**
  * @name: 歌词格式化
- * @param {string} lyric
+ * @param {string} lrc
  * @Description:
  */
-export const parsingLyrics = (lyric: string = '') => {
-  if (!lyric) return { lyric: [{ time: 0, lyric: '这个地方没有歌词！' }] };
+export const parseLRC = (lrc: string): Array<LRC> => {
+  const reg = /\[(\d+):(\d+)[.|:](\d+)\](.+)/;
+  const regTime = /\[(\d+):(\d+)[.|:](\d+)\]/g;
+  const regCompatible = /\[(\d+):(\d+)]()(.+)/;
+  const regTimeCompatible = /\[(\d+):(\d+)]/g;
+  const regOffset = /\[offset:\s*(-?\d+)\]/;
+  const offsetMatch = lrc.match(regOffset);
+  const offset = offsetMatch ? Number(offsetMatch[1]) : 0;
+  const parsed: Array<LRC> = [];
+  const matchAll = (line: string) => {
+    const match = line.match(reg) || line.match(regCompatible);
+    if (!match || match.length !== 5) return;
+    const minutes = Number(match[1]) || 0;
+    const seconds = Number(match[2]) || 0;
+    const milliseconds = Number(match[3]) || 0;
+    const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds + offset; // eslint-disable-line no-mixed-operators
+    const text = (match[4] as string).replace(regTime, '').replace(regTimeCompatible, '');
 
-  const lyricObjArr: any = []; // 最终生成的歌词数组
-
-  // 将歌曲字符串变成数组，数组每一项就是当前歌词信息
-  const lineLyric: any = lyric?.split(/\n/);
-
-  // 匹配中括号里正则的
-  const regTime = /\d{2}:\d{2}.\d{2,3}/;
-
-  // 循环遍历歌曲数组
-  for (let i = 0; i < lineLyric?.length; i++) {
-    if (!lineLyric[i].match(regTime)) continue;
-    const time: number = formatLyricTime(lineLyric[i].match(regTime)[0]);
-    if (lineLyric[i].split(']')[1]) {
-      lyricObjArr.push({
-        time: time,
-        lyric: lineLyric[i].split(']')[1],
-      });
-    }
-  }
-  return {
-    lyric: lyricObjArr,
+    // 优化：不要显示空行
+    if (!text) return;
+    parsed.push({ time, text });
+    matchAll(match[4]); // 递归匹配多个时间标签
   };
-};
 
-const formatLyricTime = (time: string) => {
-  const regMin = /.*:/;
-  const regSec = /:.*\./;
-  const regMs = /\./;
-  const min = parseInt((time.match(regMin) as any)[0].slice(0, 2));
-  let sec = parseInt((time.match(regSec) as any)[0].slice(1, 3));
-  const ms = time.slice((time.match(regMs) as any).index + 1, (time.match(regMs) as any).index + 3);
-  if (min !== 0) {
-    sec += min * 60;
+  lrc
+    .replace(/\\n/g, '\n')
+    .split('\n')
+    .forEach((line) => matchAll(line));
+
+  if (parsed.length > 0) {
+    parsed.sort((a, b) => a.time - b.time);
   }
-  return Number(sec + '.' + ms);
+  return parsed;
 };
 
 /**
@@ -211,11 +211,11 @@ const formatLyricTime = (time: string) => {
  * @Description:
  */
 export const getTimeIndex = (timeArr: any | [], time: number) => {
-  let timeIndex = -1;
+  let timeIndex = 0;
   const length = timeArr.length;
   const currentTime = Number(time) + 0.2;
   for (let i = 0; i < length; i++) {
-    if (timeArr[i].time >= currentTime) {
+    if (timeArr[i].time >= currentTime * 1000) {
       timeIndex = i - 1;
       break;
     } else {

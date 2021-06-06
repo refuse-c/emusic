@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-03 17:17:35
+ * @LastEditTime: 2021-06-05 17:42:21
  * @Description:搜索框组件
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -20,15 +20,16 @@ const SearchInput: FC = () => {
   const { dispatch } = useContext(Context);
   // 输入检索搜索建议
   const handleInput = (e: any) => {
-    const keywords = trim(e.target.value, 't');
-    setKeywords(keywords);
-    debounce(() => keywords && getSearchHotSuggest(keywords), 500);
+    const val = trim(e.target.value, 't');
+    setKeywords(val);
+    debounce(() => val && getSearchHotSuggest(val), 500);
   };
 
   // 回车检索事件
   const onPressEnter = async () => {
     let pathname = -1;
-    const _val = keywords ? keywords : dfKeyWord.realkeyword;
+    const _val = keywords || dfKeyWord.realkeyword;
+    setKeywords(_val);
     dispatch({ type: 'searchText', data: _val });
     pathname = window.location.href.indexOf('/search');
     if (pathname === -1) history.push('/search');

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 22:27:17
+ * @LastEditTime: 2021-06-05 17:20:50
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState } from 'react';
@@ -14,7 +14,6 @@ import ExclusiveList from '@/components/exclusiveList';
 import Songs from '@/components/song';
 import MvList from '@/components/mvList';
 import RadioList from '@/components/radioList';
-
 import { findBanner, recommendList, exclusive, personalizedMv, recommendDj } from '@/common/net/find';
 import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
@@ -22,7 +21,6 @@ import { newMusic } from '@/common/net/api';
 const Recommend: FC = () => {
   const [bannerList, setBannerList] = useState([]);
   const [playList, setPlayList] = useState([]);
-  // const [songList, setSongList] = useState([]);
   const [exclusiveList, setExclusiveList] = useState([]);
   const [newMusicList, setNewMusicList] = useState([]);
   const [mvList, setMvList] = useState([]);
@@ -126,11 +124,11 @@ const Recommend: FC = () => {
       <PlayList list={playList || []} />
       <Title title="独家放送" top={10} pathName="/exclusive" />
       <ExclusiveList list={exclusiveList} isAdaptive={false} />
-      <Title title="最新音乐" top={10} pathName="/find/playlist" />
+      <Title title="最新音乐" top={10} pathName="/find/newmusic" />
       <Songs list={newMusicList} />
-      <Title title="推荐MV" top={10} pathName="/find/playlist" />
+      <Title title="推荐MV" top={10} pathName="/video/mv" />
       <MvList list={mvList} hideLst={true} showTips={true} />
-      <Title title="主播电台" top={10} pathName="/find/playlist" />
+      <Title title="主播电台" top={10} pathName="/find/radio" />
       <RadioList list={radioList} />
       {/* <Title title="看看" pathName="/find/playlist" /> */}
     </div>

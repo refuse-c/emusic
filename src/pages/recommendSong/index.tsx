@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-01 19:52:20
+ * @LastEditTime: 2021-06-05 23:30:40
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -27,7 +27,7 @@ const RecommendSong: FC = () => {
   return (
     <div className={styles.recommendSong}>
       <div id="head">
-        <Content padding={30}>
+        <Content padding={'30px 30px 10px'} isFull={true}>
           <div className={styles.head}>
             <div className={styles.time}>
               <span>{moment().locale('zh-cn').format('DD')}</span>
@@ -40,7 +40,9 @@ const RecommendSong: FC = () => {
           <PlayAll list={dailySongs} />
         </Content>
       </div>
-      <MusicList list={dailySongs} />
+      <div style={{ borderTop: '1px solid #E5E5E5' }}>
+        <MusicList list={dailySongs} />
+      </div>
     </div>
   );
 };

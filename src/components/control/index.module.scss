@@ -91,6 +91,14 @@
         border-radius: 50%;
         color: #000;
 
+        &.activeLrc {
+          color: $color !important;
+        }
+
+        &:hover {
+          color: $color;
+        }
+
         &:nth-child(3) {
           width: 36px;
           height: 36px;
@@ -208,11 +216,10 @@
 
   .lrc {
     position: fixed;
-    bottom: 73px;
     right: 0;
     z-index: 5;
     width: calc(100% - 200px);
-    height: 30px;
+    transition: all 0.5s ease;
     overflow: hidden;
     background-color: rgba($color: #F5F5F6, $alpha: 0.9);
     border-top: 1px solid #E1E1E1;
@@ -234,5 +241,13 @@
 
   .active {
     color: $color;
+  }
+
+  .noLyric {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

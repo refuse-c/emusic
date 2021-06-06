@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 22:02:33
+ * @LastEditTime: 2021-06-05 13:53:47
  * @Description:歌单组件
  */
 import { FC } from 'react';
@@ -37,7 +37,11 @@ const SongList: FC<Props> = (props) => {
             <div
               onClick={() => history.push(pathName)}
               className={styles.imgBox}
-              style={{ backgroundImage: `url(${formatImgSize(picUrl || coverImgUrl, 210, 210)})` }}
+              style={{
+                backgroundImage: `url(${
+                  identifying ? picUrl || coverImgUrl : formatImgSize(picUrl || coverImgUrl, 210, 210)
+                })`,
+              }}
             >
               {identifying ? <div className={styles.dateBox}>{day}</div> : <Playcount num={playcount || playCount} />}
             </div>

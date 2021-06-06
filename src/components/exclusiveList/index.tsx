@@ -2,9 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-20 20:32:00
+ * @LastEditTime: 2021-06-05 14:00:18
  * @Description:独家发送列表组件
  */
+import { formatImgSize } from '@/common/utils/format';
 import { FC } from 'react';
 import styles from './index.module.scss';
 interface Props {
@@ -25,7 +26,11 @@ const ExclusiveList: FC<Props> = (props) => {
           <li key={index} className={isAdaptive ? styles.adaptive : ''}>
             <div
               className={styles.imgBox}
-              style={{ backgroundImage: `url(${isAdaptive ? item.picUrl : item.sPicUrl})` }}
+              style={{
+                backgroundImage: `url(${
+                  isAdaptive ? formatImgSize(item.picUrl, 334, 126) : formatImgSize(item.sPicUrl, 334, 188)
+                })`,
+              }}
             ></div>
             <p>{item.name}</p>
           </li>
