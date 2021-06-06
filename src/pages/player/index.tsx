@@ -2,9 +2,19 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-06 23:35:28
+ * @LastEditTime: 2021-06-06 23:40:45
  * @Description:播放页
  */
+
+/*     
+privilege.fee
+8、0：免费
+4：所在专辑需单独付费
+1：VIP可听
+privilege.cs: 云盘
+privilege.st：-200无版权
+ */
+
 import { FC, useState, useEffect, useContext } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
