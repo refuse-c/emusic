@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 22:47:34
+ * @LastEditTime: 2021-06-08 22:58:04
  * @Description:发现音乐-排行榜
  */
 import { FC, useEffect, useState } from 'react';
@@ -87,7 +87,7 @@ const TopList: FC = () => {
 
   return (
     <div className={styles.topList}>
-      <Title text="官方版" />
+      <Title text="官方版" margin="10px 0 21px" />
       <div className={styles.list}>
         {official.map((item: Item, index: number) => {
           const { list, ToplistType, coverImgUrl, id } = item;
