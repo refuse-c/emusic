@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 22:58:04
+ * @LastEditTime: 2021-06-08 23:03:15
  * @Description:发现音乐-排行榜
  */
 import { FC, useEffect, useState } from 'react';
@@ -15,6 +15,7 @@ import { assemblyIds, getSession, mergeData, setSession } from '@/common/utils/t
 import { songDetail } from '@/common/net/api';
 import { formatImgSize } from '@/common/utils/format';
 import { createHashHistory } from 'history';
+import { Spin } from 'antd';
 const history = createHashHistory();
 interface Item {
   list: [];
@@ -28,6 +29,7 @@ interface Item {
 // 原创榜  publishTime不为0 表示新歌(显示icon new)
 
 const TopList: FC = () => {
+  const [loading, setLoading] = useState(false);
   const [official, setOfficial] = useState<any>(getSession('official') || []);
   const [worldwide, setWorldwide] = useState(getSession('worldwide') || []);
   const getTopList = async () => {
@@ -70,6 +72,7 @@ const TopList: FC = () => {
   };
 
   const queryAListDetail = (list: any) => {
+    setLoading(!official.length);
     const promises = list.map((item: any) =>
       item.ToplistType === 'A' ? queryToplistArtist(item) : getPlayListDetail(item.id),
     );
@@ -77,6 +80,7 @@ const TopList: FC = () => {
       console.log(official);
       setSession('official', official);
       setOfficial(official);
+      setLoading(false);
     });
   };
 
@@ -88,25 +92,27 @@ const TopList: FC = () => {
   return (
     <div className={styles.topList}>
       <Title text="官方版" margin="10px 0 21px" />
-      <div className={styles.list}>
-        {official.map((item: Item, index: number) => {
-          const { list, ToplistType, coverImgUrl, id } = item;
-          const pathName = ToplistType === 'A' ? '/recommendSong' : `/single${id}`;
-          return (
-            <div key={index} className={styles.item}>
-              <div className={styles.img_box} onClick={() => history.push(pathName)}>
-                <img src={formatImgSize(coverImgUrl, 172, 172)} alt="" />
+      <Spin spinning={loading}>
+        <div className={styles.list}>
+          {official.map((item: Item, index: number) => {
+            const { list, ToplistType, coverImgUrl, id } = item;
+            const pathName = ToplistType === 'A' ? '/recommendSong' : `/single${id}`;
+            return (
+              <div key={index} className={styles.item}>
+                <div className={styles.img_box} onClick={() => history.push(pathName)}>
+                  <img src={formatImgSize(coverImgUrl, 172, 172)} alt="" />
+                </div>
+                <ul className={styles.songList}>
+                  {list.map((child: any, _index) => {
+                    return _index < 5 && <li key={_index}>{child.name}</li>;
+                  })}
+                  <div className={styles.viewAll}>查看全部</div>
+                </ul>
               </div>
-              <ul className={styles.songList}>
-                {list.map((child: any, _index) => {
-                  return _index < 5 && <li key={_index}>{child.name}</li>;
-                })}
-                <div className={styles.viewAll}>查看全部</div>
-              </ul>
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      </Spin>
       <Title text="全球榜" />
       <PlayList list={worldwide || []} />
     </div>
