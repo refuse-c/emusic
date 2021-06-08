@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 23:03:15
+ * @LastEditTime: 2021-06-08 23:14:08
  * @Description:发现音乐-排行榜
  */
 import { FC, useEffect, useState } from 'react';
@@ -106,7 +106,9 @@ const TopList: FC = () => {
                   {list.map((child: any, _index) => {
                     return _index < 5 && <li key={_index}>{child.name}</li>;
                   })}
-                  <div className={styles.viewAll}>查看全部</div>
+                  <div className={styles.viewAll} onClick={() => history.push(pathName)}>
+                    查看全部
+                  </div>
                 </ul>
               </div>
             );
