@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 11:59:45
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 21:32:43
+ * @LastEditTime: 2021-06-08 17:02:44
  * @Description:发现音乐
  */
 import { FC } from 'react';
@@ -19,7 +19,7 @@ const Find: FC = (props: any) => {
       <Content padding={'0 30px'} isFull={true}>
         <Nav list={findNav} isFixed={true} />
       </Content>
-      <Content>
+      <Content padding={'0 30px'} isFull={false}>
         <Router>
           {router.map((item: any, index: number) => (
             <Route

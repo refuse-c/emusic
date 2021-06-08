@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 14:01:17
+ * @LastEditTime: 2021-06-08 11:06:27
  * @Description:轮播图
  */
 import { formatImgSize } from '@/common/utils/format';
@@ -12,6 +12,7 @@ interface Props {
   list: any;
 }
 interface Item {
+  pic: string;
   imageUrl: string;
   typeTitle: string;
   titleColor: string;
@@ -40,7 +41,7 @@ const Banner: FC<Props> = (props) => {
           const color = item.titleColor === 'red' ? '#CC4A4A' : '#4A79CC';
           return (
             <li key={index} className={[cls1, cls2, cls3].join(' ')} onClick={() => setActive(index)}>
-              {<img src={formatImgSize(item.imageUrl, 540, 198)} alt="" />}
+              {<img src={formatImgSize(item.imageUrl || item.pic, 540, 198)} alt="" />}
               <p style={{ backgroundColor: color }}>{item.typeTitle}</p>
             </li>
           );
@@ -49,9 +50,9 @@ const Banner: FC<Props> = (props) => {
         <div className={styles.arrow_next}></div>
       </ul>
       <ul className={styles.pointList}>
-        {list.map((item: Item, index: number) => {
+        {list.map((_item, index: number) => {
           const cls = index === active ? styles.active : '';
-          return <li key={item.imageUrl} className={cls} onMouseEnter={() => setActive(index)}></li>;
+          return <li key={index} className={cls} onMouseEnter={() => setActive(index)}></li>;
         })}
       </ul>
     </div>

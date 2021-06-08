@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-06 18:39:28
+ * @LastEditTime: 2021-06-08 10:08:58
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -12,12 +12,17 @@ import PlayAll from '@components/playAll';
 import { recommendSong } from '@/common/net/find';
 import MusicList from '@components/musicList';
 import moment from 'moment';
+import { Spin } from 'antd';
 const RecommendSong: FC = () => {
+  const [loading, setLoading] = useState(false);
   const [dailySongs, setDdailySongs] = useState([]);
+
   const getRecommendSong = async () => {
+    setLoading(true);
     const res: any = await recommendSong();
     const dailySongs = res.data.dailySongs;
     setDdailySongs(dailySongs);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -40,9 +45,11 @@ const RecommendSong: FC = () => {
           <PlayAll list={dailySongs} />
         </Content>
       </div>
-      <div style={{ borderTop: '1px solid #E5E5E5' }}>
-        <MusicList list={dailySongs} />
-      </div>
+      <Spin spinning={loading}>
+        <div style={{ borderTop: '1px solid #E5E5E5' }}>
+          <MusicList list={dailySongs} />
+        </div>
+      </Spin>
     </div>
   );
 };
