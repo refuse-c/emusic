@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-06-09 12:11:56
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-09 17:47:10
+ * @LastEditTime: 2021-06-09 22:44:01
  * @Description:歌手api
  */
 import { get } from './request';
@@ -26,13 +26,7 @@ export const topArtists = (params: { limit: number; offset: number }) => {
  * type 取值:-1:全部 1:男歌手2:女歌手3:乐队
  * area 取值:-1:全部 7:华语 96:欧美 8:日本 16:韩国 0:其他
  */
-export const artistList = (params: {
-  limit: number;
-  offset: number;
-  initial: string;
-  type: string | number;
-  area: number | string;
-}) => {
+export const artistList = (params: { limit: number; offset: number; initial: string; type: string; area: string }) => {
   return get('/artist/list', params);
 };
 

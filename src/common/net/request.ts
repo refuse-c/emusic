@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:24:31
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 21:13:19
+ * @LastEditTime: 2021-06-09 23:58:46
  * @Description:
  */
 
@@ -41,8 +41,10 @@ instance.interceptors.response.use(
     return response.data;
   },
   (error) => {
+    const err = JSON.parse(JSON.stringify(error));
+    message.error(err.message);
     // 对响应错误做点什么
-    return Promise.reject(error);
+    return err; // Promise.reject(error);
   },
 );
 
