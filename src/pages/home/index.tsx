@@ -28,7 +28,7 @@ const Home: FC = () => {
               render={(props) => <item.component {...props} router={item.router} />}
             />
           ))}
-          <Redirect exact from="/" to="/find/toplist" />
+          <Redirect exact from="/" to="/find" />
         </Router>
       </View>
     </div>

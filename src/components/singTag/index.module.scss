@@ -1,0 +1,44 @@
+@import '~@common/css/_variables.scss';
+
+.singTag {
+  font-size: 12px;
+  display: flex;
+  .title {
+    color: #373737;
+    margin-top: 10px;
+    white-space: nowrap;
+  }
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      height: 20px;
+      color: #676767;
+      text-align: center;
+      line-height: 1;
+      border-radius: 15px;
+      margin-top: 10px;
+      cursor: pointer;
+      &:hover {
+        color: #373737;
+      }
+      &.active {
+        color: $color;
+      }
+      &:not(:last-child) {
+        position: relative;
+        margin-right: 20px;
+        &::after {
+          position: absolute;
+          top: 50%;
+          right: -10px;
+          content: '';
+          width: 1px;
+          height: 10px;
+          transform: translateY(-50%);
+          background-color: #f2f2f2;
+        }
+      }
+    }
+  }
+}

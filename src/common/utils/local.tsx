@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 17:20:43
+ * @LastEditTime: 2021-06-09 18:54:30
  * @Description:
  */
 /**
@@ -124,7 +124,7 @@ export const searchNav = [
  * @name:播放列表导航
  * @param {*}
  */
-export const playListNav = [{ title: '播放列表' }, { title: '历史记录' }];
+export const playListNav = [{ name: '播放列表' }, { name: '历史记录' }];
 
 /**
  * @name: 视频顶部导航
@@ -223,4 +223,63 @@ export const defaultColor = [
   '#653294',
   '#697689',
   '#555555',
+];
+
+/**
+ * @name: 歌手分类-首字母
+ * @param {*}
+ */
+export const initialList = [
+  { name: '热门', key: '-1' },
+  { name: 'A', key: 'a' },
+  { name: 'B', key: 'b' },
+  { name: 'C', key: 'c' },
+  { name: 'D', key: 'd' },
+  { name: 'E', key: 'e' },
+  { name: 'F', key: 'f' },
+  { name: 'G', key: 'g' },
+  { name: 'H', key: 'h' },
+  { name: 'I', key: 'i' },
+  { name: 'J', key: 'j' },
+  { name: 'K', key: 'k' },
+  { name: 'L', key: 'l' },
+  { name: 'M', key: 'm' },
+  { name: 'N', key: 'n' },
+  { name: 'O', key: 'o' },
+  { name: 'P', key: 'p' },
+  { name: 'Q', key: 'q' },
+  { name: 'R', key: 'r' },
+  { name: 'S', key: 's' },
+  { name: 'T', key: 't' },
+  { name: 'U', key: 'u' },
+  { name: 'V', key: 'v' },
+  { name: 'W', key: 'w' },
+  { name: 'X', key: 'x' },
+  { name: 'Y', key: 'y' },
+  { name: 'Z', key: 'z' },
+  { name: '#', key: '0' },
+];
+
+/**
+ * @name: 歌手分类-类型
+ * @param {*}
+ */
+export const typeList = [
+  { name: '全部', key: '-1' },
+  { name: '男歌手', key: '1' },
+  { name: '女歌手', key: '2' },
+  { name: '乐队', key: '3' },
+];
+
+/**
+ * @name: 歌手分类-地区
+ * @param {*}
+ */
+export const areaList = [
+  { name: '全部', key: '-1' },
+  { name: '华语', key: '7' },
+  { name: '欧美', key: '96' },
+  { name: '日本', key: '8' },
+  { name: '韩国', key: '16' },
+  { name: '其他', key: '0' },
 ];
