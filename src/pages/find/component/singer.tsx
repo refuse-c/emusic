@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-09 23:55:40
+ * @LastEditTime: 2021-06-11 01:26:27
  * @Description:发现音乐-歌手
  */
 import { FC, useState, useEffect } from 'react';
@@ -15,13 +15,16 @@ const Singer: FC = () => {
   const [type, setType] = useState('-1');
   const [initial, setInitial] = useState('-1');
   const queryArtistList = () => {
-    artistList({ limit: 10, offset: 0, area, type, initial })
-      .then((res) => {
+    artistList({ limit: 10, offset: 0, area, type, initial }).then(
+      (res: any) => {
         console.log(res);
-      })
-      // .catch((err) => console.log(err));
-      .then(null, (err) => console.log(err)); // catch
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
   };
+
   useEffect(() => {
     queryArtistList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
