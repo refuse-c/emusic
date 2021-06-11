@@ -1,6 +1,7 @@
 @import '~@common/css/_variables.scss';
 
 .playAll {
+  display: inline;
   p {
     cursor: pointer;
     display: table;

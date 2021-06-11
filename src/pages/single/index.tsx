@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-24 23:35:10
+ * @LastEditTime: 2021-06-11 14:10:00
  * @Description:
  */
 import { FC, useEffect, useState } from 'react';
@@ -62,7 +62,11 @@ const Single: FC = (props: any) => {
           <Content isFull={true} padding={'0 30px'}>
             <div id="head">
               <Head data={headData} list={musicList} />
-              <Navigation status={navStatus} list={navigationList} onChange={(index: number) => setNavStatus(index)} />
+              <Navigation
+                status={navStatus}
+                list={navigationList}
+                onChange={(_item: any, index: number) => setNavStatus(index)}
+              />
             </div>
           </Content>
           {navStatus === 0 ? (

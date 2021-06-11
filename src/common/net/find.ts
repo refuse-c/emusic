@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-27 21:33:43
+ * @LastEditTime: 2021-06-11 10:34:57
  * @Description:
  */
 import { get } from './request';
@@ -24,6 +24,23 @@ export const recommendSong = (params?: any) => {
   return get('/recommend/songs', params);
 };
 
+/**
+ * @name:获取历史日推可用日期列表
+ * @param {*} params
+ * @Description:
+ */
+export const historyRecommendSong = (params?: any) => {
+  return get('/history/recommend/songs', params);
+};
+
+/**
+ * @name:获取历史日推详情数据
+ * @param {*} params
+ * @Description:
+ */
+export const historyRecommendSongDetail = (params: { date: string }) => {
+  return get('/history/recommend/songs/detail', params);
+};
 /**
  * @name: 获取每日推荐歌单
  * @param {*} params

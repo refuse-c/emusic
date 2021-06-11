@@ -29,7 +29,7 @@
 
       &.active {
         color: $color;
-        background-color: #F7F8FE;
+        background-color: rgba($color, $alpha: 1);
       }
 
       &:nth-child(1) {
@@ -48,7 +48,7 @@
           width: 1px;
           height: 10px;
           transform: translateY(-50%);
-          background-color: #F2F2F2;
+          background-color: #f2f2f2;
         }
       }
     }

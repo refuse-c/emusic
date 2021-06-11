@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-25 14:22:51
+ * @LastEditTime: 2021-06-11 09:50:21
  * @Description:歌手组件
  */
 import { formatImgSize } from '@/common/utils/format';
@@ -23,9 +23,11 @@ const Singer: FC<Props> = (props) => {
           <li key={index}>
             <div className={styles.content}>
               <img src={formatImgSize(item.img1v1Url, 60, 60)} alt="" />
-              <p>{item.name}</p>
             </div>
-            {item.accountId ? <div className={styles.accountId}>accountId</div> : null}
+            <div className={styles.info}>
+              <p>{item.name}</p>
+              {item.accountId ? <div className={styles.accountId}>accountId</div> : null}
+            </div>
           </li>
         );
       })}
