@@ -22,7 +22,7 @@ export const initialState = {
   isPlay: false, // 是否播放
   searchText: '', // 检索的文字
   searchInfo: initSearchInfo, // 检索到的总数量
-  isOnLine: true, // 当前的网络状态 true/已连接  false/已断开
+  // isOnLine: true, // 当前的网络状态 true/已连接  false/已断开
   likeList: [], // 我喜欢的音乐id集合
   songList: [], // 当前播放的音乐列表
   playList: [], // 当前用户创建/收藏的歌单

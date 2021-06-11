@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 23:14:08
+ * @LastEditTime: 2021-06-12 00:24:10
  * @Description:发现音乐-排行榜
  */
 import { FC, useEffect, useState } from 'react';
@@ -48,27 +48,33 @@ const TopList: FC = () => {
 
   // 歌手榜单
   const queryToplistArtist = async (item: { coverUrl: string }) => {
-    const res = await toplistArtist();
-    const list = res.list.artists;
-    return { list, id: 'artisid', name: '歌手榜', coverImgUrl: item.coverUrl, ToplistType: 'A' };
+    const res: any = await toplistArtist();
+    if (res.code === 200) {
+      const list = res.list.artists;
+      return { list, id: 'artisid', name: '歌手榜', coverImgUrl: item.coverUrl, ToplistType: 'A' };
+    }
   };
 
   // 获取歌单内容
   const getPlayListDetail = async (id: string) => {
     const res: any = await playlistDetail({ id });
-    const { name, trackIds, updateTime, coverImgUrl } = res.playlist;
-    const idsArr = assemblyIds(res.playlist.trackIds);
-    const list = await getSongDetail(idsArr, trackIds);
-    return { list, id, name, updateTime, coverImgUrl };
+    if (res.code === 200) {
+      const { name, trackIds, updateTime, coverImgUrl } = res.playlist;
+      const idsArr = assemblyIds(res.playlist.trackIds);
+      const list = await getSongDetail(idsArr, trackIds);
+      return { list, id, name, updateTime, coverImgUrl };
+    }
   };
 
   // 批量获取歌曲详情
   const getSongDetail = async (ids: string, trackIds: any) => {
     const res: any = await songDetail({ ids });
-    const { songs, privileges } = res;
-    const mergeTrack = mergeData(privileges, trackIds) as [];
-    const musicList = mergeData(songs, mergeTrack); // 合并数据
-    return musicList;
+    if (res.code === 200) {
+      const { songs, privileges } = res;
+      const mergeTrack = mergeData(privileges, trackIds) as [];
+      const musicList = mergeData(songs, mergeTrack); // 合并数据
+      return musicList;
+    }
   };
 
   const queryAListDetail = (list: any) => {
@@ -77,7 +83,6 @@ const TopList: FC = () => {
       item.ToplistType === 'A' ? queryToplistArtist(item) : getPlayListDetail(item.id),
     );
     Promise.all(promises).then((official) => {
-      console.log(official);
       setSession('official', official);
       setOfficial(official);
       setLoading(false);

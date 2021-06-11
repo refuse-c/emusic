@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 22:24:15
+ * @LastEditTime: 2021-06-12 00:04:23
  * @Description:搜索-单曲
  */
-import { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState, useContext, useCallback } from 'react';
 import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
@@ -19,29 +19,35 @@ const Single: FC = () => {
   const { searchText: keywords, dispatch } = useContext(Context);
 
   // 检索
-  const getSearch = async (keywords: string) => {
-    setList([]);
-    setloading(true);
-    const res: any = await search({ keywords, limit: 100, type: 1 });
-    const { songs = [], songCount } = res && res.result;
-    const idsArr = songs.length && assemblyIds(songs);
-    const data = { type: 1, total: songCount || 0 };
-    await getSongDetail(idsArr);
-    dispatch({ type: 'searchInfo', data });
-  };
+  const getSearch = useCallback(
+    async (keywords: string) => {
+      setList([]);
+      setloading(true);
+      const res: any = await search({ keywords, limit: 100, type: 1 });
+      if (res.code === 200) {
+        const { songs = [], songCount } = res && res.result;
+        const idsArr = songs.length && assemblyIds(songs);
+        const data = { type: 1, total: songCount || 0 };
+        await getSongDetail(idsArr);
+        dispatch({ type: 'searchInfo', data });
+      }
+    },
+    [dispatch],
+  );
 
   const getSongDetail = async (ids: string) => {
     const res: any = await songDetail({ ids });
-    const { songs, privileges } = res;
-    const list = mergeData(songs, privileges) || []; // 合并数据
-    setList(list);
-    setloading(false);
+    if (res.code === 200) {
+      const { songs, privileges } = res;
+      const list = mergeData(songs, privileges) || []; // 合并数据
+      setList(list);
+      setloading(false);
+    }
   };
 
   useEffect(() => {
     getSearch(keywords);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keywords]);
+  }, [getSearch, keywords]);
 
   return (
     <Spin spinning={loading}>

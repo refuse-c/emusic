@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-17 18:04:03
+ * @LastEditTime: 2021-06-11 23:37:01
  * @Description:独家发送
  */
 import { FC, useEffect, useState } from 'react';
@@ -15,8 +15,7 @@ const Exclusive: FC = () => {
   const [list, setList] = useState([]);
   const getPrivatecontentList = async () => {
     const res: any = await privatecontentList();
-    const list = res.result || [];
-    setList(list);
+    if (res.code === 200) setList(res.result || []);
   };
 
   useEffect(() => {

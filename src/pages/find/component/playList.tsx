@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-10 00:03:37
+ * @LastEditTime: 2021-06-12 00:16:33
  * @Description:发现音乐-歌单
  */
 import { FC, useEffect, useState, useContext } from 'react';
@@ -35,8 +35,7 @@ const Recommend: FC = () => {
   // 获取热门歌单标签
   const getPlaylistHot = async () => {
     const res: any = await playlistHot();
-    const tagList = res.tags;
-    setTagList(tagList);
+    if (res.code === 200) setTagList(res.tags || []);
   };
 
   // 切换分页
@@ -45,15 +44,16 @@ const Recommend: FC = () => {
   // 获取歌单分类
   const getPlaylistCatlist = async () => {
     const res: any = await playlistCatlist();
-    const { categories, sub } = res;
-    let catObj: any = [];
-    Object.getOwnPropertyNames(categories).forEach((element) => {
-      const title = categories[element];
-      const children = sub.filter((item: any) => item.category === Number(element));
-      const obj = { title, children };
-      catObj.push(obj);
-    });
-    setCatlist(catObj);
+    if (res.code === 200) {
+      let catObj: any = [];
+      const { categories, sub } = res;
+      Object.getOwnPropertyNames(categories).forEach((element) => {
+        const title = categories[element];
+        const children = sub.filter((item: any) => item.category === Number(element));
+        catObj.push({ title, children });
+      });
+      setCatlist(catObj);
+    }
   };
 
   // 获取歌单 ( 网友精选碟 )
@@ -62,16 +62,17 @@ const Recommend: FC = () => {
     if (contentDom) contentDom.scrollTop = 0;
     const params = { order: 'hot', cat, limit: 100, offset: (current - 1) * 100 };
     const res: any = await playlistTop({ ...params });
-    res.current = current || 1;
-    setPlayList(res);
+    if (res.code === 200) {
+      res.current = current || 1;
+      setPlayList(res);
+    }
   };
 
   // 获取精品歌单
   const getHighqualityTop = async (cat: string) => {
     const params = { cat, limit: 1, before: '' };
     const res: any = await highqualityTop({ ...params });
-    const playList = res.playlists[0] || {};
-    setHighList(playList);
+    if (res.code === 200) setHighList(res.playlists[0] || {});
   };
 
   useEffect(() => {
@@ -79,7 +80,6 @@ const Recommend: FC = () => {
     getPlaylistCatlist();
     getPplaylistTop('', 1);
     getHighqualityTop('');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

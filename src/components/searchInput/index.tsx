@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 17:42:21
+ * @LastEditTime: 2021-06-12 00:12:44
  * @Description:搜索框组件
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -39,14 +39,18 @@ const SearchInput: FC = () => {
   //搜索建议
   const getSearchHotSuggest = async (keywords: string) => {
     const res: any = await searchHotSuggest({ keywords });
-    console.log(res);
+    if (res.code === 200) {
+      console.log(res);
+    }
   };
 
   // 获取默认搜索关键字
   const getDefaultVal = async () => {
     const res: any = await searchDefault();
-    const dfKeyWord = res.data || defaultVal;
-    setDfKeyWord(dfKeyWord);
+    if (res.code === 200) {
+      const dfKeyWord = res.data || defaultVal;
+      setDfKeyWord(dfKeyWord);
+    }
   };
 
   useEffect(() => {

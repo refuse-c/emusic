@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-11 14:28:54
+ * @LastEditTime: 2021-06-12 01:47:24
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -96,7 +96,7 @@ const RecommendSong: FC = () => {
           </div>
           <div className={styles.tools}>
             <PlayAll list={dailySongs} />
-            {historyInfo.length > 2 && (
+            {historyInfo.length > 3 && (
               <Navigation
                 list={historyInfo}
                 status={navStatus}

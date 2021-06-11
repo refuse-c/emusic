@@ -175,6 +175,14 @@
       .ant-table-column-sorters {
         padding: 0 7px !important;
       }
+      .ant-table-column-sorter {
+        opacity: 0;
+      }
+      &:hover {
+        .ant-table-column-sorter {
+          opacity: 1;
+        }
+      }
     }
 
     .ant-table-tbody {

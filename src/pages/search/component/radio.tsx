@@ -2,11 +2,11 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-27 16:59:47
+ * @LastEditTime: 2021-06-12 00:02:49
  * @Description:搜索-主播电台
  */
 
-import { FC, useEffect, useState, useContext } from 'react';
+import { FC, useEffect, useState, useContext, useCallback } from 'react';
 import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
@@ -18,22 +18,25 @@ const Radio: FC = () => {
   const { searchText: keywords, dispatch } = useContext(Context);
 
   // 检索
-  const getSearch = async (keywords: string) => {
-    setList([]);
-    setloading(true);
-    const res: any = await search({ keywords, type: 1009, limit: 100 });
-    console.log(res);
-    const { djRadios = [], djRadiosCount = 0 } = res && res.result;
-    const data = { type: 1009, total: djRadiosCount };
-    setloading(false);
-    setList(djRadios || []);
-    dispatch({ type: 'searchInfo', data });
-  };
+  const getSearch = useCallback(
+    async (keywords: string) => {
+      setList([]);
+      setloading(true);
+      const res: any = await search({ keywords, type: 1009, limit: 100 });
+      if (res.code === 200) {
+        const { djRadios = [], djRadiosCount = 0 } = res && res.result;
+        const data = { type: 1009, total: djRadiosCount };
+        setloading(false);
+        setList(djRadios || []);
+        dispatch({ type: 'searchInfo', data });
+      }
+    },
+    [dispatch],
+  );
 
   useEffect(() => {
     getSearch(keywords);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keywords]);
+  }, [getSearch, keywords]);
 
   return (
     <Spin spinning={loading}>

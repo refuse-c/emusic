@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-06 21:43:12
+ * @LastEditTime: 2021-06-12 00:16:19
  * @Description:control
  */
-import { FC, useContext, useState, useEffect } from 'react';
+import { FC, useContext, useState, useEffect, useCallback } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatImgSize, formatTime } from '@/common/utils/format';
@@ -66,17 +66,21 @@ const Control: FC = () => {
     }
   };
   // 获取url
-  const getSongUrl = async (id: number | string) => {
-    if (!id) return false;
-    const params = { id, br: '128000' };
-    const res: any = await songUrl(params);
-    if (res.code === 200) {
-      const url = (res && res.data[0] && res.data[0].url) || `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
-      setUrl(url);
-      // blobLoad(url);
-      dispatch({ type: 'isPlay', data: true });
-    }
-  };
+  const getSongUrl = useCallback(
+    async (id: number | string) => {
+      if (!id) return false;
+      const params = { id, br: '128000' };
+      const res: any = await songUrl(params);
+      if (res.code === 200) {
+        const url =
+          (res && res.data[0] && res.data[0].url) || `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+        setUrl(url);
+        // blobLoad(url);
+        dispatch({ type: 'isPlay', data: true });
+      }
+    },
+    [dispatch],
+  );
   // 暂停/播放
   const handlePaused = () => {
     dispatch({ type: 'isPlay', data: !isPlay });
@@ -84,13 +88,16 @@ const Control: FC = () => {
   };
 
   // 切歌
-  const handlcutSong = async (type: number) => {
-    setSongTime({ currentTime: 0, duration: 0 });
-    // if (model === 3) return false;
-    const currentIndex = _findIndex(songList, id);
-    const index = cutSong(currentIndex, songList, model, type);
-    dispatch({ type: 'currentSong', data: songList.length ? songList[index] : initSong });
-  };
+  const handlcutSong = useCallback(
+    async (type: number) => {
+      setSongTime({ currentTime: 0, duration: 0 });
+      // if (model === 3) return false;
+      const currentIndex = _findIndex(songList, id);
+      const index = cutSong(currentIndex, songList, model, type);
+      dispatch({ type: 'currentSong', data: songList.length ? songList[index] : initSong });
+    },
+    [dispatch, id, model, songList],
+  );
 
   // 改变模式
   const handleModel = () => {
@@ -137,8 +144,7 @@ const Control: FC = () => {
         debounce(() => handlcutSong(2), 1000);
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [getSongUrl, handlcutSong, id, refAudio]);
 
   useEffect(() => {
     if (refAudio) {
@@ -148,8 +154,7 @@ const Control: FC = () => {
         model !== 3 && setSongTime({ currentTime, duration });
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refAudio]);
+  }, [model, refAudio, volume]);
   const num = getTimeIndex(lrc, currentTime);
   return (
     <div className={styles.control}>

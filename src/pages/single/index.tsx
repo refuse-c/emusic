@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-11 14:10:00
+ * @LastEditTime: 2021-06-12 00:10:18
  * @Description:
  */
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useCallback } from 'react';
 import { Spin } from 'antd';
 import Head from './component/head';
 import styles from './index.module.scss';
@@ -27,33 +27,34 @@ const Single: FC = (props: any) => {
   const [navStatus, setNavStatus] = useState(0);
 
   // 获取歌单内容
-  const getPlayListDetail = async (id: string) => {
+  const getPlayListDetail = useCallback(async (id: string) => {
     setLoading(true);
-    try {
-      const res: any = await playlistDetail({ id });
+    const res: any = await playlistDetail({ id });
+    if (res.code === 200) {
       const headData = res.playlist || {};
       const idsArr = assemblyIds(res.playlist.trackIds);
       await getSongDetail(idsArr);
       setHeadData(headData);
       setLoading(false);
-    } catch (e) {
+    } else {
       setLoading(false);
     }
-  };
+  }, []);
 
   // 批量获取歌曲详情
   const getSongDetail = async (ids: string) => {
     const res: any = await songDetail({ ids });
-    const { songs, privileges } = res;
-    const musicList = mergeData(songs, privileges); // 合并数据
-    setMusicList(musicList);
+    if (res.code === 200) {
+      const { songs, privileges } = res;
+      const musicList = mergeData(songs, privileges); // 合并数据
+      setMusicList(musicList);
+    }
   };
   useEffect(() => {
     setNavStatus(0);
     setMusicList([]);
     getPlayListDetail(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [getPlayListDetail, id]);
 
   return (
     <Content isFull={true} padding={0}>

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-11 10:39:02
+ * @LastEditTime: 2021-06-12 00:13:41
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -33,15 +33,21 @@ const App: FC = () => {
 
   // 登录
   const getLogin = async () => {
-    const res: any = await login({ phone: '13272946536', password: 'wangyi123@@' });
-    if (res.code === 200) {
-      const userInfo = res.profile;
-      const userId = userInfo.userId;
-      const nickname = userInfo.nickname || '';
-      getPlaylist(userId, nickname);
-      getGrowthpoint();
-      dispatch({ type: 'userInfo', data: userInfo });
-    }
+    login({ phone: '18008523529', password: 'wangyi123' }).then(
+      (res: any) => {
+        if (res.code === 200) {
+          const userInfo = res.profile;
+          const userId = userInfo.userId;
+          const nickname = userInfo.nickname || '';
+          getPlaylist(userId, nickname);
+          getGrowthpoint();
+          dispatch({ type: 'userInfo', data: userInfo });
+        }
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
   };
 
   // 获取vip成长值
@@ -62,7 +68,9 @@ const App: FC = () => {
   // 获取我喜欢的音乐ids集合
   const getLikeIds = async () => {
     const res: any = await likelist();
-    dispatch({ type: 'likeList', data: res.ids || [] });
+    if (res.code === 200) {
+      dispatch({ type: 'likeList', data: res.ids || [] });
+    }
   };
 
   // 添加/取消我喜欢的音乐
@@ -71,39 +79,37 @@ const App: FC = () => {
     if (res.code === 200) {
       getLikeIds();
       message.success(like ? '已添加到我喜欢的音乐' : '取消喜欢成功');
+    } else {
+      message.success(like ? '添加失败' : '取消失败');
     }
   };
 
   // 获取当前登录用户的歌单
-  const getPlaylist = async (uid: number, nickname: string) => {
-    const res: any = await playlist({ uid });
-    const allList = res.playlist || [];
-    allList.map((item: Item) => {
-      item.type = 1;
-      item.path = `/single${item.id}`;
-      item.name = item.userId === uid ? item.name.replace(nickname, '我') : item.name;
-      return item;
-    });
-    const createList = allList.filter((item: Item) => item.privacy !== 10 && item.userId === uid);
-    const collectList = allList.filter((item: Item) => item.privacy !== 10 && item.userId !== uid);
-    // const myLikeSingle = allList.find((item) => item.specialType === 5 && item.userId === uid);
-    createList.unshift(createObj);
-    collectList.unshift(collectObj);
-    const list = createList.concat(collectList);
-    dispatch({ type: 'playList', data: list });
+  const getPlaylist = (uid: number, nickname: string) => {
+    playlist({ uid }).then(
+      (res: any) => {
+        const allList = res.playlist || [];
+        allList.map((item: Item) => {
+          item.type = 1;
+          item.path = `/single${item.id}`;
+          item.name = item.userId === uid ? item.name.replace(nickname, '我') : item.name;
+          return item;
+        });
+        const createList = allList.filter((item: Item) => item.privacy !== 10 && item.userId === uid);
+        const collectList = allList.filter((item: Item) => item.privacy !== 10 && item.userId !== uid);
+        // const myLikeSingle = allList.find((item) => item.specialType === 5 && item.userId === uid);
+        createList.unshift(createObj);
+        collectList.unshift(collectObj);
+        const list = createList.concat(collectList);
+        dispatch({ type: 'playList', data: list });
+      },
+      (err) => console.log(err),
+    );
   };
 
   useEffect(() => {
     getLogin();
     getLikeIds();
-    window.ononline = () => {
-      message.info('网络已经连上');
-      dispatch({ type: 'isOnLine', data: navigator.onLine });
-    };
-    window.onoffline = () => {
-      message.warning('网络已经断开');
-      dispatch({ type: 'isOnLine', data: navigator.onLine });
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

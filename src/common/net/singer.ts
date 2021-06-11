@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-06-09 12:11:56
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-09 22:44:01
+ * @LastEditTime: 2021-06-11 21:38:53
  * @Description:歌手api
  */
 import { get } from './request';

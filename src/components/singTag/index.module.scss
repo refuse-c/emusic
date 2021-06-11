@@ -6,7 +6,7 @@
 
   .title {
     color: #373737;
-    margin: 10px 6px 0;
+    margin: 8px 6px 0;
     line-height: 20px;
     white-space: nowrap;
   }
@@ -16,20 +16,16 @@
     flex-wrap: wrap;
 
     li {
+      position: relative;
       line-height: 20px;
       color: #676767;
       text-align: center;
       border-radius: 15px;
-      margin-top: 10px;
+      margin-top: 8px;
       cursor: pointer;
 
       &:hover {
         color: #373737;
-      }
-
-      &.active {
-        color: $color;
-        background-color: rgba($color, $alpha: 1);
       }
 
       &:nth-child(1) {
@@ -37,7 +33,6 @@
       }
 
       &:not(:last-child) {
-        position: relative;
         margin-right: 20px;
 
         &::after {
@@ -45,10 +40,25 @@
           top: 50%;
           right: -10px;
           content: '';
-          width: 1px;
+          width: 2px;
           height: 10px;
           transform: translateY(-50%);
           background-color: #f2f2f2;
+        }
+      }
+
+      &.active {
+        color: $color;
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+          width: 100%;
+          height: 100%;
+          border-radius: 15px;
+          opacity: 0.08;
+          background-color: $color;
         }
       }
     }
