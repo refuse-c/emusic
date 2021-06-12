@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:16:19
+ * @LastEditTime: 2021-06-12 11:12:34
  * @Description:control
  */
 import { FC, useContext, useState, useEffect, useCallback } from 'react';
@@ -150,7 +150,14 @@ const Control: FC = () => {
     if (refAudio) {
       refAudio.volume = volume / 10;
       refAudio.addEventListener('timeupdate', () => {
-        const { currentTime, duration } = refAudio;
+        const { currentTime, duration, buffered } = refAudio;
+        // 缓冲进度
+        if (buffered.length !== 0) {
+          const bufferTime = buffered.end(buffered.length - 1);
+          const bw = Number((bufferTime / duration).toFixed(2)) * 100;
+          const slider = document.getElementsByClassName('ant-slider-rail')[0] as HTMLElement;
+          slider.style.background = `linear-gradient(to right, #cdcdcd ${bw}%, #e5e5e5 ${1 - bw}%)`;
+        }
         model !== 3 && setSongTime({ currentTime, duration });
       });
     }

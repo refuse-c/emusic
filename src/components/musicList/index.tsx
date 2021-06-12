@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-03 21:51:57
+ * @LastEditTime: 2021-06-12 11:12:16
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
@@ -28,9 +28,9 @@ const MusicList: FC<Props> = (props) => {
     const _index = _findIndex(list, currentSong.id);
 
     console.log(_index);
-    const contentDom = document.getElementById('content') as any;
-    const headDomHeight = document.getElementById('head')?.clientHeight as any;
-    const tableDom = document.getElementsByClassName('ant-table-tbody')[0].childNodes as any;
+    const contentDom = document.getElementById('content') as HTMLElement;
+    const headDomHeight = document.getElementById('head')?.clientHeight as unknown as HTMLElement;
+    const tableDom = document.getElementsByClassName('ant-table-tbody')[0].childNodes as unknown as HTMLElement;
     if (contentDom && tableDom) contentDom.scrollTop = _index === -1 ? 0 : tableDom[_index].offsetTop + headDomHeight;
   };
   const columns = [
