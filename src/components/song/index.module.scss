@@ -55,21 +55,17 @@
       flex-direction: column;
       justify-content: space-between;
       padding: 5px 0 8px 10px;
+      overflow: hidden;
 
-      div {
-        &:nth-child(1) {
-          font-size: 14px;
-
-          span {
-            color: #929292;
-            font-size: 12px;
-          }
-        }
-
-        &:nth-child(2) {
-          font-size: 14px;
-          font-weight: 200;
-        }
+      .name {
+        font-size: 14px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        // span {
+        //   color: #929292;
+        //   font-size: 12px;
+        // }
       }
     }
   }

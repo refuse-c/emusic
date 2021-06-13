@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-27 22:38:10
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-04-30 18:24:24
+ * @LastEditTime: 2021-06-13 13:57:21
  * @Description:
  */
 import { get } from './request';
@@ -189,10 +189,11 @@ export const playlistDelete = (params: { id: number | string }) => {
 
 /**
  * @name: 收藏/取消收藏歌单
- * @param {*} t : 类型,1:收藏,2:取消收藏 id : 歌单 id
+ * @param {*} id : 歌单 id
+ * @param {*} t : 类型,1:收藏,2:取消收藏
  * @Description:
  */
-export const playlistSubscribe = (params: { t: number | string }) => {
+export const playlistSubscribe = (params: { id: number | string; t: number | string }) => {
   return get('/playlist/subscribe', params);
 };
 

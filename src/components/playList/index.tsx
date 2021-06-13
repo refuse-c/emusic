@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-21 16:27:12
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 21:56:38
+ * @LastEditTime: 2021-06-12 23:33:57
  * @Description:播放列表
  */
 
@@ -28,7 +28,7 @@ const PlayList: FC = () => {
           })}
         </ul>
       </div>
-      {console.log(songList)}
+      {/* {console.log(songList)} */}
     </div>
   );
 };

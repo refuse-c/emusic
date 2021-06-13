@@ -74,6 +74,9 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       padding-right: 5px;
+      span {
+        color: #507daf;
+      }
     }
 
     i {
@@ -106,10 +109,16 @@
     color: #656565;
     cursor: pointer;
     padding-right: 5px;
-
+    span {
+      color: #507daf;
+    }
     &:hover {
       color: #000000d9;
       text-decoration: underline;
+      span {
+        color: #000000d9;
+        text-decoration: underline;
+      }
     }
   }
 
@@ -118,6 +127,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    cursor: pointer;
+
+    span {
+      color: #507daf;
+    }
+    &:hover {
+      color: #000000d9;
+      text-decoration: underline;
+      span {
+        color: #000000d9;
+        text-decoration: underline;
+      }
+    }
   }
 
   .time {

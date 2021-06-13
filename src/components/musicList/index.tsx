@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 11:12:16
+ * @LastEditTime: 2021-06-13 14:43:26
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
@@ -10,29 +10,36 @@ import { message, Table } from 'antd';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatSerialNumber, formatTime } from '@/common/utils/format';
-import { _findIndex } from '@/common/utils/tools';
+import { highlight, _findIndex } from '@/common/utils/tools';
 import ToggleLike from '@components/model/toggleLike';
 import clone from 'clone';
 interface Props {
   list?: any | [];
   loading?: boolean;
-  likeCallBack?: (id: string) => void;
+  singleId?: number | string;
+  callBack?: any;
+  searchText?: string;
 }
 
 const MusicList: FC<Props> = (props) => {
-  const { list, loading = false } = props;
+  const { list, loading = false, callBack, singleId, searchText = '' } = props;
   const [id, setId] = useState(0);
-  const { songList, likeList, currentSong, setLike, dispatch } = useContext(Context);
-
+  const { songList, myLikeId, likeList, currentSong, setLike, dispatch } = useContext(Context);
+  // 点击返回顶部或者滚动到当前播放的音乐
   const handle = () => {
     const _index = _findIndex(list, currentSong.id);
-
-    console.log(_index);
     const contentDom = document.getElementById('content') as HTMLElement;
     const headDomHeight = document.getElementById('head')?.clientHeight as unknown as HTMLElement;
     const tableDom = document.getElementsByClassName('ant-table-tbody')[0].childNodes as unknown as HTMLElement;
     if (contentDom && tableDom) contentDom.scrollTop = _index === -1 ? 0 : tableDom[_index].offsetTop + headDomHeight;
   };
+
+  //如果当前处于我喜欢的列表 操作喜欢/取消喜欢后 刷新列表
+  const handleLike = async (recordId: number | string, like: boolean) => {
+    await setLike(recordId, like);
+    if (myLikeId === singleId) callBack(myLikeId);
+  };
+
   const columns = [
     {
       title: '',
@@ -45,7 +52,7 @@ const MusicList: FC<Props> = (props) => {
             {likeList.includes(record.id) ? (
               <span onClick={() => setId(record.id)} style={{ color: '#EC4141' }} className="icon icon-like"></span>
             ) : (
-              <span onClick={() => setLike(record.id, true)} className="icon icon-unlike"></span>
+              <span onClick={() => handleLike(record.id, true)} className="icon icon-unlike"></span>
             )}
             <span style={{ marginLeft: 10 }} className="icon icon-list-download"></span>
           </div>
@@ -60,12 +67,10 @@ const MusicList: FC<Props> = (props) => {
       render: (record: any) => (
         <div className={styles.name}>
           <p
-          // dangerouslySetInnerHTML={{
-          //   __html: highlightText(this.props.keywords, item.name),
-          // }}
-          >
-            {record.name}
-          </p>
+            dangerouslySetInnerHTML={{
+              __html: highlight(searchText, record.name),
+            }}
+          ></p>
           {record.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
           {record.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
           {record.mv !== 0 ? (
@@ -81,9 +86,13 @@ const MusicList: FC<Props> = (props) => {
       sorter: (a: any, b: any) => a.ar[0].name.localeCompare(b.ar[0].name),
       render: (record: any) =>
         record.ar.map((item: any, index: number) => (
-          <span key={index} className={styles.singer}>
-            {item.name}
-          </span>
+          <span
+            key={index}
+            className={styles.singer}
+            dangerouslySetInnerHTML={{
+              __html: highlight(searchText, item.name),
+            }}
+          ></span>
         )),
     },
     {
@@ -91,7 +100,14 @@ const MusicList: FC<Props> = (props) => {
       key: 'album',
       ellipsis: true,
       sorter: (a: any, b: any) => a.name.localeCompare(b.name),
-      render: (record: any) => <span className={styles.album}>{record.al.name}</span>,
+      render: (record: any) => (
+        <span
+          className={styles.album}
+          dangerouslySetInnerHTML={{
+            __html: highlight(searchText, record.al.name),
+          }}
+        ></span>
+      ),
     },
     {
       title: '时长',
@@ -132,7 +148,7 @@ const MusicList: FC<Props> = (props) => {
   };
   return (
     <div className={styles.musicList}>
-      <ToggleLike id={id} hasShow={!!id} onClose={() => setId(0)} />
+      <ToggleLike hasShow={!!id} onFinish={() => handleLike(id, false)} onClose={() => setId(0)} />
       <div id="point" className={styles.point} onClick={() => handle()}></div>
       <Table
         rowKey="id"

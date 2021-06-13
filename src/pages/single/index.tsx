@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:11:50
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:10:18
+ * @LastEditTime: 2021-06-13 13:55:53
  * @Description:
  */
 import { FC, useEffect, useState, useCallback } from 'react';
@@ -27,7 +27,7 @@ const Single: FC = (props: any) => {
   const [navStatus, setNavStatus] = useState(0);
 
   // 获取歌单内容
-  const getPlayListDetail = useCallback(async (id: string) => {
+  const getPlayListDetail = useCallback(async (id: string | number) => {
     setLoading(true);
     const res: any = await playlistDetail({ id });
     if (res.code === 200) {
@@ -50,6 +50,7 @@ const Single: FC = (props: any) => {
       setMusicList(musicList);
     }
   };
+
   useEffect(() => {
     setNavStatus(0);
     setMusicList([]);
@@ -62,7 +63,7 @@ const Single: FC = (props: any) => {
         <div className={styles.single}>
           <Content isFull={true} padding={'0 30px'}>
             <div id="head">
-              <Head data={headData} list={musicList} />
+              <Head singleId={id} data={headData} list={musicList} callBack={getPlayListDetail} />
               <Navigation
                 status={navStatus}
                 list={navigationList}
@@ -71,7 +72,7 @@ const Single: FC = (props: any) => {
             </div>
           </Content>
           {navStatus === 0 ? (
-            <MusicList list={musicList} likeCallBack={getPlayListDetail} />
+            <MusicList list={musicList} singleId={id} callBack={getPlayListDetail} />
           ) : navStatus === 1 ? (
             <Comments />
           ) : (

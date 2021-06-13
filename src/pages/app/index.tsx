@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:13:41
+ * @LastEditTime: 2021-06-13 14:52:00
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -33,25 +33,20 @@ const App: FC = () => {
 
   // 登录
   const getLogin = async () => {
-    login({ phone: '18008523529', password: 'wangyi123' }).then(
-      (res: any) => {
-        if (res.code === 200) {
-          const userInfo = res.profile;
-          const userId = userInfo.userId;
-          const nickname = userInfo.nickname || '';
-          getPlaylist(userId, nickname);
-          getGrowthpoint();
-          dispatch({ type: 'userInfo', data: userInfo });
-        }
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
+    const res: any = await login({ phone: '18008523529', password: 'wangyi123' });
+    if (res.code === 200) {
+      if (res.code === 200) {
+        const data = res.profile;
+        const userId = data.userId;
+        const nickname = data.nickname || '';
+        getPlaylist(userId, nickname);
+        getGrowthpoint();
+        dispatch({ type: 'userInfo', data });
+      }
+    }
   };
 
   // 获取vip成长值
-
   const getGrowthpoint = async () => {
     const res: any = await growthpoint();
     if (res.code === 200) {
@@ -74,10 +69,11 @@ const App: FC = () => {
   };
 
   // 添加/取消我喜欢的音乐
-  const setLike = async (id: number, like: boolean) => {
+  const setLike = async (id: number, like: boolean, callback?: () => void) => {
     const res: any = await addLike({ id, like });
     if (res.code === 200) {
       getLikeIds();
+      callback && callback();
       message.success(like ? '已添加到我喜欢的音乐' : '取消喜欢成功');
     } else {
       message.success(like ? '添加失败' : '取消失败');
@@ -85,26 +81,25 @@ const App: FC = () => {
   };
 
   // 获取当前登录用户的歌单
-  const getPlaylist = (uid: number, nickname: string) => {
-    playlist({ uid }).then(
-      (res: any) => {
-        const allList = res.playlist || [];
-        allList.map((item: Item) => {
-          item.type = 1;
-          item.path = `/single${item.id}`;
-          item.name = item.userId === uid ? item.name.replace(nickname, '我') : item.name;
-          return item;
-        });
-        const createList = allList.filter((item: Item) => item.privacy !== 10 && item.userId === uid);
-        const collectList = allList.filter((item: Item) => item.privacy !== 10 && item.userId !== uid);
-        // const myLikeSingle = allList.find((item) => item.specialType === 5 && item.userId === uid);
-        createList.unshift(createObj);
-        collectList.unshift(collectObj);
-        const list = createList.concat(collectList);
-        dispatch({ type: 'playList', data: list });
-      },
-      (err) => console.log(err),
-    );
+  const getPlaylist = async (uid: number, nickname: string) => {
+    const res: any = await playlist({ uid });
+    if (res.code === 200) {
+      const allList = res.playlist || [];
+      allList.map((item: Item) => {
+        item.type = 1;
+        item.path = `/single${item.id}`;
+        item.name = item.userId === uid ? item.name.replace(nickname, '我') : item.name;
+        return item;
+      });
+      const createList = allList.filter((item: Item) => item.privacy !== 10 && item.userId === uid);
+      const collectList = allList.filter((item: Item) => item.privacy !== 10 && item.userId !== uid);
+      const myLikeId = allList.find((item: any) => item.specialType === 5 && item.userId === uid);
+      createList.unshift(createObj);
+      collectList.unshift(collectObj);
+      const list = createList.concat(collectList);
+      dispatch({ type: 'playList', data: list });
+      dispatch({ type: 'myLikeId', data: String(myLikeId.id) });
+    }
   };
 
   useEffect(() => {
@@ -115,7 +110,7 @@ const App: FC = () => {
 
   return (
     <div className={styles.app} onClick={() => dispatch({ type: 'showModal', data: '' })}>
-      <Context.Provider value={{ ...state, setLike, dispatch }}>
+      <Context.Provider value={{ ...state, setLike, getPlaylist, dispatch }}>
         <Home />
       </Context.Provider>
     </div>

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 14:13:51
+ * @LastEditTime: 2021-06-13 10:17:17
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState } from 'react';
@@ -17,12 +17,13 @@ import RadioList from '@/components/radioList';
 import { findBanner, recommendList, exclusive, personalizedMv, recommendDj } from '@/common/net/find';
 import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
-import { newMusic } from '@/common/net/api';
+import { newMusic, songDetail } from '@/common/net/api';
+import { assemblyIds, mergeData } from '@/common/utils/tools';
 const Recommend: FC = () => {
   const [bannerList, setBannerList] = useState([]);
   const [playList, setPlayList] = useState([]);
   const [exclusiveList, setExclusiveList] = useState([]);
-  const [newMusicList, setNewMusicList] = useState([]);
+  const [newMusicList, setNewMusicList] = useState<any>([]);
   const [mvList, setMvList] = useState([]);
   const [radioList, setRadioList] = useState([]);
 
@@ -80,9 +81,9 @@ const Recommend: FC = () => {
    */
   const getNewMusic = async () => {
     const result: any = await newMusic();
-    const newMusicList = result.data || [];
-    newMusicList.length = 12;
-    setNewMusicList(newMusicList);
+    const arr = result.data || [];
+    const idsArr = assemblyIds(arr);
+    await getSongDetail(idsArr);
   };
 
   /**
@@ -107,14 +108,34 @@ const Recommend: FC = () => {
     setRadioList(radioList);
   };
 
+  // 批量获取歌曲详情
+  const getSongDetail = async (ids: string) => {
+    const res: any = await songDetail({ ids });
+    if (res.code === 200) {
+      const { songs, privileges } = res;
+      const arr = mergeData(songs, privileges); // 合并数据
+      const list = arr.filter((item) => item.fee !== -200 && item.fee !== 4);
+      list.length = list.length > 12 ? 12 : list.length;
+      setNewMusicList(list);
+    }
+  };
+
   useEffect(() => {
     getFindBanner();
     getRecommendList();
-    // getRecommendSong();
     getExclusiveList();
     getNewMusic();
     getPersonalizedMv();
     getRecommendDj();
+    return () => {
+      setBannerList([]);
+      setPlayList([]);
+      setExclusiveList([]);
+      setNewMusicList([]);
+      setMvList([]);
+      setRadioList([]);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 01:47:24
+ * @LastEditTime: 2021-06-13 10:12:29
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -20,55 +20,45 @@ const RecommendSong: FC = () => {
   const [historyInfo, setHistoryInfo] = useState([]);
   const [dailySongs, setDdailySongs] = useState([]);
   const [navStatus, setNavStatus] = useState(0);
+
   // 获取推荐歌曲
-  const getRecommendSong = () => {
+  const getRecommendSong = async () => {
     setLoading(true);
-    recommendSong().then(
-      (res: any) => {
-        const dailySongs = res.data.dailySongs;
-        setDdailySongs(dailySongs);
-        setLoading(false);
-      },
-      (error) => {
-        console.log(error);
-        setLoading(false);
-      },
-    );
+    const res: any = await recommendSong();
+    if (res.code === 200) {
+      const dailySongs = res.data.dailySongs;
+      setDdailySongs(dailySongs);
+      setLoading(false);
+    } else {
+      setLoading(false);
+    }
   };
 
   // 获取历史时间
-  const getHistoryRecommendSong = () => {
-    historyRecommendSong().then(
-      (res: any) => {
-        let array: any = [];
-        const dates = res.data.dates || [];
-        dates.unshift(moment().format('YYYY-MM-DD'));
-        dates.forEach((item: string) => {
-          const today = moment().format('YYYY-MM-DD');
-          const obj = { title: item === today ? '今天' : moment(item).format('MM-DD'), key: item };
-          array.push(obj);
-        });
-        setHistoryInfo(array);
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
+  const getHistoryRecommendSong = async () => {
+    const res: any = await historyRecommendSong();
+    if (res.code === 200) {
+      let array: any = [];
+      const dates = res.data.dates || [];
+      dates.unshift(moment().format('YYYY-MM-DD'));
+      dates.forEach((item: string) => {
+        const today = moment().format('YYYY-MM-DD');
+        const obj = { title: item === today ? '今天' : moment(item).format('MM-DD'), key: item };
+        array.push(obj);
+      });
+      setHistoryInfo(array);
+    }
   };
+
   // 获取历史推荐歌曲
-  const getHistoryRecommendSongDetail = (date: string) => {
+  const getHistoryRecommendSongDetail = async (date: string) => {
     setLoading(true);
-    historyRecommendSongDetail({ date }).then(
-      (res: any) => {
-        const dailySongs = res.data.songs;
-        setDdailySongs(dailySongs);
-        setLoading(false);
-      },
-      (error) => {
-        console.log(error);
-        setLoading(false);
-      },
-    );
+    const res: any = await historyRecommendSongDetail({ date });
+    if (res.code === 200) {
+      const dailySongs = res.data.songs;
+      setDdailySongs(dailySongs);
+      setLoading(false);
+    }
   };
 
   const handleNav = (item: { title: string; key: string }, index: number) => {

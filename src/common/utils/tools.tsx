@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 16:40:03
+ * @LastEditTime: 2021-06-13 14:41:57
  * @Description:
  */
 
@@ -35,13 +35,24 @@ export const isArray = (arr: []) => {
 interface Item {
   name: string;
 }
-export const renderArtists = (arr: []) => {
+export const renderArtists = (item: any) => {
   return (
-    <ul className={styles.artists}>
-      {arr.map((item: Item, index: number) => (
-        <li key={index}>{item.name}</li>
-      ))}
-    </ul>
+    <div className={styles.artists}>
+      {item.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
+      {item.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
+      {item.mv !== 0 ? (
+        <i onClick={() => console.log(item.mv)} className={['icon icon-mv', styles.mv].join(' ')}></i>
+      ) : null}
+      <div className={styles.artistsName}>
+        {item.ar.map((item: Item, index: number) => {
+          return (
+            <span key={index} title={item.name}>
+              {item.name}
+            </span>
+          );
+        })}{' '}
+      </div>
+    </div>
   );
 };
 
@@ -223,4 +234,14 @@ export const getTimeIndex = (timeArr: any | [], time: number) => {
     }
   }
   return Number(timeIndex);
+};
+
+/**
+ * @name: 高亮检索文字
+ * @param {*} text  原文本
+ * @param {*} searchText    检索文本
+ * @Description:
+ */
+export const highlight = (text: string, searchText: string) => {
+  return searchText.replace(new RegExp(text, 'gi'), (val: string) => `<span>${val}</span>`);
 };
