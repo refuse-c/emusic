@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 11:12:34
+ * @LastEditTime: 2021-06-13 16:29:02
  * @Description:control
  */
 import { FC, useContext, useState, useEffect, useCallback } from 'react';
@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatImgSize, formatTime } from '@/common/utils/format';
 import { lyric, songUrl } from '@/common/net/api';
-import { Slider } from 'antd';
+import { message, Slider } from 'antd';
 import Player from '@pages/player';
 import { initSong, initTime } from '@/common/utils/local';
 import { cutSong, debounce, getLocal, setLocal, _findIndex, parseLRC, getTimeIndex } from '@/common/utils/tools';
@@ -18,6 +18,7 @@ import { cutSong, debounce, getLocal, setLocal, _findIndex, parseLRC, getTimeInd
 const Control: FC = () => {
   const refAudio = document.getElementById('refAudio') as any;
   const [url, setUrl] = useState('');
+  const [isMute, setIsMute] = useState(false);
   const [lrc, setLrc] = useState<any>([]);
   const [isShowPlayer, setIsShowPlayer] = useState(false);
   const [isShowlrc, setIsShowlrc] = useState(getLocal('showLrc') || false);
@@ -83,21 +84,18 @@ const Control: FC = () => {
   );
   // 暂停/播放
   const handlePaused = () => {
+    if (!songList.length) return message.info('当前无可以播放音乐,快去添加吧^v^');
     dispatch({ type: 'isPlay', data: !isPlay });
     isPlay ? refAudio.pause() : refAudio.play();
   };
 
   // 切歌
-  const handlcutSong = useCallback(
-    async (type: number) => {
-      setSongTime({ currentTime: 0, duration: 0 });
-      // if (model === 3) return false;
-      const currentIndex = _findIndex(songList, id);
-      const index = cutSong(currentIndex, songList, model, type);
-      dispatch({ type: 'currentSong', data: songList.length ? songList[index] : initSong });
-    },
-    [dispatch, id, model, songList],
-  );
+  const handlcutSong = async (type: number) => {
+    setSongTime({ currentTime: 0, duration: 0 });
+    const currentIndex = _findIndex(songList, id);
+    const index = cutSong(currentIndex, songList, model, type);
+    dispatch({ type: 'currentSong', data: songList.length ? songList[index] : initSong });
+  };
 
   // 改变模式
   const handleModel = () => {
@@ -115,8 +113,15 @@ const Control: FC = () => {
     setLocal('volume', value);
     refAudio.volume = value / 10;
     setVolume(value);
+    setIsMute(false);
+    refAudio.muted = false;
   };
 
+  // 静音操作
+  const changeMute = () => {
+    refAudio.muted = !isMute;
+    setIsMute(!isMute);
+  };
   // 无歌词渲染
   const noLyric = () => {
     return !id
@@ -135,6 +140,7 @@ const Control: FC = () => {
     setLocal('showLrc', !isShowlrc);
   };
 
+  // id改变后 获取播放地址 || 获取歌词 || 当前音乐播放完毕切换到下一首
   useEffect(() => {
     getSongUrl(id);
     getLyric(id);
@@ -144,8 +150,10 @@ const Control: FC = () => {
         debounce(() => handlcutSong(2), 1000);
       });
     }
-  }, [getSongUrl, handlcutSong, id, refAudio]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
+  // audio - timeupdate 缓冲进度 || 当前播放时间变化
   useEffect(() => {
     if (refAudio) {
       refAudio.volume = volume / 10;
@@ -162,6 +170,7 @@ const Control: FC = () => {
       });
     }
   }, [model, refAudio, volume]);
+
   const num = getTimeIndex(lrc, currentTime);
   return (
     <div className={styles.control}>
@@ -185,9 +194,15 @@ const Control: FC = () => {
           )}
         </div>
       }
-      <audio src={url.replace('http:', 'https:')} loop={model === 3} autoPlay preload="auto" id="refAudio" />
-      <div className={styles.left}>
-        {al.picUrl ? (
+      <audio
+        autoPlay
+        preload="auto"
+        id="refAudio"
+        src={url.replace('http:', 'https:')}
+        loop={songList.length === 1 || model === 3}
+      />
+      {songList.length ? (
+        <div className={styles.left}>
           <div className={styles.content}>
             <img
               onClick={() => setIsShowPlayer(!isShowPlayer)}
@@ -211,8 +226,10 @@ const Control: FC = () => {
               </div>
             </div>
           </div>
-        ) : null}
-      </div>
+        </div>
+      ) : (
+        <div></div>
+      )}
       <div className={styles.center}>
         <ul className={styles.btn_group}>
           <li
@@ -242,25 +259,32 @@ const Control: FC = () => {
           <div className={styles.time}>{formatTime(duration || Number(currentSong.dt) / 1000, true)}</div>
         </div>
       </div>
-      <ul className={styles.right}>
-        <li className={[styles.quality, 'icon icon-volume'].join(' ')}></li>
-        <li className={styles.volume}>
-          <Slider
-            min={0}
-            max={10}
-            value={volume}
-            tipFormatter={null}
-            onChange={(value: number) => changeVolume(value)}
-          />
-        </li>
-        <li
-          className={[styles.list, 'icon icon-playlist'].join(' ')}
-          onClick={(e) => {
-            dispatch({ type: 'showModal', data: showModal === 'showPlayList' ? '' : 'showPlayList' });
-            e.stopPropagation();
-          }}
-        ></li>
-      </ul>
+      {songList.length ? (
+        <ul className={styles.right}>
+          <li
+            className={[styles.quality, `icon ${isMute ? 'icon-mute' : 'icon-volume'}`].join(' ')}
+            onClick={() => changeMute()}
+          ></li>
+          <li className={styles.volume}>
+            <Slider
+              min={0}
+              max={10}
+              tipFormatter={null}
+              value={!isMute ? volume : 0}
+              onChange={(value: number) => changeVolume(value)}
+            />
+          </li>
+          <li
+            className={[styles.list, 'icon icon-playlist'].join(' ')}
+            onClick={(e) => {
+              dispatch({ type: 'showModal', data: showModal === 'showPlayList' ? '' : 'showPlayList' });
+              e.stopPropagation();
+            }}
+          ></li>
+        </ul>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

@@ -127,7 +127,6 @@
         :global {
           .ant-slider {
             &:hover {
-
               .ant-slider-rail,
               .ant-slider-step,
               .ant-slider-track {
@@ -152,6 +151,7 @@
     padding-right: 20px;
 
     .quality {
+      cursor: pointer;
       color: #373737;
       font-size: 20px;
     }
@@ -221,8 +221,8 @@
     width: calc(100% - 200px);
     transition: all 0.5s ease;
     overflow: hidden;
-    background-color: rgba($color: #F5F5F6, $alpha: 0.9);
-    border-top: 1px solid #E1E1E1;
+    background-color: rgba($color: #f5f5f6, $alpha: 0.9);
+    border-top: 1px solid #e1e1e1;
 
     .content {
       position: absolute;
