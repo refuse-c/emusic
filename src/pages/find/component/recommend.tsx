@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 14:13:51
+ * @LastEditTime: 2021-06-15 15:55:12
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState } from 'react';
@@ -97,12 +97,13 @@ const Recommend: FC = () => {
   };
 
   /**
-   * @name:推荐mv
+   * @name:主播电台
    * @param {*} async
    * @Description:
    */
   const getRecommendDj = async () => {
     const result: any = await recommendDj();
+    console.log(result);
     const radioList = result.data || [];
     setRadioList(radioList);
   };

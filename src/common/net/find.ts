@@ -74,5 +74,5 @@ export const personalizedMv = (params?: any) => {
  * @Description:
  */
 export const recommendDj = () => {
-  return get('/dj/personalize/recommend');
+  return get('/dj/today/perfered');
 };
