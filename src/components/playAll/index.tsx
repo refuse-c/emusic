@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 23:09:58
+ * @LastEditTime: 2021-06-17 10:10:57
  * @Description:播放全部
  */
 import { FC, useContext } from 'react';
@@ -19,7 +19,8 @@ interface Props {
 const PlayAll: FC<Props> = (props) => {
   const { list } = props;
   const { songList, currentSong, dispatch } = useContext(Context);
-  const canbeusedList = list.filter((item: { st: number }) => item.st !== -200); // 筛选出没有版权的音乐
+  let canbeusedList = list.filter((item: { st: number; fee: number }) => item.st !== -200); // 筛选出没有版权的音乐
+  canbeusedList = list.filter((item: { st: number; fee: number }) => item.fee !== 4); // 筛选出需要付费的专辑
   // 播放全部
   const playAll = () => {
     if (canbeusedList.length) {

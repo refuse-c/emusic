@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:24:10
+ * @LastEditTime: 2021-06-18 00:28:13
  * @Description:发现音乐-排行榜
  */
 import { FC, useEffect, useState } from 'react';
@@ -96,7 +96,7 @@ const TopList: FC = () => {
 
   return (
     <div className={styles.topList}>
-      <Title text="官方版" margin="10px 0 21px" />
+      <Title title="官方版" margin="10px 0 21px" />
       <Spin spinning={loading}>
         <div className={styles.list}>
           {official.map((item: Item, index: number) => {
@@ -120,7 +120,7 @@ const TopList: FC = () => {
           })}
         </div>
       </Spin>
-      <Title text="全球榜" />
+      <Title title="全球榜" />
       <PlayList list={worldwide || []} />
     </div>
   );

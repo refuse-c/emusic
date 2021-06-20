@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-11 23:37:01
+ * @LastEditTime: 2021-06-18 00:27:43
  * @Description:独家发送
  */
 import { FC, useEffect, useState } from 'react';
@@ -25,7 +25,7 @@ const Exclusive: FC = () => {
   return (
     <div className={styles.exclusive}>
       <Content>
-        <Title text="独家放送" />
+        <Title title="独家放送" />
         <ExclusiveList list={list} isAdaptive={true} />
       </Content>
     </div>

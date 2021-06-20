@@ -2,15 +2,16 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-11 00:49:00
+ * @LastEditTime: 2021-06-17 02:36:53
  * @Description:标签
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 interface Props {
+  type?: string; // 是什么类型   视频 歌单
   tag: string;
   list?: any | [];
-  changeTag: (val: string) => void;
+  changeTag: (val: { name: string }) => void;
   showCallBack: () => void;
 }
 interface Item {
@@ -35,7 +36,7 @@ const Tags: FC<Props> = (props) => {
           const { name } = item;
           const cls = tag === name ? styles.active : '';
           return (
-            <li key={index} className={cls} onClick={() => changeTag(name)}>
+            <li key={index} className={cls} onClick={() => changeTag(item)}>
               {name}
             </li>
           );

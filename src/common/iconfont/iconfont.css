@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'font_family'; /* Project id 2501801 */
-  src: url('iconfont.woff2?t=1623432327653') format('woff2'), url('iconfont.woff?t=1623432327653') format('woff'),
-    url('iconfont.ttf?t=1623432327653') format('truetype');
+  src: url('iconfont.woff2?t=1623943465721') format('woff2'), url('iconfont.woff?t=1623943465721') format('woff'),
+    url('iconfont.ttf?t=1623943465721') format('truetype');
 }
 
 .icon {
@@ -10,6 +10,38 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-empty:before {
+  content: '\e672';
+}
+
+.icon-zuixiaohua-0615:before {
+  content: '\e61a';
+}
+
+.icon-guanbi-0615:before {
+  content: '\e61b';
+}
+
+.icon-buzhidao-0615:before {
+  content: '\e61d';
+}
+
+.icon-mail:before {
+  content: '\e61e';
+}
+
+.icon-theme:before {
+  content: '\e61f';
+}
+
+.icon-setting:before {
+  content: '\e620';
+}
+
+.icon-quanping-0615:before {
+  content: '\e622';
 }
 
 .icon-usersetting:before {
@@ -62,18 +94,6 @@
 
 .icon-date:before {
   content: '\e631';
-}
-
-.icon-theme:before {
-  content: '\e632';
-}
-
-.icon-mail:before {
-  content: '\e633';
-}
-
-.icon-setting:before {
-  content: '\e634';
 }
 
 .icon-like:before {

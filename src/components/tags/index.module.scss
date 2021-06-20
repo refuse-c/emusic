@@ -29,6 +29,7 @@
     display: flex;
 
     li {
+      position: relative;
       color: #676767;
       padding: 4px 10px;
       font-size: 12px;
@@ -37,15 +38,29 @@
       &:hover {
         color: #373737;
       }
-
+      &::before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+      }
       &.active {
         color: $color;
         border-radius: 10px;
-        background-color: #fdf5f5;
+        color: $color;
+        &::before {
+          opacity: 0.08;
+          background-color: $color;
+        }
 
         &:hover {
-          color: $color;
-          background-color: #fdf5f5;
+          &::before {
+            opacity: 0.08;
+            background-color: $color;
+          }
         }
       }
     }

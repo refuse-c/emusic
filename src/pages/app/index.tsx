@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 14:52:00
+ * @LastEditTime: 2021-06-18 10:15:16
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -33,7 +33,7 @@ const App: FC = () => {
 
   // 登录
   const getLogin = async () => {
-    const res: any = await login({ phone: '18008523529', password: 'wangyi123' });
+    const res: any = await login({ phone: '13272946536', password: 'wangyi123@@' });
     if (res.code === 200) {
       if (res.code === 200) {
         const data = res.profile;

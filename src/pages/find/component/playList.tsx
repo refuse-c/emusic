@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:16:33
+ * @LastEditTime: 2021-06-17 02:32:40
  * @Description:发现音乐-歌单
  */
 import { FC, useEffect, useState, useContext } from 'react';
@@ -14,8 +14,12 @@ import { Context } from '@utils/context';
 import PlayList from '@/components/songList';
 import CatGroup from '@/components/catGroup';
 import { formatImgSize } from '@/common/utils/format';
-
+interface Item {
+  name: string;
+  id?: number;
+}
 const Recommend: FC = () => {
+  const [tag, setTag] = useState('全部');
   const [tagList, setTagList] = useState([]);
   const [catlist, setCatlist] = useState<any>([]);
   const [playList, setPlayList] = useState({
@@ -28,18 +32,21 @@ const Recommend: FC = () => {
   const { showModal, dispatch } = useContext(Context);
 
   // 点击热门标签回调
-  const changeTag = async (tag: string) => {
-    getHighqualityTop(tag);
-    getPplaylistTop(tag, 1);
+  const changeTag = async (item: Item) => {
+    const { name } = item;
+    setTag(name);
+    getHighqualityTop(name);
+    getPplaylistTop(name, 1);
   };
+
+  // 切换分页
+  const onChange = (current: number) => getPplaylistTop(tag, current);
+
   // 获取热门歌单标签
   const getPlaylistHot = async () => {
     const res: any = await playlistHot();
     if (res.code === 200) setTagList(res.tags || []);
   };
-
-  // 切换分页
-  const onChange = (current: number) => getPplaylistTop(playList.cat, current);
 
   // 获取歌单分类
   const getPlaylistCatlist = async () => {
@@ -85,7 +92,7 @@ const Recommend: FC = () => {
   return (
     <div className={styles.playlist}>
       {showModal === 'showCatList' && (
-        <CatGroup list={catlist} active={playList.cat} changeTag={(cat: string) => changeTag(cat)} />
+        <CatGroup list={catlist} active={tag} changeTag={(item: Item) => changeTag(item)} />
       )}
       {highList.coverImgUrl ? (
         <div className={styles.boutique}>
@@ -102,9 +109,9 @@ const Recommend: FC = () => {
         </div>
       ) : null}
       <Tags
-        tag={playList.cat}
+        tag={tag}
         list={tagList}
-        changeTag={(cat: string) => changeTag(cat)}
+        changeTag={(item: Item) => changeTag(item)}
         showCallBack={() => dispatch({ type: 'showModal', data: showModal === 'showCatList' ? '' : 'showCatList' })}
       />
 

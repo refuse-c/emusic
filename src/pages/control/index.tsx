@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 16:29:02
+ * @LastEditTime: 2021-06-20 10:05:28
  * @Description:control
  */
 import { FC, useContext, useState, useEffect, useCallback } from 'react';
@@ -111,7 +111,7 @@ const Control: FC = () => {
   // 改变音量
   const changeVolume = (value: number) => {
     setLocal('volume', value);
-    refAudio.volume = value / 10;
+    refAudio.volume = value / 100;
     setVolume(value);
     setIsMute(false);
     refAudio.muted = false;
@@ -153,10 +153,27 @@ const Control: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
+  // 监听音乐的播放、暂停、错误
+  useEffect(() => {
+    if (refAudio) {
+      // refAudio.addEventListener('play', () => {
+      //   !isPlay && dispatch({ type: 'isPlay', data: true });
+      // });
+      // refAudio.addEventListener('pause', () => {
+      //   !isPlay && dispatch({ type: 'isPlay', data: false });
+      // });
+      refAudio.addEventListener('error', (e: any) => {
+        console.log(e);
+        getSongUrl(id);
+        getLyric(id);
+      });
+    }
+  }, [refAudio, id, getSongUrl]);
+
   // audio - timeupdate 缓冲进度 || 当前播放时间变化
   useEffect(() => {
     if (refAudio) {
-      refAudio.volume = volume / 10;
+      refAudio.volume = volume / 100;
       refAudio.addEventListener('timeupdate', () => {
         const { currentTime, duration, buffered } = refAudio;
         // 缓冲进度
@@ -268,7 +285,7 @@ const Control: FC = () => {
           <li className={styles.volume}>
             <Slider
               min={0}
-              max={10}
+              max={100}
               tipFormatter={null}
               value={!isMute ? volume : 0}
               onChange={(value: number) => changeVolume(value)}

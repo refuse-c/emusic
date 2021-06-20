@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 00:03:41
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-01 11:26:40
+ * @LastEditTime: 2021-06-16 12:58:26
  * @Description:
  */
 
@@ -15,7 +15,9 @@ import FindSinger from '@pages/find/component/singer'; // 歌手
 import FindNewmusic from '@pages/find/component/newmusic'; // 最新音乐
 import RecommendSong from '@/pages/recommendSong'; // 推荐歌曲
 
-import Video from '@pages/video'; // 视频
+import Videos from '@pages/video'; // 视频
+import Video from '@pages/video/component/video'; // 视频
+import Mv from '@pages/video/component/mv'; // MV
 
 import Friend from '@pages/friend'; // 发现
 
@@ -46,7 +48,14 @@ const router = [
       { path: '/find/newmusic', component: FindNewmusic },
     ],
   },
-  { path: '/video', component: Video },
+  {
+    path: '/video',
+    component: Videos,
+    router: [
+      { path: '/video', component: Video },
+      { path: '/video/mv', component: Mv },
+    ],
+  },
   { path: '/friend', component: Friend },
   { path: '/exclusive', component: Exclusive },
   { path: '/single:id', component: Single },

@@ -2,26 +2,45 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 11:44:43
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 22:56:45
+ * @LastEditTime: 2021-06-18 10:02:04
  * @Description:标题
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
-
+import { createHashHistory } from 'history';
+import { Button } from 'antd';
+const history = createHashHistory();
 interface Props {
-  text: string;
-  iconText?: string;
-  children?: any;
+  title: string; // 显示的标题
+  btn?: string;
+  type?: string; // 标题前面的type 类型
+  path?: string; // 跳转的路径
+  list?: any; // 显示的列表
+  active?: string; // 有列表时高亮的item
   margin?: string;
+  callBack?: any;
 }
 
 const Title: FC<Props> = (Props) => {
-  const { text, iconText, children, margin = '21px 0' } = Props;
+  const { title, btn, type, path = '', list = [], active = '', callBack, margin = '21px 0' } = Props;
+  const cls = path ? styles.cursor : '';
   return (
-    <div className={styles.title} style={{ margin }}>
-      {iconText ? <div className={styles.iconText}>{iconText}</div> : null}
-      <div className={styles.text}>{text}</div>
-      <div className={styles.children}>{children}</div>
+    <div className={styles.content} style={{ margin }}>
+      {type && <div className={styles.type}>{type}</div>}
+      <div className={[styles.title, cls].join(' ')} onClick={() => path && history.push(path)}>
+        {title} {path && <span className="icon icon-back"></span>}
+      </div>
+      <div className={styles.tools}>
+        {btn && <Button>{btn}</Button>}
+        {list.map((item: string, index: number) => {
+          const cls = item === active ? styles.active : '';
+          return (
+            <span key={index} className={cls} onClick={() => callBack(item)}>
+              {item}
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 };

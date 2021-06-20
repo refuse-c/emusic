@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 10:12:29
+ * @LastEditTime: 2021-06-18 00:06:16
  * @Description:空组件
  */
 import { FC, useEffect, useState } from 'react';
@@ -76,7 +76,7 @@ const RecommendSong: FC = () => {
       <div id="head">
         <Content padding={'30px 30px 10px'} isFull={true}>
           <div className={styles.head}>
-            <div className={styles.time}>
+            <div className={[styles.time, ' icon icon-date'].join(' ')}>
               <span>{moment().locale('zh-cn').format('DD')}</span>
             </div>
             <div className={styles.info}>

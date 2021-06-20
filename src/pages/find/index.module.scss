@@ -21,21 +21,6 @@
   }
 }
 
-// Title component
-.findTitle {
-  display: table;
-
-  font-size: 20px;
-  font-weight: bold;
-  padding: 14px 0;
-
-  span {
-    cursor: pointer;
-    padding-right: 20px;
-    background: url('~@images/icon_arrow_right.png') center right / 16px no-repeat;
-  }
-}
-
 // playlist
 .playlist {
   .boutique {

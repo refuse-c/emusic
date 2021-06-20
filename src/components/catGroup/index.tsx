@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-03 14:56:56
+ * @LastEditTime: 2021-06-17 02:37:06
  * @Description:catGroup
  */
 import { FC } from 'react';
@@ -10,15 +10,16 @@ import styles from './index.module.scss';
 interface Props {
   list?: any | [];
   active: string;
-  changeTag: (val: string) => void;
+  changeTag: (val: { name: string }) => void;
 }
 
 const CatGroup: FC<Props> = (props) => {
   const { list, active, changeTag } = props;
-  console.log(list);
   return (
     <div className={styles.catGroup}>
-      <div className={styles.all}>全部</div>
+      <div className={styles.all} onClick={() => changeTag({ name: '全部' })}>
+        全部歌单
+      </div>
       {list.map((item: any, index: number) => {
         return (
           <div key={index} className={styles.alone}>
@@ -29,7 +30,7 @@ const CatGroup: FC<Props> = (props) => {
                 const cls2 = child.hot ? styles.isHot : '';
                 return (
                   <li key={child.name} className={[cls1].join(' ')}>
-                    <span className={cls2} onClick={() => changeTag(child.name)}>
+                    <span className={cls2} onClick={() => changeTag(child)}>
                       {child.name}
                     </span>
                   </li>

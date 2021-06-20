@@ -2,18 +2,20 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 10:17:17
+ * @LastEditTime: 2021-06-18 01:03:41
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
-import Title from '@pages/find/component/title';
+import Title from '@components/title';
 import Banner from '@components/banner';
 import PlayList from '@/components/songList';
 import ExclusiveList from '@/components/exclusiveList';
 import Songs from '@/components/song';
 import MvList from '@/components/mvList';
 import RadioList from '@/components/radioList';
+import Loading from '@/components/loading';
+
 import { findBanner, recommendList, exclusive, personalizedMv, recommendDj } from '@/common/net/find';
 import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
@@ -98,12 +100,13 @@ const Recommend: FC = () => {
   };
 
   /**
-   * @name:推荐mv
+   * @name:主播电台
    * @param {*} async
    * @Description:
    */
   const getRecommendDj = async () => {
     const result: any = await recommendDj();
+    console.log(result);
     const radioList = result.data || [];
     setRadioList(radioList);
   };
@@ -140,16 +143,17 @@ const Recommend: FC = () => {
 
   return (
     <div className={styles.recommend}>
+      <Loading />
       <Banner list={bannerList || []} />
-      <Title title="推荐歌单" top={5} pathName="/find/playlist" />
+      <Title title="推荐歌单" margin={'10px  0'} path="/find/playlist" />
       <PlayList list={playList || []} />
-      <Title title="独家放送" top={10} pathName="/exclusive" />
+      <Title title="独家放送" margin={'10px  0'} path="/exclusive" />
       <ExclusiveList list={exclusiveList} isAdaptive={false} />
-      <Title title="最新音乐" top={10} pathName="/find/newmusic" />
+      <Title title="最新音乐" margin={'10px  0'} path="/find/newmusic" />
       <Songs list={newMusicList} />
-      <Title title="推荐MV" top={10} pathName="/video/mv" />
+      <Title title="推荐MV" margin={'10px  0'} path="/video/mv" />
       <MvList list={mvList} hideLst={true} showTips={true} />
-      <Title title="主播电台" top={10} pathName="/find/radio" />
+      <Title title="主播电台" margin={'10px  0'} path="/find/radio" />
       <RadioList list={radioList} />
       {/* <Title title="看看" pathName="/find/playlist" /> */}
     </div>
