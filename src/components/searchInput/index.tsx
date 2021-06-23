@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:12:44
+ * @LastEditTime: 2021-06-23 23:50:27
  * @Description:搜索框组件
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -28,7 +28,7 @@ const SearchInput: FC = () => {
   // 回车检索事件
   const onPressEnter = async () => {
     let pathname = -1;
-    const _val = keywords || dfKeyWord.realkeyword;
+    const _val = keywords || dfKeyWord.showKeyword;
     setKeywords(_val);
     dispatch({ type: 'searchText', data: _val });
     pathname = window.location.href.indexOf('/search');
