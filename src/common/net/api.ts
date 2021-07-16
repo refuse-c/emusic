@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-16 23:45:51
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-27 19:31:30
+ * @LastEditTime: 2021-07-10 17:30:27
  * @Description:
  */
 import { get } from './request';
@@ -67,4 +67,25 @@ export const songUrl = (params: { id: string | number; br?: string }) => {
  */
 export const lyric = (params: { id: string | number }) => {
   return get('lyric', params);
+};
+
+/**
+ * @name: 获取相似歌曲
+ * @param {*}params
+ * @Description:
+ */
+
+export const simiSong = (params: { id: number | string }) => {
+  return get('/simi/song', params);
+};
+
+/**
+ * @name: 分享歌曲、歌单、mv、电台、电台节目到动态
+ * @param {string | number} id : 资源 id （歌曲，歌单，mv，电台，电台节目对应 id）
+ * @param {string } type: 资源类型，默认歌曲 song，可传 song,playlist,mv,djradio,djprogram
+ * @param {string | number} msg: 内容，140 字限制，支持 emoji，@用户名（/user/follows接口获取的用户名，用户名后和内容应该有空格），图片暂不支持
+ * @Description:
+ */
+export const share = (params: { id: number | string; type: string; msg?: string }) => {
+  return get('/share/resource', params);
 };

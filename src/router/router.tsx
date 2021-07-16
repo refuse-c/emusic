@@ -2,76 +2,54 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 00:03:41
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-16 12:58:26
+ * @LastEditTime: 2021-07-12 21:32:59
  * @Description:
  */
 
-import Find from '@pages/find'; // 发现音乐
-import FindRecommend from '@pages/find/component/recommend'; // 个性推荐
-import FindPlaylist from '@pages/find/component/playList'; // 歌单
-import FindRadio from '@pages/find/component/radio'; // 主播电台
-import FindToplist from '@pages/find/component/toplist'; // 排行榜
-import FindSinger from '@pages/find/component/singer'; // 歌手
-import FindNewmusic from '@pages/find/component/newmusic'; // 最新音乐
-import RecommendSong from '@/pages/recommendSong'; // 推荐歌曲
-
-import Videos from '@pages/video'; // 视频
-import Video from '@pages/video/component/video'; // 视频
-import Mv from '@pages/video/component/mv'; // MV
-
-import Friend from '@pages/friend'; // 发现
-
-import Exclusive from '@pages/exclusive'; // 独家放送
-
-import Single from '@/pages/single'; // 歌单
-
-import Search from '@/pages/search'; // 搜索页
-import SearchSingle from '@/pages/search/component/single'; // 单曲
-import SearchSinger from '@/pages/search/component/singer'; // 歌手
-import SearchAlbum from '@/pages/search/component/album'; // 专辑
-import SearchVideo from '@/pages/search/component/video'; // 视频
-import SearchPlaylist from '@/pages/search/component/playlist'; // 歌单
-import SearchLyric from '@/pages/search/component/lyric'; // 歌词
-import SearchRadio from '@/pages/search/component/radio'; // 主播电台
-import SearchUser from '@/pages/search/component/user'; // 用户
+import { lazy } from 'react';
 
 const router = [
   {
     path: '/find',
-    component: Find,
+    component: lazy(() => import('@pages/find')), // 发现音乐
     router: [
-      { path: '/find', component: FindRecommend },
-      { path: '/find/playlist', component: FindPlaylist },
-      { path: '/find/radio', component: FindRadio },
-      { path: '/find/toplist', component: FindToplist },
-      { path: '/find/singer', component: FindSinger },
-      { path: '/find/newmusic', component: FindNewmusic },
+      {
+        path: '/find',
+        component: lazy(() => import('@pages/find/component/recommend')), // 个性推荐
+      },
+      { path: '/find/playlist', component: lazy(() => import('@pages/find/component/playList')) }, // 歌单
+      { path: '/find/radio', component: lazy(() => import('@pages/find/component/radio')) }, // 主播电台
+      { path: '/find/toplist', component: lazy(() => import('@pages/find/component/toplist')) }, // 排行榜
+      { path: '/find/singer', component: lazy(() => import('@pages/find/component/singer')) }, // 歌手
+      { path: '/find/newmusic', component: lazy(() => import('@pages/find/component/newmusic')) }, // 最新音乐
     ],
   },
   {
     path: '/video',
-    component: Videos,
+    component: lazy(() => import('@pages/video')), // 视频
     router: [
-      { path: '/video', component: Video },
-      { path: '/video/mv', component: Mv },
+      { path: '/video', component: lazy(() => import('@pages/video/component/video')) }, // 视频
+      { path: '/video/mv', component: lazy(() => import('@pages/video/component/mv')) }, // MV
     ],
   },
-  { path: '/friend', component: Friend },
-  { path: '/exclusive', component: Exclusive },
-  { path: '/single:id', component: Single },
-  { path: '/recommendSong', component: RecommendSong },
+  { path: '/friend', component: lazy(() => import('@pages/friend')) }, // 发现
+  { path: '/exclusive', component: lazy(() => import('@pages/exclusive')) }, // 独家放送
+  { path: '/single:id/:type', component: lazy(() => import('@/pages/singleDetail')) }, // 歌单
+  { path: '/recommendSong', component: lazy(() => import('@/pages/recommendSong')) }, // 推荐歌曲
+  { path: '/singertop', component: lazy(() => import('@pages/singerTop')) }, // 云音乐歌手榜
+  { path: '/singerDetail:id', component: lazy(() => import('@/pages/singerDetail')) }, // 歌手详情页
   {
     path: '/search',
-    component: Search,
+    component: lazy(() => import('@/pages/search')), // 搜索页
     router: [
-      { path: '/search', component: SearchSingle },
-      { path: '/search/singer', component: SearchSinger },
-      { path: '/search/album', component: SearchAlbum },
-      { path: '/search/video', component: SearchVideo },
-      { path: '/search/playlist', component: SearchPlaylist },
-      { path: '/search/lyric', component: SearchLyric },
-      { path: '/search/radio', component: SearchRadio },
-      { path: '/search/user', component: SearchUser },
+      { path: '/search', component: lazy(() => import('@/pages/search/component/single')) }, // 单曲
+      { path: '/search/singer', component: lazy(() => import('@/pages/search/component/singer')) }, // 歌手
+      { path: '/search/album', component: lazy(() => import('@/pages/search/component/album')) }, // 专辑
+      { path: '/search/video', component: lazy(() => import('@/pages/search/component/video')) }, // 视频
+      { path: '/search/playlist', component: lazy(() => import('@/pages/search/component/playlist')) }, // 歌单
+      { path: '/search/lyric', component: lazy(() => import('@/pages/search/component/lyric')) }, // 歌词
+      { path: '/search/radio', component: lazy(() => import('@/pages/search/component/radio')) }, // 主播电台
+      { path: '/search/user', component: lazy(() => import('@/pages/search/component/user')) }, // 用户
     ],
   },
 ];

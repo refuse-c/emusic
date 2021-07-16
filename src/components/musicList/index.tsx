@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 14:43:26
+ * @LastEditTime: 2021-07-10 19:55:23
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
@@ -11,8 +11,10 @@ import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatSerialNumber, formatTime } from '@/common/utils/format';
 import { highlight, _findIndex } from '@/common/utils/tools';
-import ToggleLike from '@components/model/toggleLike';
+import Tips from '@/components/model/tips';
 import clone from 'clone';
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 interface Props {
   list?: any | [];
   loading?: boolean;
@@ -88,6 +90,7 @@ const MusicList: FC<Props> = (props) => {
         record.ar.map((item: any, index: number) => (
           <span
             key={index}
+            onClick={() => history.push(`/singerDetail${item.id}`)}
             className={styles.singer}
             dangerouslySetInnerHTML={{
               __html: highlight(searchText, item.name),
@@ -103,6 +106,7 @@ const MusicList: FC<Props> = (props) => {
       render: (record: any) => (
         <span
           className={styles.album}
+          onClick={() => history.push(`/single${record.al.id}/${'专辑'}`)}
           dangerouslySetInnerHTML={{
             __html: highlight(searchText, record.al.name),
           }}
@@ -148,7 +152,12 @@ const MusicList: FC<Props> = (props) => {
   };
   return (
     <div className={styles.musicList}>
-      <ToggleLike hasShow={!!id} onFinish={() => handleLike(id, false)} onClose={() => setId(0)} />
+      <Tips
+        hasShow={!!id}
+        onFinish={() => handleLike(id, false)}
+        onClose={() => setId(0)}
+        msg="确定将选中歌曲从我喜欢的音乐中删除?"
+      />
       <div id="point" className={styles.point} onClick={() => handle()}></div>
       <Table
         rowKey="id"

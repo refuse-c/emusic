@@ -2,10 +2,14 @@
  * @Author: REFUSE_C
  * @Date: 2021-06-09 12:11:56
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-11 21:38:53
+ * @LastEditTime: 2021-07-09 15:16:45
  * @Description:歌手api
  */
 import { get } from './request';
+
+interface Id {
+  id: number | string;
+}
 
 /**
  * @name: 热门歌手
@@ -36,7 +40,7 @@ export const artistList = (params: { limit: number; offset: number; initial: str
  * id : 歌手 id
  * t:操作,1 为收藏,其他为取消收藏
  */
-export const artistSub = (params: { id: number; t: number }) => {
+export const artistSub = (params: { id: Id; t: number }) => {
   return get('/artist/sub', params);
 };
 
@@ -45,7 +49,7 @@ export const artistSub = (params: { id: number; t: number }) => {
  * @param {object} params
  * id : 歌手 id
  */
-export const artistTopSong = (params: { id: number }) => {
+export const artistTopSong = (params: { id: Id }) => {
   return get('/artist/top/song', params);
 };
 
@@ -57,7 +61,7 @@ export const artistTopSong = (params: { id: number }) => {
  * limit: 取出歌单数量 , 默认为 50
  * offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*50, 其中 50 为 limit 的值
  */
-export const artistSongs = (params: { id: number; order?: string; limit: number; offset: number }) => {
+export const artistSongs = (params: { id: Id; order?: string; limit: number; offset: number }) => {
   return get('/artist/songs', params);
 };
 
@@ -65,7 +69,7 @@ export const artistSongs = (params: { id: number; order?: string; limit: number;
  * @name: 收藏的歌手列表
  * @param {object} params
  */
-export const artistSublist = (params: { id: number; order?: string; limit: number; offset: number }) => {
+export const artistSublist = (params: { id: Id; order?: string; limit: number; offset: number }) => {
   return get('/artist/sublist', params);
 };
 
@@ -74,7 +78,7 @@ export const artistSublist = (params: { id: number; order?: string; limit: numbe
  * @param {*}
  * id: 歌手 id, 可由搜索接口获得
  */
-export const artists = (params: { id: number }) => {
+export const artists = (params: { id: Id }) => {
   return get('/artists', params);
 };
 
@@ -83,7 +87,7 @@ export const artists = (params: { id: number }) => {
  * @param {*}
  * id: 歌手 id, 可由搜索接口获得
  */
-export const artistsMv = (params: { id: number }) => {
+export const artistsMv = (params: { id: Id }) => {
   return get('/artist/mv', params);
 };
 
@@ -94,7 +98,7 @@ export const artistsMv = (params: { id: number }) => {
  *  * limit: 取出歌单数量 , 默认为 50
  * offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*50, 其中 50 为 limit 的值
  */
-export const artistsAlbum = (params: { id: number; limit: number; offset: number }) => {
+export const artistsAlbum = (params: { id: Id; limit?: number; offset?: number }) => {
   return get('/artist/album', params);
 };
 
@@ -103,7 +107,7 @@ export const artistsAlbum = (params: { id: number; limit: number; offset: number
  * @param {*}
  * id: 歌手 id
  */
-export const artistsDesc = (params: { id: number }) => {
+export const artistsDesc = (params: { id: Id }) => {
   return get('/artist/desc', params);
 };
 
@@ -112,7 +116,7 @@ export const artistsDesc = (params: { id: number }) => {
  * @param {*}
  * id: 歌手 id
  */
-export const artistsDetail = (params: { id: number }) => {
+export const artistsDetail = (params: { id: Id }) => {
   return get('/artist/detail', params);
 };
 
@@ -121,7 +125,7 @@ export const artistsDetail = (params: { id: number }) => {
  * @param {*}
  * id: 歌手 id
  */
-export const artistsSimi = (params: { id: number }) => {
+export const artistsSimi = (params: { id: Id }) => {
   return get('/simi/artist', params);
 };
 
@@ -130,7 +134,7 @@ export const artistsSimi = (params: { id: number }) => {
  * @param {*}
  * id: 歌手 id
  */
-export const artistsTop = (params: { id: number }) => {
+export const artistsTop = (params: { id: Id }) => {
   return get('/top/artists', params);
 };
 
@@ -140,7 +144,7 @@ export const artistsTop = (params: { id: number }) => {
  * id: 歌手 id
  * type : 地区1: 华语2: 欧美3: 韩国4: 日本
  */
-export const artistsTopList = (params: { id: number; type: number | string }) => {
+export const artistsTopList = (params: { id: Id; type: number | string }) => {
   return get('/toplist/artist', params);
 };
 
@@ -171,6 +175,6 @@ export const artistNewMv = (params: { limit: number; before: number | string }) 
  * limit: 取出评论数量 , 默认为 20
  * offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*10, 其中 10 为 limit 的值
  */
-export const artistFans = (params: { id: number; limit: number; offset: number }) => {
+export const artistFans = (params: { id: Id; limit: number; offset: number }) => {
   return get('/artist/fans', params);
 };

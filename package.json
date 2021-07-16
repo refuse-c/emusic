@@ -27,6 +27,8 @@
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
     "starts": "concurrently \"set BROWSER=none &&  react-app-rewired start\" \"electron .\" ",
+    "lint:eslint": "eslint ./ --ext .ts,.tsx --color --quiet --fix",
+    "postinstall": "husky install",
     "packager": "electron-packager ./build emusic –out out_dir --arch=x64 --overwrite --ignore=node_modules"
   },
   "eslintConfig": {
@@ -60,9 +62,13 @@
     "axios": "^0.21.1",
     "clone": "^2.1.2",
     "concurrently": "^6.0.1",
+    "copy-to-clipboard": "^3.3.1",
     "css-loader": "^5.2.5",
     "customize-cra": "^1.0.0",
     "electron": "^12.0.9",
+    "husky": "^7.0.1",
+    "lint-staged": "^11.0.1",
+    "lodash": "^4.17.21",
     "moment": "^2.29.1",
     "node-sass": "^5.0.0",
     "postcss-loader": "^5.2.0",
@@ -75,6 +81,10 @@
     "reset.css": "^2.0.2",
     "sass-loader": "^11.0.1",
     "source-map-loader": "^2.0.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0",
+    "stylelint-order": "^4.1.0",
     "ts-loader": "^8.1.0",
     "typescript": "^4.2.3"
   },
@@ -83,5 +93,15 @@
   },
   "win": {
     "icon": "https://www.baidu.com/favicon.ico"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.tsx": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   }
 }

@@ -1,32 +1,50 @@
 .singer {
-  min-height: 100vh;
-  padding-bottom: 40px;
+  // min-height: 100vh;
+  // padding-bottom: 40px;
 
   &.row {
     li {
       display: flex;
       align-items: center;
       height: 80px;
-      padding: 0 30px;
+      padding: 30px;
+
       &:nth-child(even) {
         background-color: #f9f9f9;
       }
 
       &:nth-child(odd) {
-        background-color: #ffffff;
+        background-color: #fff;
       }
+
       &:hover {
         background-color: #f0f1f2;
       }
+
       .content {
         display: flex;
         align-items: center;
         flex-wrap: nowrap;
+
+        .left {
+          display: flex;
+          align-items: center;
+
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+          }
+        }
+
         img {
-          width: 60px;
           height: 60px;
+          min-width: 60px;
         }
       }
+
       .info {
         flex: 1;
         display: flex;
@@ -39,19 +57,24 @@
       }
     }
   }
+
   &.col {
     display: flex;
     flex-wrap: wrap;
+    padding: 0 30px 30px;
+
     li {
       margin-top: 18px;
+
       .content {
         position: relative;
         width: 100%;
         padding-top: 100%;
-        border-radius: 4px;
         overflow: hidden;
         border: 1px solid #f3f3f3;
+        border-radius: 4px;
       }
+
       img {
         position: absolute;
         top: 0;
@@ -59,6 +82,7 @@
         width: 100%;
         height: 100%;
       }
+
       .info {
         display: flex;
         align-items: center;
@@ -68,6 +92,7 @@
       @media screen and (max-width: 1100px) {
         width: calc(100% / 5 - 14.4px);
         overflow: hidden;
+
         &:not(:nth-child(5n - 5)) {
           margin-right: 18px;
         }
@@ -75,22 +100,24 @@
       @media screen and (min-width: 1100px) {
         width: calc(100% / 6 - 15px);
         overflow: hidden;
+
         &:not(:nth-child(6n - 6)) {
           margin-right: 18px;
         }
       }
     }
   }
+
   .accountId {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: #fff;
     width: 16px;
     height: 16px;
-    border-radius: 50%;
     font-size: 14px;
+    color: #fff;
+    cursor: pointer;
     background-color: #f74d43;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
   }
 }

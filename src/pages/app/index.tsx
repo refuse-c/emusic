@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-23 23:50:59
+ * @LastEditTime: 2021-07-09 22:37:22
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -33,7 +33,7 @@ const App: FC = () => {
 
   // 登录
   const getLogin = async () => {
-    const res: any = await login({ phone: '18008523529', password: 'wangyi123' });
+    const res: any = await login({ phone: '13272946536', password: 'wangyi123@@' });
     if (res.code === 200) {
       if (res.code === 200) {
         const data = res.profile;
@@ -87,7 +87,7 @@ const App: FC = () => {
       const allList = res.playlist || [];
       allList.map((item: Item) => {
         item.type = 1;
-        item.path = `/single${item.id}`;
+        item.path = `/single${item.id}/${'歌单'}`;
         item.name = item.userId === uid ? item.name.replace(nickname, '我') : item.name;
         return item;
       });

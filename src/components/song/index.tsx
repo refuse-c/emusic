@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 00:13:02
+ * @LastEditTime: 2021-07-01 23:33:52
  * @Description:最新音乐组件
  */
 import { formatImgSize } from '@/common/utils/format';

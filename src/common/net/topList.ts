@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 11:19:16
+ * @LastEditTime: 2021-07-09 13:39:15
  * @Description:排行榜
  */
 import { get } from './request';
@@ -30,7 +30,7 @@ export const toplistDetail = (params?: {}) => {
  * @param {any} params
  * @Description:
  */
-export const toplistArtist = (params?: { limit: number; area: string; offset: number }) => {
+export const toplistArtist = (params?: { type: number }) => {
   return get('/toplist/artist', params);
 };
 

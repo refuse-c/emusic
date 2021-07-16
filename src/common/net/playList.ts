@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-27 22:38:10
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 13:57:21
+ * @LastEditTime: 2021-07-12 21:35:10
  * @Description:
  */
 import { get } from './request';
@@ -204,7 +204,7 @@ export const playlistSubscribe = (params: { id: number | string; t: number | str
  * @param {*} offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
  * @Description:
  */
-export const playlistSubscribers = (params: { id: number | string; limit: number; offset: number }) => {
+export const playlistSubscribers = (params: { id: number | string; limit?: number; offset?: number }) => {
   return get('/playlist/subscribers', params);
 };
 

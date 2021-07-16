@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 11:49:34
+ * @LastEditTime: 2021-07-09 13:47:14
  * @Description:
  */
 /**
@@ -183,6 +183,55 @@ export const navigationList = [
     title: '收藏者',
   },
 ];
+
+/**
+ * @name: 歌手详情二级导航
+ * @param {*}
+ * @Description:
+ */
+export const singerDetailNavList = [
+  {
+    key: 1,
+    title: '专辑',
+  },
+  {
+    key: 2,
+    title: 'MV',
+  },
+  {
+    key: 3,
+    title: '歌手详情',
+  },
+  {
+    key: 3,
+    title: '相似歌手',
+  },
+];
+
+/**
+ * @name:歌手榜单二级导航
+ * @param {*}
+ * @Description:
+ */
+export const singerTopNav = [
+  {
+    key: 1,
+    title: '华语',
+  },
+  {
+    key: 2,
+    title: '欧美',
+  },
+  {
+    key: 3,
+    title: '韩国',
+  },
+  {
+    key: 3,
+    title: '日本',
+  },
+];
+
 /**
  * @name: 默认搜索关键词
  * @param {*}

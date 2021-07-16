@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 12:10:18
+ * @LastEditTime: 2021-07-01 23:21:55
  * @Description:
  */
 /*
@@ -28,6 +28,7 @@ export const initialState = {
   playList: [], // 当前用户创建/收藏的歌单
   myLikeId: '', // 我喜欢的音乐
   showModal: '', // 显示弹窗
+  showPlayer: false, // 显示播放页
   vipInfo: getLocal('vipInfo') || { redVipImageUrl: '', level: 0, vipType: -1 }, // vip  信息
   currentSong: initSong, // 当前播放的音乐信息
   userInfo: initUserInfo, // 用户信息

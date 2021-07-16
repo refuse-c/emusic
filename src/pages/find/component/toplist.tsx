@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-18 00:28:13
+ * @LastEditTime: 2021-07-09 16:18:59
  * @Description:发现音乐-排行榜
  */
 import { FC, useEffect, useState } from 'react';
@@ -16,6 +16,8 @@ import { songDetail } from '@/common/net/api';
 import { formatImgSize } from '@/common/utils/format';
 import { createHashHistory } from 'history';
 import { Spin } from 'antd';
+import Content from '@components/view/content';
+
 const history = createHashHistory();
 interface Item {
   list: [];
@@ -95,34 +97,36 @@ const TopList: FC = () => {
   }, []);
 
   return (
-    <div className={styles.topList}>
-      <Title title="官方版" margin="10px 0 21px" />
-      <Spin spinning={loading}>
-        <div className={styles.list}>
-          {official.map((item: Item, index: number) => {
-            const { list, ToplistType, coverImgUrl, id } = item;
-            const pathName = ToplistType === 'A' ? '/recommendSong' : `/single${id}`;
-            return (
-              <div key={index} className={styles.item}>
-                <div className={styles.img_box} onClick={() => history.push(pathName)}>
-                  <img src={formatImgSize(coverImgUrl, 172, 172)} alt="" />
-                </div>
-                <ul className={styles.songList}>
-                  {list.map((child: any, _index) => {
-                    return _index < 5 && <li key={_index}>{child.name}</li>;
-                  })}
-                  <div className={styles.viewAll} onClick={() => history.push(pathName)}>
-                    查看全部
+    <Content padding={'0 30px 30px'} isFull={false}>
+      <div className={styles.topList}>
+        <Title title="官方版" margin="10px 0 21px" />{' '}
+        <Spin spinning={loading}>
+          <div className={styles.list}>
+            {official.map((item: Item, index: number) => {
+              const { list, ToplistType, coverImgUrl, id } = item;
+              const pathName = ToplistType === 'A' ? '/singertop' : `/single${id}/${'歌单'}`;
+              return (
+                <div key={index} className={styles.item}>
+                  <div className={styles.img_box} onClick={() => history.push(pathName)}>
+                    <img src={formatImgSize(coverImgUrl, 172, 172)} alt="" />
                   </div>
-                </ul>
-              </div>
-            );
-          })}
-        </div>
-      </Spin>
-      <Title title="全球榜" />
-      <PlayList list={worldwide || []} />
-    </div>
+                  <ul className={styles.songList}>
+                    {list.map((child: any, _index) => {
+                      return _index < 5 && <li key={_index}>{child.name}</li>;
+                    })}
+                    <div className={styles.viewAll} onClick={() => history.push(pathName)}>
+                      查看全部
+                    </div>
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
+        </Spin>
+        <Title title="全球榜" />
+        <PlayList list={worldwide || []} />
+      </div>
+    </Content>
   );
 };
 

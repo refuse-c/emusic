@@ -2,9 +2,11 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:13
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 20:16:27
+ * @LastEditTime: 2021-07-07 11:16:51
  * @Description:
  */
+
+import { message } from 'antd';
 
 /**
  * @name:修改图片大小
@@ -12,8 +14,8 @@
  * @param {string} w      图片宽度
  * @param {string} h      图片高度
  */
-export const formatImgSize = (imgUrl: string, w: number, h: number) => {
-  return imgUrl && `${imgUrl.replace('http:', 'https:')}?param=${w}y${h}`;
+export const formatImgSize = (imgUrl: string, w?: number, h?: number) => {
+  return imgUrl && `${imgUrl.replace('http:', 'https:')}?param=${w || 50}y${h || 50}`;
 };
 
 /**
@@ -53,4 +55,24 @@ export const formatTime = (v: any, isSeconds: boolean = false) => {
 export const formatSerialNumber = (v: number) => {
   if (v < 0) return '';
   return v < 10 ? '0' + v : v;
+};
+
+/**
+ * @name: 筛选出可用的音乐
+ * @param {any} arr 歌单列表
+ * @param {boolean} msg  是否显示提示语
+ * @Description:
+ */
+export const formatAvailableSongs = (arr: any, msg: boolean = true) => {
+  let list = [];
+  if (!arr.length) {
+    msg && message.error('当前暂无可播放音乐');
+    return list;
+  }
+  list = arr.filter((item: { st: number }) => item.st !== -200); // 筛选出没有版权的音乐
+  list = list.filter((item: { fee: number }) => item.fee !== 4); // 筛选出需要付费的专辑
+  if (!list.length) {
+    msg && message.error('因合作方要求,该资源暂时下架>_<');
+  }
+  return list;
 };

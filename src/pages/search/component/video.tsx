@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:06:22
+ * @LastEditTime: 2021-07-09 17:01:42
  * @Description:搜索-视频
  */
 import { FC, useEffect, useState, useContext, useCallback } from 'react';
@@ -10,6 +10,7 @@ import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
 import Video from '@components/video';
+import Content from '@components/view/content';
 import { Spin } from 'antd';
 const Vidoe: FC = () => {
   const [list, setList] = useState<any>([]);
@@ -41,7 +42,9 @@ const Vidoe: FC = () => {
     <Spin spinning={loading}>
       <div className={styles.box}>
         {list.length && !loading ? (
-          <Video list={list} />
+          <Content padding={'0 30px'} isFull>
+            <Video list={list} />
+          </Content>
         ) : !loading ? (
           <p className={styles.empty}>
             很抱歉,未能找到与" <span style={{ color: '#507DAF' }}>{keywords}</span> "相关的任何视频

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 14:38:24
+ * @LastEditTime: 2021-06-24 14:06:59
  * @Description:搜索-单曲
  */
 import { FC, useEffect, useState, useContext, useCallback } from 'react';
@@ -26,9 +26,15 @@ const Single: FC = () => {
       const res: any = await search({ keywords, limit: 100, type: 1 });
       if (res.code === 200) {
         const { songs = [], songCount } = res && res.result;
-        const idsArr = songs.length && assemblyIds(songs);
+        // 没数据就清除loading
+        if (songs.length) {
+          const idsArr = songs.length && assemblyIds(songs);
+
+          await getSongDetail(idsArr);
+        } else {
+          setloading(false);
+        }
         const data = { type: 1, total: songCount || 0 };
-        await getSongDetail(idsArr);
         dispatch({ type: 'searchInfo', data });
       }
     },
@@ -36,6 +42,7 @@ const Single: FC = () => {
   );
 
   const getSongDetail = async (ids: string) => {
+    setloading(true);
     const res: any = await songDetail({ ids });
     if (res.code === 200) {
       const { songs, privileges } = res;

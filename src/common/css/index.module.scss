@@ -4,49 +4,53 @@ div,
 ul,
 li,
 p {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   cursor: default;
   user-select: none;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-  color: #373737;
   position: relative;
   font-size: 14px;
+  color: #373737;
 
   &::after {
     position: absolute;
-    bottom: 2px;
     right: 2px;
+    bottom: 2px;
     z-index: 2;
-    content: '';
     width: 10px;
     height: 10px;
     background: url('~@images/icon_drag_drop.svg') center center / 10px no-repeat;
+    content: '';
   }
 }
+
 .artists {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
+
   i {
     max-height: 16px;
     overflow: hidden;
     line-height: 12px;
+
     &.vip {
-      color: #fe672e;
       font-size: 27px;
+      color: #fe672e;
     }
 
     &.sq {
-      color: $color;
       font-size: 27px;
+      color: $color;
     }
 
     &.mv {
-      color: $color;
       font-size: 32px;
+      color: $color;
       cursor: pointer;
+
       &:hover {
         opacity: 0.8;
       }
@@ -54,21 +58,23 @@ body {
   }
 
   .artistsName {
-    flex: 1;
     height: 16px;
-    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    word-break: break-all;
     color: #929292;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+    white-space: nowrap;
+    flex: 1;
+
     span {
-      word-wrap: break-word;
-      word-break: break-all;
-      cursor: pointer;
       padding-right: 5px;
       font-size: 12px;
       color: #929292;
+      word-break: break-all;
+      word-wrap: break-word;
+      cursor: pointer;
+
       &:hover {
         color: #5f5f5f;
         text-decoration: underline;
@@ -88,12 +94,12 @@ body {
   // 分页组件样式重写
   .ant-pagination {
     display: table;
-    margin: 0 auto;
+    margin: 30px auto;
 
     .ant-pagination-item {
       margin-left: 4px !important;
-      border: 1px solid #e6e6e6 !important;
       background-color: #fff;
+      border: 1px solid #e6e6e6 !important;
 
       a:hover {
         color: #373737;

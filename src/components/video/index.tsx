@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-17 16:52:07
+ * @LastEditTime: 2021-07-09 16:55:45
  * @Description:视频列表组件
  */
 import { FC } from 'react';
@@ -15,9 +15,12 @@ interface Props {
 }
 interface Item {
   id: string;
-  title: string;
-  coverUrl: string;
-  playTime: number;
+  name?: string;
+  title?: string;
+  imgurl?: string;
+  coverUrl?: string;
+  playTime?: number;
+  artistName?: number;
   copywriter?: string;
   creator?: any;
   data?: any;
@@ -29,11 +32,12 @@ const Video: FC<Props> = (props) => {
       {list
         .filter((child: { type: number }) => child.type !== 7) // 过滤直播数据
         .map((item: Item, index: number) => {
-          const { title, coverUrl, playTime, creator, data } = item;
-          const name = type === 1 ? data.title : title; // 标题
+          const { title, name, coverUrl, playTime, creator, data, artistName, imgurl } = item;
+          const videoName = type === 1 ? data.title : title || name; // 标题
           const playcount = type === 1 ? data.playTime : playTime; // 播放量
-          const backgroundImage = `url(${formatImgSize(type === 1 ? data.coverUrl : coverUrl, 334, 188)})`; // 背景图
-          const artistName = type === 1 ? data && data.creator && data.creator.nickname : creator[0].userName; // 作者
+          const backgroundImage = `url(${formatImgSize(type === 1 ? data.coverUrl : coverUrl || imgurl, 334, 188)})`; // 背景图
+          const arName =
+            type === 1 ? data && data.creator && data.creator.nickname : (creator && creator[0].userName) || artistName; // 作者
 
           return (
             <li key={index}>
@@ -42,8 +46,8 @@ const Video: FC<Props> = (props) => {
                   <Playcount num={playcount} />
                 </div>
               </div>
-              <p className={styles.title}>{name}</p>
-              <p className={styles.artistName}>by {artistName}</p>
+              <p className={styles.title}>{videoName}</p>
+              <p className={styles.artistName}>by {arName}</p>
             </li>
           );
         })}

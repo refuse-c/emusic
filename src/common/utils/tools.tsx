@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-13 15:03:27
+ * @LastEditTime: 2021-07-08 17:17:40
  * @Description:
  */
 
@@ -195,7 +195,7 @@ export const parseLRC = (lrc: string): Array<LRC> => {
     const minutes = Number(match[1]) || 0;
     const seconds = Number(match[2]) || 0;
     const milliseconds = Number(match[3]) || 0;
-    const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds + offset; // eslint-disable-line no-mixed-operators
+    const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds + offset;
     const text = (match[4] as string).replace(regTime, '').replace(regTimeCompatible, '');
 
     // 优化：不要显示空行

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-17 02:32:40
+ * @LastEditTime: 2021-07-12 21:38:39
  * @Description:发现音乐-歌单
  */
 import { FC, useEffect, useState, useContext } from 'react';
@@ -14,6 +14,8 @@ import { Context } from '@utils/context';
 import PlayList from '@/components/songList';
 import CatGroup from '@/components/catGroup';
 import { formatImgSize } from '@/common/utils/format';
+import Content from '@components/view/content';
+
 interface Item {
   name: string;
   id?: number;
@@ -91,42 +93,44 @@ const Recommend: FC = () => {
 
   return (
     <div className={styles.playlist}>
-      {showModal === 'showCatList' && (
-        <CatGroup list={catlist} active={tag} changeTag={(item: Item) => changeTag(item)} />
-      )}
-      {highList.coverImgUrl ? (
-        <div className={styles.boutique}>
-          <img src={formatImgSize(highList.coverImgUrl, 140, 140)} alt="" />
-          <div className={styles.info}>
-            <span>精品歌单</span>
-            <p>{highList.name}</p>
-            <p>{highList.copywriter}</p>
+      <Content padding={'0 30px 30px'} isFull={false}>
+        {showModal === 'showCatList' && (
+          <CatGroup list={catlist} active={tag} changeTag={(item: Item) => changeTag(item)} />
+        )}
+        {highList.coverImgUrl ? (
+          <div className={styles.boutique}>
+            <img src={formatImgSize(highList.coverImgUrl, 140, 140)} alt="" />
+            <div className={styles.info}>
+              <span>精品歌单</span>
+              <p>{highList.name}</p>
+              <p>{highList.copywriter}</p>
+            </div>
+            <div
+              className={styles.bg}
+              style={{ backgroundImage: `url(${formatImgSize(highList.coverImgUrl, 200, 200)})` }}
+            ></div>
           </div>
-          <div
-            className={styles.bg}
-            style={{ backgroundImage: `url(${formatImgSize(highList.coverImgUrl, 200, 200)})` }}
-          ></div>
-        </div>
-      ) : null}
-      <Tags
-        tag={tag}
-        list={tagList}
-        changeTag={(item: Item) => changeTag(item)}
-        showCallBack={() => dispatch({ type: 'showModal', data: showModal === 'showCatList' ? '' : 'showCatList' })}
-      />
-
-      <PlayList list={playList.playlists} />
-      <div className={styles.pages}>
-        <Pagination
-          size="small"
-          pageSize={100}
-          total={playList.total}
-          showSizeChanger={false}
-          hideOnSinglePage={true}
-          current={playList.current}
-          onChange={onChange}
+        ) : null}
+        <Tags
+          tag={tag}
+          list={tagList}
+          changeTag={(item: Item) => changeTag(item)}
+          showCallBack={() => dispatch({ type: 'showModal', data: showModal === 'showCatList' ? '' : 'showCatList' })}
         />
-      </div>
+
+        <PlayList list={playList.playlists} />
+        <div className={styles.pages}>
+          <Pagination
+            size="small"
+            pageSize={100}
+            total={playList.total}
+            showSizeChanger={false}
+            hideOnSinglePage={true}
+            current={playList.current}
+            onChange={onChange}
+          />
+        </div>
+      </Content>
     </div>
   );
 };

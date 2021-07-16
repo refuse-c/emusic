@@ -2,11 +2,11 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-23 23:44:59
+ * @LastEditTime: 2021-07-09 15:57:53
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState } from 'react';
-import styles from '../index.module.scss';
+// import styles from '../index.module.scss';
 import Title from '@components/title';
 import Banner from '@components/banner';
 import PlayList from '@/components/songList';
@@ -15,6 +15,7 @@ import Songs from '@/components/song';
 import MvList from '@/components/mvList';
 import RadioList from '@/components/radioList';
 import Loading from '@/components/loading';
+import Content from '@components/view/content';
 
 import { findBanner, recommendList, exclusive, personalizedMv, recommendDj } from '@/common/net/find';
 import moment from 'moment';
@@ -142,7 +143,7 @@ const Recommend: FC = () => {
   }, []);
 
   return (
-    <div className={styles.recommend}>
+    <Content padding={'0 30px 30px'} isFull={false}>
       <Loading />
       <Banner list={bannerList || []} />
       <Title title="推荐歌单" margin={'10px  0'} path="/find/playlist" />
@@ -156,7 +157,7 @@ const Recommend: FC = () => {
       <Title title="主播电台" margin={'10px  0'} path="/find/radio" />
       <RadioList list={radioList} />
       {/* <Title title="看看" pathName="/find/playlist" /> */}
-    </div>
+    </Content>
   );
 };
 

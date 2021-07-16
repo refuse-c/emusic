@@ -2,8 +2,8 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-27 17:56:00
- * @Description:检索-电台组件
+ * @LastEditTime: 2021-07-16 17:53:13
+ * @Description:用户列表
  */
 import { formatImgSize } from '@/common/utils/format';
 import { FC } from 'react';

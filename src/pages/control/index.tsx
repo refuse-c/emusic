@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-20 10:05:28
+ * @LastEditTime: 2021-07-08 20:24:33
  * @Description:control
  */
 import { FC, useContext, useState, useEffect, useCallback } from 'react';
@@ -14,19 +14,19 @@ import { message, Slider } from 'antd';
 import Player from '@pages/player';
 import { initSong, initTime } from '@/common/utils/local';
 import { cutSong, debounce, getLocal, setLocal, _findIndex, parseLRC, getTimeIndex } from '@/common/utils/tools';
-
+import { createHashHistory } from 'history';
+const history = createHashHistory();
 const Control: FC = () => {
   const refAudio = document.getElementById('refAudio') as any;
   const [url, setUrl] = useState('');
   const [isMute, setIsMute] = useState(false);
   const [lrc, setLrc] = useState<any>([]);
-  const [isShowPlayer, setIsShowPlayer] = useState(false);
   const [isShowlrc, setIsShowlrc] = useState(getLocal('showLrc') || false);
   const [lrcLoading, setLrcLoading] = useState(false);
   const [model, setModel] = useState(getLocal('model') || 1);
   const [volume, setVolume] = useState(getLocal('volume') || 5);
   const [songTime, setSongTime] = useState(initTime);
-  const { isPlay, likeList, songList, currentSong, showModal, setLike, dispatch } = useContext(Context);
+  const { isPlay, likeList, songList, currentSong, showModal, setLike, showPlayer, dispatch } = useContext(Context);
   const { id, al, ar, name } = currentSong;
   const { currentTime, duration } = songTime;
   // 通过blob预加载全部音频
@@ -181,7 +181,7 @@ const Control: FC = () => {
           const bufferTime = buffered.end(buffered.length - 1);
           const bw = Number((bufferTime / duration).toFixed(2)) * 100;
           const slider = document.getElementsByClassName('ant-slider-rail')[0] as HTMLElement;
-          slider.style.background = `linear-gradient(to right, #cdcdcd ${bw}%, #e5e5e5 ${1 - bw}%)`;
+          slider.style.background = `linear-gradient(to right, #cdcdcd ${bw}%, #e5e5e5 ${100 - bw}%)`;
         }
         model !== 3 && setSongTime({ currentTime, duration });
       });
@@ -191,7 +191,7 @@ const Control: FC = () => {
   const num = getTimeIndex(lrc, currentTime);
   return (
     <div className={styles.control}>
-      {isShowPlayer && <Player num={num} lrc={lrc} isPlay={isPlay} noLyric={noLyric} />}
+      {showPlayer && <Player num={num} lrc={lrc} isPlay={isPlay} noLyric={noLyric} />}
       {
         <div className={styles.lrc} style={{ height: isShowlrc ? 31 : 0, bottom: isShowlrc ? 73 : 72 }}>
           {isShowlrc && (
@@ -222,7 +222,7 @@ const Control: FC = () => {
         <div className={styles.left}>
           <div className={styles.content}>
             <img
-              onClick={() => setIsShowPlayer(!isShowPlayer)}
+              onClick={() => dispatch({ type: 'showPlayer', data: !showPlayer })}
               className={styles.img_box}
               src={formatImgSize(al.picUrl, 48, 48)}
               alt=""
@@ -238,7 +238,9 @@ const Control: FC = () => {
               </div>
               <div>
                 {ar.map((item: any, index: number) => (
-                  <span key={index}>{item.name}</span>
+                  <span key={index} onClick={() => history.push(`/singerDetail${item.id}`)}>
+                    {item.name}
+                  </span>
                 ))}
               </div>
             </div>

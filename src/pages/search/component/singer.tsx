@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:03:06
+ * @LastEditTime: 2021-07-08 15:09:55
  * @Description:搜索-歌手
  */
 
@@ -42,7 +42,7 @@ const Singer: FC = () => {
     <Spin spinning={loading}>
       <div className={styles.box}>
         {list.length && !loading ? (
-          <SingerComponent list={list} />
+          <SingerComponent list={list} type={2} layout="row" />
         ) : !loading ? (
           <p className={styles.empty}>
             很抱歉,未能找到与" <span style={{ color: '#507DAF' }}>{keywords}</span> "相关的任何歌手

@@ -2,11 +2,11 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:13:46
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-11 01:22:38
+ * @LastEditTime: 2021-07-17 07:28:22
  * @Description:
  */
 module.exports = {
-  parser: '@typescript-eslint/parser', // 指定ESLint解析器
+  // parser: '@typescript-eslint/parser', // 指定ESLint解析器
   extends: [
     'plugin:react/recommended', // 使用来自 @eslint-plugin-react 的推荐规则
     'plugin:@typescript-eslint/recommended', // 使用来自@typescript-eslint/eslint-plugin的推荐规则
