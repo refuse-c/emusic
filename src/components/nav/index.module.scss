@@ -2,9 +2,9 @@
 
 .nav {
   display: flex;
-  align-items: center;
-  padding: 20px 0;
   height: 64px;
+  padding: 20px 0;
+  align-items: center;
 
   &.isFixed {
     position: sticky;
@@ -20,18 +20,18 @@
 
       &.active {
         position: relative;
-        color: #000;
         font-size: 14px;
-        line-height: 1;
         font-weight: bold;
+        line-height: 1;
+        color: #000;
       }
     }
   }
 
   a {
+    font-size: 16px;
     color: #373737;
     cursor: pointer;
-    font-size: 16px;
     transition: all 0.25s ease;
 
     &:not(:first-child) {
@@ -44,20 +44,20 @@
 
     &.active {
       position: relative;
-      color: #000;
       font-size: 20px;
-      line-height: 1;
       font-weight: bold;
+      line-height: 1;
+      color: #000;
 
       &::after {
         position: absolute;
         bottom: -10px;
         left: 50%;
-        content: '';
         width: 75%;
-        border-radius: 4px;
-        transform: translateX(-50%);
         border-bottom: 3px solid $color;
+        border-radius: 4px;
+        content: '';
+        transform: translateX(-50%);
       }
     }
   }

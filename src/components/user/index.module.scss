@@ -1,5 +1,6 @@
 .user {
   font-size: 12px;
+
   &.row {
     li {
       display: flex;
@@ -13,7 +14,7 @@
       }
 
       &:nth-child(odd) {
-        background-color: #ffffff;
+        background-color: #fff;
       }
 
       &:hover {
@@ -36,11 +37,12 @@
           white-space: nowrap;
         }
       }
+
       .artist {
         max-width: 100%;
-        color: #9f9f9f;
         padding-left: 30px;
         overflow: hidden;
+        color: #9f9f9f;
         text-overflow: ellipsis;
         white-space: nowrap;
       }

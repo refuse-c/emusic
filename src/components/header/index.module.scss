@@ -3,49 +3,49 @@
 .header {
   position: relative;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
   height: 100%;
-  background: url('../../common/images/logo.svg') left 11px center / 116.8px no-repeat;
   padding-left: 212px;
+  background: url('../../common/images/logo.svg') left 11px center / 116.8px no-repeat;
+  align-items: center;
+  justify-content: space-between;
 
   &::before {
     position: absolute;
     top: 50%;
     left: 0;
-    content: '';
-    transform: translateY(-50%);
     width: 36px;
     height: 30px;
     background: $color url('../../common/images/circle.svg') left 2px center/30px no-repeat;
+    content: '';
+    transform: translateY(-50%);
   }
 
   .left {
     display: flex;
-    align-items: center;
     height: 100%;
+    align-items: center;
 
     .back_group {
       display: flex;
-      align-items: center;
       height: 100%;
+      align-items: center;
 
       p {
         width: 24px;
         height: 24px;
-        border-radius: 50%;
-        cursor: pointer;
-        color: #fff;
         font-size: 9px;
         line-height: 24px;
+        color: #fff;
         text-align: center;
-        -webkit-app-region: no-drag;
+        cursor: pointer;
         background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        -webkit-app-region: no-drag;
 
         &:last-child {
-          transform: rotate(180deg);
           margin-left: 8px;
+          transform: rotate(180deg);
         }
       }
     }
@@ -55,8 +55,8 @@
       color: #fff;
 
       p {
-        cursor: pointer;
         font-size: 20px;
+        cursor: pointer;
         -webkit-app-region: no-drag;
       }
     }
@@ -67,32 +67,30 @@
     align-items: center;
 
     li {
-      color: #fff;
       margin: 0 8px;
       font-size: 20px;
+      color: #fff;
+      color: #e9e9e9;
       cursor: pointer;
       -webkit-app-region: no-drag;
-      color: #e9e9e9;
-
-
 
       &.author {
         display: flex;
-        align-items: center;
         font-size: 14px;
+        align-items: center;
 
         .avatarUrl {
           width: 30px;
           height: 30px;
-          border-radius: 50%;
           margin-right: 6px;
           cursor: pointer;
+          border-radius: 50%;
         }
 
         .userInfo {
           display: flex;
-          align-items: center;
           cursor: pointer;
+          align-items: center;
 
           &:hover {
             color: #fff;
@@ -104,16 +102,16 @@
           }
 
           p {
-            cursor: pointer;
             white-space: nowrap;
+            cursor: pointer;
 
             &:nth-child(2) {
               margin-left: 4px;
             }
 
             &:nth-child(3) {
-              font-size: 8px;
               margin-left: 4px;
+              font-size: 8px;
             }
           }
         }

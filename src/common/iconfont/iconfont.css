@@ -7,223 +7,223 @@
 .icon {
   font-family: 'font_family' !important;
   font-size: 16px;
-  font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-style: normal;
 }
 
-.icon-empty:before {
+.icon-empty::before {
   content: '\e672';
 }
 
-.icon-zuixiaohua-0615:before {
+.icon-zuixiaohua-0615::before {
   content: '\e61a';
 }
 
-.icon-guanbi-0615:before {
+.icon-guanbi-0615::before {
   content: '\e61b';
 }
 
-.icon-buzhidao-0615:before {
+.icon-buzhidao-0615::before {
   content: '\e61d';
 }
 
-.icon-mail:before {
+.icon-mail::before {
   content: '\e61e';
 }
 
-.icon-theme:before {
+.icon-theme::before {
   content: '\e61f';
 }
 
-.icon-setting:before {
+.icon-setting::before {
   content: '\e620';
 }
 
-.icon-quanping-0615:before {
+.icon-quanping-0615::before {
   content: '\e622';
 }
 
-.icon-usersetting:before {
+.icon-usersetting::before {
   content: '\e602';
 }
 
-.icon-musicicon:before {
+.icon-musicicon::before {
   content: '\e694';
 }
 
-.icon-hot-0603:before {
+.icon-hot-0603::before {
   content: '\e619';
 }
 
-.icon-max:before {
+.icon-max::before {
   content: '\e617';
 }
 
-.icon-mic-0603:before {
+.icon-mic-0603::before {
   content: '\e616';
 }
 
-.icon-volume:before {
+.icon-volume::before {
   content: '\e635';
 }
 
-.icon-minimize:before {
+.icon-minimize::before {
   content: '\e623';
 }
 
-.icon-min:before {
+.icon-min::before {
   content: '\e625';
 }
 
-.icon-close:before {
+.icon-close::before {
   content: '\e626';
 }
 
-.icon-zoom:before {
+.icon-zoom::before {
   content: '\e62e';
 }
 
-.icon-shengyin12345:before {
+.icon-shengyin12345::before {
   content: '\e62f';
 }
 
-.icon-mute:before {
+.icon-mute::before {
   content: '\e630';
 }
 
-.icon-date:before {
+.icon-date::before {
   content: '\e631';
 }
 
-.icon-like:before {
+.icon-like::before {
   content: '\e621';
 }
 
-.icon-logo:before {
+.icon-logo::before {
   content: '\e6c1';
 }
 
-.icon-download:before {
+.icon-download::before {
   content: '\e651';
 }
 
-.icon-list-download:before {
+.icon-list-download::before {
   content: '\e639';
 }
 
-.icon-list:before {
+.icon-list::before {
   content: '\e6d8';
 }
 
-.icon-play:before {
+.icon-play::before {
   content: '\e62c';
 }
 
-.icon-pause:before {
+.icon-pause::before {
   content: '\e62d';
 }
 
-.icon-lrc:before {
+.icon-lrc::before {
   content: '\e667';
 }
 
-.icon-next:before {
+.icon-next::before {
   content: '\e618';
 }
 
-.icon-random:before {
+.icon-random::before {
   content: '\e6a0';
 }
 
-.icon-cycle:before {
+.icon-cycle::before {
   content: '\e6a2';
 }
 
-.icon-order:before {
+.icon-order::before {
   content: '\e6a3';
 }
 
-.icon-tubiaozhizuomoban-01:before {
+.icon-tubiaozhizuomoban-01::before {
   content: '\e61c';
 }
 
-.icon-shoucang2-01:before {
+.icon-shoucang2-01::before {
   content: '\e62a';
 }
 
-.icon-shoucang-01:before {
+.icon-shoucang-01::before {
   content: '\e62b';
 }
 
-.icon-sound:before {
+.icon-sound::before {
   content: '\e627';
 }
 
-.icon-back:before {
+.icon-back::before {
   content: '\e600';
 }
 
-.icon-arrow-bottom:before {
+.icon-arrow-bottom::before {
   content: '\e611';
 }
 
-.icon-playlist:before {
+.icon-playlist::before {
   content: '\e612';
 }
 
-.icon-search:before {
+.icon-search::before {
   content: '\e613';
 }
 
-.icon-arrow-left:before {
+.icon-arrow-left::before {
   content: '\e614';
 }
 
-.icon-local-music:before {
+.icon-local-music::before {
   content: '\e60c';
 }
 
-.icon-menu-playlist:before {
+.icon-menu-playlist::before {
   content: '\e601';
 }
 
-.icon-cardiac:before {
+.icon-cardiac::before {
   content: '\e603';
 }
 
-.icon-cloud:before {
+.icon-cloud::before {
   content: '\e604';
 }
 
-.icon-radio:before {
+.icon-radio::before {
   content: '\e605';
 }
 
-.icon-mv:before {
+.icon-mv::before {
   content: '\e606';
 }
 
-.icon-collection:before {
+.icon-collection::before {
   content: '\e607';
 }
 
-.icon-add:before {
+.icon-add::before {
   content: '\e608';
 }
 
-.icon-dianzan-01:before {
+.icon-dianzan-01::before {
   content: '\e609';
 }
 
-.icon-sq:before {
+.icon-sq::before {
   content: '\e60a';
 }
 
-.icon-vip:before {
+.icon-vip::before {
   content: '\e60b';
 }
 
-.icon-unlike:before {
+.icon-unlike::before {
   content: '\e60d';
 }

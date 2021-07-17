@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-06-12 09:03:02
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 09:03:14
+ * @LastEditTime: 2021-07-17 11:08:02
  * @Description:
  */
 
@@ -20,6 +20,27 @@ targetId	banner type	targetId	banner type
 "-1004"	"明星访谈"	"4001"	"动态话题"
 
 background: linear-gradient(to right, red 50%, blue 50%);
+
+
+
+  通过blob预加载全部音频
+  const blobLoad = (src: string) => {
+    const req = new XMLHttpRequest();
+    req.open('GET', src, true);
+    req.responseType = 'blob';
+    req.onload = function () {
+      if (this.status === 200) {
+        const blob = this.response;
+        const blobSrc = URL.createObjectURL(blob);
+        console.log(blobSrc);
+  setUrl(blobSrc);
+      }
+    };
+    req.onerror = function () {
+  Error
+    };
+    req.send();
+  };
 
 
 

@@ -11,14 +11,14 @@
     position: fixed;
     right: 30px;
     bottom: 100px;
+    z-index: 8;
     width: 20px;
     height: 20px;
-    z-index: 8;
     cursor: pointer;
+    background-color: transparent;
+    border: 1px solid $color;
     border-radius: 50%;
     opacity: 0;
-    border: 1px solid $color;
-    background-color: transparent;
     transition: all 0.25s ease;
 
     &::before,
@@ -26,11 +26,11 @@
       position: absolute;
       top: 50%;
       left: 50%;
-      content: '';
       width: 30px;
       height: 1px;
-      transform: translate(-50%, -50%);
       background-color: $color;
+      content: '';
+      transform: translate(-50%, -50%);
     }
 
     &::after {
@@ -57,64 +57,68 @@
     }
 
     .serial {
-      color: #bababa;
       width: 30px;
+      color: #bababa;
     }
   }
 
   .name {
-    color: #373737;
     display: flex;
-    align-items: center;
     width: 100%;
     height: 100%;
+    color: #373737;
+    align-items: center;
 
     p {
+      padding-right: 5px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      padding-right: 5px;
+
       span {
         color: #507daf;
       }
     }
 
     i {
-      white-space: nowrap;
-      text-align: center;
-      margin: 0;
       width: 32px;
       height: 16px;
+      margin: 0;
       line-height: 18px;
+      text-align: center;
+      white-space: nowrap;
 
       &.vip {
-        color: #fe672e;
         font-size: 27px;
+        color: #fe672e;
       }
 
       &.sq {
-        color: $color;
         font-size: 27px;
+        color: $color;
       }
 
       &.mv {
-        color: $color;
         font-size: 32px;
+        color: $color;
         cursor: pointer;
       }
     }
   }
 
   .singer {
+    padding-right: 5px;
     color: #656565;
     cursor: pointer;
-    padding-right: 5px;
+
     span {
       color: #507daf;
     }
+
     &:hover {
       color: #000000d9;
       text-decoration: underline;
+
       span {
         color: #000000d9;
         text-decoration: underline;
@@ -123,8 +127,8 @@
   }
 
   .album {
-    color: #656565;
     overflow: hidden;
+    color: #656565;
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
@@ -132,9 +136,11 @@
     span {
       color: #507daf;
     }
+
     &:hover {
       color: #000000d9;
       text-decoration: underline;
+
       span {
         color: #000000d9;
         text-decoration: underline;
@@ -166,7 +172,7 @@
   }
 
   .odd {
-    background-color: #ffffff;
+    background-color: #fff;
   }
 
   .active {
@@ -189,17 +195,19 @@
     }
 
     .ant-table-thead > tr > th {
-      color: #888888;
-      background-color: #fff;
       height: 34px;
+      color: #888;
       vertical-align: middle;
+      background-color: #fff;
 
       .ant-table-column-sorters {
         padding: 0 7px !important;
       }
+
       .ant-table-column-sorter {
         opacity: 0;
       }
+
       &:hover {
         .ant-table-column-sorter {
           opacity: 1;
@@ -210,24 +218,22 @@
     .ant-table-tbody {
       font-size: 12px;
 
-      tr {
+      > tr {
+        &:hover:not(.ant-table-expanded-row) > td,
+        .ant-table-row-hover,
+        .ant-table-row-hover > td {
+          background-color: #f0f1f2;
+        }
+
         td {
           height: 34px;
-          vertical-align: middle;
           padding: 0 7px !important;
+          vertical-align: middle;
 
           &.ant-table-column-sort {
             background-color: transparent;
           }
         }
-      }
-    }
-
-    .ant-table-tbody {
-      > tr:hover:not(.ant-table-expanded-row) > td,
-      .ant-table-row-hover,
-      .ant-table-row-hover > td {
-        background-color: #f0f1f2;
       }
     }
 

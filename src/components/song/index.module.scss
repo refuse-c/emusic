@@ -1,8 +1,8 @@
 @import '~@common/css/_variables.scss';
 
 .list {
-  width: 100%;
   display: flex;
+  width: 100%;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -11,9 +11,9 @@
     display: flex;
     width: calc(33.33% - 13.33px);
     height: 48px;
-    border-radius: 6px;
-    color: #333;
     margin-bottom: 16px;
+    color: #333;
+    border-radius: 6px;
 
     &:hover {
       background-color: #eaeaea;
@@ -29,37 +29,37 @@
 
     .img {
       position: relative;
-      min-width: 48px;
       height: 48px;
-      border-radius: 6px;
+      min-width: 48px;
+      cursor: pointer;
       background-repeat: no-repeat;
       background-size: 48px 48px;
+      border-radius: 6px;
       background-clip: 4px;
-      cursor: pointer;
 
       &::after {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%);
-        content: '';
         width: 24px;
         height: 24px;
-        border-radius: 50%;
         background: rgba(255, 255, 255, 0.9) url('~@images/icon_play1.png') left 5px top 4px / 17px no-repeat;
+        border-radius: 50%;
+        content: '';
+        transform: translate(-50%, -50%);
       }
     }
 
     .info {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       padding: 5px 0 8px 10px;
       overflow: hidden;
+      flex-direction: column;
+      justify-content: space-between;
 
       .name {
-        font-size: 14px;
         overflow: hidden;
+        font-size: 14px;
         text-overflow: ellipsis;
         white-space: nowrap;
         // span {

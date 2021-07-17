@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-08 20:24:33
+ * @LastEditTime: 2021-07-17 11:45:47
  * @Description:control
  */
-import { FC, useContext, useState, useEffect, useCallback } from 'react';
+import { FC, useContext, useState, useEffect, useRef, useCallback } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatImgSize, formatTime } from '@/common/utils/format';
@@ -16,8 +16,9 @@ import { initSong, initTime } from '@/common/utils/local';
 import { cutSong, debounce, getLocal, setLocal, _findIndex, parseLRC, getTimeIndex } from '@/common/utils/tools';
 import { createHashHistory } from 'history';
 const history = createHashHistory();
+
 const Control: FC = () => {
-  const refAudio = document.getElementById('refAudio') as any;
+  let refAudio = useRef(null) as React.RefObject<any>;
   const [url, setUrl] = useState('');
   const [isMute, setIsMute] = useState(false);
   const [lrc, setLrc] = useState<any>([]);
@@ -29,24 +30,6 @@ const Control: FC = () => {
   const { isPlay, likeList, songList, currentSong, showModal, setLike, showPlayer, dispatch } = useContext(Context);
   const { id, al, ar, name } = currentSong;
   const { currentTime, duration } = songTime;
-  // 通过blob预加载全部音频
-  // const blobLoad = (src: string) => {
-  //   const req = new XMLHttpRequest();
-  //   req.open('GET', src, true);
-  //   req.responseType = 'blob';
-  //   req.onload = function () {
-  //     if (this.status === 200) {
-  //       const blob = this.response;
-  //       const blobSrc = URL.createObjectURL(blob);
-  //       console.log(blobSrc);
-  // setUrl(blobSrc);
-  //     }
-  //   };
-  //   req.onerror = function () {
-  // Error
-  //   };
-  //   req.send();
-  // };
 
   // 获取歌词
   const getLyric = async (id: number | string) => {
@@ -86,7 +69,7 @@ const Control: FC = () => {
   const handlePaused = () => {
     if (!songList.length) return message.info('当前无可以播放音乐,快去添加吧^v^');
     dispatch({ type: 'isPlay', data: !isPlay });
-    isPlay ? refAudio.pause() : refAudio.play();
+    isPlay ? refAudio.current?.pause() : refAudio.current?.play();
   };
 
   // 切歌
@@ -105,21 +88,21 @@ const Control: FC = () => {
 
   // 改变进度
   const changeCurrentTime = (value: number) => {
-    refAudio.currentTime = value;
+    if (refAudio) refAudio.current.currentTime = value;
   };
 
   // 改变音量
   const changeVolume = (value: number) => {
     setLocal('volume', value);
-    refAudio.volume = value / 100;
+    if (refAudio) refAudio.current.volume = value / 100;
     setVolume(value);
     setIsMute(false);
-    refAudio.muted = false;
+    if (refAudio) refAudio.current.muted = false;
   };
 
   // 静音操作
   const changeMute = () => {
-    refAudio.muted = !isMute;
+    if (refAudio) refAudio.current.muted = !isMute;
     setIsMute(!isMute);
   };
   // 无歌词渲染
@@ -146,7 +129,7 @@ const Control: FC = () => {
     getLyric(id);
     // 播放结束切歌
     if (refAudio) {
-      refAudio.addEventListener('ended', () => {
+      refAudio.current.addEventListener('ended', () => {
         debounce(() => handlcutSong(2), 1000);
       });
     }
@@ -156,13 +139,7 @@ const Control: FC = () => {
   // 监听音乐的播放、暂停、错误
   useEffect(() => {
     if (refAudio) {
-      // refAudio.addEventListener('play', () => {
-      //   !isPlay && dispatch({ type: 'isPlay', data: true });
-      // });
-      // refAudio.addEventListener('pause', () => {
-      //   !isPlay && dispatch({ type: 'isPlay', data: false });
-      // });
-      refAudio.addEventListener('error', (e: any) => {
+      refAudio.current.addEventListener('error', (e: any) => {
         console.log(e);
         getSongUrl(id);
         getLyric(id);
@@ -173,9 +150,9 @@ const Control: FC = () => {
   // audio - timeupdate 缓冲进度 || 当前播放时间变化
   useEffect(() => {
     if (refAudio) {
-      refAudio.volume = volume / 100;
-      refAudio.addEventListener('timeupdate', () => {
-        const { currentTime, duration, buffered } = refAudio;
+      refAudio.current.volume = volume / 100;
+      refAudio.current.addEventListener('timeupdate', () => {
+        const { currentTime, duration, buffered } = refAudio.current;
         // 缓冲进度
         if (buffered.length !== 0) {
           const bufferTime = buffered.end(buffered.length - 1);
@@ -196,7 +173,7 @@ const Control: FC = () => {
         <div className={styles.lrc} style={{ height: isShowlrc ? 31 : 0, bottom: isShowlrc ? 73 : 72 }}>
           {isShowlrc && (
             <ul className={styles.content} style={{ transform: `translateY(${-num * 30}px)` }}>
-              {lrc.length > 0 ? (
+              {lrc.length ? (
                 lrc.map((item: any, index: number) => {
                   return (
                     <li className={index === num ? styles.active : styles.bb} key={index}>
@@ -215,6 +192,7 @@ const Control: FC = () => {
         autoPlay
         preload="auto"
         id="refAudio"
+        ref={refAudio}
         src={url.replace('http:', 'https:')}
         loop={songList.length === 1 || model === 3}
       />

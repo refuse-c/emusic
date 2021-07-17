@@ -1,5 +1,6 @@
 .radio {
   font-size: 12px;
+
   &.row {
     li {
       display: flex;
@@ -13,7 +14,7 @@
       }
 
       &:nth-child(odd) {
-        background-color: #ffffff;
+        background-color: #fff;
       }
 
       &:hover {
@@ -35,19 +36,22 @@
           padding-left: 10px;
         }
       }
+
       .artist {
         display: flex;
         align-items: center;
         flex: 1;
         height: 100%;
         color: #9f9f9f;
+
         &:hover {
-          cursor: pointer;
           color: #616162;
+          cursor: pointer;
         }
+
         span {
-          color: #cfcfdf;
           padding-right: 10px;
+          color: #cfcfdf;
         }
       }
     }

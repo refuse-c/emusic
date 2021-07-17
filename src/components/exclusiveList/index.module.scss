@@ -30,43 +30,42 @@
     .imgBox {
       position: relative;
       width: 100%;
-      border-radius: 6px;
       padding-top: calc(100% / 1.78);
       cursor: pointer;
-      background-size: contain;
       background-position: center center;
       background-repeat: no-repeat;
+      background-size: contain;
+      border-radius: 6px;
 
       &::before {
         position: absolute;
         top: 0;
         left: 0;
-        content: '';
         width: 100%;
         height: 100%;
-        border-radius: 6px;
         background: url('~@images/icon_mask_layer3.png') top center / 100% no-repeat;
+        border-radius: 6px;
+        content: '';
       }
 
       &::after {
         position: absolute;
         top: 8px;
         left: 8px;
-        content: '';
         width: 26px;
         height: 26px;
         background: url('~@images/icon_play_1.png') center center / 26px no-repeat;
+        content: '';
       }
-
     }
 
     p {
-      font-size: 14px;
+      display: -webkit-box;
       margin: 4px 0 14px;
       overflow: hidden;
+      font-size: 14px;
       line-height: 1.5;
       text-overflow: ellipsis;
-      display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
     }

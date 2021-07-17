@@ -2,33 +2,33 @@
   position: fixed;
   top: 60px;
   right: 0;
+  z-index: 40;
   width: 425px;
   height: calc(100vh - 133px);
   overflow: hidden;
-  z-index: 40;
   background-color: #fff;
 
   .content {
     display: flex;
+    width: calc(100% - 10px);
+    height: 100%;
+    padding: 20px 0 0;
+    margin-left: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     flex-direction: column;
     align-items: center;
-    padding: 20px 0 0;
-    width: calc(100% - 10px);
-    margin-left: 10px;
-    height: 100%;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
 
     .tools {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
       width: calc(100% - 40px);
       padding: 20px 0 15px;
       border-bottom: 1px solid #f2f2f2;
+      align-items: center;
+      justify-content: space-between;
 
       .total {
-        color: #cfcfcf;
         font-size: 12px;
+        color: #cfcfcf;
       }
 
       .info {
@@ -42,15 +42,15 @@
       overflow-y: scroll;
 
       li {
-        line-height: 34px;
         padding: 0 20px;
+        line-height: 34px;
 
         &:nth-child(even) {
           background-color: #f9f9f9;
         }
 
         &:nth-child(odd) {
-          background-color: #ffffff;
+          background-color: #fff;
         }
       }
 

@@ -7,41 +7,40 @@
 
   li {
     position: relative;
-    overflow: hidden;
-    margin-left: 0;
     margin-bottom: 14px;
+    margin-left: 0;
+    overflow: hidden;
 
     .img_box {
       position: relative;
       width: 100%;
       cursor: pointer;
-      background-size: 100% 100%;
       background-position: center center;
       background-repeat: no-repeat;
-
+      background-size: 100% 100%;
       border-radius: 6px;
 
       .copywriter {
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 5;
         width: 100%;
-        opacity: 0;
-        color: #fff;
+        padding: 12px 8px;
         font-size: 14px;
         line-height: 1;
-        padding: 12px 8px;
-        transform: all 0.25 ease;
-        z-index: 5;
+        color: #fff;
         background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        transform: all 0.25 ease;
       }
     }
 
     .title {
-      font-size: 14px;
       margin: 4px 0 0;
-      line-height: 1.5;
       overflow: hidden;
+      font-size: 14px;
+      line-height: 1.5;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
