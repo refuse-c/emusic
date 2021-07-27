@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-09 13:47:14
+ * @LastEditTime: 2021-07-22 14:05:11
  * @Description:
  */
 /**
@@ -141,7 +141,7 @@ export const videoNav = [
  * @param {*}
  * @Description:
  */
-export const initUserInfo = { userId: 0, nickname: '', avatarUrl: '', myLikeId: {} };
+export const initUserInfo = { userId: 0, nickname: '', avatarUrl: '' };
 
 /**
  * @name: 歌曲信息默认值

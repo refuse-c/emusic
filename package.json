@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "homepage": ".",
-  "main": "main.js",
+  "main": "./main/index.js",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
     "@typescript-eslint/eslint-plugin": "^4.21.0",
     "@typescript-eslint/parser": "^4.21.0",
+    "electron-is-dev": "^2.0.0",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
@@ -26,8 +27,12 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "eject": "react-app-rewired eject",
+    "pack": "electron-builder",
+    "prepack": "react-scripts build",
+    "pack:dir": "electron-builder --dir",
     "starts": "concurrently \"set BROWSER=none &&  react-app-rewired start\" \"electron .\" ",
     "lint:eslint": "eslint ./ --ext .ts,.tsx --color --quiet --fix",
+    "dev": "concurrently \" wait-on http://localhost:3000 && electron . \" \" cross-env BROWSER=none npm start \" ",
     "postinstall": "husky install",
     "packager": "electron-packager ./build emusic –out out_dir --arch=x64 --overwrite --ignore=node_modules"
   },
@@ -51,6 +56,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.13.15",
+    "@szhsin/react-menu": "^1.10.1",
     "@types/clone": "^2.1.0",
     "@types/react": "^17.0.3",
     "@types/react-color": "^3.0.4",
@@ -63,9 +69,11 @@
     "clone": "^2.1.2",
     "concurrently": "^6.0.1",
     "copy-to-clipboard": "^3.3.1",
+    "cross-env": "^7.0.3",
     "css-loader": "^5.2.5",
     "customize-cra": "^1.0.0",
     "electron": "^12.0.9",
+    "electron-builder": "^22.11.7",
     "husky": "^7.0.1",
     "lint-staged": "^11.0.1",
     "lodash": "^4.17.21",
@@ -86,7 +94,8 @@
     "stylelint-config-standard": "^22.0.0",
     "stylelint-order": "^4.1.0",
     "ts-loader": "^8.1.0",
-    "typescript": "^4.2.3"
+    "typescript": "^4.2.3",
+    "wait-on": "^6.0.0"
   },
   "mac": {
     "icon": "https://www.baidu.com/favicon.ico"

@@ -181,4 +181,4 @@ module.exports = {
     ],
   },
   ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
-}
+};

@@ -2,14 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 00:08:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-26 12:11:26
+ * @LastEditTime: 2021-07-27 15:56:35
  * @Description:
  */
 const { app, BrowserWindow, globalShortcut } = require('electron');
-// const path = require('path');
+const path = require('path');
 let mainWindow = null;
-//判断命令行脚本的第二参数是否含--debug
-const debug = /--debug/.test(process.argv[2]);
+const isDev = require('electron-is-dev');
+console.log(isDev);
+
 function makeSingleInstance() {
   if (process.mas) return;
   app.requestSingleInstanceLock();
@@ -26,23 +27,24 @@ function createWindow() {
     height: 670, //指定窗口的高度，单位: 像素值,. 默认是 600
     // transparent: true, // 无框窗口透明 默认值为false
     center: true, //窗口是否在屏幕居中；true or false
-    resizable: true, //窗口的大小是否可以；true or false，默认值为true
-    movable: true, //窗口能否可以被移动；true or false，默认值为 true
     frame: false, //值为true或false, 表示是否创建无边框窗口，默认的程序窗口是带外壳的(标题栏，工具栏，边框等)
     show: true, //是否显示窗口
     kiosk: false, //是否使用kiosk模式。如果使用kiosk模式，应用程序将全屏显示，并且阻止用户离开应用。true or false
-    // useContentSize: false,
-    // webPreferences: {
-    //   nodeIntegration: true,
-    //   enablemotemodule: true
-    // }
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+      preload: path.join(__dirname, 'preload.js'),
+    },
   };
 
   mainWindow = new BrowserWindow(windowOptions); // 加载窗口配置文件
   mainWindow.setMinimumSize(1022, 670); // 设置最小宽高
-  mainWindow.webContents.closeDevTools();
-  mainWindow.loadURL('http://localhost:3000/');
+  // mainWindow.loadURL('http://localhost:3000/');
   // mainWindow.loadURL(path.join('file://', __dirname, '/build/index.html'));
+  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${__dirname}/../build/index.html`);
+
+  isDev && mainWindow.webContents.openDevTools();
+
   //接收渲染进程的信息
   const ipc = require('electron').ipcMain;
   ipc.on('min', function () {
@@ -54,12 +56,6 @@ function createWindow() {
   ipc.on('login', function () {
     mainWindow.maximize();
   });
-  //如果是--debug 打开开发者工具，窗口最大化，
-  if (debug) {
-    mainWindow.webContents.openDevTools();
-    require('devtron').install();
-  }
-
   mainWindow.on('closed', () => {
     mainWindow = null;
   });

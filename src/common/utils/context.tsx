@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-01 23:21:55
+ * @LastEditTime: 2021-07-22 13:55:15
  * @Description:
  */
 /*
@@ -26,6 +26,7 @@ export const initialState = {
   likeList: [], // 我喜欢的音乐id集合
   songList: [], // 当前播放的音乐列表
   playList: [], // 当前用户创建/收藏的歌单
+  createList: [], // 当前用户创建的歌单
   myLikeId: '', // 我喜欢的音乐
   showModal: '', // 显示弹窗
   showPlayer: false, // 显示播放页

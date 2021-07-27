@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-27 22:38:10
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-12 21:35:10
+ * @LastEditTime: 2021-07-21 22:00:20
  * @Description:
  */
 import { get } from './request';
@@ -214,7 +214,7 @@ export const playlistSubscribers = (params: { id: number | string; limit?: numbe
  * @param {*} pid: 歌单 id tracks: 歌曲 id,可多个,用逗号隔开
  * @Description:
  */
-export const playlistTracks = (params: { op: number | string; pid?: number | string }) => {
+export const playlistTracks = (params: { op: number | string; pid: number | string; tracks: number | string }) => {
   return get('/playlist/tracks', params);
 };
 

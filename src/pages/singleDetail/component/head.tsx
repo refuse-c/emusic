@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-10 20:04:56
+ * @LastEditTime: 2021-07-23 14:55:43
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
@@ -14,9 +14,7 @@ import PlayAll from '@components/playAll';
 import { playlistSubscribe } from '@/common/net/playList';
 import { formatImgSize, formatNumber } from '@/common/utils/format';
 import { albumSub } from '@/common/net/album';
-import { share } from '@/common/net/api';
-import copy from 'copy-to-clipboard';
-import { message } from 'antd';
+import { Image, message } from 'antd';
 import Tips from '@/components/model/tips';
 
 interface Props {
@@ -61,7 +59,7 @@ const Head: FC<Props> = (props: any) => {
     // subTime = 0,
   } = info;
 
-  const { userInfo, getPlaylist } = useContext(Context);
+  const { userInfo, getPlaylist, handleShare } = useContext(Context);
   const { userId, nickname } = userInfo;
   const isMe = user_id === userId;
 
@@ -97,16 +95,6 @@ const Head: FC<Props> = (props: any) => {
     }
   };
 
-  // 分享
-  const handleShare = async (id, type) => {
-    const res: any = await share({ id, type });
-    if (res.code === 200) {
-      if (copy(res.resUrl)) {
-        message.success('分享链接已生成');
-      }
-    }
-  };
-
   return (
     <div className={styles.head}>
       <Tips
@@ -116,7 +104,17 @@ const Head: FC<Props> = (props: any) => {
         msg={`确定不再收藏该${type}`}
       />
       <div className={styles.left}>
-        <img src={formatImgSize(status ? picUrl : coverImgUrl, 184, 184)} alt="" />
+        {/* <img src={formatImgSize(status ? picUrl : coverImgUrl, 184, 184)} alt="" /> */}
+        <Image
+          width={'100%'}
+          height={'100%'}
+          preview={false}
+          src={formatImgSize(status ? picUrl : coverImgUrl, 184, 184)}
+          fallback={
+            'https://p1.music.126.net/Fihk6zWF24ZR0EhsjWOZqQ==/3308430489032745.jpg?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200'
+          }
+          placeholder={<Image preview={false} src={formatImgSize(status ? picUrl : coverImgUrl, 184, 184)} />}
+        ></Image>
       </div>
       <div className={styles.right}>
         <div className={styles.title}>

@@ -59,7 +59,19 @@
         }
 
         &:last-child {
+          overflow: inherit;
           font-size: 12px;
+
+          span {
+            &:not(:first-child) {
+              padding-left: 6px;
+            }
+
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
         }
       }
     }
@@ -130,10 +142,12 @@
               .ant-slider-step,
               .ant-slider-track {
                 height: 5px;
+                cursor: pointer;
               }
             }
 
             .ant-slider-rail {
+              cursor: pointer;
               background-color: #cdcdcd;
             }
           }
@@ -187,9 +201,11 @@
       .ant-slider-step,
       .ant-slider-track {
         height: 3px;
+        cursor: pointer;
       }
 
       .ant-slider-rail {
+        cursor: pointer;
         background-color: #e5e5e5;
       }
 
@@ -230,6 +246,7 @@
       transition: all ease 0.5s;
 
       li {
+        height: 30px !important;
         font-size: 12px;
         line-height: 30px;
         text-align: center;

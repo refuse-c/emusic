@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-10 19:55:23
+ * @LastEditTime: 2021-07-24 05:26:47
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
@@ -14,6 +14,7 @@ import { highlight, _findIndex } from '@/common/utils/tools';
 import Tips from '@/components/model/tips';
 import clone from 'clone';
 import { createHashHistory } from 'history';
+import Contextmenu from '@components/contextmenu';
 const history = createHashHistory();
 interface Props {
   list?: any | [];
@@ -26,6 +27,9 @@ interface Props {
 const MusicList: FC<Props> = (props) => {
   const { list, loading = false, callBack, singleId, searchText = '' } = props;
   const [id, setId] = useState(0);
+  const [currentItem, setCurrentItem] = useState({});
+  const [isOpen, setOpen] = useState(false);
+  const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   const { songList, myLikeId, likeList, currentSong, setLike, dispatch } = useContext(Context);
   // 点击返回顶部或者滚动到当前播放的音乐
   const handle = () => {
@@ -158,6 +162,7 @@ const MusicList: FC<Props> = (props) => {
         onClose={() => setId(0)}
         msg="确定将选中歌曲从我喜欢的音乐中删除?"
       />
+      <Contextmenu isOpen={isOpen} setOpen={setOpen} currentItem={currentItem} anchorPoint={anchorPoint} />
       <div id="point" className={styles.point} onClick={() => handle()}></div>
       <Table
         rowKey="id"
@@ -178,6 +183,12 @@ const MusicList: FC<Props> = (props) => {
           return {
             onClick: () => {}, // 点击行
             onDoubleClick: () => selectRow(record),
+            onContextMenu: (e) => {
+              e.preventDefault();
+              setAnchorPoint({ x: e.clientX, y: e.clientY });
+              setOpen(true);
+              setCurrentItem(record);
+            },
           };
         }}
         rowClassName={(record, index) => setClassName(record, index)}

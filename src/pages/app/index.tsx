@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-09 22:37:22
+ * @LastEditTime: 2021-07-22 14:14:29
  * @Description:
  */
 import { FC, useEffect, useReducer } from 'react';
@@ -11,10 +11,12 @@ import Home from '@pages/home';
 import { login } from '@/common/net/login';
 import { playlist } from '@/common/net/playList';
 import { Context, reducer, initialState } from '@utils/context';
-import { likelist, addLike } from '@/common/net/api';
+import { likelist, addLike, share } from '@/common/net/api';
 import { message } from 'antd';
 import { growthpoint } from '@/common/net/vip';
 import { setLocal } from '@/common/utils/tools';
+import clone from 'clone';
+import copy from 'copy-to-clipboard';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
 interface Item {
@@ -80,6 +82,13 @@ const App: FC = () => {
     }
   };
 
+  // 获取分享链接
+  const handleShare = async (id: number | string, type: string) => {
+    const res: any = await share({ id, type });
+    const { code, message: msg } = res;
+    code === 200 ? res.resUrl && copy(res.resUrl) && message.success('分享链接已生成') : message.warning(msg);
+  };
+
   // 获取当前登录用户的歌单
   const getPlaylist = async (uid: number, nickname: string) => {
     const res: any = await playlist({ uid });
@@ -92,12 +101,14 @@ const App: FC = () => {
         return item;
       });
       const createList = allList.filter((item: Item) => item.privacy !== 10 && item.userId === uid);
+      const cloneList = clone(createList);
       const collectList = allList.filter((item: Item) => item.privacy !== 10 && item.userId !== uid);
       const myLikeId = allList.find((item: any) => item.specialType === 5 && item.userId === uid);
       createList.unshift(createObj);
       collectList.unshift(collectObj);
       const list = createList.concat(collectList);
       dispatch({ type: 'playList', data: list });
+      dispatch({ type: 'createList', data: cloneList });
       dispatch({ type: 'myLikeId', data: String(myLikeId.id) });
     }
   };
@@ -110,7 +121,7 @@ const App: FC = () => {
 
   return (
     <div className={styles.app} onClick={() => dispatch({ type: 'showModal', data: '' })}>
-      <Context.Provider value={{ ...state, setLike, getPlaylist, dispatch }}>
+      <Context.Provider value={{ ...state, getLikeIds, handleShare, setLike, getPlaylist, dispatch }}>
         <Home />
       </Context.Provider>
     </div>
