@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-07-17 07:31:53
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-22 14:16:00
+ * @LastEditTime: 2021-07-28 10:04:07
  * @Description:
  */
 import { FC, useMemo, useContext, useCallback, useEffect, useState } from 'react';
@@ -92,7 +92,9 @@ const Contextmenu: FC<Props> = (props) => {
     (list) =>
       list.map((item: any, index: number) =>
         item.children ? (
-          <SubMenu label={item.name}>{renderMenu(item.children)}</SubMenu>
+          <SubMenu label={item.name} key={index}>
+            {renderMenu(item.children)}
+          </SubMenu>
         ) : (
           <MenuItem onClick={item.fun} key={index}>
             {item.name}

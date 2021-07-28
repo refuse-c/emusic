@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-21 20:34:23
+ * @LastEditTime: 2021-07-28 00:02:46
  * @Description:
  */
-import { FC, useContext } from 'react';
+import { FC, useContext, useState } from 'react';
 import styles from './index.module.scss';
 import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
@@ -14,9 +14,14 @@ import { Context } from '@utils/context';
 import { defaultColor } from '@/common/utils/local';
 import SearchInput from '@components/searchInput';
 import { formatImgSize } from '@/common/utils/format';
+import { message } from 'antd';
+const { remote, ipcRenderer } = window.require('electron');
+
+const win = remote.getCurrentWindow();
 const history = createHashHistory();
 const DOM = document.getElementsByTagName('body')[0] as HTMLElement;
 const Header: FC = () => {
+  const [isMaximized, setIsMaximized] = useState(win.isMaximized());
   const { vipInfo, userInfo, globalColor, showModal, dispatch } = useContext(Context);
   DOM.style.setProperty('--color', globalColor, '');
   //  修改颜色
@@ -25,6 +30,11 @@ const Header: FC = () => {
     DOM.style.setProperty('--color', val, '');
     dispatch({ type: 'globalColor', data: val });
   };
+
+  // 监听是否是全屏
+  ipcRenderer.on('maximize', () => setIsMaximized(true));
+  ipcRenderer.on('unmaximize', () => setIsMaximized(false));
+
   return (
     <div className={styles.header}>
       <div className={styles.colorContent} onClick={(e) => e.stopPropagation()}>
@@ -67,12 +77,15 @@ const Header: FC = () => {
             e.stopPropagation();
           }}
         ></li>
-        <li className="icon icon-setting"></li>
-        <li className="icon icon-mail"></li>
-        <li className="icon icon-min"></li>
-        <li className="icon icon-minimize"></li>
-        <li className="icon  icon-max"></li>
-        <li className="icon icon-close"></li>
+        <li className="icon icon-setting" onClick={() => message.info('开发中...')}></li>
+        <li className="icon icon-mail" onClick={() => message.info('开发中...')}></li>
+        {/* <li className="icon icon-min"></li> */}
+        <li className="icon icon-minimize" onClick={() => win.minimize()}></li>
+        <li
+          className={`icon ${isMaximized ? 'icon-quanping-0615' : 'icon-max'}`}
+          onClick={() => (isMaximized ? win.restore() : win.maximize())}
+        ></li>
+        <li className="icon icon-close" onClick={() => win.close()}></li>
       </ul>
     </div>
   );

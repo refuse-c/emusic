@@ -2,25 +2,23 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 00:08:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-27 15:56:35
+ * @LastEditTime: 2021-07-28 09:14:54
  * @Description:
  */
 const { app, BrowserWindow, globalShortcut } = require('electron');
 const path = require('path');
-let mainWindow = null;
 const isDev = require('electron-is-dev');
-console.log(isDev);
-
-function makeSingleInstance() {
-  if (process.mas) return;
-  app.requestSingleInstanceLock();
-  app.on('second-instance', () => {
-    if (mainWindow) {
-      if (mainWindow.isMinimized()) mainWindow.restore();
-      mainWindow.focus();
-    }
-  });
-}
+let mainWindow = null;
+// function makeSingleInstance() {
+//   if (process.mas) return;
+//   app.requestSingleInstanceLock();
+//   app.on('second-instance', () => {
+//     if (mainWindow) {
+//       if (mainWindow.isMinimized()) mainWindow.restore();
+//       mainWindow.focus();
+//     }
+//   });
+// }
 function createWindow() {
   const windowOptions = {
     width: 1022, //指定窗口的宽度，单位: 像素值. 默认是 800
@@ -33,77 +31,63 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,
+      enableRemoteModule: true,
       preload: path.join(__dirname, 'preload.js'),
     },
   };
-
   mainWindow = new BrowserWindow(windowOptions); // 加载窗口配置文件
   mainWindow.setMinimumSize(1022, 670); // 设置最小宽高
-  // mainWindow.loadURL('http://localhost:3000/');
-  // mainWindow.loadURL(path.join('file://', __dirname, '/build/index.html'));
   mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${__dirname}/../build/index.html`);
-
   isDev && mainWindow.webContents.openDevTools();
-
-  //接收渲染进程的信息
-  const ipc = require('electron').ipcMain;
-  ipc.on('min', function () {
-    mainWindow.minimize();
-  });
-  ipc.on('max', function () {
-    mainWindow.maximize();
-  });
-  ipc.on('login', function () {
-    mainWindow.maximize();
-  });
-  mainWindow.on('closed', () => {
-    mainWindow = null;
-  });
+  app.on('window-all-closed', () => app.quit());
+  mainWindow.on('closed', () => (mainWindow = null));
+  mainWindow.on('maximize', () => mainWindow.webContents.send('maximize'));
+  mainWindow.on('unmaximize', () => mainWindow.webContents.send('unmaximize'));
 }
-makeSingleInstance();
-//app主进程的事件和方法
-app.on('ready', () => {
-  createWindow();
-});
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
-  }
-});
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow();
-  }
-});
+
+// makeSingleInstance();
+
+// app.on('window-all-closed', () => {
+//   if (process.platform !== 'darwin') {
+//     app.quit();
+//   }
+// });
+// app.on('activate', () => {
+//   if (mainWindow === null) {
+//     createWindow();
+//   }
+// });
 
 app.on('ready', () => {
+  //app主进程的事件和方法
+  createWindow();
   // 快捷键监听全局模式
   // 打开软件
   globalShortcut.register('Alt+X', () => {
     mainWindow.show();
   });
   // 最小化软件
-  globalShortcut.register('Alt+Z', () => {
+  globalShortcut.register('Alt+M', () => {
     mainWindow.minimize();
   });
   // 退出软件，测试期间使用
-  globalShortcut.register('Alt+C', () => {
+  globalShortcut.register('Alt+F4', () => {
     app.exit();
   });
   // 进入调试模式
   globalShortcut.register('Alt+K', () => {
-    mainWindow.webContents.openDevTools();
+    isDev && mainWindow.webContents.openDevTools();
   });
   // 关闭调试模式
   globalShortcut.register('Alt+L', () => {
-    mainWindow.webContents.closeDevTools();
+    isDev && mainWindow.webContents.closeDevTools();
   });
   // 刷新页面
   globalShortcut.register('Alt+Q', () => {
-    mainWindow.reload();
+    isDev && mainWindow.reload();
   });
   // 音量+
-  globalShortcut.register('Alt+Up', (even) => {
+  globalShortcut.register('Alt+Up', () => {
     mainWindow.webContents.send('Up', 'Up');
   });
   // 音量-
