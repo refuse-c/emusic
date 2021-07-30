@@ -216,7 +216,7 @@ const Control: FC = () => {
               </div>
               <div>
                 {ar.map((item: any, index: number) => (
-                  <span key={index} onClick={() => history.push(`/singerDetail${item.id}`)}>
+                  <span key={index} onClick={() => history.push(`/singer${item.id}`)}>
                     {item.name}
                   </span>
                 ))}

@@ -1,0 +1,141 @@
+@import '~@common/css/_variables.scss';
+
+.head {
+  display: flex;
+  padding: 30px 0;
+
+  .left {
+    width: 184px;
+    height: 184px;
+    min-width: 184px;
+    overflow: hidden;
+    border: 1px solid #f2f2f2;
+    border-radius: 50%;
+
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+
+  .right {
+    flex: 1;
+    padding-left: 20px;
+
+    ul {
+      display: flex;
+      align-items: center;
+
+      li {
+        &:not(:last-child) {
+          margin-right: 6px;
+        }
+      }
+    }
+
+    .top {
+      padding-bottom: 8px;
+      border-bottom: 1px solid #e5e6ea;
+
+      .nickname {
+        padding-bottom: 12px;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      .topInfo {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .list1 {
+          flex-wrap: wrap;
+
+          li {
+            white-space: nowrap;
+          }
+        }
+
+        .list2 {
+          li {
+            padding: 0 14px 0 40px;
+            line-height: 32px;
+            white-space: nowrap;
+            border: 1px solid #d8d8d8;
+            border-radius: 32px;
+
+            &:last-child {
+              width: 32px;
+              padding: 0;
+            }
+
+            &:hover {
+              color: #000;
+              background-color: #f2f2f2;
+            }
+          }
+        }
+      }
+    }
+
+    .bottom {
+      padding-top: 20px;
+
+      .list3 {
+        li {
+          &:not(:last-child) {
+            position: relative;
+            padding-right: 64px;
+            margin-right: 0;
+
+            &::before {
+              position: absolute;
+              top: 10%;
+              left: 64px;
+              width: 1px;
+              height: 90%;
+              background-color: #d8d8d8;
+              content: '';
+            }
+          }
+
+          p {
+            &:first-child {
+              font-size: 18px;
+              font-weight: 500;
+            }
+
+            &:last-child {
+              padding-top: 6px;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+
+      .list4 {
+        display: block;
+        margin-top: 10px;
+
+        li {
+          padding-top: 10px;
+
+          &.personal {
+            p {
+              overflow: hidden;
+              font-size: 12px;
+              line-height: 20px;
+              color: #676767;
+
+              strong {
+                font-size: 14px;
+                color: #373737;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

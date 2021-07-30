@@ -9,7 +9,7 @@ import { FC, useEffect, useState, useContext, useCallback } from 'react';
 import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
-import UserComponent from '@components/user';
+import UserComponent from '@/components/user-list';
 import { Spin } from 'antd';
 const User: FC = () => {
   const [list, setList] = useState<any>([]);

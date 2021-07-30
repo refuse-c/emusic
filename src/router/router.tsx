@@ -2,21 +2,27 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 00:03:41
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-12 21:32:59
+ * @LastEditTime: 2021-07-29 11:10:28
  * @Description:
  */
 
 import { lazy } from 'react';
 
 const router = [
+  { path: '/friend', component: lazy(() => import('@pages/friend')) }, // 朋友
+  { path: '/exclusive', component: lazy(() => import('@pages/exclusive')) }, // 独家放送
+  { path: '/single:id/:type', component: lazy(() => import('@/pages/single')) }, // 歌单
+  { path: '/recommendSong', component: lazy(() => import('@/pages/recommend-song')) }, // 推荐歌曲
+  { path: '/singertop', component: lazy(() => import('@/pages/singer-top')) }, // 云音乐歌手榜
+  { path: '/singer:id', component: lazy(() => import('@/pages/singer')) }, // 歌手详情页
+  { path: '/user:uid', component: lazy(() => import('@pages/user')) }, // 用户详情
+  { path: '/setting', component: lazy(() => import('@pages/setting')) }, // 设置
+
   {
     path: '/find',
     component: lazy(() => import('@pages/find')), // 发现音乐
     router: [
-      {
-        path: '/find',
-        component: lazy(() => import('@pages/find/component/recommend')), // 个性推荐
-      },
+      { path: '/find', component: lazy(() => import('@pages/find/component/recommend')) }, // 个性推荐
       { path: '/find/playlist', component: lazy(() => import('@pages/find/component/playList')) }, // 歌单
       { path: '/find/radio', component: lazy(() => import('@pages/find/component/radio')) }, // 主播电台
       { path: '/find/toplist', component: lazy(() => import('@pages/find/component/toplist')) }, // 排行榜
@@ -32,12 +38,7 @@ const router = [
       { path: '/video/mv', component: lazy(() => import('@pages/video/component/mv')) }, // MV
     ],
   },
-  { path: '/friend', component: lazy(() => import('@pages/friend')) }, // 发现
-  { path: '/exclusive', component: lazy(() => import('@pages/exclusive')) }, // 独家放送
-  { path: '/single:id/:type', component: lazy(() => import('@/pages/singleDetail')) }, // 歌单
-  { path: '/recommendSong', component: lazy(() => import('@/pages/recommendSong')) }, // 推荐歌曲
-  { path: '/singertop', component: lazy(() => import('@pages/singerTop')) }, // 云音乐歌手榜
-  { path: '/singerDetail:id', component: lazy(() => import('@/pages/singerDetail')) }, // 歌手详情页
+
   {
     path: '/search',
     component: lazy(() => import('@/pages/search')), // 搜索页

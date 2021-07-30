@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 00:08:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-28 09:14:54
+ * @LastEditTime: 2021-07-29 00:13:51
  * @Description:
  */
 const { app, BrowserWindow, globalShortcut } = require('electron');
@@ -21,13 +21,13 @@ let mainWindow = null;
 // }
 function createWindow() {
   const windowOptions = {
-    width: 1022, //指定窗口的宽度，单位: 像素值. 默认是 800
-    height: 670, //指定窗口的高度，单位: 像素值,. 默认是 600
+    width: 1022, //指定窗口的宽度
+    height: 670, //指定窗口的高度
     // transparent: true, // 无框窗口透明 默认值为false
-    center: true, //窗口是否在屏幕居中；true or false
-    frame: false, //值为true或false, 表示是否创建无边框窗口，默认的程序窗口是带外壳的(标题栏，工具栏，边框等)
-    show: true, //是否显示窗口
-    kiosk: false, //是否使用kiosk模式。如果使用kiosk模式，应用程序将全屏显示，并且阻止用户离开应用。true or false
+    center: true, // 窗口是否在屏幕居中；
+    frame: false, // 是否创建无边框窗口，
+    show: true, // 是否显示窗口
+    kiosk: false, // 应用程序将全屏显示，并且阻止用户离开应用。
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false,

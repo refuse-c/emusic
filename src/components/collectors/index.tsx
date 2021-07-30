@@ -9,7 +9,7 @@ import { FC, useState, useEffect } from 'react';
 // import styles from './index.module.scss';
 import { playlistSubscribers } from '@/common/net/playList';
 import { Pagination } from 'antd';
-import UserComponent from '@components/user';
+import UserComponent from '@/components/user-list';
 import Content from '@components/view/content';
 const limit = 100;
 interface Props {

@@ -2,13 +2,12 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 11:44:43
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-18 10:02:04
+ * @LastEditTime: 2021-07-28 23:55:42
  * @Description:标题
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 import { createHashHistory } from 'history';
-import { Button } from 'antd';
 const history = createHashHistory();
 interface Props {
   title: string; // 显示的标题
@@ -31,7 +30,7 @@ const Title: FC<Props> = (Props) => {
         {title} {path && <span className="icon icon-back"></span>}
       </div>
       <div className={styles.tools}>
-        {btn && <Button>{btn}</Button>}
+        {btn && <div className={styles.btn}>{btn}</div>}
         {list.map((item: string, index: number) => {
           const cls = item === active ? styles.active : '';
           return (

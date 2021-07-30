@@ -2,18 +2,18 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-09 15:57:53
+ * @LastEditTime: 2021-07-30 14:37:27
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState } from 'react';
-// import styles from '../index.module.scss';
+import styles from '../index.module.scss';
 import Title from '@components/title';
 import Banner from '@components/banner';
-import PlayList from '@/components/songList';
-import ExclusiveList from '@/components/exclusiveList';
-import Songs from '@/components/song';
-import MvList from '@/components/mvList';
-import RadioList from '@/components/radioList';
+import PlayList from '@/components/song-list';
+import ExclusiveList from '@/components/exclusive-list';
+import Songs from '@/components/new-music-list';
+import MvList from '@/components/mv-list';
+import RadioList from '@/components/radio-list';
 import Loading from '@/components/loading';
 import Content from '@components/view/content';
 
@@ -22,6 +22,7 @@ import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
 import { newMusic, songDetail } from '@/common/net/api';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
+
 const Recommend: FC = () => {
   const [bannerList, setBannerList] = useState([]);
   const [playList, setPlayList] = useState([]);
@@ -30,6 +31,40 @@ const Recommend: FC = () => {
   const [mvList, setMvList] = useState([]);
   const [radioList, setRadioList] = useState([]);
 
+  const list = [
+    {
+      title: '推荐歌单',
+      margin: '10px 0',
+      path: '/find/playlist',
+      Component: <PlayList list={playList || []} />,
+    },
+    {
+      title: '独家放送',
+      margin: '10px 0',
+      path: '/exclusive',
+      Component: <ExclusiveList list={exclusiveList} isAdaptive={false} />,
+    },
+    {
+      title: '最新音乐',
+      margin: '10px 0',
+      path: '/find/newmusic',
+      Component: <Songs list={newMusicList} />,
+    },
+    {
+      title: '推荐MV',
+      margin: '10px 0',
+      path: '/video/mv',
+      Component: <MvList list={mvList} hideLst={true} showTips={true} />,
+    },
+    {
+      title: '主播电台',
+      margin: '10px 0',
+      path: '/find/radio',
+      Component: <RadioList list={radioList} />,
+    },
+  ];
+  const [moduleList, setList] = useState(list || []);
+  setList(list);
   /**
    * @name:获取轮播图
    * @param {*} async
@@ -54,17 +89,6 @@ const Recommend: FC = () => {
     playList.length = 10;
     setPlayList(playList);
   };
-
-  /**
-   * @name:获取每日推荐歌曲
-   * @param {*} async
-   * @Description:
-   */
-  // const getRecommendSong = async () => {
-  //   const result: any = await recommendSong();
-  //   const songList = result.data.dailySongs || [];
-  //   setSongList(songList);
-  // };
 
   /**
    * @name:获取独家放送入口列表
@@ -132,12 +156,12 @@ const Recommend: FC = () => {
     getPersonalizedMv();
     getRecommendDj();
     return () => {
-      setBannerList([]);
-      setPlayList([]);
-      setExclusiveList([]);
-      setNewMusicList([]);
-      setMvList([]);
-      setRadioList([]);
+      // setBannerList([]);
+      // setPlayList([]);
+      // setExclusiveList([]);
+      // setNewMusicList([]);
+      // setMvList([]);
+      // setRadioList([]);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -146,17 +170,19 @@ const Recommend: FC = () => {
     <Content padding={'0 30px 30px'} isFull={false}>
       <Loading />
       <Banner list={bannerList || []} />
-      <Title title="推荐歌单" margin={'10px  0'} path="/find/playlist" />
-      <PlayList list={playList || []} />
-      <Title title="独家放送" margin={'10px  0'} path="/exclusive" />
-      <ExclusiveList list={exclusiveList} isAdaptive={false} />
-      <Title title="最新音乐" margin={'10px  0'} path="/find/newmusic" />
-      <Songs list={newMusicList} />
-      <Title title="推荐MV" margin={'10px  0'} path="/video/mv" />
-      <MvList list={mvList} hideLst={true} showTips={true} />
-      <Title title="主播电台" margin={'10px  0'} path="/find/radio" />
-      <RadioList list={radioList} />
-      {/* <Title title="看看" pathName="/find/playlist" /> */}
+      {moduleList.map((item, index) => {
+        const { Component, path, title } = item;
+        return (
+          <div key={index}>
+            <Title title={title} margin={'10px  0'} path={path} />
+            {Component}
+          </div>
+        );
+      })}
+      <div className={styles.sort}>
+        <p>现在可以根据个人喜好，自由调整首页栏目顺序啦~</p>
+        <div>调整栏目顺序</div>
+      </div>
     </Content>
   );
 };

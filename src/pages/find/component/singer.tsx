@@ -8,8 +8,8 @@
 import { FC, useState, useEffect, useCallback } from 'react';
 // import styles from '../index.module.scss';
 import { areaList, initialList, typeList } from '@/common/utils/local';
-import SingTag from '@/components/singTag';
-import SingerComponent from '@components/singer';
+import SingTag from '@/components/sing-tag';
+import SingerComponent from '@/components/singer-list';
 import { artistList } from '@/common/net/singer';
 import { Spin } from 'antd';
 import Content from '@components/view/content';

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-08 17:17:40
+ * @LastEditTime: 2021-07-30 14:01:24
  * @Description:
  */
 
@@ -10,8 +10,10 @@
  * @name:
  * @param {*} arr
  */
+import { createHashHistory } from 'history';
 import styles from '@common/css/index.module.scss';
 import { message } from 'antd';
+const history = createHashHistory();
 // interface params {
 //   list: [];
 //   type: string;
@@ -148,6 +150,13 @@ export const debounce = (cb: () => any, wait = 500) => {
     cb && cb();
   }, wait);
 };
+
+/**
+ * @name: 获取index
+ * @param {*} list
+ * @param {number} ele
+ * @Description:
+ */
 export const _findIndex = (list: [], ele: number | string) => {
   const _index = list.findIndex((item: { id: number }) => item.id === ele);
   return _index; // === -1 ? 0 : _index;
@@ -245,3 +254,10 @@ export const getTimeIndex = (timeArr: any | [], time: number) => {
 export const highlight = (text: string, searchText: string) => {
   return searchText.replace(new RegExp(text, 'gi'), (val: string) => `<span>${val}</span>`);
 };
+
+/**
+ * @name: 跳转页面
+ * @param {string} pathName
+ * @Description:
+ */
+export const jumpPage = (pathName: string) => history.push(pathName);

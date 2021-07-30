@@ -2,17 +2,17 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-28 00:02:46
+ * @LastEditTime: 2021-07-28 16:07:40
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
 import styles from './index.module.scss';
 import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
-import { setLocal } from '@/common/utils/tools';
+import { jumpPage, setLocal } from '@/common/utils/tools';
 import { Context } from '@utils/context';
 import { defaultColor } from '@/common/utils/local';
-import SearchInput from '@components/searchInput';
+import SearchInput from '@/components/search-Input';
 import { formatImgSize } from '@/common/utils/format';
 import { message } from 'antd';
 const { remote, ipcRenderer } = window.require('electron');
@@ -77,7 +77,7 @@ const Header: FC = () => {
             e.stopPropagation();
           }}
         ></li>
-        <li className="icon icon-setting" onClick={() => message.info('开发中...')}></li>
+        <li className="icon icon-setting" onClick={() => jumpPage('/setting')}></li>
         <li className="icon icon-mail" onClick={() => message.info('开发中...')}></li>
         {/* <li className="icon icon-min"></li> */}
         <li className="icon icon-minimize" onClick={() => win.minimize()}></li>

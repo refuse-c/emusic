@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-27 22:38:10
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-21 22:00:20
+ * @LastEditTime: 2021-07-29 11:05:54
  * @Description:
  */
 import { get } from './request';
@@ -12,18 +12,14 @@ import { get } from './request';
  * @param {*}
  * @Description:
  */
-export const playlist = (params: { uid: number | string }) => {
-  return get('/user/playlist', params);
-};
+export const playlist = (params: { uid: number | string }) => get('/user/playlist', params);
 
 /**
  * @name:精品歌单标签
  * @param {*}
  * @Description:
  */
-export const playlistTags = () => {
-  return get('/playlist/highquality/tags');
-};
+export const playlistTags = () => get('/playlist/highquality/tags');
 
 /**
  * @name:更新歌单
@@ -33,9 +29,8 @@ export const playlistTags = () => {
  * @param {*} tags:歌单tag ,多个用 `;`隔开,只能用官方规定标签
  * @Description:
  */
-export const updatePlaylist = (params: { id: number | string; name: string; desc: string; tags: string }) => {
-  return get('/playlist/update', params);
-};
+export const updatePlaylist = (params: { id: number | string; name: string; desc: string; tags: string }) =>
+  get('/playlist/update', params);
 
 /**
  * @name:更新歌单描述
@@ -43,9 +38,8 @@ export const updatePlaylist = (params: { id: number | string; name: string; desc
  * @param {*} desc:歌单描述
  * @Description:
  */
-export const updatePlaylistDesc = (params: { id: number | string; desc: string }) => {
-  return get('/playlist/desc/update', params);
-};
+export const updatePlaylistDesc = (params: { id: number | string; desc: string }) =>
+  get('/playlist/desc/update', params);
 
 /**
  * @name:更新歌名字
@@ -53,9 +47,8 @@ export const updatePlaylistDesc = (params: { id: number | string; desc: string }
  * @param {*} name:名字
  * @Description:
  */
-export const updatePlaylistName = (params: { id: number | string; name: string }) => {
-  return get('/playlist/name/update', params);
-};
+export const updatePlaylistName = (params: { id: number | string; name: string }) =>
+  get('/playlist/name/update', params);
 
 /**
  * @name:更新歌标签
@@ -63,9 +56,8 @@ export const updatePlaylistName = (params: { id: number | string; name: string }
  * @param {*} name:歌单标签
  * @Description:
  */
-export const updatePlaylistTag = (params: { id: number | string; tags: string }) => {
-  return get('/playlist/tags/update', params);
-};
+export const updatePlaylistTag = (params: { id: number | string; tags: string }) =>
+  get('/playlist/tags/update', params);
 
 /**
  * @name:歌单封面上传
@@ -75,9 +67,8 @@ export const updatePlaylistTag = (params: { id: number | string; tags: string })
  * @param {*} imgY 垂直裁剪偏移,方形图片可不传,默认为0
  * @Description:
  */
-export const updatePlaylistCover = (params: { id: number | string; imgSize: string; imgX: number; imgY: number }) => {
-  return get('/playlist/cover/update', params);
-};
+export const updatePlaylistCover = (params: { id: number | string; imgSize: string; imgX: number; imgY: number }) =>
+  get('/playlist/cover/update', params);
 
 /**
  * @name:调整歌曲顺序
@@ -85,27 +76,21 @@ export const updatePlaylistCover = (params: { id: number | string; imgSize: stri
  * @param {*} ids 歌曲id列表
  * @Description:
  */
-export const updatePlaylistOrder = (params: { pid: number | string; ids: any }) => {
-  return get('/song/order/update', params);
-};
+export const updatePlaylistOrder = (params: { pid: number | string; ids: any }) => get('/song/order/update', params);
 
 /**
  * @name: 歌单分类
  * @param {*}
  * @Description:
  */
-export const playlistCatlist = () => {
-  return get('/playlist/catlist');
-};
+export const playlistCatlist = () => get('/playlist/catlist');
 
 /**
  * @name: 热门歌单分类
  * @param {*}
  * @Description:
  */
-export const playlistHot = () => {
-  return get('/playlist/hot');
-};
+export const playlistHot = () => get('/playlist/hot');
 
 /**
  * @name: 歌单 ( 网友精选碟 )
@@ -115,18 +100,15 @@ export const playlistHot = () => {
  * @param {*} offset 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*50, 其中 50 为 limit 的值
  * @Description:
  */
-export const playlistTop = (params: { order?: string; cat?: string; limit: number; offset: number }) => {
-  return get('/top/playlist', params);
-};
+export const playlistTop = (params: { order?: string; cat?: string; limit: number; offset: number }) =>
+  get('/top/playlist', params);
 
 /**
  * @name: 精品歌单标签列表
  * @param {*}
  * @Description:
  */
-export const highqualityTags = () => {
-  return get('/playlist/highquality/tags');
-};
+export const highqualityTags = () => get('/playlist/highquality/tags');
 
 /**
  * @name: 获取精品歌单
@@ -135,18 +117,15 @@ export const highqualityTags = () => {
  * @param {*} before: 分页参数,取上一页最后一个歌单的 updateTime 获取下一页数据
  * @Description:
  */
-export const highqualityTop = (params: { cat?: string; limit?: number; before?: number | string }) => {
-  return get('/top/playlist/highquality', params);
-};
+export const highqualityTop = (params: { cat?: string; limit?: number; before?: number | string }) =>
+  get('/top/playlist/highquality', params);
 
 /**
  * @name: 相关歌单推荐
  * @param {*} id 歌单id
  * @Description:
  */
-export const playlistRelated = (params: { id: number | string }) => {
-  return get('/related/playlist', params);
-};
+export const playlistRelated = (params: { id: number | string }) => get('/related/playlist', params);
 
 /**
  * @name: 获取歌单详情
@@ -154,18 +133,14 @@ export const playlistRelated = (params: { id: number | string }) => {
  * @param {*} s : 歌单最近的 s 个收藏者,默认为8
  * @Description:
  */
-export const playlistDetail = (params: { id: number | string; s?: number }) => {
-  return get('/playlist/detail', params);
-};
+export const playlistDetail = (params: { id: number | string; s?: number }) => get('/playlist/detail', params);
 
 /**
  * @name: 歌单详情动态
  * @param {*} id : 歌单 id
  * @Description:
  */
-export const playlistDetailDynamic = (params: { id: number | string }) => {
-  return get('/playlist/detail/dynamic', params);
-};
+export const playlistDetailDynamic = (params: { id: number | string }) => get('/playlist/detail/dynamic', params);
 
 /**
  * @name: 新建歌单
@@ -174,18 +149,15 @@ export const playlistDetailDynamic = (params: { id: number | string }) => {
  * @param {*} type : 歌单类型,默认'NORMAL',传 'VIDEO'则为视频歌单
  * @Description:
  */
-export const playlistCreate = (params: { name: string; privacy?: number | string; type?: string }) => {
-  return get('/playlist/create', params);
-};
+export const playlistCreate = (params: { name: string; privacy?: number | string; type?: string }) =>
+  get('/playlist/create', params);
 
 /**
  * @name: 删除歌单
  * @param {*} id : 歌单id,可多个,用逗号隔开
  * @Description:
  */
-export const playlistDelete = (params: { id: number | string }) => {
-  return get('/playlist/delete', params);
-};
+export const playlistDelete = (params: { id: number | string }) => get('/playlist/delete', params);
 
 /**
  * @name: 收藏/取消收藏歌单
@@ -193,9 +165,8 @@ export const playlistDelete = (params: { id: number | string }) => {
  * @param {*} t : 类型,1:收藏,2:取消收藏
  * @Description:
  */
-export const playlistSubscribe = (params: { id: number | string; t: number | string }) => {
-  return get('/playlist/subscribe', params);
-};
+export const playlistSubscribe = (params: { id: number | string; t: number | string }) =>
+  get('/playlist/subscribe', params);
 
 /**
  * @name: 歌单收藏者
@@ -204,9 +175,8 @@ export const playlistSubscribe = (params: { id: number | string; t: number | str
  * @param {*} offset: 偏移数量 , 用于分页 , 如 :( 评论页数 -1)*20, 其中 20 为 limit 的值
  * @Description:
  */
-export const playlistSubscribers = (params: { id: number | string; limit?: number; offset?: number }) => {
-  return get('/playlist/subscribers', params);
-};
+export const playlistSubscribers = (params: { id: number | string; limit?: number; offset?: number }) =>
+  get('/playlist/subscribers', params);
 
 /**
  * @name: 对歌单添加或删除歌曲
@@ -214,9 +184,8 @@ export const playlistSubscribers = (params: { id: number | string; limit?: numbe
  * @param {*} pid: 歌单 id tracks: 歌曲 id,可多个,用逗号隔开
  * @Description:
  */
-export const playlistTracks = (params: { op: number | string; pid: number | string; tracks: number | string }) => {
-  return get('/playlist/tracks', params);
-};
+export const playlistTracks = (params: { op: number | string; pid: number | string; tracks: number | string }) =>
+  get('/playlist/tracks', params);
 
 /**
  * @name: 歌单评论
@@ -231,33 +200,25 @@ export const playlistComment = (params: {
   limit: number;
   offset: number;
   before: number | string;
-}) => {
-  return get('/comment/playlist', params);
-};
+}) => get('/comment/playlist', params);
 
 /**
  * @name:获取相似歌单
  * @param {*} id: 歌曲 id
  * @Description:
  */
-export const playlistSimi = (params: { id: number | string }) => {
-  return get('/simi/playlist', params);
-};
+export const playlistSimi = (params: { id: number | string }) => get('/simi/playlist', params);
 
 /**
  * @name:获取每日推荐歌单
  * @param {*}
  * @Description:
  */
-export const playlistRecommend = () => {
-  return get('/recommend/resource');
-};
+export const playlistRecommend = () => get('/recommend/resource');
 
 /**
  * @name:推荐歌单
  * @param {*}
  * @Description:
  */
-export const personalized = () => {
-  return get('/personalized');
-};
+export const personalized = () => get('/personalized');

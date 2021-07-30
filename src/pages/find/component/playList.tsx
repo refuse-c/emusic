@@ -11,8 +11,8 @@ import { playlistHot, playlistTop, playlistCatlist, highqualityTop } from '@/com
 import { Pagination } from 'antd';
 import Tags from '@components/tags';
 import { Context } from '@utils/context';
-import PlayList from '@/components/songList';
-import CatGroup from '@/components/catGroup';
+import PlayList from '@/components/song-list';
+import CatGroup from '@/components/cat-group';
 import { formatImgSize } from '@/common/utils/format';
 import Content from '@components/view/content';
 

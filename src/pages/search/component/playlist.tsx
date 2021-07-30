@@ -9,7 +9,7 @@ import { FC, useEffect, useState, useContext, useCallback } from 'react';
 import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
-import SongList from '@components/songList';
+import SongList from '@/components/song-list';
 import { Spin } from 'antd';
 import Content from '@components/view/content';
 const PlayList: FC = () => {

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 17:12:07
+ * @LastEditTime: 2021-07-29 11:06:04
  * @Description:电台api
  */
 import { get } from './request';
@@ -12,6 +12,4 @@ import { get } from './request';
  * @param {any} params
  * @Description:
  */
-export const radioBanner = (params?: any) => {
-  return get('/dj/banner', params);
-};
+export const radioBanner = (params?: any) => get('/dj/banner', params);

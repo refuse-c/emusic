@@ -9,7 +9,7 @@ import { FC, useEffect, useState } from 'react';
 import styles from '../index.module.scss';
 import Title from '@components/title';
 import { toplist, toplistArtist } from '@/common/net/topList';
-import PlayList from '@/components/songList';
+import PlayList from '@/components/song-list';
 import { playlistDetail } from '@/common/net/playList';
 import { assemblyIds, getSession, mergeData, setSession } from '@/common/utils/tools';
 import { songDetail } from '@/common/net/api';

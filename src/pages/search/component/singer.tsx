@@ -10,7 +10,7 @@ import { FC, useEffect, useState, useContext, useCallback } from 'react';
 import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
-import SingerComponent from '@components/singer';
+import SingerComponent from '@/components/singer-list';
 import { Spin } from 'antd';
 const Singer: FC = () => {
   const [list, setList] = useState<any>([]);

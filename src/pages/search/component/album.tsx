@@ -9,7 +9,7 @@ import { FC, useEffect, useState, useContext, useCallback } from 'react';
 import styles from '../index.module.scss';
 import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
-import AlbumComponent from '@components/album';
+import AlbumComponent from '@/components/album-list';
 import { Spin } from 'antd';
 const Album: FC = () => {
   const [list, setList] = useState<any>([]);

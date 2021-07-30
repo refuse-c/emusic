@@ -11,7 +11,7 @@ import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
 import { songDetail } from '@/common/net/api';
-import MusicList from '@/components/musicList';
+import MusicList from '@/components/music-list';
 import { Spin } from 'antd';
 const Single: FC = () => {
   const [list, setList] = useState<any>([]);

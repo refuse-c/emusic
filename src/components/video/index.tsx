@@ -7,7 +7,7 @@
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
-import Playcount from '@components/playcount';
+import Playcount from '@/components/play-count';
 import { formatImgSize } from '@/common/utils/format';
 interface Props {
   type?: number; // 渲染那个页面  默认为0  0 检索页  1 视频页

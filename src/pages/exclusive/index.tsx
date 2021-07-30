@@ -9,7 +9,7 @@ import { FC, useEffect, useState } from 'react';
 import styles from './index.module.scss';
 import Title from '@/components/title';
 import { privatecontentList } from '@/common/net/api';
-import ExclusiveList from '@/components/exclusiveList';
+import ExclusiveList from '@/components/exclusive-list';
 import Content from '@components/view/content';
 const Exclusive: FC = () => {
   const [list, setList] = useState([]);
