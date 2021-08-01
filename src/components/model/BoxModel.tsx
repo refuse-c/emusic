@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-10 16:01:12
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-23 13:54:42
+ * @LastEditTime: 2021-07-30 22:33:26
  * @Description:
  */
 import { FC } from 'react';
@@ -22,6 +22,7 @@ const BoxModel: FC<Props> = (props) => {
   const { title, width, height, hasShow, onClose, children } = props;
   return (
     <Modal
+      centered={true}
       mask={false}
       width={width}
       title={title}

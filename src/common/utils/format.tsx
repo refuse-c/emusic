@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:13
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-07 11:16:51
+ * @LastEditTime: 2021-07-31 00:19:13
  * @Description:
  */
 
@@ -75,4 +75,10 @@ export const formatAvailableSongs = (arr: any, msg: boolean = true) => {
     msg && message.error('因合作方要求,该资源暂时下架>_<');
   }
   return list;
+};
+
+export const formatAllAuthTypes = (arr) => {
+  return arr.map((item) => {
+    return item.tags && item.tags.length ? { desc: `${item.desc}、${item.tags.join('、')}` } : { desc: `${item.desc}` };
+  });
 };

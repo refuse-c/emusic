@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-29 21:35:06
+ * @LastEditTime: 2021-07-30 22:18:24
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
@@ -16,6 +16,7 @@ import { formatImgSize, formatNumber } from '@/common/utils/format';
 import { albumSub } from '@/common/net/album';
 import { Image, message } from 'antd';
 import Tips from '@/components/model/tips';
+import { jumpPage } from '@/common/utils/tools';
 
 interface Props {
   data: object;
@@ -82,7 +83,7 @@ const Head: FC<Props> = (props: any) => {
     if (res.code === 200) {
       callBack(singleId, type); // 刷新歌单信息
       getPlaylist(userId, nickname); // 刷新左侧菜单信息
-      message.success(t === 1 ? '歌单收藏成功' : '歌单取消收藏成功');
+      message.success(t ? '歌单收藏成功' : '歌单取消收藏成功');
     }
   };
 
@@ -91,7 +92,7 @@ const Head: FC<Props> = (props: any) => {
     const res: any = await albumSub({ id, t });
     if (res.code === 200) {
       callBack(singleId, type); // 刷新专辑信息
-      message.success(t === 1 ? '专辑收藏成功' : '专辑取消收藏成功');
+      message.success(t ? '专辑收藏成功' : '专辑取消收藏成功');
     }
   };
 
@@ -121,11 +122,10 @@ const Head: FC<Props> = (props: any) => {
           <span>{type}</span>
           <span>{isMe ? name.replace(nickname, '我') : name}</span>
         </div>
-
         {creator && creator.avatarUrl && (
           <div className={styles.creator}>
-            <img src={formatImgSize(creator.avatarUrl, 24, 24)} alt="" />
-            <p>{creator.nickname}</p>
+            <img onClick={() => jumpPage(`/user${user_id}`)} src={formatImgSize(creator.avatarUrl, 24, 24)} alt="" />
+            <p onClick={() => jumpPage(`/user${user_id}`)}>{creator.nickname}</p>
             <p>{createTime ? `${moment(createTime).format('YYYY-MM-DD')}创建` : ''}</p>
           </div>
         )}
@@ -133,7 +133,7 @@ const Head: FC<Props> = (props: any) => {
         <div className={styles.btnGroup}>
           <PlayAll list={list} />
           <div className={styles.tool}>
-            <p className={isMe ? styles.disabled : ''} onClick={() => handleCollection(singleId, collection ? 2 : 1)}>
+            <p className={isMe ? styles.disabled : ''} onClick={() => handleCollection(singleId, collection ? 0 : 1)}>
               {collection ? '已收藏' : '收藏'}
               {!!subcount && `(${subcount})`}
             </p>

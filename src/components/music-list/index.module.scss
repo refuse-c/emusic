@@ -181,6 +181,10 @@
     .name {
       p {
         color: $color !important;
+
+        span {
+          color: $color !important;
+        }
       }
     }
   }

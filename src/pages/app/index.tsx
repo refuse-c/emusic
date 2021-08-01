@@ -16,6 +16,7 @@ import { message } from 'antd';
 import { growthpoint } from '@/common/net/vip';
 import { setLocal } from '@/common/utils/tools';
 import clone from 'clone';
+import Login from '@components/model/login';
 import copy from 'copy-to-clipboard';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = { name: '收藏的歌单', type: 2, isBold: false, isFull: false };
@@ -123,6 +124,7 @@ const App: FC = () => {
     <div className={styles.app} onClick={() => dispatch({ type: 'showModal', data: '' })}>
       <Context.Provider value={{ ...state, getLikeIds, handleShare, setLike, getPlaylist, dispatch }}>
         <Home />
+        <Login />
       </Context.Provider>
     </div>
   );

@@ -2,9 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-30 13:50:04
+ * @LastEditTime: 2021-08-01 12:08:47
  * @Description:
  */
+import { formatAllAuthTypes } from '@/common/utils/format';
 import { jumpPage } from '@/common/utils/tools';
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -17,18 +18,21 @@ interface Props {
 
 const Head: FC<Props> = (props: any) => {
   const { data, getFollow } = props;
-  const { id, profile = {}, bindings = [], level } = data;
+  const { profile = {}, bindings = [], level } = data;
+
   const {
     avatarUrl,
     nickname,
+    gender = '',
     eventCount = 0,
     artistId = '',
     follows = 0,
     followeds = 0,
     signature = '',
     followed = false,
+    allAuthTypes = [],
   } = profile;
-  console.log(id);
+  const allAuthTypeData = formatAllAuthTypes(allAuthTypes);
   const bindingsData = bindings.filter((item) => item.url);
   return (
     <div className={styles.head}>
@@ -40,10 +44,16 @@ const Head: FC<Props> = (props: any) => {
           <p className={styles.nickname}>{nickname}</p>
           <div className={styles.topInfo}>
             <ul className={styles.list1}>
-              <li className={styles.isvip}>是否是会员</li>
-              {artistId && <li className={styles.issinger}>是否是歌手</li>}
-              <li className={styles.lv}>LV{level}</li>
-              <li className={styles.gender}>性别</li>
+              <li className={styles.isvip}>会员</li>
+              {!!allAuthTypeData.length && (
+                <li className={styles.identify}>
+                  {allAuthTypeData.map((item, index) => (
+                    <span key={index}>{item.desc}</span>
+                  ))}
+                </li>
+              )}
+              <li className={styles.lv}>Lv{level}</li>
+              {!!gender && <li className={gender === 1 ? styles.genderMan : styles.genderWomen}></li>}
             </ul>
             <ul className={styles.list2}>
               {artistId && <li onClick={() => jumpPage(`/singer${artistId}`)}>歌手页</li>}
@@ -69,7 +79,7 @@ const Head: FC<Props> = (props: any) => {
             </li>
           </ul>
           <ul className={styles.list4}>
-            <li className={styles.address}>所在地区：</li>
+            {/* <li className={styles.address}>所在地区：</li> */}
             <li className={styles.social}>
               社交网络：
               {bindingsData.map((item, index) => (
