@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-30 15:19:32
+ * @LastEditTime: 2021-08-02 23:03:16
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
@@ -23,6 +23,7 @@ const DOM = document.getElementsByTagName('body')[0] as HTMLElement;
 const Header: FC = () => {
   const [isMaximized, setIsMaximized] = useState(win.isMaximized());
   const { vipInfo, userInfo, globalColor, showModal, dispatch } = useContext(Context);
+  const { userId, nickname } = userInfo;
   DOM.style.setProperty('--color', globalColor, '');
   //  修改颜色
   const changeColor = (val: string) => {
@@ -48,8 +49,8 @@ const Header: FC = () => {
       </div>
       <div className={styles.left}>
         <div className={styles.back_group}>
-          <p className="icon icon-back" onClick={() => history.go(-1)}></p>
-          <p className="icon icon-back" onClick={() => history.go(+1)}></p>
+          <p className="icon icon-right" onClick={() => history.go(-1)}></p>
+          <p className="icon icon-right" onClick={() => history.go(+1)}></p>
         </div>
         <SearchInput />
         <div className={styles.general_song}>
@@ -59,9 +60,16 @@ const Header: FC = () => {
 
       <ul className={styles.tool}>
         <li className={styles.author}>
-          <img className={styles.avatarUrl} src={formatImgSize(userInfo.avatarUrl, 30, 30)} alt="" />
+          <img
+            className={styles.avatarUrl}
+            src={formatImgSize(userInfo.avatarUrl, 30, 30)}
+            alt=""
+            onClick={() => {
+              jumpPage(`/user${userId}`);
+            }}
+          />
           <div className={styles.userInfo}>
-            <p>{userInfo.nickname}</p>
+            <p>{nickname}</p>
             {vipInfo.vipType > 0 ? (
               <img className={styles.redVipImageUrl} src={formatImgSize(vipInfo.redVipImageUrl, 36, 12)} alt="" />
             ) : (

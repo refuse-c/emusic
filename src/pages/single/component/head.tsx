@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-30 22:18:24
+ * @LastEditTime: 2021-08-02 23:01:24
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
@@ -145,7 +145,7 @@ const Head: FC<Props> = (props: any) => {
         <div className={styles.info}>
           {artist && (
             <p className={styles.artist}>
-              歌手：<span>{artist.name}</span>
+              歌手：<span onClick={() => jumpPage(`/singer${artist.id}`)}>{artist.name}</span>
             </p>
           )}
           {publishTime && (

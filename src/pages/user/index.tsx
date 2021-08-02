@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-07-08 16:14:44
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 14:09:10
+ * @LastEditTime: 2021-08-02 18:23:36
  * @Description:用户详情页
  */
 
@@ -16,6 +16,7 @@ import { message } from 'antd';
 import { playlist } from '@/common/net/playList';
 import PlayList from '@/components/song-list';
 import Arrange from '@/components/arrange';
+
 interface Item {
   id: number;
   path: string;

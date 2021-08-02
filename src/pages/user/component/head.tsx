@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-01 18:44:08
+ * @LastEditTime: 2021-08-02 21:04:41
  * @Description:用户详情-头部
  */
 import { formatAllAuthTypes } from '@/common/utils/format';
@@ -10,7 +10,7 @@ import { jumpPage } from '@/common/utils/tools';
 import { FC } from 'react';
 import ReactMarkdown from 'react-markdown';
 import styles from '../index.module.scss';
-
+import { cityList, getCityString } from '@/common/utils/city';
 interface Props {
   data: object;
   isMe: boolean;
@@ -22,6 +22,7 @@ const Head: FC<Props> = (props: any) => {
   const { profile = {}, bindings = [], level } = data;
 
   const {
+    city = '',
     avatarUrl,
     nickname,
     gender = '',
@@ -35,6 +36,7 @@ const Head: FC<Props> = (props: any) => {
   } = profile;
   const allAuthTypeData = formatAllAuthTypes(allAuthTypes);
   const bindingsData = bindings.filter((item) => item.url);
+  const address = getCityString(cityList, String(city));
   return (
     <div className={styles.head}>
       <div className={styles.left}>
@@ -80,11 +82,18 @@ const Head: FC<Props> = (props: any) => {
             </li>
           </ul>
           <ul className={styles.list4}>
-            {/* <li className={styles.address}>所在地区：</li> */}
+            {address && (
+              <li className={styles.address}>
+                所在地区：<span>{address}</span>
+              </li>
+            )}
+            {console.log(bindingsData)}
             <li className={styles.social}>
               社交网络：
               {bindingsData.length ? (
-                bindingsData.map((item) => <span key={item.type}>{item.type}</span>)
+                bindingsData.map((item) => {
+                  return <span className={styles.icon} key={item.type}></span>;
+                })
               ) : (
                 <span className={styles.notbind}>未绑定</span>
               )}

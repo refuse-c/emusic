@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:13
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-31 00:19:13
+ * @LastEditTime: 2021-08-02 18:37:41
  * @Description:
  */
 
@@ -77,8 +77,14 @@ export const formatAvailableSongs = (arr: any, msg: boolean = true) => {
   return list;
 };
 
+/**
+ * @name: 格式化用户AuthTypes
+ * @param {*} arr
+ * @Description:
+ */
 export const formatAllAuthTypes = (arr) => {
-  return arr.map((item) => {
+  const array = arr.filter((item) => item.desc !== '' && item.tags !== null);
+  return array.map((item) => {
     return item.tags && item.tags.length ? { desc: `${item.desc}、${item.tags.join('、')}` } : { desc: `${item.desc}` };
   });
 };

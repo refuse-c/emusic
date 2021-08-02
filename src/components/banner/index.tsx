@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-08 11:06:27
+ * @LastEditTime: 2021-08-02 23:21:10
  * @Description:轮播图
  */
 import { formatImgSize } from '@/common/utils/format';
@@ -11,6 +11,7 @@ import styles from './index.module.scss';
 interface Props {
   list: any;
 }
+let timer: NodeJS.Timer | null;
 interface Item {
   pic: string;
   imageUrl: string;
@@ -23,11 +24,12 @@ const Banner: FC<Props> = (props) => {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    clearInterval(Number(timer));
+    timer = setInterval(() => {
       const newActive = active + 1 === list.length ? 0 : active + 1;
       setActive(newActive);
     }, 5000);
-    return () => clearInterval(timer);
+    return () => clearInterval(Number(timer));
   }, [active, list.length]);
 
   return (

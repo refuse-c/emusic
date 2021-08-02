@@ -152,9 +152,25 @@
           font-size: 12px;
           line-height: 20px;
 
-          .notbind {
+          span {
             overflow: hidden;
             color: #676767;
+          }
+
+          &.social {
+            display: flex;
+            align-items: center;
+
+            span {
+              display: inline-block;
+              width: 16px;
+              height: 16px;
+              cursor: pointer;
+
+              &.icon {
+                background: url('~@common/svg/weibo.svg') center center / 16px 16px no-repeat;
+              }
+            }
           }
 
           &.personal {

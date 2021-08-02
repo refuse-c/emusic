@@ -2,13 +2,14 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-09 15:19:19
+ * @LastEditTime: 2021-08-02 22:59:03
  * @Description:
  */
 import { FC } from 'react';
 import styles from '../index.module.scss';
 import { formatImgSize } from '@/common/utils/format';
 import { artistSub } from '@/common/net/singer';
+import { jumpPage } from '@/common/utils/tools';
 
 interface Props {
   data: object;
@@ -40,7 +41,7 @@ const Head: FC<Props> = (props: any) => {
         <div className={styles.btnGroup}>
           <div className={styles.tool}>
             <p onClick={() => getArtistSub(followed ? 2 : 1)}>{followed ? '已收藏' : '收藏'}</p>
-            {accountId && <p>个人主页</p>}
+            {accountId && <p onClick={() => jumpPage(`/user${accountId}`)}>个人主页</p>}
           </div>
         </div>
         <div className={styles.info}>
