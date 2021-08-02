@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-07-08 16:14:44
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-01 12:08:43
+ * @LastEditTime: 2021-08-02 14:09:10
  * @Description:用户详情页
  */
 
@@ -15,6 +15,7 @@ import { follow, userDetail } from '@/common/net/api';
 import { message } from 'antd';
 import { playlist } from '@/common/net/playList';
 import PlayList from '@/components/song-list';
+import Arrange from '@/components/arrange';
 interface Item {
   id: number;
   path: string;
@@ -29,11 +30,13 @@ interface Item {
 const UserDetail: FC = (props: any) => {
   const { uid } = props.match.params;
   const [info, setInfo] = useState({});
+  const [arrange1, setArrange1] = useState('row');
+  const [arrange2, setArrange2] = useState('row');
   const [create, setCreate] = useState([]);
   const [collect, setCollect] = useState([]);
   const { userInfo } = useContext(Context);
   const { userId, nickname } = userInfo;
-
+  const isMe = Number(uid) === userId;
   // 获取用户信息
   const getUserDetail = async (uid) => {
     const res: any = await userDetail({ uid });
@@ -75,12 +78,26 @@ const UserDetail: FC = (props: any) => {
   return (
     <div className={styles.userDetail}>
       <Content padding={'0 30px'} isFull>
-        <Head data={info || {}} getFollow={getFollow} />
+        <Head data={info || {}} getFollow={getFollow} isMe={isMe} />
       </Content>
-      {!!create.length && <p>创建{`（${create.length}）`}</p>}
-      <PlayList list={create} />
-      {!!collect.length && <p>收藏{`（${collect.length}）`}</p>}
-      <PlayList list={collect} />
+      {!!create.length && (
+        <div className={styles.title}>
+          <p>
+            创建<span>{`（${create.length}）`}</span>
+          </p>
+          <Arrange active={arrange1} cb={setArrange1} />
+        </div>
+      )}
+      <PlayList list={create} pad={true} layout={arrange1} />
+      {!!collect.length && (
+        <div className={styles.title}>
+          <p>
+            收藏<span>{`（${collect.length}）`}</span>
+          </p>
+          <Arrange active={arrange2} cb={setArrange2} />
+        </div>
+      )}
+      <PlayList list={collect} pad={true} layout={arrange2} />
     </div>
   );
 };

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-30 23:20:47
+ * @LastEditTime: 2021-08-01 23:57:25
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState, useCallback } from 'react';
@@ -171,7 +171,7 @@ const Recommend: FC = () => {
         );
       })} */}
       <Title title="推荐歌单" margin={'10px  0'} path="/find/playlist" />
-      <PlayList list={playList || []} />
+      <PlayList list={playList || []} fixedNum={true} />
       <Title title="独家放送" margin={'10px  0'} path="/exclusive" />
       <ExclusiveList list={exclusiveList} isAdaptive={false} />
       <Title title="最新音乐" margin={'10px  0'} path="/find/newmusic" />

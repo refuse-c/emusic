@@ -50,23 +50,53 @@
         justify-content: space-between;
 
         .list1 {
+          display: flex;
           flex-wrap: wrap;
 
           li {
+            margin-top: 2px;
+            margin-bottom: 2px;
+            font-size: 12px;
             white-space: nowrap;
+
+            &.identify {
+              padding: 2px 6px;
+              color: #f0483b;
+              background-color: #fde4e2;
+              border-radius: 10px;
+            }
+
+            &.level {
+              height: 16px;
+              padding: 2px 6px;
+              background-color: #f0f0f0;
+              border-radius: 10px;
+            }
+
+            &.genderMan {
+              width: 16px;
+              height: 16px;
+              background: url('~@common/svg/gender-man.svg') center center / 16px 16px no-repeat;
+            }
+
+            &.genderWomen {
+              width: 16px;
+              height: 16px;
+              background: url('~@common/svg/gender-women.svg') center center / 16px 16px no-repeat;
+            }
           }
         }
 
         .list2 {
           li {
-            padding: 0 14px 0 40px;
-            line-height: 32px;
+            padding: 0 14px; //  0 14px
+            line-height: 30px;
             white-space: nowrap;
             border: 1px solid #d8d8d8;
-            border-radius: 32px;
+            border-radius: 30px;
 
-            &:last-child {
-              width: 32px;
+            &.more {
+              width: 30px;
               padding: 0;
             }
 
@@ -116,16 +146,20 @@
 
       .list4 {
         display: block;
-        margin-top: 10px;
 
         li {
-          padding-top: 10px;
+          padding-top: 6px;
+          font-size: 12px;
+          line-height: 20px;
+
+          .notbind {
+            overflow: hidden;
+            color: #676767;
+          }
 
           &.personal {
             p {
               overflow: hidden;
-              font-size: 12px;
-              line-height: 20px;
               color: #676767;
 
               strong {
@@ -135,6 +169,27 @@
             }
           }
         }
+      }
+    }
+  }
+}
+
+.userDetail {
+  padding-bottom: 40px;
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;
+
+    p {
+      font-size: 14px;
+      font-weight: bold;
+
+      span {
+        font-size: 12px;
+        font-weight: 400;
       }
     }
   }

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 00:00:53
+ * @LastEditTime: 2021-08-02 14:13:49
  * @Description:搜索-歌单
  */
 import { FC, useEffect, useState, useContext, useCallback } from 'react';
@@ -11,7 +11,6 @@ import { Context } from '@utils/context';
 import { search } from '@/common/net/search';
 import SongList from '@/components/song-list';
 import { Spin } from 'antd';
-import Content from '@components/view/content';
 const PlayList: FC = () => {
   const [list, setList] = useState<any>([]);
   const [loading, setloading] = useState(false);
@@ -40,17 +39,15 @@ const PlayList: FC = () => {
 
   return (
     <Spin spinning={loading}>
-      <Content padding={'0 30px'} isFull={true}>
-        <div className={styles.box}>
-          {list.length && !loading ? (
-            <SongList list={list} />
-          ) : !loading ? (
-            <p className={styles.empty}>
-              很抱歉,未能找到与" <span style={{ color: '#507DAF' }}>{keywords}</span> "相关的任何歌单
-            </p>
-          ) : null}
-        </div>
-      </Content>
+      <div className={styles.box}>
+        {list.length && !loading ? (
+          <SongList list={list} layout="col" />
+        ) : !loading ? (
+          <p className={styles.empty}>
+            很抱歉,未能找到与" <span style={{ color: '#507DAF' }}>{keywords}</span> "相关的任何歌单
+          </p>
+        ) : null}
+      </div>
     </Spin>
   );
 };

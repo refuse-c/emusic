@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-22 14:05:11
+ * @LastEditTime: 2021-08-02 14:11:45
  * @Description:
  */
 /**
@@ -331,4 +331,14 @@ export const areaList = [
   { name: '日本', key: '8' },
   { name: '韩国', key: '16' },
   { name: '其他', key: '0' },
+];
+
+/**
+ * @name: 排列方法
+ * @param {*}
+ */
+export const arrangeList = [
+  { title: '大图模式', key: 'row', cls: 'icon icon-list1' },
+  { title: '列表模式', key: 'col', cls: 'icon icon-list2' },
+  // { title: '图例模式', key: 'detail', cls: 'icon icon-list3' },
 ];

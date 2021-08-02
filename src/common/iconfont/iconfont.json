@@ -6,6 +6,62 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "10680421",
+      "name": "more read",
+      "font_class": "more",
+      "unicode": "e610",
+      "unicode_decimal": 58896
+    },
+    {
+      "icon_id": "5932779",
+      "name": "ico-list",
+      "font_class": "list3",
+      "unicode": "e67a",
+      "unicode_decimal": 59002
+    },
+    {
+      "icon_id": "9351139",
+      "name": "list",
+      "font_class": "list2",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "10636099",
+      "name": "list",
+      "font_class": "list1",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    },
+    {
+      "icon_id": "14261406",
+      "name": "性别-男",
+      "font_class": "man",
+      "unicode": "e899",
+      "unicode_decimal": 59545
+    },
+    {
+      "icon_id": "22781294",
+      "name": "性别女",
+      "font_class": "women",
+      "unicode": "e646",
+      "unicode_decimal": 58950
+    },
+    {
+      "icon_id": "11246588",
+      "name": "评论",
+      "font_class": "pinglun",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "19858001",
+      "name": "double arrows left",
+      "font_class": "double-arrow",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
       "icon_id": "9448829",
       "name": "empty",
       "font_class": "empty",
@@ -267,7 +323,7 @@
     {
       "icon_id": "13333956",
       "name": "back-line",
-      "font_class": "back",
+      "font_class": "right",
       "unicode": "e600",
       "unicode_decimal": 58880
     },
@@ -291,13 +347,6 @@
       "font_class": "search",
       "unicode": "e613",
       "unicode_decimal": 58899
-    },
-    {
-      "icon_id": "21206804",
-      "name": "左侧箭头",
-      "font_class": "arrow-left",
-      "unicode": "e614",
-      "unicode_decimal": 58900
     },
     {
       "icon_id": "21196435",

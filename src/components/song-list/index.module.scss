@@ -1,62 +1,170 @@
 .songList {
-  display: flex;
-  flex-wrap: wrap;
+  // 竖排
+  &.col {
+    padding-bottom: 40px;
 
-  li {
-    width: calc(20% - 15px);
-    border-radius: 6px;
-
-    &:not(:nth-child(5n - 4)) {
-      margin-left: 18px;
-    }
-
-    .dateBox {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 70px;
-      height: 70px;
-      font-size: 28px;
-      font-weight: 500;
-      line-height: 80px;
-      color: #fff;
-      text-align: center;
-      background: url('~@images/icon_date_box.png') center center / cover no-repeat;
-      transform: translate(-50%, -50%);
-    }
-
-    .imgBox {
-      position: relative;
+    .item {
+      display: flex;
+      justify-content: space-between;
       width: 100%;
-      padding-top: 100%;
-      cursor: pointer;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: contain;
-      border-radius: 6px;
-      // border: 1px solid #f3f3f3;
+      height: 80px;
+      align-items: center;
+      padding: 0 30px;
 
-      &::before {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: url('~@images/icon_mask_layer3.png') top center / 100% no-repeat;
-        border-radius: 6px;
-        content: '';
+      &:nth-child(odd) {
+        background-color: #f9f9f9;
+      }
+
+      &:hover {
+        background-color: #f0f1f2;
+      }
+
+      .left {
+        display: flex;
+        align-items: center;
+        width: 40%;
+
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 6px;
+          object-fit: contain;
+        }
+
+        .name {
+          width: calc(100% - 80px);
+          padding-left: 16px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+
+      .right {
+        display: flex;
+        width: 60%;
+
+        li {
+          padding-left: 6px;
+          overflow: hidden;
+          font-size: 12px;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          flex: 1;
+        }
+      }
+    }
+  }
+
+  // 横排
+  &.row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 30px;
+
+    .item {
+      position: relative;
+      width: calc(20% - 15px);
+      border-radius: 6px;
+      // 小于1100px
+      @media only screen and (max-width: 1100px) {
+        width: calc((100% - 60px) / 4);
+
+        &:not(:nth-child(4n - 4)) {
+          margin-right: 20px;
+        }
+      }
+      // 大于1100px && 小于1300px
+      @media screen and (min-width: 1100px) and (max-width: 1300px) {
+        width: calc((100% - 80px) / 5);
+
+        &:not(:nth-child(5n - 5)) {
+          margin-right: 20px;
+        }
+      }
+      // 大于1300px
+      @media screen and (min-width: 1300px) {
+        width: calc((100% - 100px) / 6);
+
+        &:not(:nth-child(6n - 6)) {
+          margin-right: 20px;
+        }
+      }
+
+      &:hover {
+        .right {
+          opacity: 1;
+          transition: all 1s ease;
+        }
+      }
+    }
+    // 固定个数为5个时候的样式
+    .fixedNum {
+      width: calc((100% - 80px) / 5);
+
+      &:not(:nth-child(5n - 5)) {
+        margin-right: 20px;
       }
     }
 
-    p {
-      display: -webkit-box;
-      margin: 4px 0 14px;
+    .left {
+      position: relative;
+      width: 100%;
+      height: calc(100% - 34px);
+
+      img {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        border-radius: 6px;
+        object-fit: contain;
+      }
+
+      .dateBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+        font-weight: 500;
+        line-height: 80px;
+        color: #fff;
+        text-align: center;
+        cursor: pointer;
+        background: url('~@images/icon_date_box.png') center center / cover no-repeat;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .right {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+      display: flex;
+      width: 100%;
+      height: calc(100% - 34px);
+      color: #fff;
+      pointer-events: none;
+      background-color: rgba($color: #000, $alpha: 0.3);
+      opacity: 1;
+      transition: all 1s ease;
+      flex-direction: column;
+
+      li {
+        overflow: hidden;
+        line-height: 30px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .name {
+      padding: 6px 0 12px;
       overflow: hidden;
-      font-size: 14px;
-      line-height: 1.5;
       text-overflow: ellipsis;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      white-space: nowrap;
     }
   }
 }

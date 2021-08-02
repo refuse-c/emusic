@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'font_family'; /* Project id 2501801 */
-  src: url('iconfont.woff2?t=1623943465721') format('woff2'), url('iconfont.woff?t=1623943465721') format('woff'),
-    url('iconfont.ttf?t=1623943465721') format('truetype');
+  src: url('iconfont.woff2?t=1627871497528') format('woff2'), url('iconfont.woff?t=1627871497528') format('woff'),
+    url('iconfont.ttf?t=1627871497528') format('truetype');
 }
 
 .icon {
@@ -10,6 +10,38 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-style: normal;
+}
+
+.icon-more::before {
+  content: '\e610';
+}
+
+.icon-list3::before {
+  content: '\e67a';
+}
+
+.icon-list2::before {
+  content: '\e633';
+}
+
+.icon-list1::before {
+  content: '\e60f';
+}
+
+.icon-man::before {
+  content: '\e899';
+}
+
+.icon-women::before {
+  content: '\e646';
+}
+
+.icon-pinglun::before {
+  content: '\e624';
+}
+
+.icon-double-arrow::before {
+  content: '\e60e';
 }
 
 .icon-empty::before {
@@ -160,7 +192,7 @@
   content: '\e627';
 }
 
-.icon-back::before {
+.icon-right::before {
   content: '\e600';
 }
 
@@ -174,10 +206,6 @@
 
 .icon-search::before {
   content: '\e613';
-}
-
-.icon-arrow-left::before {
-  content: '\e614';
 }
 
 .icon-local-music::before {
