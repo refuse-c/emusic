@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-01 23:57:25
+ * @LastEditTime: 2021-08-03 14:06:31
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState, useCallback } from 'react';
@@ -107,7 +107,7 @@ const Recommend: FC = () => {
    * @Description:
    */
   const getNewMusic = useCallback(async () => {
-    const result: any = await newMusic();
+    const result: any = await newMusic({ type: 0 });
     const arr = result.data || [];
     const idsArr = assemblyIds(arr);
     await getSongDetail(idsArr);

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-23 23:50:27
+ * @LastEditTime: 2021-08-03 20:42:35
  * @Description:搜索框组件
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -13,6 +13,7 @@ import { defaultVal } from '@/common/utils/local';
 import { Context } from '@utils/context';
 import { searchDefault, searchHotSuggest } from '@/common/net/search';
 import styles from './index.module.scss';
+let timer: NodeJS.Timer | null;
 const history = createHashHistory();
 const SearchInput: FC = () => {
   const [keywords, setKeywords] = useState('');
@@ -33,7 +34,6 @@ const SearchInput: FC = () => {
     dispatch({ type: 'searchText', data: _val });
     pathname = window.location.href.indexOf('/search');
     if (pathname === -1) history.push('/search');
-    // debounce(() => getDefaultVal(), 10000);
   };
 
   //搜索建议
@@ -54,9 +54,14 @@ const SearchInput: FC = () => {
   };
 
   useEffect(() => {
+    clearInterval(Number(timer));
     getDefaultVal();
-    return () => {
+    timer = setInterval(() => {
+      console.log(11);
       getDefaultVal();
+    }, 30 * 6 * 10000);
+    return () => {
+      clearInterval(Number(timer));
     };
   }, []);
   return (

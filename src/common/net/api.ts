@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-16 23:45:51
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-29 21:37:57
+ * @LastEditTime: 2021-08-03 13:56:31
  * @Description:
  */
 import { get } from './request';
@@ -19,7 +19,7 @@ export const privatecontentList = (params?: any) => get('/personalized/privateco
  * @param {any} params
  * @Description:
  */
-export const newMusic = (params?: any) => get('/top/song', params);
+export const newMusic = (params: { type: number }) => get('/top/song', params);
 
 /**
  * @name: 喜欢的音乐

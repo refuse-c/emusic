@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 14:11:45
+ * @LastEditTime: 2021-08-03 22:55:42
  * @Description:
  */
 /**
@@ -86,12 +86,6 @@ export const menuList = [
     isBold: false,
     // icon: 'iocn icon-collection',
   },
-  // {
-  //   name: '创建的歌单',
-  //   path: '/createPlaylist',
-  //   type: 2,
-  //   isBold: false,
-  // },
 ];
 
 /**
@@ -106,7 +100,7 @@ export const findNav = [
   { name: '主播电台', path: '/find/radio' },
   { name: '排行榜', path: '/find/toplist' },
   { name: '歌手', path: '/find/singer' },
-  { name: '最新音乐', path: '/find/newmusic' },
+  { name: '最新音乐', path: '/find/new' },
 ];
 
 export const searchNav = [
@@ -125,6 +119,12 @@ export const searchNav = [
  * @param {*}
  */
 export const playListNav = [{ name: '播放列表' }, { name: '历史记录' }];
+
+/**
+ * @name:最新音乐导航
+ * @param {*}
+ */
+export const newMusicNav = [{ name: '新歌速递' }, { name: '新碟上架' }];
 
 /**
  * @name: 视频顶部导航
@@ -170,18 +170,9 @@ export const initSearchInfo = { total: 0, type: 1 };
  * @Description:
  */
 export const navigationList = [
-  {
-    key: 1,
-    title: '歌曲列表',
-  },
-  {
-    key: 2,
-    title: '评论',
-  },
-  {
-    key: 3,
-    title: '收藏者',
-  },
+  { key: 1, title: '歌曲列表' },
+  { key: 2, title: '评论' },
+  { key: 3, title: '收藏者' },
 ];
 
 /**
@@ -190,22 +181,10 @@ export const navigationList = [
  * @Description:
  */
 export const singerDetailNavList = [
-  {
-    key: 1,
-    title: '专辑',
-  },
-  {
-    key: 2,
-    title: 'MV',
-  },
-  {
-    key: 3,
-    title: '歌手详情',
-  },
-  {
-    key: 3,
-    title: '相似歌手',
-  },
+  { key: 1, title: '专辑' },
+  { key: 2, title: 'MV' },
+  { key: 3, title: '歌手详情' },
+  { key: 3, title: '相似歌手' },
 ];
 
 /**
@@ -214,22 +193,10 @@ export const singerDetailNavList = [
  * @Description:
  */
 export const singerTopNav = [
-  {
-    key: 1,
-    title: '华语',
-  },
-  {
-    key: 2,
-    title: '欧美',
-  },
-  {
-    key: 3,
-    title: '韩国',
-  },
-  {
-    key: 3,
-    title: '日本',
-  },
+  { key: 1, title: '华语' },
+  { key: 2, title: '欧美' },
+  { key: 3, title: '韩国' },
+  { key: 3, title: '日本' },
 ];
 
 /**
@@ -325,12 +292,11 @@ export const typeList = [
  * @param {*}
  */
 export const areaList = [
-  { name: '全部', key: '-1' },
-  { name: '华语', key: '7' },
-  { name: '欧美', key: '96' },
-  { name: '日本', key: '8' },
-  { name: '韩国', key: '16' },
-  { name: '其他', key: '0' },
+  { title: '全部', area: 'ALL', key: 0 },
+  { title: '华语', area: 'ZH', key: 7 },
+  { title: '欧美', area: 'EA', key: 96 },
+  { title: '韩国', area: 'KR', key: 16 },
+  { title: '日本', area: 'JP', key: 8 },
 ];
 
 /**
@@ -341,4 +307,13 @@ export const arrangeList = [
   { title: '大图模式', key: 'row', cls: 'icon icon-list1' },
   { title: '列表模式', key: 'col', cls: 'icon icon-list2' },
   // { title: '图例模式', key: 'detail', cls: 'icon icon-list3' },
+];
+
+/**
+ * @name: 排列方法
+ * @param {*}
+ */
+export const albumList = [
+  { title: '推荐', key: 0 },
+  { title: '全部', key: 1 },
 ];

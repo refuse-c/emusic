@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 09:05:23
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-17 19:42:45
+ * @LastEditTime: 2021-08-03 10:29:20
  * @Description:左侧菜单
  */
 import { FC, useState, useContext } from 'react';
@@ -50,12 +50,11 @@ const Menu: FC = () => {
         const cls3 = statue === index && isBold ? styles.active3 : null;
         const cls4 = type === 2 ? styles.active4 : styles.router;
         const cls5 = icon ? icon : '';
+        const backgroundImage = icon ? `url(${icon}` : '';
         return (
           <li
             key={index}
-            style={{
-              backgroundImage: `url(${icon}`,
-            }}
+            style={{ backgroundImage }}
             className={[cls1, cls2, cls3, cls4, cls5].join(' ')}
             onClick={() => handleMeun(item, index)}
           >

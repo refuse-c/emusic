@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-21 16:27:12
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-12 23:33:57
+ * @LastEditTime: 2021-08-03 23:07:50
  * @Description:播放列表
  */
 
@@ -17,7 +17,11 @@ const PlayList: FC = () => {
   return (
     <div className={styles.playlist} onClick={(e) => e.stopPropagation()}>
       <div className={styles.content}>
-        <EllipticalNav list={playListNav} status={state} onChange={(state: number) => setstate(state)} />
+        <EllipticalNav
+          list={playListNav}
+          status={state}
+          onChange={(state: number) => setstate(state)}
+        />
         <div className={styles.tools}>
           <div className={styles.total}>{`总${songList.length}首`}</div>
           <div className={styles.info}>清空</div>

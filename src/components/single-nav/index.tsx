@@ -22,7 +22,7 @@ const Navigation: FC<Props> = (props) => {
   const { list, status, onChange, children } = props;
   return (
     <div className={styles.navigation}>
-      <ul>
+      <ul className={styles.list}>
         {list.map((item: Item, index: number) => {
           const cls = status === index ? styles.active : '';
           return (

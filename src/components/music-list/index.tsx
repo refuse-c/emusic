@@ -2,14 +2,14 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-24 05:26:47
+ * @LastEditTime: 2021-08-03 18:31:09
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
 import { message, Table } from 'antd';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
-import { formatSerialNumber, formatTime } from '@/common/utils/format';
+import { formatImgSize, formatSerialNumber, formatTime } from '@/common/utils/format';
 import { highlight, _findIndex } from '@/common/utils/tools';
 import Tips from '@/components/model/tips';
 import clone from 'clone';
@@ -22,10 +22,11 @@ interface Props {
   singleId?: number | string;
   callBack?: any;
   searchText?: string;
+  columnsType?: boolean;
 }
 
 const MusicList: FC<Props> = (props) => {
-  const { list, loading = false, callBack, singleId, searchText = '' } = props;
+  const { list, loading = false, callBack, singleId, searchText = '', columnsType = true } = props;
   const [id, setId] = useState(0);
   const [currentItem, setCurrentItem] = useState({});
   const [isOpen, setOpen] = useState(false);
@@ -46,7 +47,7 @@ const MusicList: FC<Props> = (props) => {
     if (myLikeId === singleId) callBack(myLikeId);
   };
 
-  const columns = [
+  const columns1 = [
     {
       title: '',
       key: 'index',
@@ -125,6 +126,45 @@ const MusicList: FC<Props> = (props) => {
       render: (record: any) => <span className={styles.time}>{formatTime(record.dt)}</span>,
     },
   ];
+
+  const columns2 = [
+    {
+      title: '序号',
+      key: 'index',
+      render: (_text, _record, index) => index + 1,
+    },
+    {
+      title: '专辑图',
+      key: 'picUrl',
+      dataIndex: 'al',
+      render: (text) => <img style={{ margin: '10px 0' }} src={formatImgSize(text.picUrl, 60, 60)} alt="" />,
+    },
+    {
+      title: '名字',
+      key: 'name',
+      dataIndex: 'name',
+      // render: (record) => record.name,
+    },
+    {
+      title: '专辑名字',
+      key: 'al',
+      dataIndex: 'al',
+      render: (text) => text.name,
+    },
+    {
+      title: '歌手名字',
+      key: 'ar',
+      dataIndex: 'ar',
+      render: (text) => text.map((item) => item.name),
+    },
+    {
+      title: '时长',
+      key: 'dt',
+      dataIndex: 'dt',
+      render: (text) => formatTime(text),
+    },
+  ];
+
   // 控制样式
   const setClassName = (record: { st: number; id: number }, index: number) => {
     const cls1 = record.st === -200 ? styles.disabled : '';
@@ -169,10 +209,11 @@ const MusicList: FC<Props> = (props) => {
         size="small"
         bordered={false}
         dataSource={list}
-        columns={columns}
+        columns={columnsType ? columns1 : columns2}
         pagination={false}
         loading={loading}
         className={styles.table}
+        showHeader={columnsType}
         locale={{
           cancelSort: '', // 取消排序
           triggerAsc: '', // 点击升序

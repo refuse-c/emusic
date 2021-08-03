@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:22:22
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 18:02:11
+ * @LastEditTime: 2021-08-03 14:41:15
  * @Description:
  */
 import { FC, useContext, Suspense } from 'react';
@@ -30,7 +30,8 @@ const Home: FC = () => {
                 render={(props) => <item.component {...props} router={item.router} />}
               />
             ))}
-            <Redirect exact from="/" to="/user81362209" />
+            {/* <Redirect exact from="/" to="/user81362209" /> */}
+            <Redirect exact from="/" to="/find/new" />
             {/* <Redirect exact from="/" to="/find" /> */}
           </Router>
         </Suspense>

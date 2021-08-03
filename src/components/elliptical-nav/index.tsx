@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-05-21 16:52:12
+ * @LastEditTime: 2021-08-03 15:10:10
  * @Description:歌单导航
  */
 import { FC } from 'react';
@@ -14,7 +14,7 @@ interface Props {
   onChange: Function;
 }
 interface Item {
-  title: string;
+  name: string;
 }
 
 const EllipticalNav: FC<Props> = (props) => {
@@ -25,7 +25,7 @@ const EllipticalNav: FC<Props> = (props) => {
         const cls = status === index ? styles.active : '';
         return (
           <li key={index} className={cls} onClick={() => onChange(index)}>
-            {item.title}
+            {item.name}
           </li>
         );
       })}

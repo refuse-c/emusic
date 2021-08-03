@@ -94,14 +94,16 @@
     "wait-on": "^6.0.0"
   },
   "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "*.tsx": [
-      "eslint --fix",
-      "prettier --write"
+    "src/**/*.{js,ts,jsx,tsx}": [
+      "prettier --write",
+      "eslint --cache --fix",
+      "git add ."
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "build": {
     "extends": null,
