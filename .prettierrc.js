@@ -2,12 +2,12 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:14:24
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 22:58:51
+ * @LastEditTime: 2021-08-04 16:45:38
  * @Description:
  */
 
 module.exports = {
-  // printWidth: 100, // 一行最多 100 字符
+  // printWidth: 90, // 一行最多 100 字符
   useTabs: false, // 不使用缩进符，而使用空格
   tabWidth: 2, // 使用 2 个空格缩进
   tabSize: 2,

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-09 15:59:38
+ * @LastEditTime: 2021-08-05 21:56:56
  * @Description:发现音乐-歌手
  */
 import { FC, useState, useEffect, useCallback } from 'react';
@@ -22,7 +22,13 @@ const Singer: FC = () => {
   const [loading, setLoading] = useState(false);
   const queryArtistList = useCallback(async () => {
     setLoading(true);
-    const res: any = await artistList({ area, type, initial, limit: 100, offset: 0 });
+    const res: any = await artistList({
+      area,
+      type,
+      initial,
+      limit: 100,
+      offset: 0,
+    });
     setLoading(false);
     if (res.code === 200) {
       setList(res.artists || []);
@@ -47,9 +53,25 @@ const Singer: FC = () => {
   return (
     <Spin spinning={loading}>
       <Content padding={'0 30px 30px'} isFull={false}>
-        <SingTag title="语种" active={area} list={areaList} cb={(key: string) => handleTag(key, 1)} />
-        <SingTag title="分类" active={type} list={typeList} cb={(key: string) => handleTag(key, 2)} />
-        <SingTag title="筛选" active={initial} list={initialList} width={44} cb={(key: string) => handleTag(key, 3)} />
+        <SingTag
+          title="语种"
+          active={area}
+          list={areaList}
+          cb={(key: string) => handleTag(key, 1)}
+        />
+        <SingTag
+          title="分类"
+          active={type}
+          list={typeList}
+          cb={(key: string) => handleTag(key, 2)}
+        />
+        <SingTag
+          title="筛选"
+          active={initial}
+          list={initialList}
+          width={44}
+          cb={(key: string) => handleTag(key, 3)}
+        />
       </Content>
       <SingerComponent list={list} type={1} layout="col" />
     </Spin>

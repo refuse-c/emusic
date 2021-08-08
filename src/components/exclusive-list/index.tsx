@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-06-05 14:00:18
+ * @LastEditTime: 2021-08-04 16:45:52
  * @Description:独家发送列表组件
  */
 import { formatImgSize } from '@/common/utils/format';
@@ -28,7 +28,9 @@ const ExclusiveList: FC<Props> = (props) => {
               className={styles.imgBox}
               style={{
                 backgroundImage: `url(${
-                  isAdaptive ? formatImgSize(item.picUrl, 334, 126) : formatImgSize(item.sPicUrl, 334, 188)
+                  isAdaptive
+                    ? formatImgSize(item.picUrl, 334, 126)
+                    : formatImgSize(item.sPicUrl, 334, 188)
                 })`,
               }}
             ></div>

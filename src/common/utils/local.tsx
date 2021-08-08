@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 22:55:42
+ * @LastEditTime: 2021-08-05 21:56:32
  * @Description:
  */
 /**
@@ -292,11 +292,11 @@ export const typeList = [
  * @param {*}
  */
 export const areaList = [
-  { title: '全部', area: 'ALL', key: 0 },
-  { title: '华语', area: 'ZH', key: 7 },
-  { title: '欧美', area: 'EA', key: 96 },
-  { title: '韩国', area: 'KR', key: 16 },
-  { title: '日本', area: 'JP', key: 8 },
+  { name: '全部', title: '全部', area: 'ALL', key: '-1' },
+  { name: '华语', title: '华语', area: 'ZH', key: '7' },
+  { name: '欧美', title: '欧美', area: 'EA', key: '96' },
+  { name: '韩国', title: '韩国', area: 'KR', key: '16' },
+  { name: '日本', title: '日本', area: 'JP', key: '8' },
 ];
 
 /**

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 14:12:12
+ * @LastEditTime: 2021-08-04 16:43:42
  * @Description:排列
  */
 import { arrangeList } from '@/common/utils/local';
@@ -20,7 +20,12 @@ const Arrange: FC<Props> = (props) => {
       {arrangeList.map((item) => {
         const cls = active === item.key ? styles.active : ' ';
         return (
-          <li className={[item.cls, cls].join(' ')} onClick={() => cb(item.key)} key={item.key} title={item.title}></li>
+          <li
+            key={item.key}
+            title={item.title}
+            className={[item.cls, cls].join(' ')}
+            onClick={() => cb(item.key)}
+          ></li>
         );
       })}
     </ul>

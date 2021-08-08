@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-08 22:22:22
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 14:41:15
+ * @LastEditTime: 2021-08-04 16:37:13
  * @Description:
  */
 import { FC, useContext, Suspense } from 'react';
@@ -27,7 +27,9 @@ const Home: FC = () => {
               <Route
                 key={index}
                 path={item.path}
-                render={(props) => <item.component {...props} router={item.router} />}
+                render={(props) => (
+                  <item.component {...props} router={item.router} />
+                )}
               />
             ))}
             {/* <Redirect exact from="/" to="/user81362209" /> */}

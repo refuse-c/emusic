@@ -90,19 +90,19 @@
         margin-top: 10px;
       }
       @media screen and (max-width: 1100px) {
-        width: calc(100% / 5 - 14.4px);
+        width: calc((100% - 80px) / 5);
         overflow: hidden;
 
         &:not(:nth-child(5n - 5)) {
-          margin-right: 18px;
+          margin-right: 20px;
         }
       }
       @media screen and (min-width: 1100px) {
-        width: calc(100% / 6 - 15px);
+        width: calc((100% - 100px) / 6);
         overflow: hidden;
 
         &:not(:nth-child(6n - 6)) {
-          margin-right: 18px;
+          margin-right: 20px;
         }
       }
     }

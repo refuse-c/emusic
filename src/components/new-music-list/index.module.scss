@@ -9,7 +9,7 @@
 
   .item {
     display: flex;
-    width: calc(33.33% - 13.33px);
+    width: calc((100% - 40px) / 3);
     height: 48px;
     margin-bottom: 16px;
     color: #333;
@@ -43,7 +43,8 @@
         left: 50%;
         width: 24px;
         height: 24px;
-        background: rgba(255, 255, 255, 0.9) url('~@images/icon_play1.png') left 5px top 4px / 17px no-repeat;
+        background: rgba(255, 255, 255, 0.9) url('~@images/icon_play1.png') left
+          5px top 4px / 17px no-repeat;
         border-radius: 50%;
         content: '';
         transform: translate(-50%, -50%);

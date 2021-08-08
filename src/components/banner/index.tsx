@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 20:36:27
+ * @LastEditTime: 2021-08-04 16:43:10
  * @Description:轮播图
  */
 import { formatImgSize } from '@/common/utils/format';
@@ -38,12 +38,27 @@ const Banner: FC<Props> = (props) => {
         {list.map((item: Item, index: number) => {
           const len = list.length - 1;
           const cls1 = index === active ? styles.active : '';
-          const cls2 = index === (active === 0 ? len : active - 1) ? styles.active_left : '';
-          const cls3 = index === (active === len ? 0 : active + 1) ? styles.active_right : '';
+          const cls2 =
+            index === (active === 0 ? len : active - 1)
+              ? styles.active_left
+              : '';
+          const cls3 =
+            index === (active === len ? 0 : active + 1)
+              ? styles.active_right
+              : '';
           const color = item.titleColor === 'red' ? '#CC4A4A' : '#4A79CC';
           return (
-            <li key={index} className={[cls1, cls2, cls3].join(' ')} onClick={() => setActive(index)}>
-              {<img src={formatImgSize(item.imageUrl || item.pic, 540, 198)} alt="" />}
+            <li
+              key={index}
+              className={[cls1, cls2, cls3].join(' ')}
+              onClick={() => setActive(index)}
+            >
+              {
+                <img
+                  src={formatImgSize(item.imageUrl || item.pic, 540, 198)}
+                  alt=""
+                />
+              }
               <p style={{ backgroundColor: color }}>{item.typeTitle}</p>
             </li>
           );
@@ -54,7 +69,13 @@ const Banner: FC<Props> = (props) => {
       <ul className={styles.pointList}>
         {list.map((_item, index: number) => {
           const cls = index === active ? styles.active : '';
-          return <li key={index} className={cls} onMouseEnter={() => setActive(index)}></li>;
+          return (
+            <li
+              key={index}
+              className={cls}
+              onMouseEnter={() => setActive(index)}
+            ></li>
+          );
         })}
       </ul>
     </div>

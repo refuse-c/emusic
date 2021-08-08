@@ -2,14 +2,18 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 18:31:09
+ * @LastEditTime: 2021-08-04 22:31:33
  * @Description:音乐列表
  */
 import { FC, useState, useContext } from 'react';
 import { message, Table } from 'antd';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
-import { formatImgSize, formatSerialNumber, formatTime } from '@/common/utils/format';
+import {
+  formatImgSize,
+  formatSerialNumber,
+  formatTime,
+} from '@/common/utils/format';
 import { highlight, _findIndex } from '@/common/utils/tools';
 import Tips from '@/components/model/tips';
 import clone from 'clone';
@@ -26,19 +30,31 @@ interface Props {
 }
 
 const MusicList: FC<Props> = (props) => {
-  const { list, loading = false, callBack, singleId, searchText = '', columnsType = true } = props;
+  const {
+    list,
+    loading = false,
+    callBack,
+    singleId,
+    searchText = '',
+    columnsType = true,
+  } = props;
   const [id, setId] = useState(0);
   const [currentItem, setCurrentItem] = useState({});
   const [isOpen, setOpen] = useState(false);
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
-  const { songList, myLikeId, likeList, currentSong, setLike, dispatch } = useContext(Context);
+  const { songList, myLikeId, likeList, currentSong, setLike, dispatch } =
+    useContext(Context);
   // 点击返回顶部或者滚动到当前播放的音乐
   const handle = () => {
     const _index = _findIndex(list, currentSong.id);
     const contentDom = document.getElementById('content') as HTMLElement;
-    const headDomHeight = document.getElementById('head')?.clientHeight as unknown as HTMLElement;
-    const tableDom = document.getElementsByClassName('ant-table-tbody')[0].childNodes as unknown as HTMLElement;
-    if (contentDom && tableDom) contentDom.scrollTop = _index === -1 ? 0 : tableDom[_index].offsetTop + headDomHeight;
+    const headDomHeight = document.getElementById('head')
+      ?.clientHeight as unknown as HTMLElement;
+    const tableDom = document.getElementsByClassName('ant-table-tbody')[0]
+      .childNodes as unknown as HTMLElement;
+    if (contentDom && tableDom)
+      contentDom.scrollTop =
+        _index === -1 ? 0 : tableDom[_index].offsetTop + headDomHeight;
   };
 
   //如果当前处于我喜欢的列表 操作喜欢/取消喜欢后 刷新列表
@@ -55,13 +71,25 @@ const MusicList: FC<Props> = (props) => {
       render: (record: any, _text: any, index: number) => {
         return (
           <div className={styles.tools}>
-            <span className={styles.serial}>{formatSerialNumber(index + 1)}</span>
+            <span className={styles.serial}>
+              {formatSerialNumber(index + 1)}
+            </span>
             {likeList.includes(record.id) ? (
-              <span onClick={() => setId(record.id)} style={{ color: '#EC4141' }} className="icon icon-like"></span>
+              <span
+                onClick={() => setId(record.id)}
+                style={{ color: '#EC4141' }}
+                className="icon icon-like"
+              ></span>
             ) : (
-              <span onClick={() => handleLike(record.id, true)} className="icon icon-unlike"></span>
+              <span
+                onClick={() => handleLike(record.id, true)}
+                className="icon icon-unlike"
+              ></span>
             )}
-            <span style={{ marginLeft: 10 }} className="icon icon-list-download"></span>
+            <span
+              style={{ marginLeft: 10 }}
+              className="icon icon-list-download"
+            ></span>
           </div>
         );
       },
@@ -78,10 +106,17 @@ const MusicList: FC<Props> = (props) => {
               __html: highlight(searchText, record.name),
             }}
           ></p>
-          {record.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
-          {record.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
+          {record.fee === 1 ? (
+            <i className={['icon icon-vip', styles.vip].join(' ')}></i>
+          ) : null}
+          {record.dl === 999000 ? (
+            <i className={['icon icon-sq', styles.sq].join(' ')}></i>
+          ) : null}
           {record.mv !== 0 ? (
-            <i onClick={() => console.log(record.mv)} className={['icon icon-mv', styles.mv].join(' ')}></i>
+            <i
+              onClick={() => console.log(record.mv)}
+              className={['icon icon-mv', styles.mv].join(' ')}
+            ></i>
           ) : null}
         </div>
       ),
@@ -123,7 +158,9 @@ const MusicList: FC<Props> = (props) => {
       key: 'dt',
       width: 80,
       sorter: (a: any, b: any) => a.dt - b.dt,
-      render: (record: any) => <span className={styles.time}>{formatTime(record.dt)}</span>,
+      render: (record: any) => (
+        <span className={styles.time}>{formatTime(record.dt)}</span>
+      ),
     },
   ];
 
@@ -131,13 +168,21 @@ const MusicList: FC<Props> = (props) => {
     {
       title: '序号',
       key: 'index',
-      render: (_text, _record, index) => index + 1,
+      render: (_text, _record, index) => (
+        <p style={{ paddingLeft: 23 }}>{index + 1}</p>
+      ),
     },
     {
       title: '专辑图',
       key: 'picUrl',
       dataIndex: 'al',
-      render: (text) => <img style={{ margin: '10px 0' }} src={formatImgSize(text.picUrl, 60, 60)} alt="" />,
+      render: (text) => (
+        <img
+          style={{ margin: '10px 0' }}
+          src={formatImgSize(text.picUrl, 60, 60)}
+          alt=""
+        />
+      ),
     },
     {
       title: '名字',
@@ -161,7 +206,7 @@ const MusicList: FC<Props> = (props) => {
       title: '时长',
       key: 'dt',
       dataIndex: 'dt',
-      render: (text) => formatTime(text),
+      render: (text) => <p style={{ paddingRight: 23 }}>{formatTime(text)}</p>,
     },
   ];
 
@@ -202,7 +247,12 @@ const MusicList: FC<Props> = (props) => {
         onClose={() => setId(0)}
         msg="确定将选中歌曲从我喜欢的音乐中删除?"
       />
-      <Contextmenu isOpen={isOpen} setOpen={setOpen} currentItem={currentItem} anchorPoint={anchorPoint} />
+      <Contextmenu
+        isOpen={isOpen}
+        setOpen={setOpen}
+        currentItem={currentItem}
+        anchorPoint={anchorPoint}
+      />
       <div id="point" className={styles.point} onClick={() => handle()}></div>
       <Table
         rowKey="id"

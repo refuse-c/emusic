@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-08-03 15:54:34
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 17:12:10
+ * @LastEditTime: 2021-08-04 22:29:46
  * @Description:
  */
 import { formatImgSize, formatTime } from '@/common/utils/format';
@@ -16,7 +16,9 @@ const columns = [
   {
     title: '序号',
     key: 'index',
-    render: (_text, _record, index) => index + 1,
+    render: (_text, _record, index) => (
+      <p style={{ paddingLeft: 30 }}>{index + 1}</p>
+    ),
   },
   {
     title: '专辑图',

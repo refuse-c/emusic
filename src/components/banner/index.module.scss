@@ -20,7 +20,7 @@
       overflow: hidden;
       border-radius: 8px;
       transform: translate(-50%, -50%);
-      transition: all 1s ease;
+      transition: none;
 
       img {
         width: 100%;
@@ -29,8 +29,9 @@
 
       &.active_left {
         left: 0;
-        z-index: 2;
+        z-index: 1;
         transform: translate(0, -50%);
+        transition: all 0.4s ease;
       }
 
       &.active {
@@ -39,6 +40,7 @@
         width: 540px;
         height: 198px;
         transform: translate(-50%, -50%);
+        transition: all 0.4s ease;
       }
 
       &.active_right {
@@ -46,6 +48,7 @@
         left: inherit;
         z-index: 2;
         transform: translate(0, -50%);
+        transition: all 0.4s ease;
       }
 
       p {
@@ -73,7 +76,8 @@
       width: 30px;
       height: 30px;
       pointer-events: none;
-      background: rgba(0, 0, 0, 0.2) url('~@images/icon_arrow.svg') center center / 20px no-repeat;
+      background: rgba(0, 0, 0, 0.2) url('~@images/icon_arrow.svg') center
+        center / 20px no-repeat;
       border-radius: 50%;
       opacity: 0;
       transform: translateY(-50%);

@@ -1,0 +1,19 @@
+.topAblum {
+  min-height: 100vh;
+  padding: 0 0 40px;
+  margin-top: -18px;
+
+  .box {
+    position: relative;
+    display: flex;
+    padding-left: 48px;
+
+    .titme {
+      position: absolute;
+      left: 30px;
+      width: 32px;
+      margin-top: 18px;
+      font-size: 16px;
+    }
+  }
+}

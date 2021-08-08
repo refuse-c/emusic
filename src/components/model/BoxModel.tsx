@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-10 16:01:12
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-30 22:33:26
+ * @LastEditTime: 2021-08-04 16:46:28
  * @Description:
  */
 import { FC } from 'react';
@@ -32,7 +32,10 @@ const BoxModel: FC<Props> = (props) => {
       onCancel={onClose && onClose}
       wrapClassName={`webModel`}
     >
-      <div className={styles.contentbox} style={{ width: '100%', height: height || 'auto' }}>
+      <div
+        className={styles.contentbox}
+        style={{ width: '100%', height: height || 'auto' }}
+      >
         {children}
       </div>
     </Modal>

@@ -136,7 +136,8 @@
         position: relative;
         width: 260px;
         height: 260px;
-        background: url('~@common/images/album.png') center center / 100% no-repeat;
+        background: url('~@common/images/album.png') center center / 100%
+          no-repeat;
         border: 10px solid #dbdbdb;
         border-radius: 50%;
 
@@ -173,16 +174,24 @@
   transition: all ease 0.5s;
 
   li {
+    height: 30px;
+    overflow: hidden;
     font-size: 12px;
     line-height: 30px;
     text-align: center;
+    opacity: 0.4;
+    transition: all 0.5s ease-out;
   }
 }
 
 // }
 
 .active {
-  color: $color;
+  height: auto !important;
+  min-height: 16px !important;
+  overflow: visible !important;
+  color: $color !important;
+  opacity: 1 !important;
 }
 
 .noLyric {

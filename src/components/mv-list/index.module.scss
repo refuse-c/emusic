@@ -5,7 +5,7 @@
 
   li {
     position: relative;
-    width: calc(25% - 15px);
+    width: calc((100% - 60px) / 4);
     margin-bottom: 14px;
     overflow: hidden;
 
@@ -68,7 +68,7 @@
     }
 
     @media screen and (max-width: 1300px) {
-      width: calc(33% - 13.33px);
+      width: calc((100% - 40px) / 3);
       overflow: hidden;
 
       &:not(:last-child) {

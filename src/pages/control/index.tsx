@@ -2,10 +2,17 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-21 20:47:56
+ * @LastEditTime: 2021-08-08 16:08:23
  * @Description:control
  */
-import { FC, useContext, useState, useEffect, useRef, useCallback } from 'react';
+import {
+  FC,
+  useContext,
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+} from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatImgSize, formatTime } from '@/common/utils/format';
@@ -13,7 +20,15 @@ import { lyric, songUrl } from '@/common/net/api';
 import { message, Slider } from 'antd';
 import Player from '@pages/player';
 import { initSong, initTime } from '@/common/utils/local';
-import { cutSong, debounce, getLocal, setLocal, _findIndex, parseLRC, getTimeIndex } from '@/common/utils/tools';
+import {
+  cutSong,
+  debounce,
+  getLocal,
+  setLocal,
+  _findIndex,
+  parseLRC,
+  getTimeIndex,
+} from '@/common/utils/tools';
 import { createHashHistory } from 'history';
 const history = createHashHistory();
 
@@ -27,14 +42,22 @@ const Control: FC = () => {
   const [model, setModel] = useState(getLocal('model') || 1);
   const [volume, setVolume] = useState(getLocal('volume') || 5);
   const [songTime, setSongTime] = useState(initTime);
-  const { isPlay, likeList, songList, currentSong, showModal, setLike, showPlayer, dispatch } = useContext(Context);
+  const {
+    isPlay,
+    likeList,
+    songList,
+    currentSong,
+    showModal,
+    setLike,
+    showPlayer,
+    dispatch,
+  } = useContext(Context);
   const { id, al, ar, name } = currentSong;
   const { currentTime, duration } = songTime;
 
   // 获取歌词
   const getLyric = async (id: number | string) => {
     if (!id) return false;
-    setLrcLoading(true);
     const res: any = await lyric({ id });
     if (res.code === 200) {
       let lrcs = '';
@@ -52,22 +75,25 @@ const Control: FC = () => {
   // 获取url
   const getSongUrl = useCallback(
     async (id: number | string) => {
+      setLrc('');
       if (!id) return false;
       const params = { id, br: '128000' };
       const res: any = await songUrl(params);
       if (res.code === 200) {
         const url =
-          (res && res.data[0] && res.data[0].url) || `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
+          (res && res.data[0] && res.data[0].url) ||
+          `https://music.163.com/song/media/outer/url?id=${id}.mp3`;
         setUrl(url);
         // blobLoad(url);
         dispatch({ type: 'isPlay', data: true });
       }
     },
-    [dispatch],
+    [dispatch]
   );
   // 暂停/播放
   const handlePaused = () => {
-    if (!songList.length) return message.info('当前无可以播放音乐,快去添加吧^v^');
+    if (!songList.length)
+      return message.info('当前无可以播放音乐,快去添加吧^v^');
     dispatch({ type: 'isPlay', data: !isPlay });
     isPlay ? refAudio.current?.pause() : refAudio.current?.play();
   };
@@ -77,7 +103,10 @@ const Control: FC = () => {
     setSongTime({ currentTime: 0, duration: 0 });
     const currentIndex = _findIndex(songList, id);
     const index = cutSong(currentIndex, songList, model, type);
-    dispatch({ type: 'currentSong', data: songList.length ? songList[index] : initSong });
+    dispatch({
+      type: 'currentSong',
+      data: songList.length ? songList[index] : initSong,
+    });
   };
 
   // 改变模式
@@ -126,7 +155,10 @@ const Control: FC = () => {
   // id改变后 获取播放地址 || 获取歌词 || 当前音乐播放完毕切换到下一首
   useEffect(() => {
     getSongUrl(id);
-    getLyric(id);
+    setLrcLoading(true);
+    setTimeout(() => {
+      getLyric(id);
+    }, 1500);
     // 播放结束切歌
     if (refAudio) {
       refAudio.current.addEventListener('ended', () => {
@@ -154,11 +186,15 @@ const Control: FC = () => {
       refAudio.current.addEventListener('timeupdate', () => {
         const { currentTime, duration, buffered } = refAudio.current;
         // 缓冲进度
-        if (buffered.length !== 0) {
+        if (buffered.length) {
           const bufferTime = buffered.end(buffered.length - 1);
           const bw = Number((bufferTime / duration).toFixed(2)) * 100;
-          const slider = document.getElementsByClassName('ant-slider-rail')[0] as HTMLElement;
-          slider.style.background = `linear-gradient(to right, #cdcdcd ${bw}%, #e5e5e5 ${100 - bw}%)`;
+          const slider = document.getElementsByClassName(
+            'ant-slider-rail'
+          )[0] as HTMLElement;
+          slider.style.background = `linear-gradient(to right, #cdcdcd ${bw}%, #e5e5e5 ${
+            100 - bw
+          }%)`;
         }
         model !== 3 && setSongTime({ currentTime, duration });
       });
@@ -168,15 +204,26 @@ const Control: FC = () => {
   const num = getTimeIndex(lrc, currentTime);
   return (
     <div className={styles.control}>
-      {showPlayer && <Player num={num} lrc={lrc} isPlay={isPlay} noLyric={noLyric} />}
+      {showPlayer && (
+        <Player num={num} lrc={lrc} isPlay={isPlay} noLyric={noLyric} />
+      )}
       {
-        <div className={styles.lrc} style={{ height: isShowlrc ? 31 : 0, bottom: isShowlrc ? 73 : 72 }}>
+        <div
+          className={styles.lrc}
+          style={{ height: isShowlrc ? 31 : 0, bottom: isShowlrc ? 73 : 72 }}
+        >
           {isShowlrc && (
-            <ul className={styles.content} style={{ transform: `translateY(${-num * 30}px)` }}>
+            <ul
+              className={styles.content}
+              style={{ transform: `translateY(${-num * 30}px)` }}
+            >
               {lrc.length ? (
                 lrc.map((item: any, index: number) => {
                   return (
-                    <li className={index === num ? styles.active : styles.bb} key={index}>
+                    <li
+                      className={index === num ? styles.active : styles.bb}
+                      key={index}
+                    >
                       {item.text}
                     </li>
                   );
@@ -200,7 +247,9 @@ const Control: FC = () => {
         <div className={styles.left}>
           <div className={styles.content}>
             <img
-              onClick={() => dispatch({ type: 'showPlayer', data: !showPlayer })}
+              onClick={() =>
+                dispatch({ type: 'showPlayer', data: !showPlayer })
+              }
               className={styles.img_box}
               src={formatImgSize(al.picUrl, 48, 48)}
               alt=""
@@ -209,14 +258,24 @@ const Control: FC = () => {
               <div>
                 <p>{name}</p>
                 {likeList.includes(id) ? (
-                  <p onClick={() => setLike(id, false)} style={{ color: '#EC4141' }} className="icon icon-like"></p>
+                  <p
+                    onClick={() => setLike(id, false)}
+                    style={{ color: '#EC4141' }}
+                    className="icon icon-like"
+                  ></p>
                 ) : (
-                  <p onClick={() => setLike(id, true)} className="icon icon-unlike"></p>
+                  <p
+                    onClick={() => setLike(id, true)}
+                    className="icon icon-unlike"
+                  ></p>
                 )}
               </div>
               <div>
                 {ar.map((item: any, index: number) => (
-                  <span key={index} onClick={() => history.push(`/singer${item.id}`)}>
+                  <span
+                    key={index}
+                    onClick={() => history.push(`/singer${item.id}`)}
+                  >
                     {item.name}
                   </span>
                 ))}
@@ -230,14 +289,30 @@ const Control: FC = () => {
       <div className={styles.center}>
         <ul className={styles.btn_group}>
           <li
-            className={`icon ${model === 1 ? 'icon-order' : model === 2 ? 'icon-random' : 'icon-cycle'}`}
+            className={`icon ${
+              model === 1
+                ? 'icon-order'
+                : model === 2
+                ? 'icon-random'
+                : 'icon-cycle'
+            }`}
             onClick={() => handleModel()}
           ></li>
-          <li className="icon icon-next" onClick={() => handlcutSong(1)} style={{ transform: 'rotate(180deg)' }}></li>
-          <li className={`icon ${isPlay ? 'icon-pause' : 'icon-play'}`} onClick={() => handlePaused()}></li>
+          <li
+            className="icon icon-next"
+            onClick={() => handlcutSong(1)}
+            style={{ transform: 'rotate(180deg)' }}
+          ></li>
+          <li
+            className={`icon ${isPlay ? 'icon-pause' : 'icon-play'}`}
+            onClick={() => handlePaused()}
+          ></li>
           <li className="icon icon-next" onClick={() => handlcutSong(2)}></li>
           <li
-            className={[isShowlrc ? styles.activeLrc : '', 'icon icon-lrc'].join(' ')}
+            className={[
+              isShowlrc ? styles.activeLrc : '',
+              'icon icon-lrc',
+            ].join(' ')}
             onClick={() => setShowLrc()}
           ></li>
         </ul>
@@ -253,13 +328,18 @@ const Control: FC = () => {
               onChange={(value: number) => changeCurrentTime(value)}
             />
           </div>
-          <div className={styles.time}>{formatTime(duration || Number(currentSong.dt) / 1000, true)}</div>
+          <div className={styles.time}>
+            {formatTime(duration || Number(currentSong.dt) / 1000, true)}
+          </div>
         </div>
       </div>
       {songList.length ? (
         <ul className={styles.right}>
           <li
-            className={[styles.quality, `icon ${isMute ? 'icon-mute' : 'icon-volume'}`].join(' ')}
+            className={[
+              styles.quality,
+              `icon ${isMute ? 'icon-mute' : 'icon-volume'}`,
+            ].join(' ')}
             onClick={() => changeMute()}
           ></li>
           <li className={styles.volume}>
@@ -274,7 +354,10 @@ const Control: FC = () => {
           <li
             className={[styles.list, 'icon icon-playlist'].join(' ')}
             onClick={(e) => {
-              dispatch({ type: 'showModal', data: showModal === 'showPlayList' ? '' : 'showPlayList' });
+              dispatch({
+                type: 'showModal',
+                data: showModal === 'showPlayList' ? '' : 'showPlayList',
+              });
               e.stopPropagation();
             }}
           ></li>

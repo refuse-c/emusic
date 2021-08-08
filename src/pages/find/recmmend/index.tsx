@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 14:06:31
+ * @LastEditTime: 2021-08-05 21:54:40
  * @Description:发现音乐-个性推荐
  */
 import { FC, useEffect, useState, useCallback } from 'react';
@@ -17,7 +17,13 @@ import RadioList from '@/components/radio-list';
 import Loading from '@/components/loading';
 import Content from '@components/view/content';
 
-import { findBanner, recommendList, exclusive, personalizedMv, recommendDj } from '@/common/net/find';
+import {
+  findBanner,
+  recommendList,
+  exclusive,
+  personalizedMv,
+  recommendDj,
+} from '@/common/net/find';
 import moment from 'moment';
 import img from '@images/icon_mask_layer4.png';
 import { newMusic, songDetail } from '@/common/net/api';
@@ -83,7 +89,12 @@ const Recommend: FC = () => {
    */
   const getRecommendList = async () => {
     const result: any = await recommendList();
-    const obj = { name: '每日推荐音乐', identifying: true, picUrl: img, day: moment().format('DD') };
+    const obj = {
+      name: '每日推荐音乐',
+      identifying: true,
+      picUrl: img,
+      day: moment().format('DD'),
+    };
     const playList = result.recommend || [];
     playList.unshift(obj);
     playList.length = 10;
@@ -107,7 +118,7 @@ const Recommend: FC = () => {
    * @Description:
    */
   const getNewMusic = useCallback(async () => {
-    const result: any = await newMusic({ type: 0 });
+    const result: any = await newMusic({ type: '0' });
     const arr = result.data || [];
     const idsArr = assemblyIds(arr);
     await getSongDetail(idsArr);

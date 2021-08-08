@@ -2,10 +2,17 @@
  * @Author: REFUSE_C
  * @Date: 2021-07-17 07:31:53
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-28 15:59:49
+ * @LastEditTime: 2021-08-04 16:44:56
  * @Description:
  */
-import { FC, useMemo, useContext, useCallback, useEffect, useState } from 'react';
+import {
+  FC,
+  useMemo,
+  useContext,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import { ControlledMenu, MenuItem, SubMenu } from '@szhsin/react-menu'; // SubMenu
 import '@szhsin/react-menu/dist/index.css';
 import { Context } from '@utils/context';
@@ -25,7 +32,15 @@ const Contextmenu: FC<Props> = (props) => {
   const [commentTotal, setCommentTotal] = useState(0);
   const { isOpen, setOpen, anchorPoint = { x: 0, y: 0 }, currentItem } = props;
   const { id = '' } = currentItem;
-  const { createList, songList, currentSong, dispatch, getLikeIds, handleShare, userInfo } = useContext(Context);
+  const {
+    createList,
+    songList,
+    currentSong,
+    dispatch,
+    getLikeIds,
+    handleShare,
+    userInfo,
+  } = useContext(Context);
   const { userId } = userInfo;
 
   // idNext为false时播放 为true时下一曲播放 默认为false
@@ -44,12 +59,13 @@ const Contextmenu: FC<Props> = (props) => {
       dispatch({ type: 'songList', data: cloneList });
       !idNext && dispatch({ type: 'currentSong', data: currentItem });
     },
-    [currentItem, currentSong.id, dispatch, id, songList],
+    [currentItem, currentSong.id, dispatch, id, songList]
   );
 
   // 复制链接
   const handleCopyLink = useCallback(() => {
-    copy(`http://music.163.com/song?id=${id}&userid=${userId}`) && message.success('链接复制成功');
+    copy(`http://music.163.com/song?id=${id}&userid=${userId}`) &&
+      message.success('链接复制成功');
   }, [id, userId]);
 
   // 获取歌曲评论
@@ -73,7 +89,7 @@ const Contextmenu: FC<Props> = (props) => {
         message.warning(msg);
       }
     },
-    [id, getLikeIds],
+    [id, getLikeIds]
   );
 
   // 过滤歌单
@@ -99,9 +115,9 @@ const Contextmenu: FC<Props> = (props) => {
           <MenuItem onClick={item.fun} key={index}>
             {item.name}
           </MenuItem>
-        ),
+        )
       ),
-    [],
+    []
   );
 
   useEffect(() => {

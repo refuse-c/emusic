@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 23:02:53
+ * @LastEditTime: 2021-08-05 22:01:12
  * @Description:发现音乐-最新音乐
  */
 import { FC, useState, useEffect, useCallback, useContext } from 'react';
@@ -15,6 +15,8 @@ import { newMusicNav, areaList, albumList } from '@/common/utils/local';
 import EllipticalNav from '@/components/elliptical-nav';
 import Navigation from '@/components/single-nav';
 import MusicList from '@components/music-list';
+import TopAblum from './component/top-album';
+
 import { formatAvailableSongs } from '@/common/utils/format';
 import { message } from 'antd';
 const Newmusic: FC = () => {
@@ -26,10 +28,11 @@ const Newmusic: FC = () => {
   const { dispatch } = useContext(Context);
 
   // 获取最新音乐列表
-  const getNewMusic = useCallback(async (type) => {
+  const getNewMusic = useCallback(async (key) => {
     setLoading(true);
     setMusicList([]);
-    const res: any = await newMusic({ type: areaList[type].key });
+    const type = areaList[key].key;
+    const res: any = await newMusic({ type: type === '-1' ? '0' : type });
     const arr = res.data || [];
     const idsArr = assemblyIds(arr);
     await getSongDetail(idsArr);
@@ -84,8 +87,8 @@ const Newmusic: FC = () => {
   };
 
   useEffect(() => {
-    getNewMusic(type);
-  }, [getNewMusic, type]);
+    !state && getNewMusic(type);
+  }, [getNewMusic, type, state]);
 
   return (
     <div className={styles.newmusic}>
@@ -112,7 +115,7 @@ const Newmusic: FC = () => {
         {!state ? (
           <MusicList list={musicList} columnsType={false} loading={loading} />
         ) : (
-          '新碟上架'
+          <TopAblum areaType={type} status={albumStatus} />
         )}
       </Content>
     </div>

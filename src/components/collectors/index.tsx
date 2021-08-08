@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-06-23 15:09:52
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-16 18:15:04
+ * @LastEditTime: 2021-08-04 16:44:14
  * @Description:
  */
 import { FC, useState, useEffect } from 'react';
@@ -22,7 +22,11 @@ const Collectors: FC<Props> = (props) => {
   const [offset, setOffset] = useState(1);
 
   const getPlaylistSubscribers = async (id, offset) => {
-    const res: any = await playlistSubscribers({ id, offset: (offset - 1) * 100, limit });
+    const res: any = await playlistSubscribers({
+      id,
+      offset: (offset - 1) * 100,
+      limit,
+    });
     console.log(res);
     if (res.code === 200) setData(res);
   };
