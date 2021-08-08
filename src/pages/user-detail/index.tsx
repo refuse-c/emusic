@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-07-08 16:14:44
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 18:23:36
+ * @LastEditTime: 2021-08-08 20:45:12
  * @Description:用户详情页
  */
 
@@ -16,6 +16,7 @@ import { message } from 'antd';
 import { playlist } from '@/common/net/playList';
 import PlayList from '@/components/song-list';
 import Arrange from '@/components/arrange';
+import { isMe } from '@/common/utils/tools';
 
 interface Item {
   id: number;
@@ -37,7 +38,6 @@ const UserDetail: FC = (props: any) => {
   const [collect, setCollect] = useState([]);
   const { userInfo } = useContext(Context);
   const { userId, nickname } = userInfo;
-  const isMe = Number(uid) === userId;
   // 获取用户信息
   const getUserDetail = async (uid) => {
     const res: any = await userDetail({ uid });
@@ -55,18 +55,28 @@ const UserDetail: FC = (props: any) => {
   };
 
   // 获取当前登录用户的歌单
-  const getPlaylist = async (uid: number, userId: string | number, nickname: string) => {
+  const getPlaylist = async (
+    uid: number,
+    userId: string | number,
+    nickname: string
+  ) => {
     const res: any = await playlist({ uid });
     if (res.code === 200) {
       const allList = res.playlist || [];
       allList.map((item: Item) => {
         item.type = 1;
         item.path = `/single${item.id}/${'歌单'}`;
-        item.name = item.userId === userId ? item.name.replace(nickname, '我') : item.name;
+        item.name = isMe(item.userId, userId)
+          ? item.name.replace(nickname, '我')
+          : item.name;
         return item;
       });
-      let createList = allList.filter((item: Item) => item.privacy !== 10 && item.userId === Number(uid));
-      let collectList = allList.filter((item: Item) => item.privacy !== 10 && item.userId !== Number(uid));
+      let createList = allList.filter(
+        (item: Item) => item.privacy !== 10 && isMe(item.userId, uid)
+      );
+      let collectList = allList.filter(
+        (item: Item) => item.privacy !== 10 && !isMe(item.userId, uid)
+      );
       setCreate(createList);
       setCollect(collectList);
     }
@@ -79,7 +89,11 @@ const UserDetail: FC = (props: any) => {
   return (
     <div className={styles.userDetail}>
       <Content padding={'0 30px'} isFull>
-        <Head data={info || {}} getFollow={getFollow} isMe={isMe} />
+        <Head
+          data={info || {}}
+          getFollow={getFollow}
+          isMe={isMe(uid, userId)}
+        />
       </Content>
       {!!create.length && (
         <div className={styles.title}>

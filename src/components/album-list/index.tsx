@@ -2,14 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-04 21:58:34
+ * @LastEditTime: 2021-08-08 21:12:29
  * @Description:专辑
  */
 import { formatImgSize } from '@/common/utils/format';
+import { jumpPage } from '@/common/utils/tools';
 import { FC } from 'react';
 import styles from './index.module.scss';
-import { createHashHistory } from 'history';
-const history = createHashHistory();
 interface Props {
   min?: boolean; // 控制最少显示几个 true:4个  false:5个
   layout?: string;
@@ -26,12 +25,12 @@ const Album: FC<Props> = (props) => {
   return (
     <ul className={[styles.album, cls].join(' ')}>
       {list.map((item: any, index: number) => {
-        const pathName = `/single${item.id}/${'专辑'}`;
+        const pathName = `/single${item.id}/专辑`;
         return (
           <li
             key={index}
             className={itemCls}
-            onClick={() => history.push(pathName)}
+            onClick={() => jumpPage(pathName)}
           >
             <div className={styles.content}>
               <img src={formatImgSize(item.picUrl, size, size)} alt="" />

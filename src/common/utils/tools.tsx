@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-01 12:26:44
+ * @LastEditTime: 2021-08-08 21:20:45
  * @Description:
  */
 
@@ -40,10 +40,17 @@ interface Item {
 export const renderArtists = (item: any) => {
   return (
     <div className={styles.artists}>
-      {item.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
-      {item.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
+      {item.fee === 1 ? (
+        <i className={['icon icon-vip', styles.vip].join(' ')}></i>
+      ) : null}
+      {item.dl === 999000 ? (
+        <i className={['icon icon-sq', styles.sq].join(' ')}></i>
+      ) : null}
       {item.mv !== 0 ? (
-        <i onClick={() => console.log(item.mv)} className={['icon icon-mv', styles.mv].join(' ')}></i>
+        <i
+          onClick={() => console.log(item.mv)}
+          className={['icon icon-mv', styles.mv].join(' ')}
+        ></i>
       ) : null}
       <div className={styles.artistsName}>
         {item.ar.map((item: Item, index: number) => {
@@ -205,7 +212,9 @@ export const parseLRC = (lrc: string): Array<LRC> => {
     const seconds = Number(match[2]) || 0;
     const milliseconds = Number(match[3]) || 0;
     const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds + offset;
-    const text = (match[4] as string).replace(regTime, '').replace(regTimeCompatible, '');
+    const text = (match[4] as string)
+      .replace(regTime, '')
+      .replace(regTimeCompatible, '');
 
     // 优化：不要显示空行
     if (!text) return;
@@ -252,7 +261,10 @@ export const getTimeIndex = (timeArr: any | [], time: number) => {
  * @Description:
  */
 export const highlight = (text: string, searchText: string) => {
-  return searchText.replace(new RegExp(text, 'gi'), (val: string) => `<span>${val}</span>`);
+  return searchText.replace(
+    new RegExp(text, 'gi'),
+    (val: string) => `<span>${val}</span>`
+  );
 };
 
 /**
@@ -261,3 +273,13 @@ export const highlight = (text: string, searchText: string) => {
  * @Description:
  */
 export const jumpPage = (pathName: string) => history.push(pathName);
+
+/**
+ * @name: 是否是登录用户
+ * @param {number} v1
+ * @param {number} v2
+ * @Description:
+ */
+export const isMe = (v1: number | string, v2: number | string) => {
+  return !!(v1 && v2 && Number(v1) === Number(v2));
+};

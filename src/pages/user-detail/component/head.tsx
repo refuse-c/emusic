@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 21:04:41
+ * @LastEditTime: 2021-08-08 20:44:00
  * @Description:用户详情-头部
  */
 import { formatAllAuthTypes } from '@/common/utils/format';
@@ -55,13 +55,25 @@ const Head: FC<Props> = (props: any) => {
                   </li>
                 ))}
               <li className={styles.level}>Lv{level}</li>
-              {!!gender && <li className={gender === 1 ? styles.genderMan : styles.genderWomen}></li>}
+              {!!gender && (
+                <li
+                  className={
+                    gender === 1 ? styles.genderMan : styles.genderWomen
+                  }
+                ></li>
+              )}
             </ul>
             <ul className={styles.list2}>
-              {artistId && <li onClick={() => jumpPage(`/singer${artistId}`)}>歌手页</li>}
+              {artistId && (
+                <li onClick={() => jumpPage(`/singer${artistId}`)}>歌手页</li>
+              )}
               {isMe && <li>编辑个人信息</li>}
               {!isMe && <li>发私信</li>}
-              {!isMe && <li onClick={() => getFollow(followed ? 0 : 1)}>{followed ? '已关注' : '关注'}</li>}
+              {!isMe && (
+                <li onClick={() => getFollow(followed ? 0 : 1)}>
+                  {followed ? '已关注' : '关注'}
+                </li>
+              )}
               {!isMe && <li className={styles.more}>more</li>}
             </ul>
           </div>
@@ -99,7 +111,12 @@ const Head: FC<Props> = (props: any) => {
               )}
             </li>
             <li className={styles.personal}>
-              {<ReactMarkdown remarkPlugins={[]} children={`**个人介绍：** ${signature || '暂无介绍'}`} />}
+              {
+                <ReactMarkdown
+                  remarkPlugins={[]}
+                  children={`**个人介绍：** ${signature || '暂无介绍'}`}
+                />
+              }
             </li>
           </ul>
         </div>
