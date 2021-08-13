@@ -1,26 +1,27 @@
 # script:npm config set registry  http://registry.npm.taobao.org && npm install && npm run  pack
+language: node_js
+# nodejs版本
 
-language: node_js # 构建所需的语言环境
-node_js:
-  - 'v11.14.0' # 对应的版本
-branches:
-  only:
-    - master # 构建的分支
+# Travis-CI Caching
 cache:
   directories:
-    - node_modules # 依赖缓存的目录
-before_install:
-  - export TZ='Asia/Shanghai' # 设置时区
+    - node_modules
+
+# S: Build Lifecycle
 install:
-  - npm install -g electron-builder # 安装编译工具
+  - npm install
+
+before_script:
+
+# 无其他依赖项所以执行npm run build 构建就行了
 script:
-  - electron-builder
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN # github 上的token环境变量
-  local-dir: ./_book/ ## 根据情况自定义到静态文件输出目录
-  target-branch: gh-pages
-  verbose: true
-  on:
-    branch: master
+  - npm run pack
+
+#指定分支，只有指定的分支提交时才会运行脚本
+branches:
+  only:
+    - master
+env:
+  global:
+    # 我将其添加到了travis-ci的环境变量中
+    #- GH_REF: github.com/yimogit/metools.git
