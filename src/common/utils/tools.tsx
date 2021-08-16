@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-08 21:20:45
+ * @LastEditTime: 2021-08-13 21:54:31
  * @Description:
  */
 
@@ -38,6 +38,7 @@ interface Item {
   name: string;
 }
 export const renderArtists = (item: any) => {
+  const { ar = [] } = item;
   return (
     <div className={styles.artists}>
       {item.fee === 1 ? (
@@ -53,7 +54,7 @@ export const renderArtists = (item: any) => {
         ></i>
       ) : null}
       <div className={styles.artistsName}>
-        {item.ar.map((item: Item, index: number) => {
+        {ar.map((item: Item, index: number) => {
           return (
             <span key={index} title={item.name}>
               {item.name}

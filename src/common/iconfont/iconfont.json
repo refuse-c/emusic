@@ -6,6 +6,181 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "15224865",
+      "name": "menu-enabled",
+      "font_class": "enabled",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "23406205",
+      "name": "binding-01",
+      "font_class": "binding-01",
+      "unicode": "e628",
+      "unicode_decimal": 58920
+    },
+    {
+      "icon_id": "23406206",
+      "name": "store-01",
+      "font_class": "store-01",
+      "unicode": "e629",
+      "unicode_decimal": 58921
+    },
+    {
+      "icon_id": "23406207",
+      "name": "myimfromation-01",
+      "font_class": "myimfromation-01",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "23406208",
+      "name": "quit-01",
+      "font_class": "quit-01",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "23406209",
+      "name": "class-01",
+      "font_class": "class-01",
+      "unicode": "e636",
+      "unicode_decimal": 58934
+    },
+    {
+      "icon_id": "23406210",
+      "name": "signin-01",
+      "font_class": "signin-01",
+      "unicode": "e637",
+      "unicode_decimal": 58935
+    },
+    {
+      "icon_id": "23406211",
+      "name": "arrow-0806",
+      "font_class": "arrow-0806",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
+      "icon_id": "23406212",
+      "name": "inform-01",
+      "font_class": "inform-01",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "23406213",
+      "name": "unaware-01",
+      "font_class": "unaware-01",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "23406214",
+      "name": "myvip-01",
+      "font_class": "myvip-01",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "23406215",
+      "name": "new-01",
+      "font_class": "new-01",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "23406216",
+      "name": "copylink-01",
+      "font_class": "copylink-01",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "23406217",
+      "name": "ilike-01",
+      "font_class": "ilike-01",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "23406218",
+      "name": "blacklist-01",
+      "font_class": "blacklist-01",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "23406219",
+      "name": "play-01",
+      "font_class": "play-01",
+      "unicode": "e641",
+      "unicode_decimal": 58945
+    },
+    {
+      "icon_id": "23406220",
+      "name": "singer-01",
+      "font_class": "singer-01",
+      "unicode": "e642",
+      "unicode_decimal": 58946
+    },
+    {
+      "icon_id": "23406221",
+      "name": "collect-01",
+      "font_class": "collect-01",
+      "unicode": "e643",
+      "unicode_decimal": 58947
+    },
+    {
+      "icon_id": "23406222",
+      "name": "compile-01",
+      "font_class": "compile-01",
+      "unicode": "e644",
+      "unicode_decimal": 58948
+    },
+    {
+      "icon_id": "23406223",
+      "name": "refuse-01",
+      "font_class": "refuse-01",
+      "unicode": "e645",
+      "unicode_decimal": 58949
+    },
+    {
+      "icon_id": "23406224",
+      "name": "comment-01",
+      "font_class": "comment-01",
+      "unicode": "e647",
+      "unicode_decimal": 58951
+    },
+    {
+      "icon_id": "23406225",
+      "name": "download-01",
+      "font_class": "download-01",
+      "unicode": "e648",
+      "unicode_decimal": 58952
+    },
+    {
+      "icon_id": "23406226",
+      "name": "seealbum-01",
+      "font_class": "seealbum-01",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
+      "icon_id": "23406227",
+      "name": "share-01",
+      "font_class": "share-01",
+      "unicode": "e64a",
+      "unicode_decimal": 58954
+    },
+    {
+      "icon_id": "23406228",
+      "name": "next-01",
+      "font_class": "next-01",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
       "icon_id": "10680421",
       "name": "more read",
       "font_class": "more",

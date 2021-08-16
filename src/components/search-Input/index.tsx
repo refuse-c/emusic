@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 20:42:35
+ * @LastEditTime: 2021-08-14 21:35:34
  * @Description:搜索框组件
  */
 import { FC, useState, useEffect, useContext } from 'react';
@@ -57,7 +57,6 @@ const SearchInput: FC = () => {
     clearInterval(Number(timer));
     getDefaultVal();
     timer = setInterval(() => {
-      console.log(11);
       getDefaultVal();
     }, 30 * 6 * 10000);
     return () => {

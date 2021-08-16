@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 14:28:42
+ * @LastEditTime: 2021-08-13 21:56:11
  * @Description:歌单组件
  */
 import { FC } from 'react';
@@ -53,8 +53,12 @@ const SongList: FC<Props> = (props) => {
           creator,
           trackCount,
         } = item;
-        const pathName = identifying ? '/recommendSong' : `/single${item.id}/${'歌单'}`;
-        const src = identifying ? picUrl || coverImgUrl : formatImgSize(picUrl || coverImgUrl, size, size);
+        const pathName = identifying
+          ? '/recommendSong'
+          : `/single${item.id}/${'歌单'}`;
+        const src = identifying
+          ? picUrl || coverImgUrl
+          : formatImgSize(picUrl || coverImgUrl, size, size);
         return (
           <li key={index} className={itemCls}>
             <div className={styles.left} onClick={() => history.push(pathName)}>

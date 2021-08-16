@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-01 23:33:52
+ * @LastEditTime: 2021-08-14 02:37:43
  * @Description:最新音乐组件
  */
 import { formatImgSize } from '@/common/utils/format';
@@ -64,7 +64,11 @@ const Songs: FC<Props> = (props) => {
             onDoubleClick={() => playAll(index)}
             className={[styles.item, cls].join(' ')}
           >
-            <div className={styles.img} onClick={() => addPlay(item)} style={{ backgroundImage }}></div>
+            <div
+              className={styles.img}
+              onClick={() => addPlay(item)}
+              style={{ backgroundImage }}
+            ></div>
             <div className={styles.info}>
               <div className={styles.name}>
                 {name}

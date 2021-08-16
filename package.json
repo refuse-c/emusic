@@ -14,6 +14,7 @@
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
+    "mys-react": "^1.0.0",
     "prettier": "^2.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -72,7 +73,7 @@
     "prepack": "react-app-rewired build",
     "pack:dir": "electron-builder --dir",
     "starts": "concurrently \"set BROWSER=none &&  react-app-rewired start\" \"electron .\" ",
-    "dev": "concurrently \" wait-on http://localhost:3000 && electron . \" \" cross-env BROWSER=none npm start \" ",
+    "dev": "set PORT=3006  && concurrently \" wait-on http://localhost:3006 && electron . \" \" cross-env BROWSER=none npm start \" ",
     "packager": "electron-packager ./build emusic –out out_dir --arch=x64 --overwrite --ignore=node_modules"
   },
   "eslintConfig": {

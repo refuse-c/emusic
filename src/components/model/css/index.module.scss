@@ -36,6 +36,32 @@
   }
 }
 
+// dragsort
+
+.dragsort {
+  padding-bottom: 40px;
+
+  .msg {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .item {
+    display: flex;
+    margin: 0 32px !important;
+    font-size: 15px;
+    line-height: 40px;
+    color: #909091;
+    border-bottom: 1px solid #e5e6ea;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      cursor: move;
+    }
+  }
+}
+
 // login
 .login {
   width: 350px;

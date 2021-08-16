@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 00:08:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-29 00:13:51
+ * @LastEditTime: 2021-08-13 20:25:08
  * @Description:
  */
 const { app, BrowserWindow, globalShortcut } = require('electron');
@@ -37,7 +37,9 @@ function createWindow() {
   };
   mainWindow = new BrowserWindow(windowOptions); // 加载窗口配置文件
   mainWindow.setMinimumSize(1022, 670); // 设置最小宽高
-  mainWindow.loadURL(isDev ? 'http://localhost:3000' : `file://${__dirname}/../build/index.html`);
+  mainWindow.loadURL(
+    isDev ? 'http://localhost:3006' : `file://${__dirname}/../build/index.html`
+  );
   isDev && mainWindow.webContents.openDevTools();
   app.on('window-all-closed', () => app.quit());
   mainWindow.on('closed', () => (mainWindow = null));
