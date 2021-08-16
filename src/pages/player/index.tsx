@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-09 22:37:32
+ * @LastEditTime: 2021-08-16 22:50:01
  * @Description:播放页
  */
 
@@ -15,7 +15,13 @@ privilege.cs: 云盘
 privilege.st：-200无版权
  */
 
-import { FC, useState, useEffect, useContext } from 'react';
+import {
+  useState,
+  useEffect,
+  useContext,
+  // forwardRef,
+  // useImperativeHandle,
+} from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import Content from '@components/view/content';
@@ -31,17 +37,22 @@ interface Props {
   lrc: [];
   isPlay: boolean;
   noLyric: any;
+  refAudio: any;
 }
 let T1: NodeJS.Timeout;
-const Player: FC<Props> = (props) => {
-  const { num, lrc, isPlay, noLyric } = props;
+const Player = (props: Props) => {
+  // ref: any
+  const { num, lrc, isPlay, noLyric, refAudio } = props;
   const { songList, currentSong, showPlayer, dispatch } = useContext(Context);
   const { al, ar, name, id } = currentSong;
   const [rotate, setRotate] = useState(0);
   const [isShowMore, setIsShowMore] = useState(true);
   const [simePlaylist, setSimePlaylist] = useState([]);
   const [musicList, setMusicList] = useState<any>([]);
-
+  //设置暴露给父组件的值
+  // useImperativeHandle(ref, () => ({
+  //   refPlayer: lrcScroll,
+  // }));
   // 获取相似歌单
   const getPaylistSimi = async (id) => {
     const res: any = await playlistSimi({ id });
@@ -69,6 +80,32 @@ const Player: FC<Props> = (props) => {
     }
   };
 
+  // 播放单曲
+  const addPlay = (item: any) => {
+    let cloneList = clone(songList);
+    if (cloneList.length) {
+      let _index1 = _findIndex(cloneList, item.id); // 查看当前歌曲是否在歌单里面
+      let _index2 = _findIndex(cloneList, currentSong.id); // 获取当前播放音乐的下标
+      if (_index1 === -1) {
+        cloneList.splice(_index2 + 1, 0, item);
+      }
+    } else {
+      cloneList = cloneList.concat(item);
+    }
+    dispatch({ type: 'currentSong', data: item });
+    dispatch({ type: 'songList', data: cloneList });
+  };
+
+  // 歌词滚动
+  const lrcScroll = (num) => {
+    const el = document.getElementById(`line${num}`);
+    el &&
+      el.scrollIntoView({
+        behavior: 'auto',
+        block: 'center',
+      });
+  };
+
   useEffect(() => {
     if (isPlay) {
       clearInterval(T1);
@@ -90,27 +127,18 @@ const Player: FC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
-  // 播放单曲
-  const addPlay = (item: any) => {
-    let cloneList = clone(songList);
-    if (cloneList.length) {
-      let _index1 = _findIndex(cloneList, item.id); // 查看当前歌曲是否在歌单里面
-      let _index2 = _findIndex(cloneList, currentSong.id); // 获取当前播放音乐的下标
-      if (_index1 === -1) {
-        cloneList.splice(_index2 + 1, 0, item);
-      }
-    } else {
-      cloneList = cloneList.concat(item);
-    }
-    dispatch({ type: 'currentSong', data: item });
-    dispatch({ type: 'songList', data: cloneList });
-  };
+  useEffect(() => {
+    lrcScroll(num);
+  }, [num]);
 
   return (
     <div className={styles.player}>
       <Content isFull={true} padding={30} maxWidth={1600}>
         <div className={styles.content}>
-          <div className={styles.isShowMore} onClick={() => setIsShowMore(!isShowMore)}>
+          <div
+            className={styles.isShowMore}
+            onClick={() => setIsShowMore(!isShowMore)}
+          >
             OFF
           </div>
           <div className={styles.name}>
@@ -123,22 +151,35 @@ const Player: FC<Props> = (props) => {
           </div>
           <div className={styles.info}>
             <div className={styles.info_box}>
-              <div className={styles.album_box} style={{ transform: `rotate(${rotate}deg)` }}>
+              <div
+                className={styles.album_box}
+                style={{ transform: `rotate(${rotate}deg)` }}
+              >
                 <img src={formatImgSize(al.picUrl, 170, 170)} alt="" />
               </div>
             </div>
             <div className={styles.info_box}>
-              <ul className={styles.lrc_list} style={{ transform: `translateY(${-num * 30}px)` }}>
+              <ul className={styles.lrc_list}>
                 {lrc.length > 0 ? (
                   lrc.map((item: any, index: number) => {
                     return (
-                      <li className={index === num ? styles.active : styles.bb} key={index}>
+                      <li
+                        key={index}
+                        id={`line${index}`}
+                        onClick={() => {
+                          if (index !== num)
+                            refAudio.current.currentTime = item.time / 1000;
+                        }}
+                        className={index === num ? styles.active : ''}
+                      >
                         {item.text}
                       </li>
                     );
                   })
                 ) : (
-                  <li className={styles.noLyric}>{noLyric()}</li>
+                  <li id="line0" className={styles.noLyric}>
+                    {noLyric()}
+                  </li>
                 )}
               </ul>
             </div>
@@ -155,10 +196,20 @@ const Player: FC<Props> = (props) => {
                             key={index}
                             onClick={() => {
                               history.push(pathName);
-                              dispatch({ type: 'showPlayer', data: !showPlayer });
+                              dispatch({
+                                type: 'showPlayer',
+                                data: !showPlayer,
+                              });
                             }}
                           >
-                            <img src={formatImgSize(item.creator.avatarUrl, 30, 30)} alt="" />
+                            <img
+                              src={formatImgSize(
+                                item.creator.avatarUrl,
+                                30,
+                                30
+                              )}
+                              alt=""
+                            />
                             <p>{item.name}</p>
                           </li>
                         );
@@ -173,7 +224,10 @@ const Player: FC<Props> = (props) => {
                       {musicList.map((item: any, index) => {
                         return (
                           <li key={index} onClick={() => addPlay(item)}>
-                            <img src={formatImgSize(item.al.picUrl, 30, 30)} alt="" />
+                            <img
+                              src={formatImgSize(item.al.picUrl, 30, 30)}
+                              alt=""
+                            />
                             <p>{item.name}</p>
                           </li>
                         );
@@ -189,5 +243,5 @@ const Player: FC<Props> = (props) => {
     </div>
   );
 };
-
+// const Player = forwardRef(Player);
 export default Player;

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-08 16:08:23
+ * @LastEditTime: 2021-08-16 22:34:56
  * @Description:control
  */
 import {
@@ -31,8 +31,8 @@ import {
 } from '@/common/utils/tools';
 import { createHashHistory } from 'history';
 const history = createHashHistory();
-
 const Control: FC = () => {
+  // let refPlayer = useRef(null) as React.RefObject<any>;
   let refAudio = useRef(null) as React.RefObject<any>;
   const [url, setUrl] = useState('');
   const [isMute, setIsMute] = useState(false);
@@ -171,8 +171,7 @@ const Control: FC = () => {
   // 监听音乐的播放、暂停、错误
   useEffect(() => {
     if (refAudio) {
-      refAudio.current.addEventListener('error', (e: any) => {
-        console.log(e);
+      refAudio.current.addEventListener('error', () => {
         getSongUrl(id);
         getLyric(id);
       });
@@ -205,7 +204,14 @@ const Control: FC = () => {
   return (
     <div className={styles.control}>
       {showPlayer && (
-        <Player num={num} lrc={lrc} isPlay={isPlay} noLyric={noLyric} />
+        <Player
+          num={num}
+          lrc={lrc}
+          isPlay={isPlay}
+          noLyric={noLyric}
+          refAudio={refAudio}
+          // ref={refPlayer}
+        />
       )}
       {
         <div
@@ -346,6 +352,7 @@ const Control: FC = () => {
             <Slider
               min={0}
               max={100}
+              vertical={true}
               tipFormatter={null}
               value={!isMute ? volume : 0}
               onChange={(value: number) => changeVolume(value)}

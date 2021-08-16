@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-14 16:55:22
+ * @LastEditTime: 2021-08-16 21:29:22
  * @Description:发现音乐-个性推荐
  */
 import {
@@ -75,41 +75,36 @@ const Recommend: FC = () => {
           {
             title: '推荐歌单',
             margin: '10px 0',
-            list: data.recommend || [],
             path: '/find/playlist',
-            Component: PlayList, //  <PlayList list={playList || []} />,
-            fixedNum: true,
+            Component: <PlayList list={data.recommend || []} fixedNum={true} />,
           },
           {
             title: '独家放送',
             margin: '10px 0',
-            list: data.exclusives || [],
             path: '/exclusive',
-            Component: ExclusiveList, //  <ExclusiveList list={exclusiveList} isAdaptive={false} />,
-            isAdaptive: false,
+            Component: (
+              <ExclusiveList list={data.exclusives || []} isAdaptive={false} />
+            ),
           },
           {
             title: '最新音乐',
             margin: '10px 0',
-            list: data.newmusic || [],
             path: '/find/newmusic',
-            Component: Songs, //  <Songs list={newMusicList} />,
+            Component: <Songs list={data.newmusic || []} />,
           },
           {
             title: '推荐MV',
             margin: '10px 0',
-            list: data.mv || [],
             path: '/video/mv',
-            Component: MvList, //  <MvList list={mvList} hideLst={true} showTips={true} />,
-            hideLst: true,
-            showTips: true,
+            Component: (
+              <MvList list={data.mv || []} hideLst={true} showTips={true} />
+            ),
           },
           {
             title: '主播电台',
             margin: '10px 0',
-            list: data.dj,
             path: '/find/radio',
-            Component: RadioList, //  <RadioList list={radioList} />,
+            Component: <RadioList list={data.dj || []} />,
           },
         ];
         setArray(array);
@@ -135,28 +130,11 @@ const Recommend: FC = () => {
       />
       {!!banners.length && <Banner list={banners || []} />}
       {array.map((item, index) => {
-        const {
-          path,
-          list,
-          title,
-          hideLst,
-          showTips,
-          fixedNum,
-          isAdaptive,
-          Component,
-        } = item;
+        const { path, title, Component } = item;
         return (
           <div key={index}>
             <Title title={title} margin={'10px  0'} path={path} />
-            {
-              <Component
-                list={list || []}
-                fixedNum={fixedNum}
-                isAdaptive={isAdaptive}
-                hideLst={hideLst}
-                showTips={showTips}
-              />
-            }
+            {Component}
           </div>
         );
       })}
