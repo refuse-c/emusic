@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-16 22:34:56
+ * @LastEditTime: 2021-08-16 23:02:49
  * @Description:control
  */
 import {
@@ -352,7 +352,6 @@ const Control: FC = () => {
             <Slider
               min={0}
               max={100}
-              vertical={true}
               tipFormatter={null}
               value={!isMute ? volume : 0}
               onChange={(value: number) => changeVolume(value)}
