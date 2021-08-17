@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-16 22:50:01
+ * @LastEditTime: 2021-08-17 23:29:22
  * @Description:播放页
  */
 
@@ -26,59 +26,30 @@ import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import Content from '@components/view/content';
 import { formatImgSize } from '@/common/utils/format';
-import { simiSong, songDetail } from '@/common/net/api';
-import { playlistSimi } from '@/common/net/playList';
-import { createHashHistory } from 'history';
 import clone from 'clone';
-import { assemblyIds, mergeData, _findIndex } from '@/common/utils/tools';
-const history = createHashHistory();
+import { jumpPage, _findIndex } from '@/common/utils/tools';
 interface Props {
   num: number;
   lrc: [];
   isPlay: boolean;
   noLyric: any;
   refAudio: any;
+  simePlaylist: [];
+  musicList: [];
 }
 let T1: NodeJS.Timeout;
 const Player = (props: Props) => {
   // ref: any
-  const { num, lrc, isPlay, noLyric, refAudio } = props;
+  const { num, lrc, isPlay, noLyric, refAudio, simePlaylist, musicList } =
+    props;
   const { songList, currentSong, showPlayer, dispatch } = useContext(Context);
-  const { al, ar, name, id } = currentSong;
+  const { al, ar, name } = currentSong;
   const [rotate, setRotate] = useState(0);
   const [isShowMore, setIsShowMore] = useState(true);
-  const [simePlaylist, setSimePlaylist] = useState([]);
-  const [musicList, setMusicList] = useState<any>([]);
   //设置暴露给父组件的值
   // useImperativeHandle(ref, () => ({
   //   refPlayer: lrcScroll,
   // }));
-  // 获取相似歌单
-  const getPaylistSimi = async (id) => {
-    const res: any = await playlistSimi({ id });
-    if (res.code === 200) setSimePlaylist(res.playlists || []);
-  };
-
-  // 获取相似音乐
-  const getSimiSong = async (id) => {
-    const res: any = await simiSong({ id });
-    if (res.code === 200 && res.songs.length) {
-      const idsArr = assemblyIds(res.songs);
-      await getSongDetail(idsArr);
-    } else {
-      setMusicList([]);
-    }
-  };
-
-  // 批量获取歌曲详情
-  const getSongDetail = async (ids: string) => {
-    const res: any = await songDetail({ ids });
-    if (res.code === 200) {
-      const { songs, privileges } = res;
-      const musicList = mergeData(songs, privileges); // 合并数据
-      setMusicList(musicList);
-    }
-  };
 
   // 播放单曲
   const addPlay = (item: any) => {
@@ -120,12 +91,6 @@ const Player = (props: Props) => {
       clearInterval(T1);
     };
   }, [isPlay, rotate]);
-
-  useEffect(() => {
-    getPaylistSimi(id);
-    getSimiSong(id);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
 
   useEffect(() => {
     lrcScroll(num);
@@ -190,12 +155,13 @@ const Player = (props: Props) => {
                     <h2>包含这首歌的歌单</h2>
                     <ul>
                       {simePlaylist.map((item: any, index) => {
-                        const pathName = `/single${item.id}/${'歌单'}`;
+                        const { id, creator, name } = item;
+                        const pathName = `/single${id}/${'歌单'}`;
                         return (
                           <li
                             key={index}
                             onClick={() => {
-                              history.push(pathName);
+                              jumpPage(pathName);
                               dispatch({
                                 type: 'showPlayer',
                                 data: !showPlayer,
@@ -203,14 +169,10 @@ const Player = (props: Props) => {
                             }}
                           >
                             <img
-                              src={formatImgSize(
-                                item.creator.avatarUrl,
-                                30,
-                                30
-                              )}
+                              src={formatImgSize(creator.avatarUrl, 30, 30)}
                               alt=""
                             />
-                            <p>{item.name}</p>
+                            <p>{name}</p>
                           </li>
                         );
                       })}

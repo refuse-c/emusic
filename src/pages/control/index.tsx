@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-16 23:02:49
+ * @LastEditTime: 2021-08-17 23:26:03
  * @Description:control
  */
 import {
@@ -16,7 +16,7 @@ import {
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatImgSize, formatTime } from '@/common/utils/format';
-import { lyric, songUrl } from '@/common/net/api';
+import { lyric, simiSong, songDetail, songUrl } from '@/common/net/api';
 import { message, Slider } from 'antd';
 import Player from '@pages/player';
 import { initSong, initTime } from '@/common/utils/local';
@@ -28,8 +28,11 @@ import {
   _findIndex,
   parseLRC,
   getTimeIndex,
+  mergeData,
+  assemblyIds,
 } from '@/common/utils/tools';
 import { createHashHistory } from 'history';
+import { playlistSimi } from '@/common/net/playList';
 const history = createHashHistory();
 const Control: FC = () => {
   // let refPlayer = useRef(null) as React.RefObject<any>;
@@ -42,6 +45,8 @@ const Control: FC = () => {
   const [model, setModel] = useState(getLocal('model') || 1);
   const [volume, setVolume] = useState(getLocal('volume') || 5);
   const [songTime, setSongTime] = useState(initTime);
+  const [simePlaylist, setSimePlaylist] = useState<any>([]);
+  const [musicList, setMusicList] = useState<any>([]);
   const {
     isPlay,
     likeList,
@@ -54,6 +59,33 @@ const Control: FC = () => {
   } = useContext(Context);
   const { id, al, ar, name } = currentSong;
   const { currentTime, duration } = songTime;
+
+  // 获取相似歌单
+  const getPaylistSimi = async (id) => {
+    const res: any = await playlistSimi({ id });
+    if (res.code === 200) setSimePlaylist(res.playlists || []);
+  };
+
+  // 获取相似音乐
+  const getSimiSong = async (id) => {
+    const res: any = await simiSong({ id });
+    if (res.code === 200 && res.songs.length) {
+      const idsArr = assemblyIds(res.songs);
+      await getSongDetail(idsArr);
+    } else {
+      setMusicList([]);
+    }
+  };
+
+  // 批量获取歌曲详情
+  const getSongDetail = async (ids: string) => {
+    const res: any = await songDetail({ ids });
+    if (res.code === 200) {
+      const { songs, privileges } = res;
+      const musicList = mergeData(songs, privileges); // 合并数据
+      setMusicList(musicList);
+    }
+  };
 
   // 获取歌词
   const getLyric = async (id: number | string) => {
@@ -155,6 +187,8 @@ const Control: FC = () => {
   // id改变后 获取播放地址 || 获取歌词 || 当前音乐播放完毕切换到下一首
   useEffect(() => {
     getSongUrl(id);
+    getPaylistSimi(id);
+    getSimiSong(id);
     setLrcLoading(true);
     setTimeout(() => {
       getLyric(id);
@@ -210,6 +244,8 @@ const Control: FC = () => {
           isPlay={isPlay}
           noLyric={noLyric}
           refAudio={refAudio}
+          simePlaylist={simePlaylist}
+          musicList={musicList}
           // ref={refPlayer}
         />
       )}
@@ -339,7 +375,7 @@ const Control: FC = () => {
           </div>
         </div>
       </div>
-      {songList.length ? (
+      {songList.length && (
         <ul className={styles.right}>
           <li
             className={[
@@ -368,8 +404,6 @@ const Control: FC = () => {
             }}
           ></li>
         </ul>
-      ) : (
-        <div></div>
       )}
     </div>
   );
