@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-17 23:26:03
+ * @LastEditTime: 2021-08-18 20:57:07
  * @Description:control
  */
 import {
@@ -375,7 +375,7 @@ const Control: FC = () => {
           </div>
         </div>
       </div>
-      {songList.length && (
+      {songList.length ? (
         <ul className={styles.right}>
           <li
             className={[
@@ -404,6 +404,8 @@ const Control: FC = () => {
             }}
           ></li>
         </ul>
+      ) : (
+        <div></div>
       )}
     </div>
   );

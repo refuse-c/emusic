@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-13 21:54:31
+ * @LastEditTime: 2021-08-18 16:20:52
  * @Description:
  */
 
@@ -103,6 +103,9 @@ export const getLocal = (name: string) => {
 };
 export const reLocal = (name: string) => {
   window.localStorage.removeItem(name);
+};
+export const reLocalAll = () => {
+  window.localStorage.clear();
 };
 export const setSession = (name: string, data: any) => {
   window.sessionStorage.setItem(name, JSON.stringify(data));

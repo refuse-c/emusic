@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:53:40
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-16 21:29:22
+ * @LastEditTime: 2021-08-18 16:33:29
  * @Description:发现音乐-个性推荐
  */
 import {
@@ -55,7 +55,7 @@ const Recommend: FC = () => {
     ]).then(
       async ([
         { banners = [] },
-        { recommend = [] },
+        { result: recommend = [] },
         { result: exclusives = [] },
         { data: list = [] },
         { result: mv = [] },

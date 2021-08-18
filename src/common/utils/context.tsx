@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-16 20:55:54
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-16 22:11:08
+ * @LastEditTime: 2021-08-18 16:26:12
  * @Description:
  */
 /*
@@ -34,6 +34,7 @@ export const initialState = {
   currentSong: initSong, // 当前播放的音乐信息
   userInfo: initUserInfo, // 用户信息
   globalColor: getLocal('color') || '#EC4141', // 当前主题颜色
+  showLogin: false, // 是否显示登录
 };
 export const reducer = (state: any, action: { type: string; data: any }) => {
   const { type, data } = action;

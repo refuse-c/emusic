@@ -2,22 +2,24 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-08 20:45:30
+ * @LastEditTime: 2021-08-18 23:53:44
  * @Description:
  */
-import { FC, useEffect, useReducer } from 'react';
+import { FC, useEffect, useReducer, useCallback } from 'react';
 import styles from './index.module.scss';
 import Home from '@pages/home';
-import { login } from '@/common/net/login';
+// import { login } from '@/common/net/login';
 import { playlist } from '@/common/net/playList';
 import { Context, reducer, initialState } from '@utils/context';
 import { likelist, addLike, share } from '@/common/net/api';
 import { message } from 'antd';
-import { growthpoint } from '@/common/net/vip';
-import { isMe, setLocal } from '@/common/utils/tools';
+// import { growthpoint } from '@/common/net/vip';
+import { isMe, jumpPage, setLocal } from '@/common/utils/tools';
 import clone from 'clone';
 import Login from '@components/model/login';
 import copy from 'copy-to-clipboard';
+import { growthpoint } from '@/common/net/vip';
+import { loginStatus } from '@/common/net/login';
 const createObj = { name: '创建的歌单', type: 2, isBold: false, isFull: false };
 const collectObj = {
   name: '收藏的歌单',
@@ -39,23 +41,21 @@ interface Item {
 const App: FC = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  // 登录
-  const getLogin = async () => {
-    const res: any = await login({
-      phone: '13272946536',
-      password: 'wangyi123@@',
-    });
-    if (res.code === 200) {
-      if (res.code === 200) {
-        const data = res.profile;
-        const userId = data.userId;
-        const nickname = data.nickname || '';
-        getPlaylist(userId, nickname);
-        getGrowthpoint();
-        dispatch({ type: 'userInfo', data });
-      }
-    }
-  };
+  // 检查登录状态
+  const queryStatus = useCallback(async () => {
+    const res: any = await loginStatus();
+    console.log(res);
+    const { profile: data } = res.data;
+    if (data === null) return false;
+    const userId = data.userId;
+    const nickname = data.nickname || '';
+    getLikeIds();
+    getGrowthpoint();
+    getPlaylist(userId, nickname);
+    dispatch({ type: 'userInfo', data });
+    dispatch({ type: 'showLogin', data: false });
+    jumpPage('/find');
+  }, []);
 
   // 获取vip成长值
   const getGrowthpoint = async () => {
@@ -133,10 +133,8 @@ const App: FC = () => {
   };
 
   useEffect(() => {
-    getLogin();
-    getLikeIds();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    queryStatus();
+  }, [queryStatus]);
 
   return (
     <div
@@ -146,15 +144,20 @@ const App: FC = () => {
       <Context.Provider
         value={{
           ...state,
-          getLikeIds,
-          handleShare,
           setLike,
-          getPlaylist,
           dispatch,
+          getLikeIds,
+          queryStatus,
+          getPlaylist,
+          handleShare,
+          getGrowthpoint,
         }}
       >
         <Home />
-        <Login />
+        <Login
+          hasShow={state.showLogin}
+          onClose={() => dispatch({ type: 'showLogin', data: false })}
+        />
       </Context.Provider>
     </div>
   );

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 20:49:42
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-29 11:05:26
+ * @LastEditTime: 2021-08-18 16:32:30
  * @Description:
  */
 import { get } from './request';
@@ -14,49 +14,51 @@ export const find = () => get('/homepage/block/page', '');
  * @param {*} params
  * @Description:
  */
-export const findBanner = (params?: any) => get('/banner', params);
+export const findBanner = () => get('/banner');
 
 /**
  * @name:获取每日推荐歌曲
  * @param {*} params
  * @Description:
  */
-export const recommendSong = (params?: any) => get('/recommend/songs', params);
+export const recommendSong = () => get('/recommend/songs');
 
 /**
  * @name:获取历史日推可用日期列表
  * @param {*} params
  * @Description:
  */
-export const historyRecommendSong = (params?: any) => get('/history/recommend/songs', params);
+export const historyRecommendSong = () => get('/history/recommend/songs');
 
 /**
  * @name:获取历史日推详情数据
  * @param {*} params
  * @Description:
  */
-export const historyRecommendSongDetail = (params: { date: string }) => get('/history/recommend/songs/detail', params);
+export const historyRecommendSongDetail = (params: { date: string }) =>
+  get('/history/recommend/songs/detail', params);
 
 /**
  * @name: 获取每日推荐歌单
  * @param {*} params
  * @Description:
  */
-export const recommendList = (params?: any) => get('/recommend/resource', params);
+// export const recommendList = () => get('/recommend/resource');
+export const recommendList = () => get('/personalized');
 
 /**
  * @name: 独家放送入口列表
  * @param {any} params
  * @Description:
  */
-export const exclusive = (params?: any) => get('/personalized/privatecontent', params);
+export const exclusive = () => get('/personalized/privatecontent');
 
 /**
  * @name: 推荐MV
  * @param {any} params
  * @Description:
  */
-export const personalizedMv = (params?: any) => get('/personalized/mv', params);
+export const personalizedMv = () => get('/personalized/mv');
 
 /**
  * @name: 推荐电台

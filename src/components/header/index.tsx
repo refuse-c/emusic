@@ -2,19 +2,21 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-08 21:16:43
+ * @LastEditTime: 2021-08-19 00:12:07
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
 import styles from './index.module.scss';
 import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
-import { jumpPage, setLocal } from '@/common/utils/tools';
+import { jumpPage, reLocalAll, setLocal } from '@/common/utils/tools';
 import { Context } from '@utils/context';
-import { defaultColor } from '@/common/utils/local';
+import { defaultColor, initSong, initUserInfo } from '@/common/utils/local';
 import SearchInput from '@/components/search-Input';
 import { formatImgSize } from '@/common/utils/format';
 import { message } from 'antd';
+import { logout } from '@/common/net/login';
+import img from '@images/user.png';
 const { remote, ipcRenderer } = window.require('electron');
 
 const win = remote.getCurrentWindow();
@@ -69,14 +71,26 @@ const Header: FC = () => {
         <li className={styles.author}>
           <img
             className={styles.avatarUrl}
-            src={formatImgSize(userInfo.avatarUrl, 30, 30)}
+            src={formatImgSize(userInfo.avatarUrl, 30, 30) || img}
             alt=""
             onClick={() => {
-              jumpPage(`/user${userId}`);
+              nickname
+                ? jumpPage(`/user${userId}`)
+                : dispatch({ type: 'showLogin', data: true });
             }}
           />
           <div className={styles.userInfo}>
-            <p>{nickname}</p>
+            {nickname ? (
+              <p>{nickname}</p>
+            ) : (
+              <p
+                onClick={() => {
+                  dispatch({ type: 'showLogin', data: true });
+                }}
+              >
+                未登录
+              </p>
+            )}
             {vipInfo.vipType > 0 ? (
               <img
                 className={styles.redVipImageUrl}
@@ -84,7 +98,7 @@ const Header: FC = () => {
                 alt=""
               />
             ) : (
-              <p>去开通</p>
+              <p>{nickname ? '去开通' : '开通VIP'}</p>
             )}
             <p className="icon icon-arrow-bottom"></p>
           </div>
@@ -105,7 +119,32 @@ const Header: FC = () => {
         ></li>
         <li
           className="icon icon-mail"
-          onClick={() => message.info('开发中...')}
+          onClick={async () => {
+            const res: any = await logout();
+            const { code } = res;
+            if (code === 200) {
+              reLocalAll();
+              message.info('退出成功');
+
+              dispatch({ type: 'likeList', data: [] });
+              dispatch({ type: 'songList', data: [] });
+              dispatch({ type: 'playList', data: [] });
+              dispatch({ type: 'createList', data: [] });
+              dispatch({ type: 'myLikeId', data: '' });
+              dispatch({ type: 'showModal', data: '' });
+              dispatch({ type: 'showPlayer', data: false });
+              dispatch({
+                type: 'vipInfo',
+                data: { redVipImageUrl: '', level: 0, vipType: -1 },
+              });
+              dispatch({ type: 'vipType', data: -1 });
+              dispatch({ type: 'currentSong', data: initSong });
+              dispatch({ type: 'userInfo', data: initUserInfo });
+              dispatch({ type: 'globalColor', data: '#EC4141' });
+              dispatch({ type: 'showLogin', data: false });
+              jumpPage('/find');
+            }
+          }}
         ></li>
         {/* <li className="icon icon-min"></li> */}
         <li className="icon icon-minimize" onClick={() => win.minimize()}></li>
