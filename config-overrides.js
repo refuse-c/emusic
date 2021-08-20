@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 13:25:20
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-27 23:19:37
+ * @LastEditTime: 2021-08-19 21:10:56
  * @Description:
  */
-const { override, addWebpackAlias, addDecoratorsLegacy } = require('customize-cra');
+const { override, addWebpackAlias, addDecoratorsLegacy, adjustStyleLoaders } = require('customize-cra');
 const path = require('path');
 
 module.exports = override(
@@ -20,6 +20,17 @@ module.exports = override(
     '@components': path.resolve(__dirname, './src/components'),
     '@pages': path.resolve(__dirname, './src/pages'),
   }),
+  adjustStyleLoaders((rule) => {
+    if (rule.test.toString().includes('scss')) {
+      rule.use.push({
+        loader: require.resolve('sass-resources-loader'),
+        options: {
+          resources: './src/common/css/_variables.scss',
+        },
+      });
+    }
+  }),
+
   (config) => {
     // 为了方便使用 electron 以及 node.js 相关的 api
     // 需要将 target 设置为 electron-renderer
@@ -29,5 +40,5 @@ module.exports = override(
     config.target = 'electron-renderer';
     return config;
   },
-  addDecoratorsLegacy(),
+  addDecoratorsLegacy()
 );

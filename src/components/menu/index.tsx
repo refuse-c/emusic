@@ -7,7 +7,7 @@
  */
 import { FC, useState, useContext } from 'react';
 import styles from './index.module.scss';
-import { menuList } from '@utils/local';
+import { menuList } from '@/common/utils/constant';
 import { message } from 'antd';
 import { Context } from '@utils/context';
 import { createHashHistory } from 'history';

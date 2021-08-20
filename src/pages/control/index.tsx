@@ -2,24 +2,17 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-18 20:57:07
+ * @LastEditTime: 2021-08-19 23:23:45
  * @Description:control
  */
-import {
-  FC,
-  useContext,
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from 'react';
+import { FC, useContext, useState, useEffect, useRef, useCallback } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { formatImgSize, formatTime } from '@/common/utils/format';
 import { lyric, simiSong, songDetail, songUrl } from '@/common/net/api';
 import { message, Slider } from 'antd';
 import Player from '@pages/player';
-import { initSong, initTime } from '@/common/utils/local';
+import { initSong, initTime } from '@/common/utils/constant';
 import {
   cutSong,
   debounce,
@@ -43,20 +36,12 @@ const Control: FC = () => {
   const [isShowlrc, setIsShowlrc] = useState(getLocal('showLrc') || false);
   const [lrcLoading, setLrcLoading] = useState(false);
   const [model, setModel] = useState(getLocal('model') || 1);
-  const [volume, setVolume] = useState(getLocal('volume') || 5);
+  const [volume, setVolume] = useState(getLocal('volume') || 50);
   const [songTime, setSongTime] = useState(initTime);
   const [simePlaylist, setSimePlaylist] = useState<any>([]);
   const [musicList, setMusicList] = useState<any>([]);
-  const {
-    isPlay,
-    likeList,
-    songList,
-    currentSong,
-    showModal,
-    setLike,
-    showPlayer,
-    dispatch,
-  } = useContext(Context);
+  const { isPlay, likeList, songList, currentSong, showModal, setLike, showPlayer, dispatch } =
+    useContext(Context);
   const { id, al, ar, name } = currentSong;
   const { currentTime, duration } = songTime;
 
@@ -124,8 +109,7 @@ const Control: FC = () => {
   );
   // 暂停/播放
   const handlePaused = () => {
-    if (!songList.length)
-      return message.info('当前无可以播放音乐,快去添加吧^v^');
+    if (!songList.length) return message.info('当前无可以播放音乐,快去添加吧^v^');
     dispatch({ type: 'isPlay', data: !isPlay });
     isPlay ? refAudio.current?.pause() : refAudio.current?.play();
   };
@@ -222,12 +206,8 @@ const Control: FC = () => {
         if (buffered.length) {
           const bufferTime = buffered.end(buffered.length - 1);
           const bw = Number((bufferTime / duration).toFixed(2)) * 100;
-          const slider = document.getElementsByClassName(
-            'ant-slider-rail'
-          )[0] as HTMLElement;
-          slider.style.background = `linear-gradient(to right, #cdcdcd ${bw}%, #e5e5e5 ${
-            100 - bw
-          }%)`;
+          const slider = document.getElementsByClassName('ant-slider-rail')[0] as HTMLElement;
+          slider.style.background = `linear-gradient(to right, #cdcdcd ${bw}%, #e5e5e5 ${100 - bw}%)`;
         }
         model !== 3 && setSongTime({ currentTime, duration });
       });
@@ -250,22 +230,13 @@ const Control: FC = () => {
         />
       )}
       {
-        <div
-          className={styles.lrc}
-          style={{ height: isShowlrc ? 31 : 0, bottom: isShowlrc ? 73 : 72 }}
-        >
+        <div className={styles.lrc} style={{ height: isShowlrc ? 31 : 0, bottom: isShowlrc ? 73 : 72 }}>
           {isShowlrc && (
-            <ul
-              className={styles.content}
-              style={{ transform: `translateY(${-num * 30}px)` }}
-            >
+            <ul className={styles.content} style={{ transform: `translateY(${-num * 30}px)` }}>
               {lrc.length ? (
                 lrc.map((item: any, index: number) => {
                   return (
-                    <li
-                      className={index === num ? styles.active : styles.bb}
-                      key={index}
-                    >
+                    <li className={index === num ? styles.active : styles.bb} key={index}>
                       {item.text}
                     </li>
                   );
@@ -289,9 +260,7 @@ const Control: FC = () => {
         <div className={styles.left}>
           <div className={styles.content}>
             <img
-              onClick={() =>
-                dispatch({ type: 'showPlayer', data: !showPlayer })
-              }
+              onClick={() => dispatch({ type: 'showPlayer', data: !showPlayer })}
               className={styles.img_box}
               src={formatImgSize(al.picUrl, 48, 48)}
               alt=""
@@ -306,18 +275,12 @@ const Control: FC = () => {
                     className="icon icon-like"
                   ></p>
                 ) : (
-                  <p
-                    onClick={() => setLike(id, true)}
-                    className="icon icon-unlike"
-                  ></p>
+                  <p onClick={() => setLike(id, true)} className="icon icon-unlike"></p>
                 )}
               </div>
               <div>
                 {ar.map((item: any, index: number) => (
-                  <span
-                    key={index}
-                    onClick={() => history.push(`/singer${item.id}`)}
-                  >
+                  <span key={index} onClick={() => history.push(`/singer${item.id}`)}>
                     {item.name}
                   </span>
                 ))}
@@ -331,13 +294,7 @@ const Control: FC = () => {
       <div className={styles.center}>
         <ul className={styles.btn_group}>
           <li
-            className={`icon ${
-              model === 1
-                ? 'icon-order'
-                : model === 2
-                ? 'icon-random'
-                : 'icon-cycle'
-            }`}
+            className={`icon ${model === 1 ? 'icon-order' : model === 2 ? 'icon-random' : 'icon-cycle'}`}
             onClick={() => handleModel()}
           ></li>
           <li
@@ -345,16 +302,10 @@ const Control: FC = () => {
             onClick={() => handlcutSong(1)}
             style={{ transform: 'rotate(180deg)' }}
           ></li>
-          <li
-            className={`icon ${isPlay ? 'icon-pause' : 'icon-play'}`}
-            onClick={() => handlePaused()}
-          ></li>
+          <li className={`icon ${isPlay ? 'icon-pause' : 'icon-play'}`} onClick={() => handlePaused()}></li>
           <li className="icon icon-next" onClick={() => handlcutSong(2)}></li>
           <li
-            className={[
-              isShowlrc ? styles.activeLrc : '',
-              'icon icon-lrc',
-            ].join(' ')}
+            className={[isShowlrc ? styles.activeLrc : '', 'icon icon-lrc'].join(' ')}
             onClick={() => setShowLrc()}
           ></li>
         </ul>
@@ -370,18 +321,13 @@ const Control: FC = () => {
               onChange={(value: number) => changeCurrentTime(value)}
             />
           </div>
-          <div className={styles.time}>
-            {formatTime(duration || Number(currentSong.dt) / 1000, true)}
-          </div>
+          <div className={styles.time}>{formatTime(duration || Number(currentSong.dt) / 1000, true)}</div>
         </div>
       </div>
       {songList.length ? (
         <ul className={styles.right}>
           <li
-            className={[
-              styles.quality,
-              `icon ${isMute ? 'icon-mute' : 'icon-volume'}`,
-            ].join(' ')}
+            className={[styles.quality, `icon ${isMute ? 'icon-mute' : 'icon-volume'}`].join(' ')}
             onClick={() => changeMute()}
           ></li>
           <li className={styles.volume}>

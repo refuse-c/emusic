@@ -11,7 +11,7 @@ import Nav from '@components/nav';
 import Content from '@components/view/content';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { Context } from '@utils/context';
-import { searchNav } from '@utils/local';
+import { searchNav } from '@/common/utils/constant';
 const Search: FC = (props: any) => {
   const { router = [] } = props;
   // const [type, setType] = useState(1);

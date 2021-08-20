@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-19 00:12:07
+ * @LastEditTime: 2021-08-19 23:58:21
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
@@ -11,7 +11,7 @@ import { BlockPicker } from 'react-color';
 import { createHashHistory } from 'history';
 import { jumpPage, reLocalAll, setLocal } from '@/common/utils/tools';
 import { Context } from '@utils/context';
-import { defaultColor, initSong, initUserInfo } from '@/common/utils/local';
+import { defaultColor, initSong, initUserInfo } from '@/common/utils/constant';
 import SearchInput from '@/components/search-Input';
 import { formatImgSize } from '@/common/utils/format';
 import { message } from 'antd';
@@ -24,14 +24,13 @@ const history = createHashHistory();
 const DOM = document.getElementsByTagName('body')[0] as HTMLElement;
 const Header: FC = () => {
   const [isMaximized, setIsMaximized] = useState(win.isMaximized());
-  const { vipInfo, userInfo, globalColor, showModal, showPlayer, dispatch } =
-    useContext(Context);
+  const { vipInfo, userInfo, globalColor, showModal, showPlayer, dispatch } = useContext(Context);
   const { userId, nickname } = userInfo;
   DOM.style.setProperty('--color', globalColor, '');
   //  修改颜色
   const changeColor = (val: string) => {
     setLocal('color', val);
-    DOM.style.setProperty('--color', val, '');
+    DOM.style.setProperty('--color', val);
     dispatch({ type: 'globalColor', data: val });
   };
 
@@ -41,9 +40,7 @@ const Header: FC = () => {
 
   // 点击前进后退
   const handleHistory = (num) => {
-    showPlayer
-      ? dispatch({ type: 'showPlayer', data: false })
-      : history.go(num);
+    showPlayer ? dispatch({ type: 'showPlayer', data: false }) : history.go(num);
   };
   return (
     <div className={styles.header}>
@@ -74,9 +71,7 @@ const Header: FC = () => {
             src={formatImgSize(userInfo.avatarUrl, 30, 30) || img}
             alt=""
             onClick={() => {
-              nickname
-                ? jumpPage(`/user${userId}`)
-                : dispatch({ type: 'showLogin', data: true });
+              nickname ? jumpPage(`/user${userId}`) : dispatch({ type: 'showLogin', data: true });
             }}
           />
           <div className={styles.userInfo}>
@@ -113,10 +108,7 @@ const Header: FC = () => {
             e.stopPropagation();
           }}
         ></li>
-        <li
-          className="icon icon-setting"
-          onClick={() => jumpPage('/setting')}
-        ></li>
+        <li className="icon icon-setting" onClick={() => jumpPage('/setting')}></li>
         <li
           className="icon icon-mail"
           onClick={async () => {

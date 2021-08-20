@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 import Nav from '@components/nav';
 import Content from '@components/view/content';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import { findNav } from '@utils/local';
+import { findNav } from '@/common/utils/constant';
 
 const Find: FC = (props: any) => {
   const { router } = props;

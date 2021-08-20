@@ -1,5 +1,3 @@
-@import '~@common/css/_variables.scss';
-
 // 添加/取消我喜欢的音乐
 .toggleLike {
   display: flex;
@@ -60,10 +58,4 @@
       cursor: move;
     }
   }
-}
-
-// login
-.login {
-  width: 350px;
-  height: 530px;
 }

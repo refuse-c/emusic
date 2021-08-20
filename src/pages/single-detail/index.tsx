@@ -16,7 +16,7 @@ import Comments from '@components/comments';
 import Collectors from '@components/collectors';
 import { playlistDetail } from '@/common/net/playList';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
-import { navigationList } from '@/common/utils/local';
+import { navigationList } from '@/common/utils/constant';
 import Content from '@components/view/content';
 import { album, albumDynamic } from '@/common/net/album';
 
@@ -44,7 +44,7 @@ const Single: FC = (props: any) => {
         setLoading(false);
       }
     },
-    [status],
+    [status]
   );
 
   // 获取专辑信息

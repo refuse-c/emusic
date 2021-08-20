@@ -9,7 +9,7 @@ import { FC, useState, useEffect } from 'react';
 import { albumNew, topAblum } from '@/common/net/album';
 import Album from '@components/album-list';
 import styles from '../index.module.scss';
-import { areaList } from '@/common/utils/local';
+import { areaList } from '@/common/utils/constant';
 import { Spin } from 'antd';
 const limit = 500;
 interface Props {
@@ -42,19 +42,14 @@ const TopAblum: FC<Props> = (props) => {
   useEffect(() => {
     setOffset(0);
     const area = areaList[areaType || 0].area;
-    status
-      ? getTAlbumNew(area, limit, offset)
-      : getTopAlbum(area, limit, offset);
+    status ? getTAlbumNew(area, limit, offset) : getTopAlbum(area, limit, offset);
   }, [areaType, status, offset]);
   const { weekData = [], monthData = [], albums = [] } = data;
 
   return (
     <Spin spinning={spinning}>
       <div className={styles.topAblum}>
-        <Album
-          list={status ? albums : areaType === 0 ? weekData : monthData}
-          layout="col"
-        />
+        <Album list={status ? albums : areaType === 0 ? weekData : monthData} layout="col" />
       </div>
     </Spin>
   );

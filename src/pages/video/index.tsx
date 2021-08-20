@@ -8,7 +8,7 @@
 import { FC } from 'react';
 import styles from './index.module.scss';
 import Nav from '@components/nav';
-import { videoNav } from '@/common/utils/local';
+import { videoNav } from '@/common/utils/constant';
 import Content from '@components/view/content';
 import { HashRouter as Router, Route } from 'react-router-dom';
 const Video: FC = (props: any) => {

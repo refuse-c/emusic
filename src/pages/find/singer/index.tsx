@@ -7,7 +7,7 @@
  */
 import { FC, useState, useEffect, useCallback } from 'react';
 // import styles from '../index.module.scss';
-import { areaList, initialList, typeList } from '@/common/utils/local';
+import { areaList, initialList, typeList } from '@/common/utils/constant';
 import SingTag from '@/components/sing-tag';
 import SingerComponent from '@/components/singer-list';
 import { artistList } from '@/common/net/singer';
@@ -53,18 +53,8 @@ const Singer: FC = () => {
   return (
     <Spin spinning={loading}>
       <Content padding={'0 30px 30px'} isFull={false}>
-        <SingTag
-          title="语种"
-          active={area}
-          list={areaList}
-          cb={(key: string) => handleTag(key, 1)}
-        />
-        <SingTag
-          title="分类"
-          active={type}
-          list={typeList}
-          cb={(key: string) => handleTag(key, 2)}
-        />
+        <SingTag title="语种" active={area} list={areaList} cb={(key: string) => handleTag(key, 1)} />
+        <SingTag title="分类" active={type} list={typeList} cb={(key: string) => handleTag(key, 2)} />
         <SingTag
           title="筛选"
           active={initial}

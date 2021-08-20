@@ -1,5 +1,3 @@
-@import '~@common/css/_variables.scss';
-
 .player {
   position: fixed;
   top: 60px;
@@ -137,8 +135,7 @@
         position: relative;
         width: 260px;
         height: 260px;
-        background: url('~@common/images/album.png') center center / 100%
-          no-repeat;
+        background: url('~@common/images/album.png') center center / 100% no-repeat;
         border: 10px solid #dbdbdb;
         border-radius: 50%;
 

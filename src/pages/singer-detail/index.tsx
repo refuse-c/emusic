@@ -12,7 +12,7 @@ import Head from './component/head';
 import { artists, artistsAlbum, artistsDesc, artistsMv, artistsSimi } from '@/common/net/singer';
 import Content from '@components/view/content';
 import Navigation from '@/components/single-nav';
-import { singerDetailNavList } from '@/common/utils/local';
+import { singerDetailNavList } from '@/common/utils/constant';
 import AlbumComponent from '@/components/album-list';
 import VideoComponent from '@components/video';
 import DescComponent from './component/desc';

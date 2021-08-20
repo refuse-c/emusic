@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-08-04 16:43:42
  * @Description:排列
  */
-import { arrangeList } from '@/common/utils/local';
+import { arrangeList } from '@/common/utils/constant';
 import { FC } from 'react';
 import styles from './index.module.scss';
 interface Props {

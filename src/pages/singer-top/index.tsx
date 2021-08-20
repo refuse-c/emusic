@@ -13,7 +13,7 @@ import Content from '@components/view/content';
 import { toplistArtist } from '@/common/net/topList';
 import SingerComponent from '@/components/singer-list';
 import Navigation from '@/components/single-nav';
-import { singerTopNav } from '@/common/utils/local';
+import { singerTopNav } from '@/common/utils/constant';
 import moment from 'moment';
 const SingerTop: FC = () => {
   const [type, setType] = useState(0);
@@ -33,7 +33,11 @@ const SingerTop: FC = () => {
     <div className={styles.singerTop}>
       <div className={styles.top}>
         <Title title="云音乐歌手榜"></Title>
-        <Navigation status={type} list={singerTopNav} onChange={(_item: any, index: number) => setType(index)}>
+        <Navigation
+          status={type}
+          list={singerTopNav}
+          onChange={(_item: any, index: number) => setType(index)}
+        >
           {!!list.updateTime && <div>更新时间：{moment(list.updateTime).format('MM月DD日')}</div>}
         </Navigation>
       </div>

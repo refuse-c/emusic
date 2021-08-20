@@ -9,7 +9,7 @@ import { FC, useState, useEffect, useContext } from 'react';
 import { Input } from 'antd';
 import { debounce, trim } from '@/common/utils/tools';
 import { createHashHistory } from 'history';
-import { defaultVal } from '@/common/utils/local';
+import { defaultVal } from '@/common/utils/constant';
 import { Context } from '@utils/context';
 import { searchDefault, searchHotSuggest } from '@/common/net/search';
 import styles from './index.module.scss';

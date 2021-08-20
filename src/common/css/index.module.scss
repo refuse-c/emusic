@@ -1,10 +1,8 @@
-@import '~@common/css/_variables.scss';
-
 div,
 ul,
 li,
 p {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Hack, Dank Mono, Fira Code Light;
   cursor: default;
   user-select: none;
 }

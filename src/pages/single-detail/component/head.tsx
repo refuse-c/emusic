@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-12 22:37:16
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-02 23:01:24
+ * @LastEditTime: 2021-08-19 22:46:24
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
@@ -124,7 +124,11 @@ const Head: FC<Props> = (props: any) => {
         </div>
         {creator && creator.avatarUrl && (
           <div className={styles.creator}>
-            <img onClick={() => jumpPage(`/user${user_id}`)} src={formatImgSize(creator.avatarUrl, 24, 24)} alt="" />
+            <img
+              onClick={() => jumpPage(`/user${user_id}`)}
+              src={formatImgSize(creator.avatarUrl, 24, 24)}
+              alt=""
+            />
             <p onClick={() => jumpPage(`/user${user_id}`)}>{creator.nickname}</p>
             <p>{createTime ? `${moment(createTime).format('YYYY-MM-DD')}创建` : ''}</p>
           </div>
@@ -133,9 +137,12 @@ const Head: FC<Props> = (props: any) => {
         <div className={styles.btnGroup}>
           <PlayAll list={list} />
           <div className={styles.tool}>
-            <p className={isMe ? styles.disabled : ''} onClick={() => handleCollection(singleId, collection ? 0 : 1)}>
+            <p
+              className={isMe ? styles.disabled : ''}
+              onClick={() => handleCollection(singleId, collection ? 0 : 1)}
+            >
               {collection ? '已收藏' : '收藏'}
-              {!!subcount && `(${subcount})`}
+              {!!subcount && `(${formatNumber(subcount)})`}
             </p>
             <p onClick={() => handleShare(id, shareType)}>分享{!!sharecount && `(${sharecount})`}</p>
             <p>下载全部</p>
@@ -169,7 +176,10 @@ const Head: FC<Props> = (props: any) => {
           )}
           {description && !status && (
             <div className={styles.makedown}>
-              <ReactMarkdown remarkPlugins={[]} children={` **简介 ：** ` + description.replace(/\n/g, '\n * ')} />
+              <ReactMarkdown
+                remarkPlugins={[]}
+                children={` **简介 ：** ` + description.replace(/\n/g, '\n * ')}
+              />
             </div>
           )}
         </div>

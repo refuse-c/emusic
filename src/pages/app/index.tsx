@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-07 23:41:03
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-18 23:53:44
+ * @LastEditTime: 2021-08-19 20:13:31
  * @Description:
  */
 import { FC, useEffect, useReducer, useCallback } from 'react';
@@ -16,7 +16,7 @@ import { message } from 'antd';
 // import { growthpoint } from '@/common/net/vip';
 import { isMe, jumpPage, setLocal } from '@/common/utils/tools';
 import clone from 'clone';
-import Login from '@components/model/login';
+import Login from '@pages/login';
 import copy from 'copy-to-clipboard';
 import { growthpoint } from '@/common/net/vip';
 import { loginStatus } from '@/common/net/login';
@@ -95,9 +95,7 @@ const App: FC = () => {
   const handleShare = async (id: number | string, type: string) => {
     const res: any = await share({ id, type });
     const { code, message: msg } = res;
-    code === 200
-      ? res.resUrl && copy(res.resUrl) && message.success('分享链接已生成')
-      : message.warning(msg);
+    code === 200 ? res.resUrl && copy(res.resUrl) && message.success('分享链接已生成') : message.warning(msg);
   };
 
   // 获取当前登录用户的歌单
@@ -108,21 +106,13 @@ const App: FC = () => {
       allList.map((item: Item) => {
         item.type = 1;
         item.path = `/single${item.id}/${'歌单'}`;
-        item.name = isMe(item.userId, uid)
-          ? item.name.replace(nickname, '我')
-          : item.name;
+        item.name = isMe(item.userId, uid) ? item.name.replace(nickname, '我') : item.name;
         return item;
       });
-      const createList = allList.filter(
-        (item: Item) => item.privacy !== 10 && isMe(item.userId, uid)
-      );
+      const createList = allList.filter((item: Item) => item.privacy !== 10 && isMe(item.userId, uid));
       const cloneList = clone(createList);
-      const collectList = allList.filter(
-        (item: Item) => item.privacy !== 10 && !isMe(item.userId, uid)
-      );
-      const myLikeId = allList.find(
-        (item: any) => item.specialType === 5 && isMe(item.userId, uid)
-      );
+      const collectList = allList.filter((item: Item) => item.privacy !== 10 && !isMe(item.userId, uid));
+      const myLikeId = allList.find((item: any) => item.specialType === 5 && isMe(item.userId, uid));
       createList.unshift(createObj);
       collectList.unshift(collectObj);
       const list = createList.concat(collectList);
@@ -137,10 +127,7 @@ const App: FC = () => {
   }, [queryStatus]);
 
   return (
-    <div
-      className={styles.app}
-      onClick={() => dispatch({ type: 'showModal', data: '' })}
-    >
+    <div className={styles.app} onClick={() => dispatch({ type: 'showModal', data: '' })}>
       <Context.Provider
         value={{
           ...state,
@@ -154,10 +141,7 @@ const App: FC = () => {
         }}
       >
         <Home />
-        <Login
-          hasShow={state.showLogin}
-          onClose={() => dispatch({ type: 'showLogin', data: false })}
-        />
+        <Login hasShow={state.showLogin} onClose={() => dispatch({ type: 'showLogin', data: false })} />
       </Context.Provider>
     </div>
   );

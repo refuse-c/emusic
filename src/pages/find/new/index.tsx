@@ -11,7 +11,7 @@ import Content from '@components/view/content';
 import { newMusic, songDetail } from '@/common/net/api';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
 import { Context } from '@utils/context';
-import { newMusicNav, areaList, albumList } from '@/common/utils/local';
+import { newMusicNav, areaList, albumList } from '@/common/utils/constant';
 import EllipticalNav from '@/components/elliptical-nav';
 import Navigation from '@/components/single-nav';
 import MusicList from '@components/music-list';
@@ -103,11 +103,7 @@ const Newmusic: FC = () => {
             }}
           />
         </div>
-        <Navigation
-          status={type}
-          list={areaList}
-          onChange={(_item: any, index: number) => setType(index)}
-        >
+        <Navigation status={type} list={areaList} onChange={(_item: any, index: number) => setType(index)}>
           {!state ? singleBtn() : albumleBtn()}
         </Navigation>
       </Content>

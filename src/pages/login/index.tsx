@@ -2,40 +2,34 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-18 15:49:55
+ * @LastEditTime: 2021-08-19 20:21:19
  * @Description:密码登录
  */
-import { login } from '@/common/net/login';
-import { FC, useContext } from 'react';
+import { FC, useState } from 'react';
 import styles from './index.module.scss';
-import { Context } from '@utils/context';
+import BoxModel from '@components/model/BoxModel';
+import Qrcode from '@pages/login/qrcode';
+import Pwd from '@pages/login/pwd';
+import Mail from '@pages/login/mail';
+
 interface Props {
-  title?: string;
+  hasShow?: boolean;
+  onClose?: any;
+  onFinish?: any;
 }
 
-const Empty: FC<Props> = (props) => {
-  const { getPlaylist, getGrowthpoint, dispatch } = useContext(Context);
-  // 登录
-  const getLogin = async () => {
-    const res: any = await login({
-      phone: '13272946536',
-      password: 'wangyi123@@',
-    });
-    if (res.code === 200) {
-      if (res.code === 200) {
-        const data = res.profile;
-        const userId = data.userId;
-        const nickname = data.nickname || '';
-        getPlaylist(userId, nickname);
-        getGrowthpoint();
-        dispatch({ type: 'userInfo', data });
-      }
-    }
-  };
-  console.log(getLogin);
-  const { title } = props;
-  console.log(title);
-  return <div className={styles.empty}>{title}</div>;
+const Login: FC<Props> = (props) => {
+  const [type, setType] = useState(1);
+  const { hasShow, onClose } = props;
+  return (
+    <BoxModel hasShow={hasShow} onClose={onClose} width={350} height={530}>
+      <div className={styles.login}>
+        {type === 1 && <Pwd setType={setType} />}
+        {type === 2 && <Qrcode setType={setType} />}
+        {type === 3 && <Mail setType={setType} />}
+      </div>
+    </BoxModel>
+  );
 };
 
-export default Empty;
+export default Login;

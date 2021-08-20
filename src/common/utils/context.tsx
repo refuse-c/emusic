@@ -17,7 +17,7 @@ showModal:
 */
 import React from 'react';
 import { getLocal } from '@/common/utils/tools';
-import { initSearchInfo, initSong, initUserInfo } from '@utils/local';
+import { initSearchInfo, initSong, initUserInfo } from '@/common/utils/constant';
 export const initialState = {
   isPlay: false, // 是否播放
   searchText: '', // 检索的文字
