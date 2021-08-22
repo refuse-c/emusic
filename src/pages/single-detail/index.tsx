@@ -16,7 +16,7 @@ import Comments from '@components/comments';
 import Collectors from '@components/collectors';
 import { playlistDetail } from '@/common/net/playList';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
-import { navigationList } from '@/common/utils/constant';
+import { NAVIGATION_LIST } from '@/common/utils/constant';
 import Content from '@components/view/content';
 import { album, albumDynamic } from '@/common/net/album';
 
@@ -85,7 +85,7 @@ const Single: FC = (props: any) => {
               />
               <Navigation
                 status={navStatus}
-                list={navigationList}
+                list={NAVIGATION_LIST}
                 onChange={(_item: any, index: number) => setNavStatus(index)}
               />
             </div>

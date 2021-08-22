@@ -2,13 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 11:44:43
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-28 23:55:42
+ * @LastEditTime: 2021-08-22 23:10:29
  * @Description:标题
  */
+import { jumpPage } from '@/common/utils/tools';
 import { FC } from 'react';
 import styles from './index.module.scss';
-import { createHashHistory } from 'history';
-const history = createHashHistory();
+
 interface Props {
   title: string; // 显示的标题
   btn?: string;
@@ -26,7 +26,7 @@ const Title: FC<Props> = (Props) => {
   return (
     <div className={styles.content} style={{ margin }}>
       {type && <div className={styles.type}>{type}</div>}
-      <div className={[styles.title, cls].join(' ')} onClick={() => path && history.push(path)}>
+      <div className={[styles.title, cls].join(' ')} onClick={() => path && jumpPage(path)}>
         {title} {path && <span className="icon icon-back"></span>}
       </div>
       <div className={styles.tools}>

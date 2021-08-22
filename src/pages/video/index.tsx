@@ -8,7 +8,7 @@
 import { FC } from 'react';
 import styles from './index.module.scss';
 import Nav from '@components/nav';
-import { videoNav } from '@/common/utils/constant';
+import { VIDEO_NAV } from '@/common/utils/constant';
 import Content from '@components/view/content';
 import { HashRouter as Router, Route } from 'react-router-dom';
 const Video: FC = (props: any) => {
@@ -16,7 +16,7 @@ const Video: FC = (props: any) => {
   return (
     <div className={styles.video}>
       <Content isFull={true}>
-        <Nav list={videoNav} />
+        <Nav list={VIDEO_NAV} />
       </Content>
       <Content padding={'0 30px'} isFull={false}>
         <Router>

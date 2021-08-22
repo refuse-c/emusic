@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:06
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-18 16:20:52
+ * @LastEditTime: 2021-08-22 23:09:01
  * @Description:
  */
 
@@ -13,7 +13,6 @@
 import { createHashHistory } from 'history';
 import styles from '@common/css/index.module.scss';
 import { message } from 'antd';
-const history = createHashHistory();
 // interface params {
 //   list: [];
 //   type: string;
@@ -25,6 +24,8 @@ interface LRC {
   time: number;
   text: string;
 }
+
+export const history = createHashHistory();
 
 export const isArray = (arr: []) => {
   return arr instanceof Array;
@@ -41,17 +42,10 @@ export const renderArtists = (item: any) => {
   const { ar = [] } = item;
   return (
     <div className={styles.artists}>
-      {item.fee === 1 ? (
-        <i className={['icon icon-vip', styles.vip].join(' ')}></i>
-      ) : null}
-      {item.dl === 999000 ? (
-        <i className={['icon icon-sq', styles.sq].join(' ')}></i>
-      ) : null}
+      {item.fee === 1 ? <i className={['icon icon-vip', styles.vip].join(' ')}></i> : null}
+      {item.dl === 999000 ? <i className={['icon icon-sq', styles.sq].join(' ')}></i> : null}
       {item.mv !== 0 ? (
-        <i
-          onClick={() => console.log(item.mv)}
-          className={['icon icon-mv', styles.mv].join(' ')}
-        ></i>
+        <i onClick={() => console.log(item.mv)} className={['icon icon-mv', styles.mv].join(' ')}></i>
       ) : null}
       <div className={styles.artistsName}>
         {ar.map((item: Item, index: number) => {
@@ -216,9 +210,7 @@ export const parseLRC = (lrc: string): Array<LRC> => {
     const seconds = Number(match[2]) || 0;
     const milliseconds = Number(match[3]) || 0;
     const time = minutes * 60 * 1000 + seconds * 1000 + milliseconds + offset;
-    const text = (match[4] as string)
-      .replace(regTime, '')
-      .replace(regTimeCompatible, '');
+    const text = (match[4] as string).replace(regTime, '').replace(regTimeCompatible, '');
 
     // 优化：不要显示空行
     if (!text) return;
@@ -265,10 +257,7 @@ export const getTimeIndex = (timeArr: any | [], time: number) => {
  * @Description:
  */
 export const highlight = (text: string, searchText: string) => {
-  return searchText.replace(
-    new RegExp(text, 'gi'),
-    (val: string) => `<span>${val}</span>`
-  );
+  return searchText.replace(new RegExp(text, 'gi'), (val: string) => `<span>${val}</span>`);
 };
 
 /**

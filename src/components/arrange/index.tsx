@@ -5,7 +5,7 @@
  * @LastEditTime: 2021-08-04 16:43:42
  * @Description:排列
  */
-import { arrangeList } from '@/common/utils/constant';
+import { ARRANGE_LIST } from '@/common/utils/constant';
 import { FC } from 'react';
 import styles from './index.module.scss';
 interface Props {
@@ -17,7 +17,7 @@ const Arrange: FC<Props> = (props) => {
   const { active, cb } = props;
   return (
     <ul className={styles.arrange}>
-      {arrangeList.map((item) => {
+      {ARRANGE_LIST.map((item) => {
         const cls = active === item.key ? styles.active : ' ';
         return (
           <li

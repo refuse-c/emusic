@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-19 21:38:46
+ * @LastEditTime: 2021-08-22 22:58:24
  * @Description:
  */
 /**
@@ -14,7 +14,7 @@
  * 3.type: 1可跳转路由 2标题(不可以跳转,非路由) 3暂未开发(保留字段)
  * 4.isBold 选中样式是否加粗 true加粗 false不加粗
  */
-export const menuList = [
+export const MENU_LIST = [
   {
     name: '发现音乐',
     path: '/find',
@@ -94,7 +94,7 @@ export const menuList = [
  * 1.name: 显示的名字
  * 2.path: 路由地址
  */
-export const findNav = [
+export const FIND_NAV = [
   { name: '个性推荐', path: '/find' },
   { name: '歌单', path: '/find/playlist' },
   { name: '主播电台', path: '/find/radio' },
@@ -103,7 +103,7 @@ export const findNav = [
   { name: '最新音乐', path: '/find/new' },
 ];
 
-export const searchNav = [
+export const SEARCH_NAV = [
   { name: '单曲', path: '/search', type: 1, unit: '首' },
   { name: '歌手', path: '/search/singer', type: 100, unit: '位' },
   { name: '专辑', path: '/search/album', type: 10, unit: '张' },
@@ -118,13 +118,13 @@ export const searchNav = [
  * @name:播放列表导航
  * @param {*}
  */
-export const playListNav = [{ name: '播放列表' }, { name: '历史记录' }];
+export const PLAYLIST_NAV = [{ name: '播放列表' }, { name: '历史记录' }];
 
 /**
  * @name:最新音乐导航
  * @param {*}
  */
-export const newMusicNav = [{ name: '新歌速递' }, { name: '新碟上架' }];
+export const NEW_MUSIC_NAV = [{ name: '新歌速递' }, { name: '新碟上架' }];
 
 /**
  * @name: 视频顶部导航
@@ -132,7 +132,7 @@ export const newMusicNav = [{ name: '新歌速递' }, { name: '新碟上架' }];
  * 1.name: 显示的名字
  * 2.path: 路由地址
  */
-export const videoNav = [
+export const VIDEO_NAV = [
   { name: '视频', path: '/video' },
   { name: 'MV', path: '/video/mv' },
 ];
@@ -141,35 +141,35 @@ export const videoNav = [
  * @param {*}
  * @Description:
  */
-export const initUserInfo = { userId: 0, nickname: '', avatarUrl: '' };
+export const INI_TUSER_INFO = { userId: 0, nickname: '', avatarUrl: '' };
 
 /**
  * @name: 歌曲信息默认值
  * @param {*}
  * @Description:
  */
-export const initSong = { id: 0, name: '', ar: [], dt: 0, al: { picUrl: '' } };
+export const INIT_SONG = { id: 0, name: '', ar: [], dt: 0, al: { picUrl: '' } };
 
 /**
  * @name: 初始化歌曲时间
  * @param {*}
  * @Description:
  */
-export const initTime = { currentTime: 0, duration: 0 };
+export const INIT_TIME = { currentTime: 0, duration: 0 };
 
 /**
  * @name: 检索信息
  * @param {*}
  * @Description:
  */
-export const initSearchInfo = { total: 0, type: 1 };
+export const INIT_SEARCH_INFO = { total: 0, type: 1 };
 
 /**
  * @name: 歌曲列表二级导航列表
  * @param {*}
  * @Description:
  */
-export const navigationList = [
+export const NAVIGATION_LIST = [
   { key: 1, title: '歌曲列表' },
   { key: 2, title: '评论' },
   { key: 3, title: '收藏者' },
@@ -180,7 +180,7 @@ export const navigationList = [
  * @param {*}
  * @Description:
  */
-export const singerDetailNavList = [
+export const SINGER_DETAIL_NAV_LIST = [
   { key: 1, title: '专辑' },
   { key: 2, title: 'MV' },
   { key: 3, title: '歌手详情' },
@@ -192,7 +192,7 @@ export const singerDetailNavList = [
  * @param {*}
  * @Description:
  */
-export const singerTopNav = [
+export const SINGER_TOP_NAV = [
   { key: 1, title: '华语' },
   { key: 2, title: '欧美' },
   { key: 3, title: '韩国' },
@@ -203,7 +203,7 @@ export const singerTopNav = [
  * @name: 默认搜索关键词
  * @param {*}
  */
-export const defaultVal = {
+export const DEFAULT_VAL = {
   realkeyword: '',
   searchType: 1,
   showKeyword: '',
@@ -213,7 +213,7 @@ export const defaultVal = {
  * @name:默认颜色
  * @param {*}
  */
-export const defaultColor = [
+export const DEFAULT_COLOR = [
   '#EC4141',
   '#9741EC',
   '#37D67A',
@@ -245,7 +245,7 @@ export const defaultColor = [
  * @name: 歌手分类-首字母
  * @param {*}
  */
-export const initialList = [
+export const INIT_LIST = [
   { name: '热门', key: '-1' },
   { name: 'A', key: 'a' },
   { name: 'B', key: 'b' },
@@ -280,7 +280,7 @@ export const initialList = [
  * @name: 歌手分类-类型
  * @param {*}
  */
-export const typeList = [
+export const TYPE_LIST = [
   { name: '全部', key: '-1' },
   { name: '男歌手', key: '1' },
   { name: '女歌手', key: '2' },
@@ -291,7 +291,7 @@ export const typeList = [
  * @name: 歌手分类-地区
  * @param {*}
  */
-export const areaList = [
+export const AREA_LIST = [
   { name: '全部', title: '全部', area: 'ALL', key: '-1' },
   { name: '华语', title: '华语', area: 'ZH', key: '7' },
   { name: '欧美', title: '欧美', area: 'EA', key: '96' },
@@ -303,17 +303,17 @@ export const areaList = [
  * @name: 排列方法
  * @param {*}
  */
-export const arrangeList = [
+export const ARRANGE_LIST = [
   { title: '大图模式', key: 'row', cls: 'icon icon-list1' },
   { title: '列表模式', key: 'col', cls: 'icon icon-list2' },
   // { title: '图例模式', key: 'detail', cls: 'icon icon-list3' },
 ];
 
 /**
- * @name: 排列方法
+ * @name: 专辑导航
  * @param {*}
  */
-export const albumList = [
+export const ALBUM_LIST = [
   { title: '推荐', key: 0 },
   { title: '全部', key: 1 },
 ];

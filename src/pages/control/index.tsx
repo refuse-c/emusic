@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-19 23:23:45
+ * @LastEditTime: 2021-08-22 23:10:59
  * @Description:control
  */
 import { FC, useContext, useState, useEffect, useRef, useCallback } from 'react';
@@ -12,7 +12,7 @@ import { formatImgSize, formatTime } from '@/common/utils/format';
 import { lyric, simiSong, songDetail, songUrl } from '@/common/net/api';
 import { message, Slider } from 'antd';
 import Player from '@pages/player';
-import { initSong, initTime } from '@/common/utils/constant';
+import { INIT_SONG, INIT_TIME } from '@/common/utils/constant';
 import {
   cutSong,
   debounce,
@@ -23,10 +23,10 @@ import {
   getTimeIndex,
   mergeData,
   assemblyIds,
+  jumpPage,
 } from '@/common/utils/tools';
-import { createHashHistory } from 'history';
+
 import { playlistSimi } from '@/common/net/playList';
-const history = createHashHistory();
 const Control: FC = () => {
   // let refPlayer = useRef(null) as React.RefObject<any>;
   let refAudio = useRef(null) as React.RefObject<any>;
@@ -37,7 +37,7 @@ const Control: FC = () => {
   const [lrcLoading, setLrcLoading] = useState(false);
   const [model, setModel] = useState(getLocal('model') || 1);
   const [volume, setVolume] = useState(getLocal('volume') || 50);
-  const [songTime, setSongTime] = useState(initTime);
+  const [songTime, setSongTime] = useState(INIT_TIME);
   const [simePlaylist, setSimePlaylist] = useState<any>([]);
   const [musicList, setMusicList] = useState<any>([]);
   const { isPlay, likeList, songList, currentSong, showModal, setLike, showPlayer, dispatch } =
@@ -121,7 +121,7 @@ const Control: FC = () => {
     const index = cutSong(currentIndex, songList, model, type);
     dispatch({
       type: 'currentSong',
-      data: songList.length ? songList[index] : initSong,
+      data: songList.length ? songList[index] : INIT_SONG,
     });
   };
 
@@ -201,7 +201,8 @@ const Control: FC = () => {
     if (refAudio) {
       refAudio.current.volume = volume / 100;
       refAudio.current.addEventListener('timeupdate', () => {
-        const { currentTime, duration, buffered } = refAudio.current;
+        const { currentTime = 0, duration = 0, buffered = 0 } = (refAudio && refAudio.current) || null;
+
         // 缓冲进度
         if (buffered.length) {
           const bufferTime = buffered.end(buffered.length - 1);
@@ -280,7 +281,7 @@ const Control: FC = () => {
               </div>
               <div>
                 {ar.map((item: any, index: number) => (
-                  <span key={index} onClick={() => history.push(`/singer${item.id}`)}>
+                  <span key={index} onClick={() => jumpPage(`/singer${item.id}`)}>
                     {item.name}
                   </span>
                 ))}

@@ -115,10 +115,54 @@
     .form {
       padding: 0 46px;
     }
+
+    .forget {
+      font-size: 12px;
+      color: #bababa;
+      cursor: pointer;
+    }
+
+    .registerBtn {
+      margin-top: 16px;
+      color: #333;
+      text-align: center;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    ul {
+      display: flex;
+      padding: 16px 46px 0;
+      align-items: center;
+      justify-content: space-between;
+
+      li {
+        display: flex;
+        width: 40px;
+        height: 40px;
+        color: #fff;
+        background-color: $color;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+      }
+    }
   }
 }
 
 :global {
+  .ant-input {
+    &::placeholder {
+      font-size: 12px;
+    }
+  }
+
+  .ant-row:nth-child(3) {
+    margin: 0;
+    font-size: 12px !important;
+    line-height: 1;
+  }
+
   .ant-tooltip {
     .ant-tooltip-arrow-content {
       background-color: #989898;

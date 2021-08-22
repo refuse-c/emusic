@@ -10,14 +10,14 @@ import styles from './index.module.scss';
 import Nav from '@components/nav';
 import Content from '@components/view/content';
 import { HashRouter as Router, Route } from 'react-router-dom';
-import { findNav } from '@/common/utils/constant';
+import { FIND_NAV } from '@/common/utils/constant';
 
 const Find: FC = (props: any) => {
   const { router } = props;
   return (
     <div className={styles.find}>
       <Content padding={'0 30px'} isFull={true}>
-        <Nav list={findNav} isFixed={true} />
+        <Nav list={FIND_NAV} isFixed={true} />
       </Content>
 
       <Router>

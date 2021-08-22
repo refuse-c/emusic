@@ -12,7 +12,7 @@ import Head from './component/head';
 import { artists, artistsAlbum, artistsDesc, artistsMv, artistsSimi } from '@/common/net/singer';
 import Content from '@components/view/content';
 import Navigation from '@/components/single-nav';
-import { singerDetailNavList } from '@/common/utils/constant';
+import { SINGER_DETAIL_NAV_LIST } from '@/common/utils/constant';
 import AlbumComponent from '@/components/album-list';
 import VideoComponent from '@components/video';
 import DescComponent from './component/desc';
@@ -26,7 +26,7 @@ const SingerDetail: FC = (props: any) => {
   const id = props.match.params.id;
   const [data, setData] = useState<any>({});
   const [navStatus, setNavStatus] = useState(0);
-  const [albumList, setAlbumList] = useState<any>({}); // 歌手专辑
+  const [ALBUM_LIST, setALBUM_LIST] = useState<any>({}); // 歌手专辑
   const [mvList, setMvList] = useState<any>({}); // 歌手视频
   const [desc, setDesc] = useState(''); // 歌手详情
   const [simiList, setSimiList] = useState([]); // 相似歌手
@@ -43,7 +43,7 @@ const SingerDetail: FC = (props: any) => {
   const getArtistsAlbum = async (id: Id) => {
     const res: any = await artistsAlbum({ id });
     if (res.code === 200) {
-      setAlbumList(res);
+      setALBUM_LIST(res);
     }
   };
 
@@ -97,12 +97,12 @@ const SingerDetail: FC = (props: any) => {
         <Head data={data} callBack={getArtists} />
         <Navigation
           status={navStatus}
-          list={singerDetailNavList}
+          list={SINGER_DETAIL_NAV_LIST}
           onChange={(_item: any, index: number) => setNavStatus(index)}
         />
       </Content>
       {navStatus === 0 ? (
-        <AlbumComponent list={(albumList && albumList.hotAlbums) || []} layout="col" />
+        <AlbumComponent list={(ALBUM_LIST && ALBUM_LIST.hotAlbums) || []} layout="col" />
       ) : navStatus === 1 ? (
         <Content padding={30} isFull>
           <VideoComponent list={(mvList && mvList.mvs) || []} />

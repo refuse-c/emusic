@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-05-24 22:10:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-09 16:18:59
+ * @LastEditTime: 2021-08-22 23:11:22
  * @Description:发现音乐-排行榜
  */
 import { FC, useEffect, useState } from 'react';
@@ -11,14 +11,13 @@ import Title from '@components/title';
 import { toplist, toplistArtist } from '@/common/net/topList';
 import PlayList from '@/components/song-list';
 import { playlistDetail } from '@/common/net/playList';
-import { assemblyIds, getSession, mergeData, setSession } from '@/common/utils/tools';
+import { assemblyIds, getSession, jumpPage, mergeData, setSession } from '@/common/utils/tools';
 import { songDetail } from '@/common/net/api';
 import { formatImgSize } from '@/common/utils/format';
-import { createHashHistory } from 'history';
+
 import { Spin } from 'antd';
 import Content from '@components/view/content';
 
-const history = createHashHistory();
 interface Item {
   list: [];
   name: string;
@@ -82,7 +81,7 @@ const TopList: FC = () => {
   const queryAListDetail = (list: any) => {
     setLoading(!official.length);
     const promises = list.map((item: any) =>
-      item.ToplistType === 'A' ? queryToplistArtist(item) : getPlayListDetail(item.id),
+      item.ToplistType === 'A' ? queryToplistArtist(item) : getPlayListDetail(item.id)
     );
     Promise.all(promises).then((official) => {
       setSession('official', official);
@@ -107,14 +106,14 @@ const TopList: FC = () => {
               const pathName = ToplistType === 'A' ? '/singertop' : `/single${id}/${'歌单'}`;
               return (
                 <div key={index} className={styles.item}>
-                  <div className={styles.img_box} onClick={() => history.push(pathName)}>
+                  <div className={styles.img_box} onClick={() => jumpPage(pathName)}>
                     <img src={formatImgSize(coverImgUrl, 172, 172)} alt="" />
                   </div>
                   <ul className={styles.songList}>
                     {list.map((child: any, _index) => {
                       return _index < 5 && <li key={_index}>{child.name}</li>;
                     })}
-                    <div className={styles.viewAll} onClick={() => history.push(pathName)}>
+                    <div className={styles.viewAll} onClick={() => jumpPage(pathName)}>
                       查看全部
                     </div>
                   </ul>

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-19 23:32:02
+ * @LastEditTime: 2021-08-22 00:20:17
  * @Description:密码登录
  */
 import { login } from '@/common/net/login';
@@ -17,7 +17,7 @@ const { Password } = Input;
 interface Props {
   setType: (v: number) => void;
 }
-
+ 
 const Pwd: FC<Props> = (props) => {
   const { setType } = props;
   const { queryStatus } = useContext(Context);
@@ -35,6 +35,8 @@ const Pwd: FC<Props> = (props) => {
     getLogin(values);
   };
 
+  const addonAfter = <div className={styles.forget}>重设密码</div>;
+
   return (
     <div className={styles.pwd}>
       <Tooltip placement="rightTop" title={'扫码登录更安全'} visible={true} align={{ offset: [-14, 10] }}>
@@ -42,7 +44,7 @@ const Pwd: FC<Props> = (props) => {
       </Tooltip>
       <div className={styles.bg}></div>
       <Form
-        name="basic"
+        name=" basic"
         size="middle"
         initialValues={{ remember: true }}
         className={styles.form}
@@ -60,7 +62,11 @@ const Pwd: FC<Props> = (props) => {
           ]}
           getValueFromEvent={(e) => e.target.value.replace(/[^\d]/g, '')}
         >
-          <Input maxLength={11} prefix={<UserOutlined className="site-form-item-icon" />} />
+          <Input
+            maxLength={11}
+            placeholder="请输入手机号"
+            prefix={<UserOutlined className="site-form-item-icon" />}
+          />
         </Item>
 
         <Item
@@ -75,11 +81,16 @@ const Pwd: FC<Props> = (props) => {
           ]}
           getValueFromEvent={(e) => trim(e.target.value)}
         >
-          <Password maxLength={16} prefix={<LockOutlined className="site-form-item-icon" />} />
+          <Password
+            maxLength={16}
+            addonAfter={addonAfter}
+            placeholder="请输入密码"
+            prefix={<LockOutlined className="site-form-item-icon" />}
+          />
         </Item>
 
         {/* <Item name="remember" valuePropName="checked">
-          <Checkbox>Remember me</Checkbox>
+          <Checkbox>自动登录</Checkbox>
         </Item> */}
 
         <Item>
@@ -88,6 +99,13 @@ const Pwd: FC<Props> = (props) => {
           </Button>
         </Item>
       </Form>
+      <div className={styles.registerBtn}>注册</div>
+      <ul>
+        <li>微信</li>
+        <li>扣扣</li>
+        <li>微博</li>
+        <li>邮箱</li>
+      </ul>
     </div>
   );
 };

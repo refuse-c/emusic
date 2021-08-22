@@ -2,16 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-09 21:46:11
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-19 23:58:21
+ * @LastEditTime: 2021-08-22 23:06:51
  * @Description:
  */
 import { FC, useContext, useState } from 'react';
 import styles from './index.module.scss';
 import { BlockPicker } from 'react-color';
-import { createHashHistory } from 'history';
-import { jumpPage, reLocalAll, setLocal } from '@/common/utils/tools';
+import { history, jumpPage, reLocalAll, setLocal } from '@/common/utils/tools';
 import { Context } from '@utils/context';
-import { defaultColor, initSong, initUserInfo } from '@/common/utils/constant';
+import { DEFAULT_COLOR, INIT_SONG, INI_TUSER_INFO } from '@/common/utils/constant';
 import SearchInput from '@/components/search-Input';
 import { formatImgSize } from '@/common/utils/format';
 import { message } from 'antd';
@@ -20,7 +19,7 @@ import img from '@images/user.png';
 const { remote, ipcRenderer } = window.require('electron');
 
 const win = remote.getCurrentWindow();
-const history = createHashHistory();
+
 const DOM = document.getElementsByTagName('body')[0] as HTMLElement;
 const Header: FC = () => {
   const [isMaximized, setIsMaximized] = useState(win.isMaximized());
@@ -47,7 +46,7 @@ const Header: FC = () => {
       <div className={styles.colorContent} onClick={(e) => e.stopPropagation()}>
         {showModal === 'showColor' ? (
           <BlockPicker
-            colors={defaultColor}
+            colors={DEFAULT_COLOR}
             color={globalColor}
             onChange={(e: { hex: string }) => changeColor(e.hex)}
           />
@@ -130,8 +129,8 @@ const Header: FC = () => {
                 data: { redVipImageUrl: '', level: 0, vipType: -1 },
               });
               dispatch({ type: 'vipType', data: -1 });
-              dispatch({ type: 'currentSong', data: initSong });
-              dispatch({ type: 'userInfo', data: initUserInfo });
+              dispatch({ type: 'currentSong', data: INIT_SONG });
+              dispatch({ type: 'userInfo', data: INI_TUSER_INFO });
               dispatch({ type: 'globalColor', data: '#EC4141' });
               dispatch({ type: 'showLogin', data: false });
               jumpPage('/find');

@@ -11,15 +11,15 @@ import Nav from '@components/nav';
 import Content from '@components/view/content';
 import { HashRouter as Router, Route } from 'react-router-dom';
 import { Context } from '@utils/context';
-import { searchNav } from '@/common/utils/constant';
+import { SEARCH_NAV } from '@/common/utils/constant';
 const Search: FC = (props: any) => {
   const { router = [] } = props;
   // const [type, setType] = useState(1);
   const { searchInfo } = useContext(Context);
   const { total, type } = searchInfo;
   const renderText = (total: number, type: number) => {
-    const _index = searchNav.findIndex((item) => item.type === type);
-    const data = searchNav[_index];
+    const _index = SEARCH_NAV.findIndex((item) => item.type === type);
+    const data = SEARCH_NAV[_index];
     if (_index !== -1) return `找到${total + data.unit + data.name}`;
   };
 
@@ -27,7 +27,7 @@ const Search: FC = (props: any) => {
     <div className={styles.search}>
       <Content padding={'30px 30px 0'} isFull={true}>
         <div className={styles.total}>{renderText(total, type)}</div>
-        <Nav list={searchNav} cls="smell" isFixed={true} />
+        <Nav list={SEARCH_NAV} cls="smell" isFixed={true} />
       </Content>
       <Router>
         {router.map((item: any, index: number) => (

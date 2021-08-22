@@ -9,7 +9,7 @@
 import { FC, useState, useContext } from 'react';
 import styles from './index.module.scss';
 import { Context } from '@utils/context';
-import { playListNav } from '@/common/utils/constant';
+import { PLAYLIST_NAV } from '@/common/utils/constant';
 import EllipticalNav from '@/components/elliptical-nav';
 const PlayList: FC = () => {
   const { songList } = useContext(Context);
@@ -17,7 +17,7 @@ const PlayList: FC = () => {
   return (
     <div className={styles.playlist} onClick={(e) => e.stopPropagation()}>
       <div className={styles.content}>
-        <EllipticalNav list={playListNav} status={state} onChange={(state: number) => setstate(state)} />
+        <EllipticalNav list={PLAYLIST_NAV} status={state} onChange={(state: number) => setstate(state)} />
         <div className={styles.tools}>
           <div className={styles.total}>{`总${songList.length}首`}</div>
           <div className={styles.info}>清空</div>

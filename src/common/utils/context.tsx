@@ -17,11 +17,11 @@ showModal:
 */
 import React from 'react';
 import { getLocal } from '@/common/utils/tools';
-import { initSearchInfo, initSong, initUserInfo } from '@/common/utils/constant';
+import { INIT_SEARCH_INFO, INIT_SONG, INI_TUSER_INFO } from '@/common/utils/constant';
 export const initialState = {
   isPlay: false, // 是否播放
   searchText: '', // 检索的文字
-  searchInfo: initSearchInfo, // 检索到的总数量
+  searchInfo: INIT_SEARCH_INFO, // 检索到的总数量
   // isOnLine: true, // 当前的网络状态 true/已连接  false/已断开
   likeList: [], // 我喜欢的音乐id集合
   songList: [], // 当前播放的音乐列表
@@ -31,8 +31,8 @@ export const initialState = {
   showModal: '', // 显示弹窗
   showPlayer: false, // 显示播放页
   vipInfo: getLocal('vipInfo') || { redVipImageUrl: '', level: 0, vipType: -1 }, // vip  信息
-  currentSong: initSong, // 当前播放的音乐信息
-  userInfo: initUserInfo, // 用户信息
+  currentSong: INIT_SONG, // 当前播放的音乐信息
+  userInfo: INI_TUSER_INFO, // 用户信息
   globalColor: getLocal('color') || '#EC4141', // 当前主题颜色
   showLogin: false, // 是否显示登录
 };

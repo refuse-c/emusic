@@ -2,15 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 09:05:23
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-03 10:29:20
+ * @LastEditTime: 2021-08-22 23:13:20
  * @Description:左侧菜单
  */
 import { FC, useState, useContext } from 'react';
 import styles from './index.module.scss';
-import { menuList } from '@/common/utils/constant';
+import { MENU_LIST } from '@/common/utils/constant';
 import { message } from 'antd';
 import { Context } from '@utils/context';
-import { createHashHistory } from 'history';
+import { jumpPage } from '@/common/utils/tools';
 
 interface Item {
   type: number;
@@ -20,7 +20,6 @@ interface Item {
 }
 
 const Menu: FC = () => {
-  const history = createHashHistory();
   const [statue, setStatue] = useState(0);
   const { playList } = useContext(Context);
 
@@ -35,7 +34,7 @@ const Menu: FC = () => {
 
     if (type === 1) {
       setStatue(index);
-      history.push(path);
+      jumpPage(path);
     } else if (type === 3) {
       message.info('暂未开发');
     }
@@ -43,7 +42,7 @@ const Menu: FC = () => {
 
   return (
     <ul className={styles.menu}>
-      {menuList.concat(playList).map((item: Item, index: number) => {
+      {MENU_LIST.concat(playList).map((item: Item, index: number) => {
         const { type, name, isBold, icon } = item;
         const cls1 = isBold ? null : styles.active1;
         const cls2 = statue === index ? styles.active2 : null;

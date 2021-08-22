@@ -2,15 +2,15 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-13 21:56:11
+ * @LastEditTime: 2021-08-22 23:09:58
  * @Description:歌单组件
  */
 import { FC } from 'react';
 import styles from './index.module.scss';
 import { formatImgSize, formatNumber } from '@/common/utils/format';
 import Playcount from '@/components/play-count';
-import { createHashHistory } from 'history';
-const history = createHashHistory();
+import { jumpPage } from '@/common/utils/tools';
+
 interface Props {
   list: any;
   layout?: string; // 是横着排还是竖着排默认值为row 可选值为col
@@ -53,15 +53,11 @@ const SongList: FC<Props> = (props) => {
           creator,
           trackCount,
         } = item;
-        const pathName = identifying
-          ? '/recommendSong'
-          : `/single${item.id}/${'歌单'}`;
-        const src = identifying
-          ? picUrl || coverImgUrl
-          : formatImgSize(picUrl || coverImgUrl, size, size);
+        const pathName = identifying ? '/recommendSong' : `/single${item.id}/${'歌单'}`;
+        const src = identifying ? picUrl || coverImgUrl : formatImgSize(picUrl || coverImgUrl, size, size);
         return (
           <li key={index} className={itemCls}>
-            <div className={styles.left} onClick={() => history.push(pathName)}>
+            <div className={styles.left} onClick={() => jumpPage(pathName)}>
               <img src={src} alt="" />
               {identifying ? (
                 <div className={styles.dateBox}>{day}</div>

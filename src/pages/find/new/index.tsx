@@ -11,7 +11,7 @@ import Content from '@components/view/content';
 import { newMusic, songDetail } from '@/common/net/api';
 import { assemblyIds, mergeData } from '@/common/utils/tools';
 import { Context } from '@utils/context';
-import { newMusicNav, areaList, albumList } from '@/common/utils/constant';
+import { NEW_MUSIC_NAV, AREA_LIST, ALBUM_LIST } from '@/common/utils/constant';
 import EllipticalNav from '@/components/elliptical-nav';
 import Navigation from '@/components/single-nav';
 import MusicList from '@components/music-list';
@@ -31,7 +31,7 @@ const Newmusic: FC = () => {
   const getNewMusic = useCallback(async (key) => {
     setLoading(true);
     setMusicList([]);
-    const type = areaList[key].key;
+    const type = AREA_LIST[key].key;
     const res: any = await newMusic({ type: type === '-1' ? '0' : type });
     const arr = res.data || [];
     const idsArr = assemblyIds(arr);
@@ -74,7 +74,7 @@ const Newmusic: FC = () => {
   const albumleBtn = () => {
     return (
       <ul className={styles.albumleBtn}>
-        {albumList.map((item, index) => {
+        {ALBUM_LIST.map((item, index) => {
           const cls = index === albumStatus ? styles.active : '';
           return (
             <li className={cls} onClick={() => setAlbumStatus(index)}>
@@ -95,7 +95,7 @@ const Newmusic: FC = () => {
       <Content padding={'0 30px 30px'} isFull={false}>
         <div className={styles.nav1}>
           <EllipticalNav
-            list={newMusicNav}
+            list={NEW_MUSIC_NAV}
             status={state}
             onChange={(state: number) => {
               setstate(state);
@@ -103,7 +103,7 @@ const Newmusic: FC = () => {
             }}
           />
         </div>
-        <Navigation status={type} list={areaList} onChange={(_item: any, index: number) => setType(index)}>
+        <Navigation status={type} list={AREA_LIST} onChange={(_item: any, index: number) => setType(index)}>
           {!state ? singleBtn() : albumleBtn()}
         </Navigation>
       </Content>

@@ -2,14 +2,13 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-07-29 10:03:19
+ * @LastEditTime: 2021-08-22 23:10:14
  * @Description:歌手组件
  */
 import { formatImgSize } from '@/common/utils/format';
+import { jumpPage } from '@/common/utils/tools';
 import { FC } from 'react';
 import styles from './index.module.scss';
-import { createHashHistory } from 'history';
-const history = createHashHistory();
 
 interface Props {
   layout?: string;
@@ -29,7 +28,7 @@ const Singer: FC<Props> = (props) => {
         const pathName = `/singer${item.id}`;
 
         return (
-          <li key={index} onClick={() => history.push(pathName)}>
+          <li key={index} onClick={() => jumpPage(pathName)}>
             <div className={styles.content}>
               <div className={styles.left}>
                 {type === 3 && (
