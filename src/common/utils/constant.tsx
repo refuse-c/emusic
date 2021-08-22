@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 23:45:32
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-22 22:58:24
+ * @LastEditTime: 2021-08-22 23:18:46
  * @Description:
  */
 /**
@@ -14,6 +14,7 @@
  * 3.type: 1可跳转路由 2标题(不可以跳转,非路由) 3暂未开发(保留字段)
  * 4.isBold 选中样式是否加粗 true加粗 false不加粗
  */
+
 export const MENU_LIST = [
   {
     name: '发现音乐',
@@ -317,3 +318,8 @@ export const ALBUM_LIST = [
   { title: '推荐', key: 0 },
   { title: '全部', key: 1 },
 ];
+
+// 密码校验
+export const REGEXP_PWD = /^[\s\S]{6,16}$/;
+// 手机号校验
+export const REGEXP_TEL = /^1[3|4|5|6|7|8|9][0-9]{9}$/;

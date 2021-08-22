@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-10 08:55:13
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-14 15:02:34
+ * @LastEditTime: 2021-08-22 23:24:01
  * @Description:
  */
 
@@ -15,9 +15,7 @@ import { message } from 'antd';
  * @param {string} h      图片高度
  */
 export const formatImgSize = (imgUrl: string, w?: number, h?: number) => {
-  return (
-    imgUrl && `${imgUrl.replace('http:', 'https:')}?param=${w || 50}y${h || 50}`
-  );
+  return imgUrl && `${imgUrl.replace('http:', 'https:')}?param=${w || 50}y${h || 50}`;
 };
 
 /**
@@ -92,3 +90,10 @@ export const formatAllAuthTypes = (arr) => {
       : { desc: `${item.desc}` };
   });
 };
+
+/**
+ * @name: 只能输入数字
+ * @param {*} arr
+ * @Description:
+ */
+export const formatInputNum = (value) => value.replace(/[^\d]/g, '');

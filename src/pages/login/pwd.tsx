@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-22 00:20:17
+ * @LastEditTime: 2021-08-22 23:24:23
  * @Description:密码登录
  */
 import { login } from '@/common/net/login';
@@ -12,12 +12,14 @@ import styles from './index.module.scss';
 import { Context } from '@utils/context';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { trim } from '@/common/utils/tools';
+import { REGEXP_PWD, REGEXP_TEL } from '@/common/utils/constant';
+import { formatInputNum } from '@/common/utils/format';
 const { Item } = Form;
 const { Password } = Input;
 interface Props {
   setType: (v: number) => void;
 }
- 
+
 const Pwd: FC<Props> = (props) => {
   const { setType } = props;
   const { queryStatus } = useContext(Context);
@@ -55,12 +57,12 @@ const Pwd: FC<Props> = (props) => {
           rules={[
             { required: true, message: '请输入手机号码' },
             {
-              pattern: /^1[3|4|5|6|7|8|9][0-9]{9}$/,
+              pattern: REGEXP_TEL,
               message: '请输入11位数字的手机号',
               validateTrigger: 'onBlur',
             },
           ]}
-          getValueFromEvent={(e) => e.target.value.replace(/[^\d]/g, '')}
+          getValueFromEvent={(e) => formatInputNum(e.target.value)}
         >
           <Input
             maxLength={11}
@@ -74,7 +76,7 @@ const Pwd: FC<Props> = (props) => {
           rules={[
             { required: true, message: '请输入登录密码' },
             {
-              pattern: /^[\s\S]{6,16}$/,
+              pattern: REGEXP_PWD,
               message: '请输入6到16位密码',
               validateTrigger: 'onBlur',
             },
@@ -88,11 +90,6 @@ const Pwd: FC<Props> = (props) => {
             prefix={<LockOutlined className="site-form-item-icon" />}
           />
         </Item>
-
-        {/* <Item name="remember" valuePropName="checked">
-          <Checkbox>自动登录</Checkbox>
-        </Item> */}
-
         <Item>
           <Button block={true} type="primary" htmlType="submit">
             登录

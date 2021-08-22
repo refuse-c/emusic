@@ -2,10 +2,10 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-22 23:13:28
+ * @LastEditTime: 2021-08-22 23:14:43
  * @Description:搜索框组件
  */
-import { FC, useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Input } from 'antd';
 import { debounce, jumpPage, trim } from '@/common/utils/tools';
 
@@ -14,7 +14,7 @@ import { Context } from '@utils/context';
 import { searchDefault, searchHotSuggest } from '@/common/net/search';
 import styles from './index.module.scss';
 let timer: NodeJS.Timer | null;
-const SearchInput: FC = () => {
+const SearchInput = () => {
   const [keywords, setKeywords] = useState('');
   const [dfKeyWord, setDfKeyWord] = useState(DEFAULT_VAL);
   const { dispatch } = useContext(Context);
