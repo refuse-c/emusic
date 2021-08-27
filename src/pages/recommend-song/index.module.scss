@@ -27,13 +27,13 @@
         &:first-child {
           font-size: 22px;
           font-weight: bold;
-          color: #333;
+          color: $c333;
         }
 
         &:last-child {
           margin-top: 10px;
           font-size: 14px;
-          color: #676767;
+          color: $c676767;
         }
       }
     }

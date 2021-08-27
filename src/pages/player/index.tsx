@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-18 14:34:18
+ * @LastEditTime: 2021-08-25 19:56:33
  * @Description:播放页
  */
 
@@ -30,18 +30,17 @@ import clone from 'clone';
 import { jumpPage, _findIndex } from '@/common/utils/tools';
 interface Props {
   num: number;
-  lrc: [];
+  lrc: string[];
   isPlay: boolean;
   noLyric: any;
   refAudio: any;
-  simePlaylist: [];
-  musicList: [];
+  simePlaylist: string[];
+  musicList: string[];
 }
 let T1: NodeJS.Timeout;
 const Player = (props: Props) => {
   // ref: any
-  const { num, lrc, isPlay, noLyric, refAudio, simePlaylist, musicList } =
-    props;
+  const { num, lrc, isPlay, noLyric, refAudio, simePlaylist, musicList } = props;
   const { songList, currentSong, showPlayer, dispatch } = useContext(Context);
   const { al, ar, name } = currentSong;
   const [rotate, setRotate] = useState(0);
@@ -100,10 +99,7 @@ const Player = (props: Props) => {
     <div className={styles.player}>
       <Content isFull={true} padding={30} maxWidth={1600}>
         <div className={styles.content}>
-          <div
-            className={styles.isShowMore}
-            onClick={() => setIsShowMore(!isShowMore)}
-          >
+          <div className={styles.isShowMore} onClick={() => setIsShowMore(!isShowMore)}>
             OFF
           </div>
           <div className={styles.name}>
@@ -116,10 +112,7 @@ const Player = (props: Props) => {
           </div>
           <div className={styles.info}>
             <div className={styles.info_box}>
-              <div
-                className={styles.album_box}
-                style={{ transform: `rotate(${rotate}deg)` }}
-              >
+              <div className={styles.album_box} style={{ transform: `rotate(${rotate}deg)` }}>
                 <img src={formatImgSize(al.picUrl, 170, 170)} alt="" />
               </div>
             </div>
@@ -132,8 +125,7 @@ const Player = (props: Props) => {
                         key={index}
                         id={`line${index}`}
                         onClick={() => {
-                          if (index !== num)
-                            refAudio.current.currentTime = item.time / 1000;
+                          if (index !== num) refAudio.current.currentTime = item.time / 1000;
                         }}
                         className={index === num ? styles.active : ''}
                       >
@@ -168,10 +160,7 @@ const Player = (props: Props) => {
                               });
                             }}
                           >
-                            <img
-                              src={formatImgSize(creator.avatarUrl, 30, 30)}
-                              alt=""
-                            />
+                            <img src={formatImgSize(creator.avatarUrl, 30, 30)} alt="" />
                             <p>{name}</p>
                           </li>
                         );
@@ -186,10 +175,7 @@ const Player = (props: Props) => {
                       {musicList.map((item: any, index) => {
                         return (
                           <li key={index} onClick={() => addPlay(item)}>
-                            <img
-                              src={formatImgSize(item.al.picUrl, 30, 30)}
-                              alt=""
-                            />
+                            <img src={formatImgSize(item.al.picUrl, 30, 30)} alt="" />
                             <p>{item.name}</p>
                           </li>
                         );

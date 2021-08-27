@@ -4,9 +4,9 @@
   left: 30px;
   z-index: 50;
   width: 740px;
-  background-color: #fff;
+  background-color: $cfff;
   border-radius: 2px;
-  box-shadow: 0 0 10px 0 rgba($color: #e5e5e5, $alpha: 1);
+  box-shadow: 0 0 10px 0 rgba($color: $ce5e5e5, $alpha: 1);
 
   .all {
     padding: 0 30px;
@@ -23,7 +23,7 @@
       width: 120px;
       padding-top: 25px;
       font-weight: 200;
-      color: #989898;
+      color: $c989898;
     }
 
     ul {

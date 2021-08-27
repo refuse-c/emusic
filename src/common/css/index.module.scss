@@ -2,7 +2,7 @@ div,
 ul,
 li,
 p {
-  font-family: Hack, Dank Mono, Fira Code Light;
+  // font-family: Hack, Dank Mono, Fira Code Light;
   cursor: default;
   user-select: none;
 }
@@ -10,7 +10,7 @@ p {
 body {
   position: relative;
   font-size: 14px;
-  color: #373737;
+  color: $c373737;
 
   &::after {
     position: absolute;
@@ -36,7 +36,7 @@ body {
 
     &.vip {
       font-size: 27px;
-      color: #fe672e;
+      color: $cfe672e;
     }
 
     &.sq {
@@ -58,7 +58,7 @@ body {
   .artistsName {
     height: 16px;
     overflow: hidden;
-    color: #929292;
+    color: $c929292;
     text-overflow: ellipsis;
     word-break: break-all;
     word-wrap: break-word;
@@ -68,13 +68,13 @@ body {
     span {
       padding-right: 5px;
       font-size: 12px;
-      color: #929292;
+      color: $c929292;
       word-break: break-all;
       word-wrap: break-word;
       cursor: pointer;
 
       &:hover {
-        color: #5f5f5f;
+        color: $c5f5f5f;
         text-decoration: underline;
       }
     }
@@ -96,12 +96,12 @@ body {
 
     .ant-pagination-item {
       margin-left: 4px !important;
-      background-color: #fff;
+      background-color: $cfff;
       border: 1px solid #e6e6e6 !important;
 
       a:hover {
-        color: #373737;
-        background-color: #f4f4f4;
+        color: $c373737;
+        background-color: $cf40;
       }
     }
 
@@ -111,22 +111,22 @@ body {
       border: 1px solid #e6e6e6 !important;
 
       &:hover {
-        background-color: #f4f4f4;
+        background-color: $cf40;
 
         .anticon {
-          color: #373737;
-          background-color: #f4f4f4;
+          color: $c373737;
+          background-color: $cf40;
         }
       }
     }
 
     .ant-pagination-disabled {
       &:hover {
-        background-color: #fff;
+        background-color: $cfff;
 
         .anticon {
-          color: #cbcbcb;
-          background-color: #fff;
+          color: $ccbcbcb;
+          background-color: $cfff;
         }
       }
     }
@@ -136,10 +136,10 @@ body {
       border-color: $color;
 
       a {
-        color: #fff;
+        color: $cfff;
 
         &:hover {
-          color: #fff;
+          color: $cfff;
           background-color: $color;
         }
       }

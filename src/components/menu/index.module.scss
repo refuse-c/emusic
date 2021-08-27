@@ -17,12 +17,12 @@
 
     &.router {
       line-height: 36px;
-      color: #333;
+      color: $c333;
       cursor: pointer;
 
       &:hover {
-        color: #373737;
-        background-color: #f6f6f7;
+        color: $c373737;
+        background-color: $cf6f6f7;
       }
     }
 
@@ -31,8 +31,8 @@
     }
 
     &.active2 {
-      color: #373737;
-      background-color: #f6f6f7;
+      color: $c373737;
+      background-color: $cf6f6f7;
     }
 
     &.active3 {
@@ -44,7 +44,7 @@
       margin-top: 5px;
       font-size: 13px;
       line-height: 36px;
-      color: #999;
+      color: $c999;
     }
 
     &.active5 {

@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-12 11:16:04
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-22 23:24:23
+ * @LastEditTime: 2021-08-27 14:04:43
  * @Description:密码登录
  */
 import { login } from '@/common/net/login';
@@ -14,6 +14,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { trim } from '@/common/utils/tools';
 import { REGEXP_PWD, REGEXP_TEL } from '@/common/utils/constant';
 import { formatInputNum } from '@/common/utils/format';
+import Checkbox from 'antd/lib/checkbox/Checkbox';
 const { Item } = Form;
 const { Password } = Input;
 interface Props {
@@ -103,6 +104,12 @@ const Pwd: FC<Props> = (props) => {
         <li>微博</li>
         <li>邮箱</li>
       </ul>
+      <div>
+        同意 <Checkbox />
+        <span>《服务条框》</span>
+        <span>《隐私政策》</span>
+        <span>《儿童隐私政策》</span>
+      </div>
     </div>
   );
 };

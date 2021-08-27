@@ -20,7 +20,7 @@
       &.active {
         position: relative;
         font-weight: bold;
-        color: #000;
+        color: $c000;
 
         &::after {
           position: absolute;

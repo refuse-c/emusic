@@ -37,9 +37,7 @@ function createWindow() {
   };
   mainWindow = new BrowserWindow(windowOptions); // 加载窗口配置文件
   mainWindow.setMinimumSize(1022, 670); // 设置最小宽高
-  mainWindow.loadURL(
-    isDev ? 'http://localhost:3006' : `file://${__dirname}/../build/index.html`
-  );
+  mainWindow.loadURL(isDev ? 'http://localhost:3006' : `file://${__dirname}/../build/index.html`);
   isDev && mainWindow.webContents.openDevTools();
   app.on('window-all-closed', () => app.quit());
   mainWindow.on('closed', () => (mainWindow = null));

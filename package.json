@@ -26,7 +26,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "^7.13.15",
-    "@szhsin/react-menu": "^1.10.1",
+    "@szhsin/react-menu": "^2.0.0",
     "@types/clone": "^2.1.0",
     "@types/react": "^17.0.3",
     "@types/react-color": "^3.0.4",

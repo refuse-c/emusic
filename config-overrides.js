@@ -2,7 +2,7 @@
  * @Author: REFUSE_C
  * @Date: 2021-04-11 13:25:20
  * @LastEditors: REFUSE_C
- * @LastEditTime: 2021-08-19 21:10:56
+ * @LastEditTime: 2021-08-27 15:11:29
  * @Description:
  */
 const { override, addWebpackAlias, addDecoratorsLegacy, adjustStyleLoaders } = require('customize-cra');
@@ -25,7 +25,7 @@ module.exports = override(
       rule.use.push({
         loader: require.resolve('sass-resources-loader'),
         options: {
-          resources: './src/common/css/_variables.scss',
+          resources: './src/common/css/variables.scss',
         },
       });
     }

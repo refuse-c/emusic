@@ -10,15 +10,15 @@
     width: calc((100% - 40px) / 3);
     height: 48px;
     margin-bottom: 16px;
-    color: #333;
+    color: $c333;
     border-radius: 6px;
 
     &:hover {
-      background-color: #eaeaea;
+      background-color: $ceaeaea;
     }
 
     &.active {
-      background-color: #eaeaea;
+      background-color: $ceaeaea;
     }
 
     // &:not(:nth-child(-n + 3)) {
@@ -61,7 +61,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         // span {
-        //   color: #929292;
+        //  color:  $c929292;
         //   font-size: 12px;
         // }
       }

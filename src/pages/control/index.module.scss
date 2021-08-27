@@ -94,7 +94,7 @@
         width: 24px;
         height: 24px;
         margin: 0 15px;
-        color: #000;
+        color: $c000;
         cursor: pointer;
         border-radius: 50%;
         align-items: center;
@@ -126,7 +126,7 @@
 
       .time {
         font-size: 11px;
-        color: #9f9f9f;
+        color: $c9f9f9f;
       }
 
       .progress {
@@ -163,7 +163,7 @@
 
     .quality {
       font-size: 20px;
-      color: #373737;
+      color: $c373737;
       cursor: pointer;
     }
 
@@ -176,7 +176,7 @@
 
     .list {
       font-size: 24px;
-      color: #373737;
+      color: $c373737;
     }
   }
 
@@ -204,7 +204,7 @@
 
       .ant-slider-rail {
         cursor: pointer;
-        background-color: #e5e5e5;
+        background-color: $ce5e5e5;
       }
 
       .ant-slider-track {

@@ -5,7 +5,7 @@
   .title {
     margin: 8px 6px 0;
     line-height: 20px;
-    color: #373737;
+    color: $c373737;
     white-space: nowrap;
   }
 
@@ -17,13 +17,13 @@
       position: relative;
       margin-top: 8px;
       line-height: 20px;
-      color: #676767;
+      color: $c676767;
       text-align: center;
       cursor: pointer;
       border-radius: 15px;
 
       &:hover {
-        color: #373737;
+        color: $c373737;
       }
 
       &:nth-child(1) {
@@ -39,7 +39,7 @@
           right: -10px;
           width: 2px;
           height: 10px;
-          background-color: #f2f2f2;
+          background-color: $cf2f2f2;
           content: '';
           transform: translateY(-50%);
         }

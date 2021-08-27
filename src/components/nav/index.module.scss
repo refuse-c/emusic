@@ -9,7 +9,7 @@
     top: 0;
     left: 0;
     z-index: 20;
-    background-color: #fff;
+    background-color: $cfff;
   }
 
   &.smell {
@@ -21,14 +21,14 @@
         font-size: 14px;
         font-weight: bold;
         line-height: 1;
-        color: #000;
+        color: $c000;
       }
     }
   }
 
   a {
     font-size: 16px;
-    color: #373737;
+    color: $c373737;
     cursor: pointer;
     transition: all 0.25s ease;
 
@@ -37,7 +37,7 @@
     }
 
     &:hover {
-      color: #000;
+      color: $c000;
     }
 
     &.active {
@@ -45,7 +45,7 @@
       font-size: 20px;
       font-weight: bold;
       line-height: 1;
-      color: #000;
+      color: $c000;
 
       &::after {
         position: absolute;

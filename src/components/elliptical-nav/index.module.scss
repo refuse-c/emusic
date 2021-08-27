@@ -8,19 +8,19 @@
     height: 28px;
     font-size: 12px;
     line-height: 28px;
-    color: #333;
+    color: $c333;
     text-align: center;
     cursor: pointer;
     border-radius: 30px;
 
     &:hover {
-      background-color: #f5f5f5;
+      background-color: $cf5f5f5;
     }
 
     &.active {
       position: relative;
-      color: #fff;
-      background-color: #bbb;
+      color: $cfff;
+      background-color: $cbbb;
 
       &::before {
         position: absolute;

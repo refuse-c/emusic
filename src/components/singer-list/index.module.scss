@@ -10,15 +10,15 @@
       padding: 30px;
 
       &:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: $cf9f9f9;
       }
 
       &:nth-child(odd) {
-        background-color: #fff;
+        background-color: $cfff;
       }
 
       &:hover {
-        background-color: #f0f1f2;
+        background-color: $cf0f1f2;
       }
 
       .content {
@@ -113,7 +113,7 @@
     width: 16px;
     height: 16px;
     font-size: 14px;
-    color: #fff;
+    color: $cfff;
     cursor: pointer;
     background-color: #f74d43;
     border-radius: 50%;

@@ -42,7 +42,7 @@
           padding-left: 10px;
           font-size: 22px;
           font-weight: 600;
-          color: #373737;
+          color: $c373737;
         }
       }
     }
@@ -63,13 +63,13 @@
 
         &:nth-child(2) {
           font-size: 14px;
-          color: #507daf;
+          color: $c507daf;
           cursor: pointer;
         }
 
         &:nth-child(3) {
           font-size: 12px;
-          color: #676767;
+          color: $c676767;
         }
       }
     }
@@ -105,7 +105,7 @@
 
         p {
           &:hover {
-            background-color: #f2f2f2;
+            background-color: $cf2f2f2;
           }
         }
       }
@@ -118,12 +118,12 @@
         margin-top: 6px;
         font-size: 14px;
         line-height: 1.2;
-        color: #373737;
+        color: $c373737;
 
         &.tags {
           span {
             margin-right: 10px;
-            color: #507daf;
+            color: $c507daf;
             cursor: pointer;
           }
         }
@@ -131,7 +131,7 @@
         &.count {
           span {
             margin-right: 20px;
-            color: #676767;
+            color: $c676767;
           }
         }
 
@@ -139,14 +139,14 @@
           margin-top: 0;
           font-size: 13px;
           line-height: 2;
-          color: #676767;
+          color: $c676767;
 
           p {
             margin: 0;
 
             strong {
               font-size: 14px;
-              color: #373737;
+              color: $c373737;
             }
           }
         }
@@ -155,7 +155,7 @@
       // 专辑
       .artist {
         span {
-          color: #507daf;
+          color: $c507daf;
 
           &:hover {
             color: #0b58b0;
@@ -168,7 +168,7 @@
         margin-top: 12px;
 
         span {
-          color: #676767;
+          color: $c676767;
         }
       }
     }

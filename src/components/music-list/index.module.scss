@@ -64,7 +64,7 @@
     display: flex;
     width: 100%;
     height: 100%;
-    color: #373737;
+    color: $c373737;
     align-items: center;
 
     p {
@@ -74,7 +74,7 @@
       white-space: nowrap;
 
       span {
-        color: #507daf;
+        color: $c507daf;
       }
     }
 
@@ -88,7 +88,7 @@
 
       &.vip {
         font-size: 27px;
-        color: #fe672e;
+        color: $cfe672e;
       }
 
       &.sq {
@@ -106,19 +106,19 @@
 
   .singer {
     padding-right: 5px;
-    color: #656565;
+    color: $c656565;
     cursor: pointer;
 
     span {
-      color: #507daf;
+      color: $c507daf;
     }
 
     &:hover {
-      color: #000000d9;
+      color: $c000;
       text-decoration: underline;
 
       span {
-        color: #000000d9;
+        color: $c000;
         text-decoration: underline;
       }
     }
@@ -126,21 +126,21 @@
 
   .album {
     overflow: hidden;
-    color: #656565;
+    color: $c656565;
     text-overflow: ellipsis;
     white-space: nowrap;
     cursor: pointer;
 
     span {
-      color: #507daf;
+      color: $c507daf;
     }
 
     &:hover {
-      color: #000000d9;
+      color: $c000;
       text-decoration: underline;
 
       span {
-        color: #000000d9;
+        color: $c000;
         text-decoration: underline;
       }
     }
@@ -153,28 +153,28 @@
 
   .disabled {
     .name {
-      color: #ccc;
+      color: $cccc;
 
       i {
-        color: #ccc !important;
+        color: $cccc !important;
       }
 
       &:hover {
-        color: #ccc !important;
+        color: $cccc !important;
       }
     }
   }
 
   .even {
-    background-color: #f9f9f9;
+    background-color: $cf9f9f9;
   }
 
   .odd {
-    background-color: #fff;
+    background-color: $cfff;
   }
 
   .active {
-    background-color: #e5e5e5;
+    background-color: $ce5e5e5;
 
     .name {
       p {
@@ -198,9 +198,9 @@
 
     .ant-table-thead > tr > th {
       height: 34px;
-      color: #888;
+      color: $c888;
       vertical-align: middle;
-      background-color: #fff;
+      background-color: $cfff;
 
       .ant-table-column-sorters {
         padding: 0 7px !important;
@@ -224,7 +224,7 @@
         &:hover:not(.ant-table-expanded-row) > td,
         .ant-table-row-hover,
         .ant-table-row-hover > td {
-          background-color: #f0f1f2;
+          background-color: $cf0f1f2;
         }
 
         td {

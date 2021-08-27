@@ -12,11 +12,11 @@
       padding: 0 30px;
 
       &:nth-child(odd) {
-        background-color: #f9f9f9;
+        background-color: $cf9f9f9;
       }
 
       &:hover {
-        background-color: #f0f1f2;
+        background-color: $cf0f1f2;
       }
 
       .left {
@@ -129,7 +129,7 @@
         font-size: 28px;
         font-weight: 500;
         line-height: 80px;
-        color: #fff;
+        color: $cfff;
         text-align: center;
         cursor: pointer;
         background: url('~@images/icon_date_box.png') center center / cover no-repeat;
@@ -145,9 +145,9 @@
       display: flex;
       width: 100%;
       height: calc(100% - 34px);
-      color: #fff;
+      color: $cfff;
       pointer-events: none;
-      background-color: rgba($color: #000, $alpha: 0.3);
+      background-color: rgba($color: $c000, $alpha: 0.3);
       opacity: 1;
       transition: all 1s ease;
       flex-direction: column;

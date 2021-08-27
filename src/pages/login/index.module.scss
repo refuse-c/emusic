@@ -34,8 +34,8 @@
         height: 100%;
         margin: 0 auto;
         font-weight: bold;
-        color: #fff;
-        background-color: rgba($color: #000, $alpha: 0.8);
+        color: $cfff;
+        background-color: rgba($color: $c000, $alpha: 0.8);
         flex-direction: column;
         align-items: center;
         justify-content: center;
@@ -124,7 +124,7 @@
 
     .registerBtn {
       margin-top: 16px;
-      color: #333;
+      color: $c333;
       text-align: center;
       text-decoration: underline;
       cursor: pointer;
@@ -140,7 +140,7 @@
         display: flex;
         width: 40px;
         height: 40px;
-        color: #fff;
+        color: $cfff;
         background-color: $color;
         border-radius: 50%;
         align-items: center;
@@ -165,7 +165,7 @@
 
   .ant-tooltip {
     .ant-tooltip-arrow-content {
-      background-color: #989898;
+      background-color: $c989898;
     }
 
     .ant-tooltip-inner {
@@ -173,7 +173,7 @@
       padding: 4px;
       font-size: 12px !important;
       line-height: 1;
-      background-color: #989898;
+      background-color: $c989898;
     }
   }
 }

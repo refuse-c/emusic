@@ -99,8 +99,8 @@
             }
 
             &:hover {
-              color: #000;
-              background-color: #f2f2f2;
+              color: $c000;
+              background-color: $cf2f2f2;
             }
           }
         }
@@ -152,7 +152,7 @@
 
           span {
             overflow: hidden;
-            color: #676767;
+            color: $c676767;
           }
 
           &.social {
@@ -174,11 +174,11 @@
           &.personal {
             p {
               overflow: hidden;
-              color: #676767;
+              color: $c676767;
 
               strong {
                 font-size: 14px;
-                color: #373737;
+                color: $c373737;
               }
             }
           }

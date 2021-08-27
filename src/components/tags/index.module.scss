@@ -8,13 +8,13 @@
     padding: 7px 20px;
     font-size: 14px;
     line-height: 1;
-    color: #373737;
+    color: $c373737;
     cursor: pointer;
     border: 1px solid #d8d8d8;
     border-radius: 30px;
 
     &:hover {
-      background-color: #f2f2f2;
+      background-color: $cf2f2f2;
     }
 
     span {
@@ -31,11 +31,11 @@
       position: relative;
       padding: 4px 10px;
       font-size: 12px;
-      color: #676767;
+      color: $c676767;
       cursor: pointer;
 
       &:hover {
-        color: #373737;
+        color: $c373737;
       }
 
       &::before {
